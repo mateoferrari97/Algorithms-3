@@ -4,11 +4,11 @@ Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUB
 
 ## Grupo N14
 
-* **Mateo Ferrari Coronel** - [integrante1](https://github.com/integrante1)
+* **Mateo Ferrari Coronel** - [Mateo Ferrari Coronel](https://github.com/mateoferrari97)
 * **Bautista** - [BautistaXifro](https://github.com/BautistaXifro)
-* **Tadeo Rial** - [integrante3](https://github.com/TadeoRial)
-* **AgustÍn Rodriguez** - [integrante4](https://github.com/chicho-98)
-* **Kevin Untrojb** - [integrante4](https://github.com/kuntrojb)
+* **Tadeo Rial** - [Tadeo Rial](https://github.com/TadeoRial)
+* **AgustÍn Rodriguez** - [AgustÍn Rodriguez](https://github.com/chicho-98)
+* **Kevin Untrojb** - [Kevin Untrojb](https://github.com/kuntrojb)
 
 Corrector: **{Corrector}**
 
