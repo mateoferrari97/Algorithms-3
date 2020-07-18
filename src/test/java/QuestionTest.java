@@ -20,6 +20,14 @@ public class QuestionTest {
 
     @Test
     public void testCreateATrueFalseResponseQuestionCanCheckAListOfAnswers(){
+        String text = "aprobaste algoritmos 3?";
+        Boolean response = false;
+        Boolean correctAnswer = false;
+        Boolean failAnsert = true;
+        Question question = new Question(text,response);
+
+        Assert.assertEquals(question.Answer(),correctAnswer);
+        Assert.assertNotEquals(question.Answer(),failAnsert);
 
     }
 }
