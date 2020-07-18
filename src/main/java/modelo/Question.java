@@ -1,3 +1,5 @@
+package modelo;
+
 public class Question {
     private String textQuestion;
     private Boolean answer;
