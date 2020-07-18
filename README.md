@@ -1,6 +1,8 @@
 # TP2 Algoritmos 3: Kahoot
 
-Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUBA
+Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUBA.
+
+Se puede visualizar el [informe](https://www.overleaf.com/read/bycdxrcvvgvh) en overleaf utilizando Latex
 
 ## Grupo N14
 
@@ -10,7 +12,7 @@ Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUB
 * **AgustÍn Rodriguez** - [AgustÍn Rodriguez](https://github.com/chicho-98)
 * **Kevin Untrojb** - [Kevin Untrojb](https://github.com/kuntrojb)
 
-Corrector: **{Corrector}**
+Corrector: **Pablo S**
 
 ### Pre-requisitos
 
@@ -19,7 +21,6 @@ Listado de software/herramientas necesarias para el proyecto
 ```
 java 1.8
 maven 3.6.0
-...
 ```
 
 ## Ejecutando las pruebas
