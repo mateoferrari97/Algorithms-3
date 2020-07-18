@@ -1,4 +1,5 @@
 
+import com.sun.jndi.ldap.sasl.LdapSasl;
 import org.junit.Test;
 import org.junit.Assert;
 import static org.junit.Assert.assertEquals;
@@ -14,12 +15,19 @@ public class QuestionTest {
         Boolean failAnsert = true;
         Question question = new Question(text,response);
 
-        Assert.assertEquals(question.Answer(),correctAnswer);
-        Assert.assertNotEquals(question.Answer(),failAnsert);
+        Assert.assertEquals(question.answer(),correctAnswer);
+        Assert.assertNotEquals(question.answer(),failAnsert);
     }
 
     @Test
     public void testCreateATrueFalseResponseQuestionCanCheckAListOfAnswers(){
+        hola como andas?
+                LdapSaslads
+                dsa
+                        sad
+                        doubled
+                                d
+                                sadsa
 
     }
 }
