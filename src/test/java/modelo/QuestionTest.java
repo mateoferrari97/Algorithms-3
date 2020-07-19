@@ -1,10 +1,7 @@
 package modelo;
 
-import modelo.Question;
 import org.junit.Test;
 import org.junit.Assert;
-
-import java.lang.reflect.Array;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -18,26 +15,28 @@ public class QuestionTest {
         Boolean failAnswer = true;
         Question question = new Question(text,false);
 
-        Assert.assertEquals(question.answer(),correctAnswer);
-        Assert.assertNotEquals(question.answer(),failAnswer);
+        Assert.assertEquals(question.getAnswer(),correctAnswer);
+        Assert.assertNotEquals(question.getAnswer(),failAnswer);
     }
 
     @Test
     public void testCreateATrueFalseResponseQuestionCanCheckAListOfAnswers(){
-        //Question
+        //Given
         String text = "aprobaste algoritmos 3?";
         Question question = new Question(text,false);
-        //Players
         Player playerOne = new Player(false);
         Player playerTwo = new Player(true);
-        Integer winnerPlayerPoints = 1;
-        Integer loserPlayerPoints = 0;
-        Boolean[] answers = {playerOne.answer(),playerTwo.answer()};
+        Integer expectedPlayerOnePoints = 1;
+        Integer expectedPlayerTwoPoints = 0;
+        Boolean[] answers = {playerOne.getAnswer(),playerTwo.getAnswer()};
         Player[] players = {playerOne,playerTwo};
 
-        question.playersAnswer(answers,players);
+        //When
+        Integer[] playerPoints = question.compareAnswersFromPlayers(answers);
+        question.givePointsToPlayers(playerPoints,players);
 
-        Assert.assertEquals(playerOne.points(),winnerPlayerPoints);
-        Assert.assertEquals(playerTwo.points(),loserPlayerPoints);
+        //Then
+        Assert.assertEquals(playerOne.getPoints(),expectedPlayerOnePoints);
+        Assert.assertEquals(playerTwo.getPoints(),expectedPlayerTwoPoints);
     }
 }

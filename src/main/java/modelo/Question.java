@@ -1,39 +1,38 @@
 package modelo;
 
-import java.lang.reflect.Array;
-
 public class Question {
-    private String textQuestion;
+    private String text;
     private Boolean answer;
-    private Player player;
 
-    public Question(String textQuestion,Boolean answer){
-        this.textQuestion = textQuestion;
+    public Question(String text,Boolean answer){
+        this.text = text;
         this.answer = answer;
     }
 
-    public boolean answer(){
+    public boolean getAnswer(){
         return answer;
     }
 
-    /*public void playersAnswer(Boolean[] answers, Player playerOne, Player playerTwo) {
-        player = playerOne;
-        for (Boolean aBoolean : answers) {
-            if (aBoolean == answer) {
-                player.gainPoint();
-            }
-            player = playerTwo;
-        }
-    }*/
-
-    public void playersAnswer(Boolean[] answers, Player[] players) {
+    public Integer[] compareAnswersFromPlayers(Boolean[] answers) {
         int i = 0;
+        Integer[] points = new Integer[2];
         for (Boolean aBoolean : answers) {
-            if (aBoolean == answer) {
-                players[i].gainPoint();
+            if(aBoolean == answer) {
+                points[i] = 1;
+            }
+            else{
+                points[i] = 0;
             }
             i++;
         }
+        return points;
     }
 
+    public void givePointsToPlayers(Integer[] playerPoints, Player[] players) {
+        int i = 0;
+        for (Integer aInteger : playerPoints) {
+            players[i].gainAmountOfPoints(playerPoints[i]);
+            i++;
+        }
+    }
 }

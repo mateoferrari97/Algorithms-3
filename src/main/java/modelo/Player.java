@@ -9,15 +9,15 @@ public class Player {
         this.answer = answer;
     }
 
-    public Boolean answer(){
+    public Boolean getAnswer(){
         return answer;
     }
 
-    public Integer points(){
+    public Integer getPoints(){
         return points;
     }
 
-    public void gainPoint() {
-        points++;
+    public void gainAmountOfPoints(Integer points) {
+        this.points += points;
     }
 }
