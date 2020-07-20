@@ -13,25 +13,12 @@ public class Question {
         return answer;
     }
 
-    public Integer[] compareAnswersFromPlayers(Boolean[] answers) {
+    public void compareAnswersFromPlayers(Boolean[] answers, Player[] players) {
         int i = 0;
-        Integer[] points = new Integer[2];
-        for (Boolean aBoolean : answers) {
-            if(aBoolean == answer) {
-                points[i] = 1;
+        for (Boolean aBoolean: answers) {
+            if (aBoolean == answer) {
+                players[i].gainPoint();
             }
-            else{
-                points[i] = 0;
-            }
-            i++;
-        }
-        return points;
-    }
-
-    public void givePointsToPlayers(Integer[] playerPoints, Player[] players) {
-        int i = 0;
-        for (Integer aInteger : playerPoints) {
-            players[i].gainAmountOfPoints(playerPoints[i]);
             i++;
         }
     }

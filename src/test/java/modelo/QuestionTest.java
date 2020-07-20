@@ -24,16 +24,15 @@ public class QuestionTest {
         //Given
         String text = "aprobaste algoritmos 3?";
         Question question = new Question(text,false);
-        Player playerOne = new Player(false);
-        Player playerTwo = new Player(true);
+        Player playerOne = new Player();
+        Player playerTwo = new Player();
         Integer expectedPlayerOnePoints = 1;
         Integer expectedPlayerTwoPoints = 0;
-        Boolean[] answers = {playerOne.getAnswer(),playerTwo.getAnswer()};
+        Boolean[] answers = {false,true};
         Player[] players = {playerOne,playerTwo};
 
         //When
-        Integer[] playerPoints = question.compareAnswersFromPlayers(answers);
-        question.givePointsToPlayers(playerPoints,players);
+        question.compareAnswersFromPlayers(answers, players);
 
         //Then
         Assert.assertEquals(playerOne.getPoints(),expectedPlayerOnePoints);
