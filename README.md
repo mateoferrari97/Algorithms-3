@@ -8,9 +8,14 @@ Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUB
 * **Bautista** - [BautistaXifro](https://github.com/BautistaXifro)
 * **Tadeo Rial** - [Tadeo Rial](https://github.com/TadeoRial)
 * **AgustÍn Rodriguez** - [AgustÍn Rodriguez](https://github.com/chicho-98)
-* **Kevin Untrojb** - [Kevin Untrojb](https://github.com/kuntrojb)
+* **Kevin Untrojb** - [Kevin Untrojb](https://github.com/kevin-untrojb)
 
-Corrector: **{Corrector}**
+Corrector: **Pablo Suarez**
+### Links del proyecto
+
+ * [Tareas realizadas en trello](https://trello.com/tp2algo3)
+ * [Visualizacion del informe](https://www.overleaf.com/read/yzwhzygbxndw)
+
 
 ### Pre-requisitos
 
@@ -19,7 +24,7 @@ Listado de software/herramientas necesarias para el proyecto
 ```
 java 11.x
 maven 3.6.0
-...
+
 ```
 
 ## Ejecutando las pruebas
