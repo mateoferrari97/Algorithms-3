@@ -17,7 +17,7 @@ Corrector: **{Corrector}**
 Listado de software/herramientas necesarias para el proyecto
 
 ```
-java 1.8
+java 11.x
 maven 3.6.0
 ...
 ```
