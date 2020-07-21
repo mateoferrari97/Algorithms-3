@@ -14,7 +14,7 @@ Corrector: **Pablo Suarez**
 ### Links del proyecto
 
  * [Tareas realizadas en trello](https://trello.com/tp2algo3)
- * [Visualizacion del informe](https://www.overleaf.com/read/yzwhzygbxndw)
+ * [Visualizacion del informe](https://www.overleaf.com/read/bycdxrcvvgvh)
 
 
 ### Pre-requisitos
