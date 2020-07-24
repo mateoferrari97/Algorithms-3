@@ -28,10 +28,11 @@ public class QuestionTest {
         Player playerTwo = new Player();
         Integer expectedPlayerOnePoints = 1;
         Integer expectedPlayerTwoPoints = 0;
-        Boolean[] answers = {true,false};
+        State[] answers = {playerOne.answersCorrectly(),playerTwo.answersIncorrectly()};
         Player[] players = {playerOne,playerTwo};
 
         //When
+        // lugar para mejora, se que answers no es tan necesario si mando una lista de players pero es para respetar el test y por ahora es medio hardcodeado la respuesta de los players
         question.compareAnswersFromPlayers(answers, players);
 
         //Then

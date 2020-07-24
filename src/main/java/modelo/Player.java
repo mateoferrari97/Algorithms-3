@@ -12,7 +12,18 @@ public class Player {
         return points;
     }
 
-    public void gainPoint() {
-        points++;
+
+    public CorrectOption answersCorrectly() {
+        CorrectOption answer = new CorrectOption();
+        return answer;
+    }
+
+    public IncorrectOption answersIncorrectly() {
+        IncorrectOption answer = new IncorrectOption();
+        return answer;
+    }
+
+    public void gainAmountOfPoints(Integer score) {
+        points += score;
     }
 }

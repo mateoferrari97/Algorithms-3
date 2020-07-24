@@ -2,23 +2,23 @@ package modelo;
 
 public class Question {
     private String text;
-    private Boolean answer;
+    private Option answer;
 
     public Question(String text,Boolean answer){
         this.text = text;
-        this.answer = answer;
+        this.answer = new Option(answer);
     }
 
     public boolean getAnswer(){
-        return answer;
+        return answer.getCorrectOption();
+
     }
 
-    public void compareAnswersFromPlayers(Boolean[] answers, Player[] players) {
+    public void compareAnswersFromPlayers(State[] answers, Player[] players) {
         int i = 0;
-        for (Boolean aBoolean: answers) {
-            if (aBoolean == answer) {
-                players[i].gainPoint();
-            }
+        for (State aState: answers) {
+            answer.setState(answers[i]); // lo que hago aca es setiar el estado de la respuesta en la clase pregunta para asi poder con polimorfismo setiar los puntajes a los players
+            answer.scorePlayer(players[i]);
             i++;
         }
     }
