@@ -11,8 +11,8 @@ public class CorrectState extends State {
         score.scorePlayer(player,this.points);
     }
 
-    public CorrectState getCorrectAnswer() {
-        return this;
+    public String getCorrectAnswer(String text) {
+        return text;
     }
 
     public void setPoints(Integer points) {

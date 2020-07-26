@@ -7,17 +7,17 @@ abstract class Question {
     public void compareAnswersFromPlayers(Integer[] answers, Player[] players) {
         int i = 0;
         for (Integer aInteger: answers) {
-            this.answers[aInteger].scorePlayer(players[i]); // lo que hago aca es setiar el estado de la respuesta en la clase pregunta para asi poder con polimorfismo setiar los puntajes a los players
+            this.answers[aInteger].scorePlayer(players[i]);
             i++;
         }
     }
 
-    public Option getCorrectOption(){
+    public String getCorrectOption(){
         int i = 0;
         for(Option aOption : answers){
-            State answeer = answers[i].getCorrectAnswer();
+            String answer = answers[i].getCorrectAnswer();
             if(answer != null){
-                return ;
+                return answer;
             }
             i++;
         }

@@ -15,7 +15,7 @@ public class QuestionTest {
         IncorrectState incorrectOption = new IncorrectState();
         Question question = new BooleanQuestion(text, correctOption, incorrectOption);
 
-        Assert.assertEquals(question.getCorrectOption(),correctOption);
+        Assert.assertEquals("Correcto",question.getCorrectOption());
     }
 
     @Test
@@ -33,7 +33,6 @@ public class QuestionTest {
         Player[] players = {playerOne,playerTwo};
 
         //When
-        // lugar para mejora, se que answers no es tan necesario si mando una lista de players pero es para respetar el test y por ahora es medio hardcodeado la respuesta de los players
         question.compareAnswersFromPlayers(answers, players);
 
         //Then

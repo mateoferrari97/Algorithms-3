@@ -8,8 +8,8 @@ public class BooleanQuestion extends Question {
         super();
         correct.setPoints(points);
         incorrect.setPenalty(penalty);
-        Option optionOne = new Option(correct);
-        Option optionTwo = new Option(incorrect);
+        Option optionOne = new Option(correct, "Correcto");
+        Option optionTwo = new Option(incorrect, "Incorrecto");
         answers = new Option[2];
         answers[0] = optionOne;
         answers[1] = optionTwo;
