@@ -1,10 +1,13 @@
 package modelo;
 
 abstract class State {
+    protected Integer points;
 
-    protected State() {
+    public void scorePlayer(ScoreBehavior score, Player player) {
+
     }
 
-    public abstract void scorePlayer(ScoreBehavior score, Player player);
+    public State getCorrectAnswer() {
 
+    }
 }

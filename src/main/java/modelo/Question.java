@@ -1,25 +1,26 @@
 package modelo;
 
-public class Question {
-    private String text;
-    private Option answer;
+abstract class Question {
+    protected String text;
+    protected Option[] answers;
 
-    public Question(String text,Boolean answer){
-        this.text = text;
-        this.answer = new Option(answer);
-    }
-
-    public boolean getAnswer(){
-        return answer.getCorrectOption();
-
-    }
-
-    public void compareAnswersFromPlayers(State[] answers, Player[] players) {
+    public void compareAnswersFromPlayers(Integer[] answers, Player[] players) {
         int i = 0;
-        for (State aState: answers) {
-            answer.setState(answers[i]); // lo que hago aca es setiar el estado de la respuesta en la clase pregunta para asi poder con polimorfismo setiar los puntajes a los players
-            answer.scorePlayer(players[i]);
+        for (Integer aInteger: answers) {
+            this.answers[aInteger].scorePlayer(players[i]); // lo que hago aca es setiar el estado de la respuesta en la clase pregunta para asi poder con polimorfismo setiar los puntajes a los players
             i++;
         }
+    }
+
+    public Option getCorrectOption(){
+        int i = 0;
+        for(Option aOption : answers){
+            State answeer = answers[i].getCorrectAnswer();
+            if(answer != null){
+                return ;
+            }
+            i++;
+        }
+        return null;
     }
 }

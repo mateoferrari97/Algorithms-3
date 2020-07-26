@@ -1,12 +1,12 @@
 package modelo;
 
 public class ScoreBehavior { // por ahora es concreta pero seria mejor que dependiendo la question se inicialize un ScoreBehavior correspondiente
-    private  Integer score;
+
     public ScoreBehavior(){
-        score = 1;
+
     }
-    public void scorePlayer(Player player){
-        player.gainAmountOfPoints(score); // esto debe estar en una clase concreta de ScoreBehavior
+    public void scorePlayer(Player player, Integer points){
+        player.gainAmountOfPoints(points); // esto debe estar en una clase concreta de ScoreBehavior
     }
 
     public void penalizePlayer(Player player) {

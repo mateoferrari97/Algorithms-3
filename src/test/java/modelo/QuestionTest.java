@@ -11,24 +11,25 @@ public class QuestionTest {
     @Test
     public void testCreateATrueFalseResponseQuestionCanCheckTheCorrectAnswer(){
         String text = "vamos a aprobar algoritmos 3?";
-        Boolean correctAnswer = true;
-        Boolean failAnswer = false;
-        Question question = new Question(text,true);
+        CorrectState correctOption = new CorrectState();
+        IncorrectState incorrectOption = new IncorrectState();
+        Question question = new BooleanQuestion(text, correctOption, incorrectOption);
 
-        Assert.assertEquals(question.getAnswer(),correctAnswer);
-        Assert.assertNotEquals(question.getAnswer(),failAnswer);
+        Assert.assertEquals(question.getCorrectOption(),correctOption);
     }
 
     @Test
     public void testCreateATrueFalseResponseQuestionCanCheckAListOfAnswers(){
         //Given
         String text = "vamos a aprobar algoritmos 3?";
-        Question question = new Question(text,true);
+        CorrectState correctOption = new CorrectState();
+        IncorrectState incorrectOption = new IncorrectState();
+        Question question = new BooleanQuestion(text, correctOption, incorrectOption);
         Player playerOne = new Player();
         Player playerTwo = new Player();
         Integer expectedPlayerOnePoints = 1;
         Integer expectedPlayerTwoPoints = 0;
-        State[] answers = {playerOne.answersCorrectly(),playerTwo.answersIncorrectly()};
+        Integer[] answers = {0,1};
         Player[] players = {playerOne,playerTwo};
 
         //When
