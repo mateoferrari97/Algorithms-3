@@ -2,6 +2,6 @@ package modelo;
 
 import java.util.List;
 
-interface IScoreBehavior {
+public interface IOptionScorer {
     void score(Player player);
 }

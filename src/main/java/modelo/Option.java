@@ -1,12 +1,10 @@
 package modelo;
 
-import java.util.List;
-
 public class Option {
     private String text;
-    private IScoreBehavior scorer;
+    private IOptionScorer scorer;
 
-    public Option(String text, IScoreBehavior scorer) {
+    public Option(String text, IOptionScorer scorer) {
         this.text = text;
         this.scorer = scorer;
     }

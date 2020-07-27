@@ -1,6 +1,6 @@
 package modelo;
 
-public class IncorrectScoreWithPenalty implements IScoreBehavior{
+public class IncorrectOptionScorer implements IOptionScorer {
     public void score(Player player) {
         player.decreasePoints();
     }

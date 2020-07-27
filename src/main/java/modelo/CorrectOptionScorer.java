@@ -1,6 +1,6 @@
 package modelo;
 
-public class CorrectScoreBehavior implements IScoreBehavior {
+public class CorrectOptionScorer implements IOptionScorer {
     public void score(Player player) {
         player.increasePoints();
     }
