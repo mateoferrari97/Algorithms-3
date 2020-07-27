@@ -11,7 +11,16 @@ public class Player {
         return points;
     }
 
-    public void gainAmountOfPoints(Integer score) {
-        points += score;
+    public void increasePoints(Integer points) {
+        this.points += points;
+    }
+
+    public void decreasePoints(Integer points) {
+        if (this.points - points <= 0) {
+            this.points = 0;
+            return;
+        }
+
+        this.points -= points;
     }
 }

@@ -1,20 +1,14 @@
 package modelo;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BooleanQuestion extends Question {
-    private Integer penalty = 0;
-    private Integer points = 1;
+    private List<Option> options = new ArrayList<>();
 
-    public BooleanQuestion(String text, CorrectState correct, IncorrectState incorrect) {
+    public BooleanQuestion(String text, Option correctOption, Option incorrectOption) {
         super();
-        correct.setPoints(points);
-        incorrect.setPenalty(penalty);
-        Option optionOne = new Option(correct, "Correcto");
-        Option optionTwo = new Option(incorrect, "Incorrecto");
-        answers = new Option[2];
-        answers[0] = optionOne;
-        answers[1] = optionTwo;
+        this.options.add(correctOption);
+        this.options.add(incorrectOption);
         this.text = text;
-
     }
-
 }
