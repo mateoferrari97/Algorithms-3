@@ -3,12 +3,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BooleanQuestion extends Question {
-    private List<Option> options = new ArrayList<>();
+    private List<Option> options;
 
-    public BooleanQuestion(String text, Option correctOption, Option incorrectOption) {
+    public BooleanQuestion(String text, List<Option> options) {
         super();
-        this.options.add(correctOption);
-        this.options.add(incorrectOption);
+        this.options = options;
         this.text = text;
+    }
+
+    public void score(Player player, List<Option> options) {
+        for (Option option: options) {
+            option.score(player);
+        }
     }
 }

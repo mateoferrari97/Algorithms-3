@@ -1,5 +1,7 @@
 package modelo;
 
+import java.util.List;
+
 interface IScoreBehavior {
-    void score(Player player, Integer points);
+    void score(Player player);
 }

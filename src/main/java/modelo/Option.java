@@ -1,5 +1,7 @@
 package modelo;
 
+import java.util.List;
+
 public class Option {
     private String text;
     private IScoreBehavior scorer;
@@ -9,7 +11,7 @@ public class Option {
         this.scorer = scorer;
     }
 
-    public void score(Player player, Integer points) {
-        scorer.score(player, points);
+    public void score(Player player) {
+        scorer.score(player);
     }
 }

@@ -3,6 +3,9 @@ package modelo;
 import org.junit.Test;
 import org.junit.Assert;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -10,14 +13,16 @@ public class OptionTest {
     @Test
     public void testBooleanOptionIncreasePlayerPointsWhenOptionIsCorrect() {
         // Given
-        IScoreBehavior correctScore = new CorrectScoreBehavior();
-        Option correctOption = new Option("si", correctScore);
+        Option option = new Option("si", new CorrectScoreBehavior());
+        List<Option> options = new LinkedList<>();
+        options.add(option);
+        Question question = new BooleanQuestion("vamos a aprobar algoritmos 3?", options);
 
         Player player = new Player();
         Integer expectedPlayerPoints = 1;
 
         // When
-        correctOption.score(player, 1);
+        question.score(player, options);
 
         // Then
         Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
@@ -26,14 +31,16 @@ public class OptionTest {
     @Test
     public void testBooleanOptionDontIncreasePlayerPointsWhenOptionIsIncorrect() {
         // Given
-        IScoreBehavior incorrectScore = new IncorrectScoreBehavior();
-        Option incorrectOption = new Option("no", incorrectScore);
+        Option option = new Option("no", new IncorrectScoreBehavior());
+        List<Option> options = new LinkedList<>();
+        options.add(option);
+        Question question = new BooleanQuestion("vamos a aprobar algoritmos 3?", options);
 
         Player player = new Player();
         Integer expectedPlayerPoints = 0;
 
         // When
-        incorrectOption.score(player, 1);
+        question.score(player, options);
 
         // Then
         Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
@@ -42,14 +49,17 @@ public class OptionTest {
     @Test
     public void testBooleanOptionWithPenaltyDecreasePlayerPointsWhenOptionIsIncorrect() {
         // Given
-        IScoreBehavior incorrectScoreWithPenalty = new IncorrectScoreWithPenalty();
-        Option incorrectOption = new Option("si", incorrectScoreWithPenalty);
+        Option option = new Option("no", new IncorrectScoreWithPenalty());
+        List<Option> options = new LinkedList<>();
+        options.add(option);
+        Question question = new BooleanQuestion("vamos a aprobar algoritmos 3?", options);
 
         Player player = new Player();
-        Integer expectedPlayerPoints = 0;
+        player.setPoints(5);
+        Integer expectedPlayerPoints = 4;
 
         // When
-        incorrectOption.score(player, 1);
+        question.score(player, options);
 
         // Then
         Assert.assertEquals(player.getPoints(), expectedPlayerPoints);

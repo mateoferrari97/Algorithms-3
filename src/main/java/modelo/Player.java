@@ -1,26 +1,23 @@
 package modelo;
 
 public class Player {
-    private Integer points;
+    private Integer points = 0;
 
-    public Player(){
-        points = 0;
-    }
-
-    public Integer getPoints(){
+    public Integer getPoints() {
         return points;
     }
 
-    public void increasePoints(Integer points) {
-        this.points += points;
+    public void setPoints(Integer points) {
+        this.points = points;
     }
 
-    public void decreasePoints(Integer points) {
-        if (this.points - points <= 0) {
-            this.points = 0;
-            return;
-        }
+    public void increasePoints() {
+        this.points++;
+    }
 
-        this.points -= points;
+    public void decreasePoints() {
+        if (this.points > 0) {
+            this.points--;
+        }
     }
 }
