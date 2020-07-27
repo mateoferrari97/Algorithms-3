@@ -1,8 +1,11 @@
 /home/bautista/Algoritmos/Algoritmos 3/Kahoot/src/main/java/modelo/Question.java
+/home/bautista/Algoritmos/Algoritmos 3/Kahoot/src/main/java/modelo/MultipleChoiceClassic.java
+/home/bautista/Algoritmos/Algoritmos 3/Kahoot/src/main/java/modelo/MultipleChoiceClassicSB.java
 /home/bautista/Algoritmos/Algoritmos 3/Kahoot/src/main/java/modelo/BooleanQuestion.java
 /home/bautista/Algoritmos/Algoritmos 3/Kahoot/src/main/java/modelo/CorrectState.java
 /home/bautista/Algoritmos/Algoritmos 3/Kahoot/src/main/java/modelo/Player.java
 /home/bautista/Algoritmos/Algoritmos 3/Kahoot/src/main/java/modelo/IncorrectState.java
+/home/bautista/Algoritmos/Algoritmos 3/Kahoot/src/main/java/modelo/BooleanSB.java
 /home/bautista/Algoritmos/Algoritmos 3/Kahoot/src/main/java/modelo/State.java
 /home/bautista/Algoritmos/Algoritmos 3/Kahoot/src/main/java/modelo/ScoreBehavior.java
 /home/bautista/Algoritmos/Algoritmos 3/Kahoot/src/main/java/modelo/Option.java

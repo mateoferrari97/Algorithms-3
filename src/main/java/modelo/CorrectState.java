@@ -2,20 +2,17 @@ package modelo;
 
 public class CorrectState extends State {
 
-    public CorrectState() {
+    public CorrectState(Integer points) {
        super();
-       this.points = 0;
+       this.points = points;
     }
 
-    public void scorePlayer(ScoreBehavior score, Player player){
-        score.scorePlayer(player,this.points);
+    public void changeScore(ScoreBehavior score){
+        score.reward(this.points);
     }
 
     public String getCorrectAnswer(String text) {
         return text;
     }
 
-    public void setPoints(Integer points) {
-        this.points = points;
-    }
 }

@@ -11,20 +11,22 @@ public class QuestionTest {
     @Test
     public void testCreateATrueFalseResponseQuestionCanCheckTheCorrectAnswer(){
         String text = "vamos a aprobar algoritmos 3?";
-        CorrectState correctOption = new CorrectState();
-        IncorrectState incorrectOption = new IncorrectState();
-        Question question = new BooleanQuestion(text, correctOption, incorrectOption);
+        int correctOptions = 0;
+        int incorrectOptions = 1;
+        String[] optionsNames = {"True","False"};
+        Question    question    =   new BooleanQuestion(text,correctOptions,incorrectOptions, optionsNames);
 
-        Assert.assertEquals("Correcto",question.getCorrectOption());
+        Assert.assertEquals("True",question.getCorrectOption());
     }
 
     @Test
     public void testCreateATrueFalseResponseQuestionCanCheckAListOfAnswers(){
         //Given
         String text = "vamos a aprobar algoritmos 3?";
-        CorrectState correctOption = new CorrectState();
-        IncorrectState incorrectOption = new IncorrectState();
-        Question question = new BooleanQuestion(text, correctOption, incorrectOption);
+        int correctOptions = 0;
+        int incorrectOptions = 1;
+        String[] optionsNames = {"True","False"};
+        Question    question    =   new BooleanQuestion(text,correctOptions,incorrectOptions, optionsNames);
         Player playerOne = new Player();
         Player playerTwo = new Player();
         Integer expectedPlayerOnePoints = 1;
@@ -36,7 +38,29 @@ public class QuestionTest {
         question.compareAnswersFromPlayers(answers, players);
 
         //Then
-        Assert.assertEquals(playerOne.getPoints(),expectedPlayerOnePoints);
-        Assert.assertEquals(playerTwo.getPoints(),expectedPlayerTwoPoints);
+        Assert.assertEquals(expectedPlayerOnePoints,playerOne.getPoints());
+        Assert.assertEquals(expectedPlayerTwoPoints,playerTwo.getPoints());
+    }
+
+    @Test
+    public void testCreateAClassicMultipleChoiceResponseQuestionCanAssignPointsToThePlayerThatChooseAllTheCorrectsOptions(){
+        String text = "vamos a aprobar algoritmos 3?";
+        Integer[] correctOptions = {0,3};
+        Integer[] incorrectOptions = {1,2};
+        String[] optionsNames = {"si","no","obvio que no", "obvio que si"};
+        Question    question    =   new MultipleChoiceClassic(text,correctOptions,incorrectOptions, optionsNames);
+        Player  playerOne   =   new Player();
+        Player  playerTwo   =   new Player();
+        Integer expectedPlayerOnePoints = 1;
+        Integer expectedPlayerTwoPoints = 0;
+        Integer[] playerOneAnswers = {0,3};
+        Integer[] playerTwoAnswers = {0,2};
+        Player[] players = {playerOne,playerTwo};
+
+
+        question.compareAnswersFromPlayers(playerOneAnswers,playerTwoAnswers,players);
+
+        Assert.assertEquals(expectedPlayerOnePoints,playerOne.getPoints());
+        Assert.assertEquals(expectedPlayerTwoPoints,playerTwo.getPoints());
     }
 }
