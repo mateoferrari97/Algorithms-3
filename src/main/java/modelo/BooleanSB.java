@@ -9,6 +9,7 @@ public class BooleanSB extends ScoreBehavior {
 
     void scorePlayer(Player player) {
         player.gainAmountOfPoints(this.points);
+        this.points = 0;
     }
 
     void reward(Integer points) {
@@ -16,6 +17,6 @@ public class BooleanSB extends ScoreBehavior {
     }
 
     void punish() {
-        this.points = 0;
+
     }
 }

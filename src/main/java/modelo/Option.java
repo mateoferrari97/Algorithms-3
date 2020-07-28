@@ -4,7 +4,7 @@ import javax.swing.*;
 
 public class Option {
     private String  text;
-    private State state; // es un estilo lo que pasa en "Pokemon" pero aca siempre hay 2 estados (correcto o incorrecto)
+    private State state;
 
     public  Option(State state, String text){
         this.state = state;
