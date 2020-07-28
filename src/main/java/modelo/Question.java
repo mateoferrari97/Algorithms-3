@@ -1,5 +1,7 @@
 package modelo;
 
+import java.util.ArrayList;
+
 abstract class Question {
     protected String text;
     protected Option[] answers;
@@ -7,16 +9,15 @@ abstract class Question {
 
     abstract void compareAnswersFromPlayers(Integer[] answers, Player[] players);
 
-    public String getCorrectOption(){
-        int i = 0;
+    public ArrayList<String> getCorrectOption(){
+        ArrayList<String> correctAnswers = new ArrayList();
         for(Option aOption : answers){
-            String answer = answers[i].getCorrectAnswer();
+            String answer = aOption.getCorrectAnswer();
             if(answer != null){
-                return answer;
+                correctAnswers.add(answer);
             }
-            i++;
         }
-        return null;
+        return correctAnswers;
     }
 
     public abstract void compareAnswersFromPlayers(Integer[] playerOneAnswers, Integer[] playerTwoAnswers, Player[] players);

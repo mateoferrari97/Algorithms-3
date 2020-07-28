@@ -3,6 +3,8 @@ package modelo;
 import org.junit.Test;
 import org.junit.Assert;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -16,7 +18,9 @@ public class QuestionTest {
         String[] optionsNames = {"True","False"};
         Question    question    =   new BooleanQuestion(text,correctOptions,incorrectOptions, optionsNames);
 
-        Assert.assertEquals("True",question.getCorrectOption());
+        ArrayList<String> correctAnswers = question.getCorrectOption();
+
+        Assert.assertEquals("True", correctAnswers.get(0));
     }
 
     @Test
@@ -43,14 +47,29 @@ public class QuestionTest {
     }
 
     @Test
+    public void testCreateAClassicMultipleChoiceResponseQuestionCanCheckTheCorrectAnswer(){
+        String text = "vamos a aprobar algoritmos 3?";
+        Integer[] correctOptions = {0,3};
+        Integer[] incorrectOptions = {1,2};
+        String[] optionsNames = {"si","no","obvio que no", "obvio que si"};
+        Question question = new MultipleChoiceClassic(text,correctOptions,incorrectOptions, optionsNames);
+
+        ArrayList<String> correctAnswers = question.getCorrectOption();
+
+        Assert.assertEquals("si",correctAnswers.get(0));
+        Assert.assertEquals("obvio que si",correctAnswers.get(1));
+
+    }
+
+    @Test
     public void testCreateAClassicMultipleChoiceResponseQuestionCanAssignPointsToThePlayerThatChooseAllTheCorrectsOptions(){
         String text = "vamos a aprobar algoritmos 3?";
         Integer[] correctOptions = {0,3};
         Integer[] incorrectOptions = {1,2};
         String[] optionsNames = {"si","no","obvio que no", "obvio que si"};
-        Question    question    =   new MultipleChoiceClassic(text,correctOptions,incorrectOptions, optionsNames);
-        Player  playerOne   =   new Player();
-        Player  playerTwo   =   new Player();
+        Question question = new MultipleChoiceClassic(text,correctOptions,incorrectOptions, optionsNames);
+        Player  playerOne = new Player();
+        Player  playerTwo = new Player();
         Integer expectedPlayerOnePoints = 1;
         Integer expectedPlayerTwoPoints = 0;
         Integer[] playerOneAnswers = {0,3};
