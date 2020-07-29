@@ -1,36 +1,20 @@
 package modelo;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BooleanQuestion extends Question {
-    private Integer points = 1;
-
-    public BooleanQuestion(String text, int correctOption, int incorrectOption, String[] names) {
+    public BooleanQuestion(String text, List<Option> options, QuestionScorer scorer) {
         super();
+        this.options = options;
         this.text = text;
-        this.score = new BooleanSB();
-        answers = new Option[2];
-        int chosenOption = correctOption;
-        State state = new CorrectState(points);
-        for (int i = 0; i <= 1; i++) {
-            Option option = new Option(state, names[chosenOption]);
-            answers[chosenOption] = option;
-            chosenOption = incorrectOption;
-            state = new IncorrectState();
-        }
-
+        this.scorer = scorer;
+        this.points = new Points();
     }
 
-    public void compareAnswersFromPlayers(Integer[] answers, Player[] players) {
-        int i = 0;
-        for (Player aPlayer : players) {
-            this.answers[answers[i]].changeScore(this.score);
-            this.score.scorePlayer(aPlayer);
-            i++;
+    public void score(Player player) {
+        for(Option aOption : options){
+            aOption.calculatePoints(scorer, this.points);
         }
-
-    }
-
-    @Override
-    public void compareAnswersFromPlayers(Integer[] playerOneAnswers, Integer[] playerTwoAnswers, Player[] players) {
-
+        scorer.score(player,this.points);
     }
 }

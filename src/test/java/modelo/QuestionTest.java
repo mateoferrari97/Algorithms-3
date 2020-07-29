@@ -1,85 +1,134 @@
 package modelo;
 
+import modelo.Exceptions.InvalidSizeException;
 import org.junit.Test;
 import org.junit.Assert;
 
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class QuestionTest {
-
     @Test
-    public void testCreateATrueFalseResponseQuestionCanCheckTheCorrectAnswer(){
-        String text = "vamos a aprobar algoritmos 3?";
-        int correctOptions = 0;
-        int incorrectOptions = 1;
-        String[] optionsNames = {"True","False"};
-        Question    question    =   new BooleanQuestion(text,correctOptions,incorrectOptions, optionsNames);
+    public void testBooleanQuestionIncreasePlayerPointsWhenOptionIsCorrect() {
+        // Given
+        List<Option> options = Arrays.asList(new Option("si", new CorrectOptionScorer()));
+        QuestionScorer scorer = new BooleanScorer();
+        Question question = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer);
 
-        ArrayList<String> correctAnswers = question.getCorrectOption();
+        Player player = new Player();
+        Integer expectedPlayerPoints = 1;
 
-        Assert.assertEquals("True", correctAnswers.get(0));
+        // When
+        question.score(player);
+
+        // Then
+        Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
     }
 
     @Test
-    public void testCreateATrueFalseResponseQuestionCanCheckAListOfAnswers(){
-        //Given
-        String text = "vamos a aprobar algoritmos 3?";
-        int correctOptions = 0;
-        int incorrectOptions = 1;
-        String[] optionsNames = {"True","False"};
-        Question    question    =   new BooleanQuestion(text,correctOptions,incorrectOptions, optionsNames);
-        Player playerOne = new Player();
-        Player playerTwo = new Player();
-        Integer expectedPlayerOnePoints = 1;
-        Integer expectedPlayerTwoPoints = 0;
-        Integer[] answers = {0,1};
-        Player[] players = {playerOne,playerTwo};
+    public void testBooleanQuestionDontIncreasePlayerPointsWhenOptionIsIncorrect() {
+        // Given
+        List<Option> options = Arrays.asList(new Option("no", new IncorrectOptionScorer()));
+        QuestionScorer scorer = new BooleanScorer();
+        Question question = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer);
 
-        //When
-        question.compareAnswersFromPlayers(answers, players);
+        Player player = new Player();
+        player.setPoints(5);
+        Integer expectedPlayerPoints = 5;
 
-        //Then
-        Assert.assertEquals(expectedPlayerOnePoints,playerOne.getPoints());
-        Assert.assertEquals(expectedPlayerTwoPoints,playerTwo.getPoints());
+        // When
+        question.score(player);
+
+        // Then
+        Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
     }
 
     @Test
-    public void testCreateAClassicMultipleChoiceResponseQuestionCanCheckTheCorrectAnswer(){
-        String text = "vamos a aprobar algoritmos 3?";
-        Integer[] correctOptions = {0,3};
-        Integer[] incorrectOptions = {1,2};
-        String[] optionsNames = {"si","no","obvio que no", "obvio que si"};
-        Question question = new MultipleChoiceClassic(text,correctOptions,incorrectOptions, optionsNames);
+    public void testBooleanQuestionWithPenaltyDecreasePlayerPointsWhenOptionIsIncorrect() {
+        // Given
+        List<Option> options = Arrays.asList(new Option("si", new IncorrectOptionScorer()));
+        QuestionScorer scorer = new BooleanWithPenaltyScorer();
+        Question question = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer);
 
-        ArrayList<String> correctAnswers = question.getCorrectOption();
+        Player player = new Player();
+        player.setPoints(5);
+        Integer expectedPlayerPoints = 4;
 
-        Assert.assertEquals("si",correctAnswers.get(0));
-        Assert.assertEquals("obvio que si",correctAnswers.get(1));
+        // When
+        question.score(player);
 
+        // Then
+        Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
     }
 
     @Test
-    public void testCreateAClassicMultipleChoiceResponseQuestionCanAssignPointsToThePlayerThatChooseAllTheCorrectsOptions(){
-        String text = "vamos a aprobar algoritmos 3?";
-        Integer[] correctOptions = {0,3};
-        Integer[] incorrectOptions = {1,2};
-        String[] optionsNames = {"si","no","obvio que no", "obvio que si"};
-        Question question = new MultipleChoiceClassic(text,correctOptions,incorrectOptions, optionsNames);
-        Player  playerOne = new Player();
-        Player  playerTwo = new Player();
-        Integer expectedPlayerOnePoints = 1;
-        Integer expectedPlayerTwoPoints = 0;
-        Integer[] playerOneAnswers = {0,3};
-        Integer[] playerTwoAnswers = {0,2};
-        Player[] players = {playerOne,playerTwo};
+    public void testMultipleChoiceQuestionIncreasePlayerPointsWhenAllOptionsAreCorrect() throws InvalidSizeException {
+        // Given
+        List<Option> options = Arrays.asList(
+                new Option("2 + 2", new CorrectOptionScorer()),
+                new Option("2 * 2", new CorrectOptionScorer()),
+                new Option("1 + 3", new CorrectOptionScorer()),
+                new Option("2^2", new CorrectOptionScorer()));
 
+        QuestionScorer scorer = new MultipleChoiceScorer();
+        Question question = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer);
 
-        question.compareAnswersFromPlayers(playerOneAnswers,playerTwoAnswers,players);
+        Player player = new Player();
+        Integer expectedPlayerPoints = 1;
 
-        Assert.assertEquals(expectedPlayerOnePoints,playerOne.getPoints());
-        Assert.assertEquals(expectedPlayerTwoPoints,playerTwo.getPoints());
+        // When
+        question.score(player);
+
+        // Then
+        Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
+    }
+
+    @Test
+    public void testMultipleChoiceQuestionWithPartialScoreIncreasePlayerPointsForeachOptionThatIsCorrect() throws InvalidSizeException {
+        // Given
+        List<Option> options = Arrays.asList(
+                new Option("2 + 2", new CorrectOptionScorer()),
+                new Option("2 * 2", new CorrectOptionScorer()),
+                new Option("1 + 3", new CorrectOptionScorer()),
+                new Option("2^2", new CorrectOptionScorer()));
+
+        QuestionScorer scorer = new MultipleChoiceWithPartialScorer();
+        Question question = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer);
+
+        Player player = new Player();
+        Integer expectedPlayerPoints = 4;
+
+        // When
+        question.score(player);
+
+        // Then
+        Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
+    }
+
+    @Test
+    public void testMultipleChoiceQuestionWithPenaltyIncreasePlayerPointsWhenOptionIsCorrectAndDecreaseWhenOptionIsIncorrect() throws InvalidSizeException {
+        // Given
+        List<Option> options = Arrays.asList(
+                new Option("2 + 2", new CorrectOptionScorer()),
+                new Option("3 / 1", new IncorrectOptionScorer()),
+                new Option("5 / 1", new IncorrectOptionScorer()),
+                new Option("1 / 1", new IncorrectOptionScorer()),
+                new Option("2^2", new CorrectOptionScorer()));
+
+        QuestionScorer scorer = new MultipleChoiceWithPenaltyScorer();
+        Question question = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer);
+
+        Player player = new Player();
+        player.setPoints(7);
+        Integer expectedPlayerPoints = 6;
+
+        // When
+        question.score(player);
+
+        // Then
+        Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
     }
 }

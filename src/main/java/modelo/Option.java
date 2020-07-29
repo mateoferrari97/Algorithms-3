@@ -1,25 +1,19 @@
 package modelo;
 
-import javax.swing.*;
-
 public class Option {
-    private String  text;
-    private State state;
+    private String text;
+    private IOptionScorer scorer;
 
-    public  Option(State state, String text){
-        this.state = state;
+    public Option(String text, IOptionScorer scorer) {
         this.text = text;
+        this.scorer = scorer;
     }
 
-    public void setState(modelo.State answer) {
-        state = answer;
+    public void calculatePoints(QuestionScorer scorer, Points points){
+        this.scorer.calculatePoints(scorer, points);
     }
 
-    public String getCorrectAnswer() {
-        return state.getCorrectAnswer(text);
-    }
-
-    public void changeScore(ScoreBehavior score) {
-        state.changeScore(score);
+    public void score(Player player) {
+        scorer.score(player);
     }
 }
