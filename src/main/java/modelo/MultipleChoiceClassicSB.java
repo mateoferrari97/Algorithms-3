@@ -22,5 +22,6 @@ public class MultipleChoiceClassicSB extends ScoreBehavior {
     public void scorePlayer(Player player){
         player.gainAmountOfPoints(this.points * this.factor);
         this.points = 0;
+        this.factor = 1;
     }
 }
