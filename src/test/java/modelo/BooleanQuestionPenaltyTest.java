@@ -25,4 +25,22 @@ public class BooleanQuestionPenaltyTest {
         // Then
         Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
     }
+
+    @Test
+    public void testBooleanQuestionWithPenaltyIncreasePlayerPointsWhenOptionIsCorrect() {
+        // Given
+        List<Option> options = Arrays.asList(new Option("si", new CorrectOptionScorer()));
+        QuestionScorer scorer = new BooleanWithPenaltyScorer();
+        Question question = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer);
+
+        Player player = new Player();
+        player.setPoints(5);
+        Integer expectedPlayerPoints = 6;
+
+        // When
+        question.score(player);
+
+        // Then
+        Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
+    }
 }

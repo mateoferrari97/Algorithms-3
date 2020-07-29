@@ -31,7 +31,7 @@ public class MultipleChoicePartialTest {
     }
 
     @Test
-    public void testMultipleChoiceQuestionWithPartialScoreDontIncreasePlayerPointsForIncorectOption() throws InvalidSizeException {
+    public void testMultipleChoiceQuestionWithPartialScoreIncreasePlayerPointsFor4CorrectOptionAndOneIncorrect() throws InvalidSizeException {
         // Given
         List<Option> options = Arrays.asList(
                 new Option("2 + 2", new CorrectOptionScorer()),
