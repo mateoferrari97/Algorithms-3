@@ -1,32 +1,16 @@
 package modelo;
 
-import java.util.List;
-
 public class MultipleChoiceWithPartialScorer implements QuestionScorer {
-    public void score(Player player, List<Option> options) {
-        Integer currentPlayerScorer = player.getPoints();
 
-        for (Option option : options) {
-            option.score(player);
-            if (player.getPoints() < currentPlayerScorer) {
-                player.setPoints(currentPlayerScorer);
-                return;
-            }
-        }
-    }
-
-    @Override
     public void score(Player player, Points points) {
-
+        points.givePointsToPlayer(player);
     }
 
-    @Override
     public void reward(Points points) {
-
+        points.increasePoints();
     }
 
-    @Override
     public void punish(Points points) {
-
+        points.changeScoreToZero();
     }
 }

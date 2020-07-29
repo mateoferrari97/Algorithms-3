@@ -70,7 +70,6 @@ public class QuestionTest {
         List<Option> options = Arrays.asList(
                 new Option("2 + 2", new CorrectOptionScorer()),
                 new Option("2 * 2", new CorrectOptionScorer()),
-                new Option("5 / 1", new IncorrectOptionScorer()),
                 new Option("1 + 3", new CorrectOptionScorer()),
                 new Option("2^2", new CorrectOptionScorer()));
 

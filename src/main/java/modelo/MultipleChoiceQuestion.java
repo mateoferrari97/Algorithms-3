@@ -14,8 +14,17 @@ public class MultipleChoiceQuestion extends Question {
             throw new InvalidSizeException(error);
         }
 
+
         this.options = options;
         this.text = text;
         this.scorer = scorer;
+        this.points = new Points();
+    }
+
+    public void score(Player player) {
+        for(Option aOption : options){
+            aOption.calculatePoints(scorer, this.points);
+        }
+        scorer.score(player,this.points);
     }
 }
