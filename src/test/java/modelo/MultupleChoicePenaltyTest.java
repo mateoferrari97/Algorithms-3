@@ -54,4 +54,28 @@ public class MultupleChoicePenaltyTest {
         Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
     }
 
+    @Test
+    public void testMultipleChoiceQuestionWithPenaltyDontDecreasePlayerPointsWhenAllOptionAreIncorrectAndPlayerHasntPoints() throws InvalidSizeException {
+        // Given
+        List<Option> options = Arrays.asList(
+                new Option("2 + 2", new IncorrectOptionScorer()),
+                new Option("3 + 1", new  IncorrectOptionScorer()),
+                new Option("5 - 1", new  IncorrectOptionScorer()),
+                new Option("2^2", new  IncorrectOptionScorer()));
+
+        QuestionScorer scorer = new MultipleChoiceWithPenaltyScorer();
+        Question question = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer);
+
+        Player player = new Player();
+        player.setPoints(0);
+        Integer expectedPlayerPoints = 0;
+
+        // When
+        question.score(player);
+
+        // Then
+        Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
+    }
+
+
 }

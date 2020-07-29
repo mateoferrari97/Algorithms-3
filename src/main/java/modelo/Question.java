@@ -8,7 +8,5 @@ abstract class Question {
     protected List<Option> options;
     protected Points points;
 
-    public void score(Player player) {
-
-    }
+    public void score(Player player) {}
 }
