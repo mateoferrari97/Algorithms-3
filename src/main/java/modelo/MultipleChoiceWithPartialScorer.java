@@ -11,6 +11,5 @@ public class MultipleChoiceWithPartialScorer implements QuestionScorer {
     }
 
     public void punish(Points points) {
-        points.changeScoreToZero();
     }
 }

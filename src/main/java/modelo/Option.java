@@ -13,7 +13,4 @@ public class Option {
         this.scorer.calculatePoints(scorer, points);
     }
 
-    public void score(Player player) {
-        scorer.score(player);
-    }
 }
