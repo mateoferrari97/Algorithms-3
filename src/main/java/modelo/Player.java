@@ -20,4 +20,8 @@ public class Player {
             this.points--;
         }
     }
+
+    public void gainAmountOfPoints(Integer points) {
+        this.points += points;
+    }
 }

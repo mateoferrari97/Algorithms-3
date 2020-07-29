@@ -9,6 +9,10 @@ public class Option {
         this.scorer = scorer;
     }
 
+    public void calculatePoints(QuestionScorer scorer, Points points){
+        this.scorer.calculatePoints(scorer, points);
+    }
+
     public void score(Player player) {
         scorer.score(player);
     }

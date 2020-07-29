@@ -1,15 +1,17 @@
 package modelo;
 
-import java.util.List;
 
 public class BooleanScorer implements QuestionScorer {
-    public void score(Player player, List<Option> options) {
-        Integer currentPlayerPoints = player.getPoints();
-        for (Option option : options) {
-            option.score(player);
-            if (player.getPoints() < currentPlayerPoints) {
-                player.increasePoints();
-            }
-        }
+
+    public void score(Player player, Points points) {
+        points.givePointsToPlayer(player);
+    }
+
+    public void reward(Points points) {
+        points.increasePoints();
+    }
+
+    public void punish(Points points) {
+
     }
 }

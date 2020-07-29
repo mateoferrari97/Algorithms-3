@@ -22,7 +22,7 @@ public class QuestionTest {
         Integer expectedPlayerPoints = 1;
 
         // When
-        question.score(player, options);
+        question.score(player);
 
         // Then
         Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
@@ -40,7 +40,7 @@ public class QuestionTest {
         Integer expectedPlayerPoints = 5;
 
         // When
-        question.score(player, options);
+        question.score(player);
 
         // Then
         Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
@@ -58,7 +58,7 @@ public class QuestionTest {
         Integer expectedPlayerPoints = 4;
 
         // When
-        question.score(player, options);
+        question.score(player);
 
         // Then
         Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
@@ -81,7 +81,7 @@ public class QuestionTest {
         Integer expectedPlayerPoints = 1;
 
         // When
-        question.score(player, options);
+        question.score(player);
 
         // Then
         Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
@@ -103,7 +103,7 @@ public class QuestionTest {
         Integer expectedPlayerPoints = 4;
 
         // When
-        question.score(player, options);
+        question.score(player);
 
         // Then
         Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
@@ -127,7 +127,7 @@ public class QuestionTest {
         Integer expectedPlayerPoints = 6;
 
         // When
-        question.score(player, options);
+        question.score(player);
 
         // Then
         Assert.assertEquals(player.getPoints(), expectedPlayerPoints);

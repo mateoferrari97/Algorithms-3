@@ -1,11 +1,18 @@
 package modelo;
 
-import java.util.List;
 
 public class BooleanWithPenaltyScorer implements QuestionScorer {
-    public void score(Player player, List<Option> options) {
-        for (Option option : options) {
-            option.score(player);
-        }
+
+
+    public void score(Player player, Points points) {
+        points.givePointsToPlayer(player);
+    }
+
+    public void reward(Points points) {
+        points.increasePoints();
+    }
+
+    public void punish(Points points) {
+        points.decreasePoints();
     }
 }

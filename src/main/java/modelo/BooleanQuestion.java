@@ -8,9 +8,13 @@ public class BooleanQuestion extends Question {
         this.options = options;
         this.text = text;
         this.scorer = scorer;
+        this.points = new Points();
     }
 
-    public void score(Player player, List<Option> options) {
-        this.scorer.score(player, options);
+    public void score(Player player) {
+        for(Option aOption : options){
+            aOption.calculatePoints(scorer, this.points);
+        }
+        scorer.score(player,this.points);
     }
 }

@@ -1,7 +1,10 @@
 package modelo;
 
-import java.util.List;
 
 public interface QuestionScorer {
-    void score(Player player, List<Option> options);
+    void score(Player player, Points points);
+
+    void reward(Points points);
+
+    void punish(Points points);
 }

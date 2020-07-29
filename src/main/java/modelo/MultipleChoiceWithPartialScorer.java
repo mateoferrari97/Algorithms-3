@@ -14,4 +14,19 @@ public class MultipleChoiceWithPartialScorer implements QuestionScorer {
             }
         }
     }
+
+    @Override
+    public void score(Player player, Points points) {
+
+    }
+
+    @Override
+    public void reward(Points points) {
+
+    }
+
+    @Override
+    public void punish(Points points) {
+
+    }
 }
