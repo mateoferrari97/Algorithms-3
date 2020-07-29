@@ -54,10 +54,10 @@
     <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
     <property name="sun.cpu.endian" value="little"/>
   </properties>
-  <testcase classname="modelo.QuestionTest" name="testBooleanQuestionWithPenaltyDecreasePlayerPointsWhenOptionIsIncorrect" time="0.003"/>
-  <testcase classname="modelo.QuestionTest" name="testMultipleChoiceQuestionWithPenaltyIncreasePlayerPointsWhenOptionIsCorrectAndDecreaseWhenOptionIsIncorrect" time="0.003"/>
-  <testcase classname="modelo.QuestionTest" name="testMultipleChoiceQuestionWithPartialScoreIncreasePlayerPointsForeachOptionThatIsCorrect" time="0"/>
+  <testcase classname="modelo.QuestionTest" name="testBooleanQuestionWithPenaltyDecreasePlayerPointsWhenOptionIsIncorrect" time="0.004"/>
+  <testcase classname="modelo.QuestionTest" name="testMultipleChoiceQuestionWithPenaltyIncreasePlayerPointsWhenOptionIsCorrectAndDecreaseWhenOptionIsIncorrect" time="0"/>
+  <testcase classname="modelo.QuestionTest" name="testMultipleChoiceQuestionWithPartialScoreIncreasePlayerPointsForeachOptionThatIsCorrect" time="0.001"/>
   <testcase classname="modelo.QuestionTest" name="testBooleanQuestionIncreasePlayerPointsWhenOptionIsCorrect" time="0"/>
-  <testcase classname="modelo.QuestionTest" name="testMultipleChoiceQuestionIncreasePlayerPointsWhenAllOptionsAreCorrect" time="0"/>
+  <testcase classname="modelo.QuestionTest" name="testMultipleChoiceQuestionIncreasePlayerPointsWhenAllOptionsAreCorrect" time="0.001"/>
   <testcase classname="modelo.QuestionTest" name="testBooleanQuestionDontIncreasePlayerPointsWhenOptionIsIncorrect" time="0"/>
 </testsuite>

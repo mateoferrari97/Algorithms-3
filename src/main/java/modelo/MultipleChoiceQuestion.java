@@ -1,6 +1,6 @@
 package modelo;
 
-import modelo.Exceptions.InvalidSizeException;
+import exceptions.InvalidSizeException;
 
 import java.util.List;
 

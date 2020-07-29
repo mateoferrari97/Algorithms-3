@@ -1,2 +1,3 @@
 modelo/Question.class
+exceptions/InvalidSizeException.class
 modelo/Player.class
