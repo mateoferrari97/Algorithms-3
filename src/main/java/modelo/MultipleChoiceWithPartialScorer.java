@@ -10,5 +10,7 @@ public class MultipleChoiceWithPartialScorer implements QuestionScorer {
         points.increasePoints();
     }
 
-    public void punish(Points points) {}
+    public void punish(Points points) {
+        points.changeScoreToZero();
+    }
 }

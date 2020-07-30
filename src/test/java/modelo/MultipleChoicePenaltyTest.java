@@ -7,7 +7,7 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 
-public class MultupleChoicePenaltyTest {
+public class MultipleChoicePenaltyTest {
     @Test
     public void testMultipleChoiceQuestionWithPenaltyIncreasePlayerPointsWhenOptionIsCorrectAndDecreaseWhenOptionIsIncorrect() throws InvalidSizeException {
         // Given
@@ -18,7 +18,7 @@ public class MultupleChoicePenaltyTest {
                 new Option("1 / 1", new IncorrectOptionScorer()),
                 new Option("2^2", new CorrectOptionScorer()));
 
-        QuestionScorer scorer = new MultipleChoiceWithPenaltyScorer();
+        QuestionScorer scorer = new PenaltyScorer();
         Question question = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer);
 
         Player player = new Player();
@@ -40,7 +40,7 @@ public class MultupleChoicePenaltyTest {
                 new Option("5 - 1", new CorrectOptionScorer()),
                 new Option("2^2", new CorrectOptionScorer()));
 
-        QuestionScorer scorer = new MultipleChoiceWithPenaltyScorer();
+        QuestionScorer scorer = new PenaltyScorer();
         Question question = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer);
 
         Player player = new Player();
@@ -63,7 +63,7 @@ public class MultupleChoicePenaltyTest {
                 new Option("5 - 1", new  IncorrectOptionScorer()),
                 new Option("2^2", new  IncorrectOptionScorer()));
 
-        QuestionScorer scorer = new MultipleChoiceWithPenaltyScorer();
+        QuestionScorer scorer = new PenaltyScorer();
         Question question = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer);
 
         Player player = new Player();

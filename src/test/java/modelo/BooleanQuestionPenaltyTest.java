@@ -12,7 +12,7 @@ public class BooleanQuestionPenaltyTest {
     public void testBooleanQuestionWithPenaltyDecreasePlayerPointsWhenOptionIsIncorrect() {
         // Given
         List<Option> options = Arrays.asList(new Option("si", new IncorrectOptionScorer()));
-        QuestionScorer scorer = new BooleanWithPenaltyScorer();
+        QuestionScorer scorer = new PenaltyScorer();
         Question question = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer);
 
         Player player = new Player();
@@ -30,7 +30,7 @@ public class BooleanQuestionPenaltyTest {
     public void testBooleanQuestionWithPenaltyIncreasePlayerPointsWhenOptionIsCorrect() {
         // Given
         List<Option> options = Arrays.asList(new Option("si", new CorrectOptionScorer()));
-        QuestionScorer scorer = new BooleanWithPenaltyScorer();
+        QuestionScorer scorer = new PenaltyScorer();
         Question question = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer);
 
         Player player = new Player();
@@ -48,7 +48,7 @@ public class BooleanQuestionPenaltyTest {
     public void testBooleanQuestionWithPenaltyDontDecreasePlayerPointsWhenOptionIsIncorrectAndPlayerHasntPoints() {
         // Given
         List<Option> options = Arrays.asList(new Option("si", new IncorrectOptionScorer()));
-        QuestionScorer scorer = new BooleanWithPenaltyScorer();
+        QuestionScorer scorer = new PenaltyScorer();
         Question question = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer);
 
         Player player = new Player();
