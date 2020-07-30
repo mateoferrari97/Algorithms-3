@@ -1,15 +1,15 @@
-/home/bautista/Algoritmos/Algoritmos 3/Kahoot/src/main/java/modelo/Points.java
-/home/bautista/Algoritmos/Algoritmos 3/Kahoot/src/main/java/modelo/Question.java
-/home/bautista/Algoritmos/Algoritmos 3/Kahoot/src/main/java/modelo/MultipleChoiceQuestion.java
-/home/bautista/Algoritmos/Algoritmos 3/Kahoot/src/main/java/modelo/BooleanScorer.java
-/home/bautista/Algoritmos/Algoritmos 3/Kahoot/src/main/java/modelo/Player.java
-/home/bautista/Algoritmos/Algoritmos 3/Kahoot/src/main/java/modelo/IncorrectOptionScorer.java
-/home/bautista/Algoritmos/Algoritmos 3/Kahoot/src/main/java/modelo/Option.java
-/home/bautista/Algoritmos/Algoritmos 3/Kahoot/src/main/java/modelo/IOptionScorer.java
-/home/bautista/Algoritmos/Algoritmos 3/Kahoot/src/main/java/modelo/CorrectOptionScorer.java
-/home/bautista/Algoritmos/Algoritmos 3/Kahoot/src/main/java/modelo/BooleanQuestion.java
-/home/bautista/Algoritmos/Algoritmos 3/Kahoot/src/main/java/exceptions/InvalidSizeException.java
-/home/bautista/Algoritmos/Algoritmos 3/Kahoot/src/main/java/modelo/MultipleChoiceScorer.java
-/home/bautista/Algoritmos/Algoritmos 3/Kahoot/src/main/java/modelo/PenaltyScorer.java
-/home/bautista/Algoritmos/Algoritmos 3/Kahoot/src/main/java/modelo/MultipleChoiceWithPartialScorer.java
-/home/bautista/Algoritmos/Algoritmos 3/Kahoot/src/main/java/modelo/QuestionScorer.java
+C:\Users\Mateo\Desktop\Kahoot\src\main\java\modelo\BooleanScorer.java
+C:\Users\Mateo\Desktop\Kahoot\src\main\java\modelo\IOptionScorer.java
+C:\Users\Mateo\Desktop\Kahoot\src\main\java\modelo\Question.java
+C:\Users\Mateo\Desktop\Kahoot\src\main\java\modelo\Option.java
+C:\Users\Mateo\Desktop\Kahoot\src\main\java\exceptions\InvalidSizeException.java
+C:\Users\Mateo\Desktop\Kahoot\src\main\java\modelo\MultipleChoiceQuestion.java
+C:\Users\Mateo\Desktop\Kahoot\src\main\java\modelo\Points.java
+C:\Users\Mateo\Desktop\Kahoot\src\main\java\modelo\MultipleChoiceWithPartialScorer.java
+C:\Users\Mateo\Desktop\Kahoot\src\main\java\modelo\IncorrectOptionScorer.java
+C:\Users\Mateo\Desktop\Kahoot\src\main\java\modelo\MultipleChoiceScorer.java
+C:\Users\Mateo\Desktop\Kahoot\src\main\java\modelo\Player.java
+C:\Users\Mateo\Desktop\Kahoot\src\main\java\modelo\BooleanQuestion.java
+C:\Users\Mateo\Desktop\Kahoot\src\main\java\modelo\PenaltyScorer.java
+C:\Users\Mateo\Desktop\Kahoot\src\main\java\modelo\QuestionScorer.java
+C:\Users\Mateo\Desktop\Kahoot\src\main\java\modelo\CorrectOptionScorer.java

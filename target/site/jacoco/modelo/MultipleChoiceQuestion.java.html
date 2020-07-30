@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MultipleChoiceQuestion.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Kahoot</a> &gt; <a href="index.source.html" class="el_package">modelo</a> &gt; <span class="el_source">MultipleChoiceQuestion.java</span></div><h1>MultipleChoiceQuestion.java</h1><pre class="source lang-java linenums">package modelo;
+
+import exceptions.InvalidSizeException;
+
+import java.util.List;
+
+public class MultipleChoiceQuestion extends Question {
+    public MultipleChoiceQuestion(String text, List&lt;Option&gt; options, QuestionScorer scorer) throws InvalidSizeException {
+<span class="fc" id="L9">        super();</span>
+
+<span class="fc" id="L11">        Integer optionsSize = options.size();</span>
+<span class="pc bpc" id="L12" title="2 of 4 branches missed.">        if (optionsSize &lt; 2 || optionsSize &gt; 5) {</span>
+<span class="nc" id="L13">            String error = &quot;invalid options size: want minimum 2, maximum 5. got: &quot; + optionsSize;</span>
+<span class="nc" id="L14">            throw new InvalidSizeException(error);</span>
+        }
+
+
+<span class="fc" id="L18">        this.options = options;</span>
+<span class="fc" id="L19">        this.text = text;</span>
+<span class="fc" id="L20">        this.scorer = scorer;</span>
+<span class="fc" id="L21">        this.points = new Points();</span>
+<span class="fc" id="L22">    }</span>
+
+    public void score(Player player) {
+<span class="fc bfc" id="L25" title="All 2 branches covered.">        for(Option aOption : options){</span>
+<span class="fc" id="L26">            aOption.calculatePoints(scorer, this.points);</span>
+<span class="fc" id="L27">        }</span>
+<span class="fc" id="L28">        scorer.score(player,this.points);</span>
+<span class="fc" id="L29">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>
