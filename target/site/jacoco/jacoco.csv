@@ -1,0 +1,14 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+Kahoot,modelo,CorrectOptionScorer,0,7,0,0,0,3,0,2,0,2
+Kahoot,modelo,Player,0,32,0,2,0,9,0,5,0,4
+Kahoot,modelo,Option,0,15,0,0,0,6,0,2,0,2
+Kahoot,modelo,IncorrectOptionScorer,0,7,0,0,0,3,0,2,0,2
+Kahoot,modelo,PenaltyScorer,0,13,0,0,0,7,0,4,0,4
+Kahoot,modelo,MultipleChoiceQuestion,8,54,2,4,2,13,2,3,0,2
+Kahoot,modelo,Question,1,3,0,0,1,1,1,1,1,1
+Kahoot,modelo,BooleanScorer,0,11,0,0,0,6,0,4,0,4
+Kahoot,modelo,MultipleChoiceWithPartialScorer,0,13,0,0,0,7,0,4,0,4
+Kahoot,modelo,BooleanQuestion,0,42,0,2,0,11,0,3,0,2
+Kahoot,modelo,MultipleChoiceScorer,0,13,0,0,0,7,0,4,0,4
+Kahoot,modelo,Points,0,64,0,0,0,14,0,6,0,6
+Kahoot,exceptions,InvalidSizeException,4,0,0,0,2,0,1,0,1,0

@@ -49,8 +49,8 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.1</version>
                 <configuration>
-                    <executable>/Users/dbizari/.sdkman/candidates/java/11.0.5.hs-adpt/bin/java</executable>
-                    <mainClass>algo3.App</mainClass>
+                    <executable> </executable>
+                    <mainClass> </mainClass>
                 </configuration>
             </plugin>
         </plugins>
