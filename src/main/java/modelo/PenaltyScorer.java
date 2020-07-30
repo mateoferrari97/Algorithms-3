@@ -1,6 +1,6 @@
 package modelo;
 
-public class MultipleChoiceWithPenaltyScorer implements QuestionScorer {
+public class PenaltyScorer implements QuestionScorer {
 
     public void score(Player player, Points points) {
         points.givePointsToPlayer(player);
