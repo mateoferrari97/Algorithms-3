@@ -1,25 +1,12 @@
 package modelo;
 
-public class Question {
-    private String text;
-    private Boolean answer;
+import java.util.List;
 
-    public Question(String text,Boolean answer){
-        this.text = text;
-        this.answer = answer;
-    }
+abstract class Question {
+    protected String text;
+    protected QuestionScorer scorer;
+    protected List<Option> options;
+    protected Points points;
 
-    public boolean getAnswer(){
-        return answer;
-    }
-
-    public void compareAnswersFromPlayers(Boolean[] answers, Player[] players) {
-        int i = 0;
-        for (Boolean aBoolean: answers) {
-            if (aBoolean == answer) {
-                players[i].gainPoint();
-            }
-            i++;
-        }
-    }
+    public void score(Player player) {}
 }
