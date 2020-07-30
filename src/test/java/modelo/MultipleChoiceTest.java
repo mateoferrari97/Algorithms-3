@@ -31,7 +31,7 @@ public class MultipleChoiceTest {
         Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
     }
     @Test
-    public void testMultipleChoiceQuestionWithPartialScoreDontIncreasePlayerPointsForIncorectOption() throws InvalidSizeException {
+    public void testMultipleChoiceQuestionDontIncreasePlayerPointsForIncorectOption() throws InvalidSizeException {
         // Given
         List<Option> options = Arrays.asList(
                 new Option("2 + 2", new CorrectOptionScorer()),
