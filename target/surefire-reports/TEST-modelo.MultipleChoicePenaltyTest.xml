@@ -41,7 +41,7 @@
     <property name="java.class.path" value="/usr/local/Cellar/maven/3.6.2/libexec/boot/plexus-classworlds-2.6.0.jar"/>
     <property name="java.vm.specification.version" value="13"/>
     <property name="sun.arch.data.model" value="64"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher verify"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher test"/>
     <property name="java.home" value="/Library/Java/JavaVirtualMachines/openjdk-13.0.1.jdk/Contents/Home"/>
     <property name="user.language" value="es"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
@@ -57,7 +57,7 @@
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
   </properties>
-  <testcase classname="modelo.MultipleChoicePenaltyTest" name="testMultipleChoiceQuestionWithPenaltyIncreasePlayerPointsWhenOptionIsCorrectAndDecreaseWhenOptionIsIncorrect" time="0"/>
-  <testcase classname="modelo.MultipleChoicePenaltyTest" name="testMultipleChoiceQuestionWithPenaltyIncreasePlayerPointsWhenAllOptionAreCorrect" time="0.001"/>
+  <testcase classname="modelo.MultipleChoicePenaltyTest" name="testMultipleChoiceQuestionWithPenaltyIncreasePlayerPointsWhenOptionIsCorrectAndDecreaseWhenOptionIsIncorrect" time="0.001"/>
+  <testcase classname="modelo.MultipleChoicePenaltyTest" name="testMultipleChoiceQuestionWithPenaltyIncreasePlayerPointsWhenAllOptionAreCorrect" time="0"/>
   <testcase classname="modelo.MultipleChoicePenaltyTest" name="testMultipleChoiceQuestionWithPenaltyDontDecreasePlayerPointsWhenAllOptionAreIncorrectAndPlayerHasntPoints" time="0"/>
 </testsuite>
