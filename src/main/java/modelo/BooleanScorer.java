@@ -14,4 +14,10 @@ public class BooleanScorer implements QuestionScorer {
     public void punish(Points points) {
 
     }
+
+    @Override
+    public void multiplicate(Points points, Integer multiplicator) {
+
+    }
+
 }

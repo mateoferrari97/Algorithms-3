@@ -13,4 +13,8 @@ public class PenaltyScorer implements QuestionScorer {
     public void punish(Points points) {
         points.decreasePoints();
     }
+
+    public void multiplicate(Points points, Integer multiplicator) {
+        points.multiplicate(multiplicator);
+    }
 }

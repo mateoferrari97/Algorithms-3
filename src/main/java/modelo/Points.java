@@ -28,4 +28,8 @@ public class Points {
     public void gainAPoint() {
         this.points = 1;
     }
+
+    public void multiplicate(Integer multiplicator){
+        factor = multiplicator;
+    }
 }

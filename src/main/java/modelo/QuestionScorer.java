@@ -7,4 +7,6 @@ public interface QuestionScorer {
     void reward(Points points);
 
     void punish(Points points);
+
+    void multiplicate(Points points, Integer multiplicator);
 }
