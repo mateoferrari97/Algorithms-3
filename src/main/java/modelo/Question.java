@@ -19,7 +19,9 @@ abstract class Question {
     }
 
     public void useMultiplicator(Integer multiplicator){
-        scorer.multiplicate(this.points, multiplicator);
+        this.scorer.multiplicate(this.points, multiplicator);
     }
+
+    public abstract void score(Player player, List<Integer> playerAnswers);
 }
 

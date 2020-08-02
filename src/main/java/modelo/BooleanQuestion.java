@@ -17,4 +17,9 @@ public class BooleanQuestion extends Question {
         }
         scorer.score(player,this.points);
     }
+
+    @Override
+    public void score(Player player, List<Integer> playerAnswers) {
+
+    }
 }

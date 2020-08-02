@@ -124,6 +124,4 @@ public class MultipleChoicePenaltyTest {
         // Then
         Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
     }
-
-
 }
