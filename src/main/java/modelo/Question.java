@@ -11,8 +11,11 @@ abstract class Question {
 
     public void score(Player player) {}
 
+
     public void multiplicate(Integer factor){
         this.multiplicator.multiplicate(this.points, factor);
     }
+
+    public abstract void score(Player player, List<Integer> playerAnswers);
 }
 
