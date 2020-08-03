@@ -1,3 +1,2 @@
-exceptions/InvalidSizeException.class
-modelo/Question.class
-modelo/Player.class
+modelo/OrderedScorer.class
+modelo/OrderedChoiceQuestion.class

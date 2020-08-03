@@ -67,14 +67,15 @@ public class BooleanQuestionPenaltyTest {
         // Given
         List<Option> options = Arrays.asList(new Option("si", new CorrectOptionScorer()));
         QuestionScorer scorer = new PenaltyScorer();
-        Question question = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer);
+        Multiplicator multiplicator = new PenaltyMultiplicator();
+        Question question = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer, multiplicator);
 
         Player player = new Player();
         player.setPoints(5);
         Integer expectedPlayerPoints = 7;
 
         // When
-        question.useDoubleMultiplicator();
+        question.multiplicate(2);
         question.score(player);
 
         // Then
@@ -86,14 +87,15 @@ public class BooleanQuestionPenaltyTest {
         // Given
         List<Option> options = Arrays.asList(new Option("si", new CorrectOptionScorer()));
         QuestionScorer scorer = new PenaltyScorer();
-        Question question = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer);
+        Multiplicator multiplicator = new PenaltyMultiplicator();
+        Question question = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer, multiplicator);
 
         Player player = new Player();
         player.setPoints(5);
         Integer expectedPlayerPoints = 8;
 
         // When
-        question.useTripleMultiplicator();
+        question.multiplicate(3);
         question.score(player);
 
         // Then

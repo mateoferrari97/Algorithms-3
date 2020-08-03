@@ -7,19 +7,13 @@ abstract class Question {
     protected QuestionScorer scorer;
     protected List<Option> options;
     protected Points points;
+    protected Multiplicator multiplicator;
 
     public void score(Player player) {}
 
-    public void useDoubleMultiplicator(){
-        this.useMultiplicator(2);
-    }
 
-    public void useTripleMultiplicator(){
-        this.useMultiplicator(3);
-    }
-
-    public void useMultiplicator(Integer multiplicator){
-        this.scorer.multiplicate(this.points, multiplicator);
+    public void multiplicate(Integer factor){
+        this.multiplicator.multiplicate(this.points, factor);
     }
 
     public abstract void score(Player player, List<Integer> playerAnswers);

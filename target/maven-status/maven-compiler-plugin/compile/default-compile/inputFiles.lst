@@ -1,15 +1,15 @@
-/home/bautista/Algoritmos/Algoritmos 3/Kahoot/src/main/java/modelo/Points.java
-/home/bautista/Algoritmos/Algoritmos 3/Kahoot/src/main/java/modelo/Question.java
-/home/bautista/Algoritmos/Algoritmos 3/Kahoot/src/main/java/modelo/MultipleChoiceQuestion.java
-/home/bautista/Algoritmos/Algoritmos 3/Kahoot/src/main/java/modelo/BooleanScorer.java
-/home/bautista/Algoritmos/Algoritmos 3/Kahoot/src/main/java/modelo/Player.java
-/home/bautista/Algoritmos/Algoritmos 3/Kahoot/src/main/java/modelo/IncorrectOptionScorer.java
-/home/bautista/Algoritmos/Algoritmos 3/Kahoot/src/main/java/modelo/Option.java
-/home/bautista/Algoritmos/Algoritmos 3/Kahoot/src/main/java/modelo/IOptionScorer.java
-/home/bautista/Algoritmos/Algoritmos 3/Kahoot/src/main/java/modelo/CorrectOptionScorer.java
-/home/bautista/Algoritmos/Algoritmos 3/Kahoot/src/main/java/modelo/BooleanQuestion.java
-/home/bautista/Algoritmos/Algoritmos 3/Kahoot/src/main/java/exceptions/InvalidSizeException.java
-/home/bautista/Algoritmos/Algoritmos 3/Kahoot/src/main/java/modelo/MultipleChoiceScorer.java
-/home/bautista/Algoritmos/Algoritmos 3/Kahoot/src/main/java/modelo/PenaltyScorer.java
-/home/bautista/Algoritmos/Algoritmos 3/Kahoot/src/main/java/modelo/MultipleChoiceWithPartialScorer.java
-/home/bautista/Algoritmos/Algoritmos 3/Kahoot/src/main/java/modelo/QuestionScorer.java
+/Users/kuntrojb/Documents/Fiuba/algo3/TP2-Kahoot/Kahoot/Kahoot/src/main/java/modelo/IncorrectOptionScorer.java
+/Users/kuntrojb/Documents/Fiuba/algo3/TP2-Kahoot/Kahoot/Kahoot/src/main/java/modelo/IOptionScorer.java
+/Users/kuntrojb/Documents/Fiuba/algo3/TP2-Kahoot/Kahoot/Kahoot/src/main/java/modelo/BooleanQuestion.java
+/Users/kuntrojb/Documents/Fiuba/algo3/TP2-Kahoot/Kahoot/Kahoot/src/main/java/modelo/MultipleChoiceScorer.java
+/Users/kuntrojb/Documents/Fiuba/algo3/TP2-Kahoot/Kahoot/Kahoot/src/main/java/modelo/MultipleChoiceQuestion.java
+/Users/kuntrojb/Documents/Fiuba/algo3/TP2-Kahoot/Kahoot/Kahoot/src/main/java/modelo/Option.java
+/Users/kuntrojb/Documents/Fiuba/algo3/TP2-Kahoot/Kahoot/Kahoot/src/main/java/modelo/QuestionScorer.java
+/Users/kuntrojb/Documents/Fiuba/algo3/TP2-Kahoot/Kahoot/Kahoot/src/main/java/modelo/BooleanScorer.java
+/Users/kuntrojb/Documents/Fiuba/algo3/TP2-Kahoot/Kahoot/Kahoot/src/main/java/modelo/Player.java
+/Users/kuntrojb/Documents/Fiuba/algo3/TP2-Kahoot/Kahoot/Kahoot/src/main/java/modelo/Question.java
+/Users/kuntrojb/Documents/Fiuba/algo3/TP2-Kahoot/Kahoot/Kahoot/src/main/java/modelo/PenaltyScorer.java
+/Users/kuntrojb/Documents/Fiuba/algo3/TP2-Kahoot/Kahoot/Kahoot/src/main/java/exceptions/InvalidSizeException.java
+/Users/kuntrojb/Documents/Fiuba/algo3/TP2-Kahoot/Kahoot/Kahoot/src/main/java/modelo/Points.java
+/Users/kuntrojb/Documents/Fiuba/algo3/TP2-Kahoot/Kahoot/Kahoot/src/main/java/modelo/CorrectOptionScorer.java
+/Users/kuntrojb/Documents/Fiuba/algo3/TP2-Kahoot/Kahoot/Kahoot/src/main/java/modelo/MultipleChoiceWithPartialScorer.java

@@ -15,9 +15,4 @@ public class BooleanScorer implements QuestionScorer {
 
     }
 
-    @Override
-    public void multiplicate(Points points, Integer multiplicator) {
-
-    }
-
 }
