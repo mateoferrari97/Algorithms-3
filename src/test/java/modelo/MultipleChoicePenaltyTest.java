@@ -88,14 +88,15 @@ public class MultipleChoicePenaltyTest {
                 new Option("2^2 + 1", new IncorrectOptionScorer()));
 
         QuestionScorer scorer = new PenaltyScorer();
-        Question question = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer);
+        Multiplicator multiplicator = new PenaltyMultiplicator();
+        Question question = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer, multiplicator);
 
         Player player = new Player();
         player.setPoints(7);
         Integer expectedPlayerPoints = 1;
 
         // When
-        question.useDoubleMultiplicator();
+        question.multiplicate(2);
         question.score(player);
 
         // Then
@@ -112,13 +113,14 @@ public class MultipleChoicePenaltyTest {
                 new Option("2^2", new CorrectOptionScorer()));
 
         QuestionScorer scorer = new PenaltyScorer();
-        Question question = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer);
+        Multiplicator multiplicator = new PenaltyMultiplicator();
+        Question question = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer, multiplicator);
 
         Player player = new Player();
         Integer expectedPlayerPoints = 12;
 
         // When
-        question.useTripleMultiplicator();
+        question.multiplicate(3);
         question.score(player);
 
         // Then

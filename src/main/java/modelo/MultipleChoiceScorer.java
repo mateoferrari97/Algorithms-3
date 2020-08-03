@@ -16,9 +16,6 @@ public class MultipleChoiceScorer implements QuestionScorer {
         points.changeScoreToZero();
     }
 
-    @Override
-    public void multiplicate(Points points, Integer multiplicator) {
 
-    }
 
 }
