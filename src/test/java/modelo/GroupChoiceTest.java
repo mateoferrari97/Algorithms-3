@@ -9,7 +9,7 @@ import java.util.List;
 
 public class GroupChoiceTest {
     @Test
-    public void testMultipleChoiceQuestionIncreasePlayerPointsWhenAllOptionsAreCorrect() throws InvalidSizeException {
+    public void testGroupChoiceQuestionIncreasePlayerPointsWhenCorrectGroupSeparation() throws InvalidSizeException {
         // Given
         List<Option> lettersGroup = Arrays.asList(
                 new Option("A", new CorrectOptionScorer()),
@@ -34,7 +34,7 @@ public class GroupChoiceTest {
     }
 
     @Test
-    public void testMultipleChoiceQuestionDontIncreasePlayerPointsForIncorectOption() throws InvalidSizeException {
+    public void testGroupChoiceQuestionDontIncreasePlayerPointsWhenInorrectGroupSeparation() throws InvalidSizeException {
 
         List<Option> lettersGroup = Arrays.asList(
                 new Option("A", new CorrectOptionScorer()),
