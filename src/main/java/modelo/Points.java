@@ -29,6 +29,8 @@ public class Points {
         this.points = 1;
     }
 
+    public Integer getPoints() {return (this.points * this.factor);}
+  
     public void multiplicate(Integer multiplicator){
         factor = multiplicator;
     }
