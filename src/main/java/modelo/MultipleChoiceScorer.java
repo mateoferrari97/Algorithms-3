@@ -15,4 +15,7 @@ public class MultipleChoiceScorer implements QuestionScorer {
     public void punish(Points points) {
         points.changeScoreToZero();
     }
+
+
+
 }

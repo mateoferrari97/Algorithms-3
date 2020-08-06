@@ -61,4 +61,44 @@ public class BooleanQuestionPenaltyTest {
         // Then
         Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
     }
+
+    @Test
+    public void testBooleanQuestionWithPenaltyGivesDoubleThePointsToPlayerWhenUsingDoubleMultiplicatorWhenOptionIsCorrect() {
+        // Given
+        List<Option> options = Arrays.asList(new Option("si", new CorrectOptionScorer()));
+        QuestionScorer scorer = new PenaltyScorer();
+        Multiplicator multiplicator = new PenaltyMultiplicator();
+        Question question = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer, multiplicator);
+
+        Player player = new Player();
+        player.setPoints(5);
+        Integer expectedPlayerPoints = 7;
+
+        // When
+        question.multiplicate(2);
+        question.score(player);
+
+        // Then
+        Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
+    }
+
+    @Test
+    public void testBooleanQuestionWithPenaltyGivesTripleThePointsToPlayerWhenUsingTripleMultiplicatorWhenOptionIsCorrect() {
+        // Given
+        List<Option> options = Arrays.asList(new Option("si", new CorrectOptionScorer()));
+        QuestionScorer scorer = new PenaltyScorer();
+        Multiplicator multiplicator = new PenaltyMultiplicator();
+        Question question = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer, multiplicator);
+
+        Player player = new Player();
+        player.setPoints(5);
+        Integer expectedPlayerPoints = 8;
+
+        // When
+        question.multiplicate(3);
+        question.score(player);
+
+        // Then
+        Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
+    }
 }
