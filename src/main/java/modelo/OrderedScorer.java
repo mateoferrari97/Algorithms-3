@@ -1,17 +1,20 @@
 package modelo;
 
-public class MultipleChoiceWithPartialScorer implements QuestionScorer {
+public class OrderedScorer implements QuestionScorer {
 
     public void score(Player player, Points points) {
         points.givePointsToPlayer(player);
     }
 
     public void reward(Points points) {
-        points.increasePoints();
+        points.gainAPoint();
     }
 
     public void punish(Points points) {
         points.changeScoreToZero();
     }
 
+    public void multiplicate(Points points, Integer multiplicator) {
+
+    }
 }

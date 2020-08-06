@@ -6,4 +6,8 @@ public class CorrectOptionScorer implements IOptionScorer {
         scorer.reward(points);
     }
 
+    public void changeState(Option option) {
+        option.changeToIncorrect();
+    }
+
 }

@@ -1,5 +1,7 @@
 package modelo;
 
+import java.util.List;
+
 public class Option {
     private String text;
     private IOptionScorer scorer;
@@ -13,4 +15,15 @@ public class Option {
         this.scorer.calculatePoints(scorer, points);
     }
 
+    public void changeState(Option option) {
+        scorer.changeState(option);
+    }
+
+    public void changeToCorrect() {
+        scorer = new CorrectOptionScorer();
+    }
+
+    public void changeToIncorrect() {
+        scorer = new IncorrectOptionScorer();
+    }
 }

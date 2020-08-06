@@ -14,4 +14,5 @@ public class BooleanScorer implements QuestionScorer {
     public void punish(Points points) {
 
     }
+
 }

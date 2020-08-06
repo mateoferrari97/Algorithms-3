@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/mateoferrari97/Kahoot.svg?branch=develop)](https://travis-ci.org/mateoferrari97/Kahoot)
+
 # TP2 Algoritmos 3: Kahoot
 
 Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUBA
