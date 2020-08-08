@@ -2,7 +2,7 @@ package modelo;
 
 import java.util.List;
 
-abstract class Question {
+public abstract class Question {
     protected String text;
     protected QuestionScorer scorer;
     protected List<Option> options;

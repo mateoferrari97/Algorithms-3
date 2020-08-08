@@ -31,7 +31,7 @@ public class Pantalla extends Application{
         questionText.setStyle("-fx-border-color: black;");
 
 
-        BooleanQuestion question = getBooleanQuesiton();
+        Question question = getBooleanQuesiton();
         fillQuestionText(question, questionText);
         Button[] buttons = getQuestionOptions(question);
 
@@ -52,21 +52,20 @@ public class Pantalla extends Application{
         stage.show();
     }
 
-    private Button[] getQuestionOptions(BooleanQuestion question) {
+    private Button[] getQuestionOptions(Question question) {
         String[] answerOptions = question.getAnswerOptions();
-        List<Option> options = question.getOptions();
         Button[] buttons = new Button[answerOptions.length];
         int i = 0;
         for(String aString : answerOptions){
             buttons[i] = new Button(aString);
-            OptionsEventHandler optionsEventHandler = new OptionsEventHandler(options.get(i), question);
+            OptionsEventHandler optionsEventHandler = new OptionsEventHandler(question.getOptions().get(i), question);
             buttons[i].setOnAction(optionsEventHandler);
             i++;
         }
         return buttons;
     }
 
-    private void fillQuestionText(BooleanQuestion question, Label questionText) {
+    private void fillQuestionText(Question question, Label questionText) {
         questionText.setText(question.getText());
     }
 
