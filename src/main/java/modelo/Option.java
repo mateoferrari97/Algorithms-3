@@ -26,4 +26,8 @@ public class Option {
     public void changeToIncorrect() {
         scorer = new IncorrectOptionScorer();
     }
+
+    public String getText() {
+        return this.text;
+    }
 }

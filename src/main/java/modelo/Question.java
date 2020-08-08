@@ -17,5 +17,19 @@ abstract class Question {
     }
 
     public abstract void score(Player player, List<Integer> playerAnswers);
+
+    public String getText() {
+        return this.text;
+    }
+
+    public String[] getOptions() {
+        int i = 0;
+        String[] answersOptions = new String[this.options.size()];
+        for(Option aOption : options){
+            answersOptions[i] = aOption.getText();
+            i++;
+        }
+        return answersOptions;
+    }
 }
 
