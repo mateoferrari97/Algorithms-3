@@ -19,7 +19,7 @@ public class BooleanQuestionTest {
         Integer expectedPlayerPoints = 1;
 
         // When
-        question.score(player);
+        question.score(player, options);
 
         // Then
         Assert.assertEquals(player.getPoints(), expectedPlayerPoints);

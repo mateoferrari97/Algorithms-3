@@ -11,7 +11,7 @@ public class OrderedChoiceQuestion extends Question {
         this.points = new Points();
     }
 
-    public void score(Player player, List<Integer> playerAnswers) {
+    /*public void score(Player player, List<Integer> playerAnswers) {
         for(Integer aInteger : playerAnswers){
             this.options.get(aInteger).calculatePoints(this.scorer, this.points);
             if(aInteger + 1 < options.size()) { // solo pregunta para ver el final del vector
@@ -19,5 +19,10 @@ public class OrderedChoiceQuestion extends Question {
             }
         }
         this.scorer.score(player, this.points);
+    }*/
+
+    @Override
+    public void score(Player player, List<Option> playerAnswers) {
+
     }
 }

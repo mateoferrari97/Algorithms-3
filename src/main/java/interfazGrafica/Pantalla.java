@@ -1,4 +1,5 @@
 package interfazGrafica;
+import interfazGrafica.Eventos.OptionsEventHandler;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -52,11 +53,14 @@ public class Pantalla extends Application{
     }
 
     private Button[] getQuestionOptions(BooleanQuestion question) {
-        String[] options = question.getOptions();
-        Button[] buttons = new Button[options.length];
+        String[] answerOptions = question.getAnswerOptions();
+        List<Option> options = question.getOptions();
+        Button[] buttons = new Button[answerOptions.length];
         int i = 0;
-        for(String aString : options){
+        for(String aString : answerOptions){
             buttons[i] = new Button(aString);
+            OptionsEventHandler optionsEventHandler = new OptionsEventHandler(options.get(i), question);
+            buttons[i].setOnAction(optionsEventHandler);
             i++;
         }
         return buttons;

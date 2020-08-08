@@ -46,7 +46,7 @@ public class MultipleChoiceQuestion extends Question {
     }
 
     @Override
-    public void score(Player player, List<Integer> playerAnswers) {
+    public void score(Player player, List<Option> playerAnswers) {
 
     }
 }

@@ -1,5 +1,4 @@
 package modelo;
-import java.util.ArrayList;
 import java.util.List;
 
 public class BooleanQuestion extends Question {
@@ -28,8 +27,11 @@ public class BooleanQuestion extends Question {
         scorer.score(player,this.points);
     }
 
-    @Override
-    public void score(Player player, List<Integer> playerAnswers) {
 
+    public void score(Player player, List<Option> playerAnswers) {
+        for(Option aOption : playerAnswers){
+            aOption.calculatePoints(scorer, this.points);
+        }
+        scorer.score(player,this.points);
     }
 }

@@ -16,13 +16,13 @@ abstract class Question {
         this.multiplicator.multiplicate(this.points, factor);
     }
 
-    public abstract void score(Player player, List<Integer> playerAnswers);
+    public abstract void score(Player player, List<Option> playerAnswers);
 
     public String getText() {
         return this.text;
     }
 
-    public String[] getOptions() {
+    public String[] getAnswerOptions() {
         int i = 0;
         String[] answersOptions = new String[this.options.size()];
         for(Option aOption : options){
@@ -30,6 +30,10 @@ abstract class Question {
             i++;
         }
         return answersOptions;
+    }
+
+    public List<Option> getOptions(){
+        return this.options;
     }
 }
 
