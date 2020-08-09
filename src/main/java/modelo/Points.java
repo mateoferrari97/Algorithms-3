@@ -15,6 +15,7 @@ public class Points {
 
     public void givePointsToPlayer(Player player) {
         player.gainAmountOfPoints(this.points * this.factor);
+        this.points = 0;
     }
 
     public void decreasePoints() {

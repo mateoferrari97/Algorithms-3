@@ -11,6 +11,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import modelo.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -25,23 +26,53 @@ public class Pantalla extends Application{
     public void start(Stage stage) throws Exception {
         stage.setTitle("Boolean Question");
 
+        //----------------------------------------------------------------------
+        //--------------------------Player and points labels--------------------
+        //----------------------------------------------------------------------
+        Player player = new Player();
+        player.setText("Bautista:");
+
+        Label playerText = new Label();
+        playerText.setTextFill(Color.BLACK);
+        playerText.setFont(new Font("Arial", 30));
+
+        Label playerPoints = new Label();
+        playerPoints.setTextFill(Color.BLACK);
+        playerPoints.setFont(new Font("Arial", 30));
+
+        playerText.setText(player.getText());
+        Integer auxPlayerPoints = player.getPoints();
+        playerPoints.setText(auxPlayerPoints.toString());
+
+        HBox playerContenedorHorizontal = new HBox(playerText, playerPoints);
+        playerContenedorHorizontal.setSpacing(10);
+
+        //----------------------------------------------------------------------
+        //--------------------------Question text label-------------------------
+        //----------------------------------------------------------------------
         Label questionText = new Label();
         questionText.setTextFill(Color.BLUE);
         questionText.setFont(new Font("Arial", 30));
         questionText.setStyle("-fx-border-color: black;");
 
-
         Question question = getBooleanQuesiton();
         fillQuestionText(question, questionText);
+
+        //----------------------------------------------------------------------
+        //--------------------------Buttons creation----------------------------
+        //----------------------------------------------------------------------
         Button[] buttons = getQuestionOptions(question);
 
+        fillWithEvents(buttons, question, playerPoints, player);
 
         HBox contenedorHorizontal = new HBox();
         fillContainer(contenedorHorizontal, buttons);
         contenedorHorizontal.setSpacing(400);
 
-
-        VBox contenedorPrincipal = new VBox(questionText, contenedorHorizontal);
+        //----------------------------------------------------------------------
+        //--------------------------Principal Container-------------------------
+        //----------------------------------------------------------------------
+        VBox contenedorPrincipal = new VBox(playerContenedorHorizontal, questionText, contenedorHorizontal);
         contenedorPrincipal.setSpacing(100);
         contenedorPrincipal.setPadding(new Insets(300));
 
@@ -52,14 +83,21 @@ public class Pantalla extends Application{
         stage.show();
     }
 
+    private void fillWithEvents(Button[] buttons, Question question, Label playerPoints, Player player) {
+        int i = 0;
+        for(Button aButton : buttons) {
+            OptionsEventHandler optionsEventHandler = new OptionsEventHandler(question.getOptions().get(i), playerPoints, player, question);
+            aButton.setOnAction(optionsEventHandler);
+            i++;
+        }
+    }
+
     private Button[] getQuestionOptions(Question question) {
         String[] answerOptions = question.getAnswerOptions();
         Button[] buttons = new Button[answerOptions.length];
         int i = 0;
         for(String aString : answerOptions){
             buttons[i] = new Button(aString);
-            OptionsEventHandler optionsEventHandler = new OptionsEventHandler(question.getOptions().get(i), question);
-            buttons[i].setOnAction(optionsEventHandler);
             i++;
         }
         return buttons;
