@@ -13,8 +13,4 @@ public class OrderedScorer implements QuestionScorer {
     public void punish(Points points) {
         points.changeScoreToZero();
     }
-
-    public void multiplicate(Points points, Integer multiplicator) {
-
-    }
 }

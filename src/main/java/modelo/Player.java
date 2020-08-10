@@ -1,6 +1,7 @@
 package modelo;
 
 public class Player {
+    private String  name;
     private Integer points = 0;
 
     public Integer getPoints() {
@@ -16,5 +17,13 @@ public class Player {
         if (this.points < 0) {
             this.points = 0;
         }
+    }
+
+    public void setText(String name){
+        this.name = name;
+    }
+
+    public String getText() {
+        return this.name;
     }
 }

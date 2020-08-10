@@ -22,15 +22,15 @@ public class GroupChoiceQuestion extends Question {
         this.points = new Points();
     }
 
-    public void score(Player player) {
-        Integer optionsASize = this.options.size();
-        Integer optionsBSize = this.optionsB.size();
+    public void score(Player player, List<Option> playerOptionsOne, List<Option> playerOptionsTwo){
+        Integer optionsASize = playerOptionsOne.size();
+        Integer optionsBSize = playerOptionsTwo.size();
 
         Points pointsA = new Points();
         Points pointsB = new Points();
 
-        for (Option aOption : this.options) {aOption.calculatePoints(scorer, pointsA);}
-        for (Option aOption : this.optionsB) { aOption.calculatePoints(scorer, pointsB);}
+        for (Option aOption : playerOptionsOne) {aOption.calculatePoints(scorer, pointsA);}
+        for (Option aOption : playerOptionsTwo) { aOption.calculatePoints(scorer, pointsB);}
 
         if (pointsA.getPoints() != optionsASize && pointsA.getPoints() != 0) {
             this.points.changeScoreToZero();
@@ -46,7 +46,7 @@ public class GroupChoiceQuestion extends Question {
     }
        
     @Override
-    public void score(Player player, List<Integer> playerAnswers) {
+    public void score(Player player, List<Option> playerAnswers) {
         
     }
 }

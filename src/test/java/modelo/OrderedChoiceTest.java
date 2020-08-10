@@ -21,11 +21,11 @@ public class OrderedChoiceTest {
         Question question = new OrderedChoiceQuestion("ordene correctamente las siguientes opciones", options, scorer);
 
         Player player = new Player();
-        List<Integer> playerAnswers = Arrays.asList(0,1,2,3);
+        List<Option> playerOptions = options;
         Integer expectedPlayerPoints = 1;
 
         // When
-        question.score(player,playerAnswers);
+        question.score(player,playerOptions);
 
         // Then
         Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
@@ -44,11 +44,15 @@ public class OrderedChoiceTest {
         Question question = new OrderedChoiceQuestion("ordene correctamente las siguientes opciones", options, scorer);
 
         Player player = new Player();
-        List<Integer> playerAnswers = Arrays.asList(0,1,3,2);
+        List<Option> playerOptions = Arrays.asList(
+                options.get(0),
+                options.get(1),
+                options.get(3),
+                options.get(2));
         Integer expectedPlayerPoints = 0;
 
         // When
-        question.score(player,playerAnswers);
+        question.score(player,playerOptions);
 
         // Then
         Assert.assertEquals(player.getPoints(), expectedPlayerPoints);

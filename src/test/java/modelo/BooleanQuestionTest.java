@@ -11,15 +11,18 @@ public class BooleanQuestionTest {
     @Test
     public void testBooleanQuestionIncreasePlayerPointsWhenOptionIsCorrect() {
         // Given
-        List<Option> options = Arrays.asList(new Option("si", new CorrectOptionScorer()));
+        List<Option> options = Arrays.asList(
+                new Option("si", new CorrectOptionScorer()),
+                new Option("no", new IncorrectOptionScorer()));
         QuestionScorer scorer = new BooleanScorer();
         Question question = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer);
 
         Player player = new Player();
+        List<Option> playerOptions = Arrays.asList(new Option("si", new CorrectOptionScorer()));
         Integer expectedPlayerPoints = 1;
 
         // When
-        question.score(player);
+        question.score(player, playerOptions);
 
         // Then
         Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
@@ -28,16 +31,19 @@ public class BooleanQuestionTest {
     @Test
     public void testBooleanQuestionDontIncreasePlayerPointsWhenOptionIsIncorrect() {
         // Given
-        List<Option> options = Arrays.asList(new Option("no", new IncorrectOptionScorer()));
+        List<Option> options = Arrays.asList(
+                new Option("si", new CorrectOptionScorer()),
+                new Option("no", new IncorrectOptionScorer()));
         QuestionScorer scorer = new BooleanScorer();
         Question question = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer);
 
         Player player = new Player();
         player.setPoints(5);
+        List<Option> playerOptions = Arrays.asList(new Option("no", new IncorrectOptionScorer()));
         Integer expectedPlayerPoints = 5;
 
         // When
-        question.score(player);
+        question.score(player, playerOptions);
 
         // Then
         Assert.assertEquals(player.getPoints(), expectedPlayerPoints);

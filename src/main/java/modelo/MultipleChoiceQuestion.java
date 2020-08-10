@@ -38,15 +38,11 @@ public class MultipleChoiceQuestion extends Question {
         this.multiplicator = multiplicator;
     }
 
-    public void score(Player player) {
-        for(Option aOption : options){
+    @Override
+    public void score(Player player, List<Option> playerAnswers) {
+        for(Option aOption : playerAnswers){
             aOption.calculatePoints(scorer, this.points);
         }
         scorer.score(player,this.points);
-    }
-
-    @Override
-    public void score(Player player, List<Integer> playerAnswers) {
-
     }
 }
