@@ -20,13 +20,6 @@ public class BooleanQuestion extends Question {
     }
 
 
-    public void score(Player player) {
-        for(Option aOption : options){
-            aOption.calculatePoints(scorer, this.points);
-        }
-        scorer.score(player,this.points);
-    }
-
 
     public void score(Player player, List<Option> playerAnswers) {
         for(Option aOption : playerAnswers){

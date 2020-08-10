@@ -18,16 +18,22 @@ public class MultipleChoiceTest {
                 new Option("2 + 2", new CorrectOptionScorer()),
                 new Option("2 * 2", new CorrectOptionScorer()),
                 new Option("1 + 3", new CorrectOptionScorer()),
-                new Option("2^2", new CorrectOptionScorer()));
+                new Option("2^2", new CorrectOptionScorer()),
+                new Option("1 - 3", new IncorrectOptionScorer()));
 
         QuestionScorer scorer = new MultipleChoiceScorer();
         Question question = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer);
 
         Player player = new Player();
+        List<Option> playerOptions = Arrays.asList(
+                new Option("2 + 2", new CorrectOptionScorer()),
+                new Option("2 * 2", new CorrectOptionScorer()),
+                new Option("1 + 3", new CorrectOptionScorer()),
+                new Option("5 - 1", new CorrectOptionScorer()));
         Integer expectedPlayerPoints = 1;
 
         // When
-        question.score(player);
+        question.score(player, playerOptions);
 
         // Then
         Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
@@ -39,17 +45,23 @@ public class MultipleChoiceTest {
         List<Option> options = Arrays.asList(
                 new Option("2 + 2", new CorrectOptionScorer()),
                 new Option("2 * 2", new CorrectOptionScorer()),
-                new Option("1 - 3", new IncorrectOptionScorer()),
-                new Option("2^2", new CorrectOptionScorer()));
+                new Option("1 + 3", new CorrectOptionScorer()),
+                new Option("2^2", new CorrectOptionScorer()),
+                new Option("1 - 3", new IncorrectOptionScorer()));
 
         QuestionScorer scorer = new MultipleChoiceScorer();
         Question question = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer);
 
         Player player = new Player();
+        List<Option> playerOptions = Arrays.asList(
+                new Option("2 + 2", new CorrectOptionScorer()),
+                new Option("2 * 2", new CorrectOptionScorer()),
+                new Option("1 + 3", new CorrectOptionScorer()),
+                new Option("1 - 3", new IncorrectOptionScorer()));
         Integer expectedPlayerPoints = 0;
 
         // When
-        question.score(player);
+        question.score(player, playerOptions);
 
         // Then
         Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
