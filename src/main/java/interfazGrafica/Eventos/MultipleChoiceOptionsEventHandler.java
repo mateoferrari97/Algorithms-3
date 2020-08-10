@@ -8,15 +8,13 @@ import modelo.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class OptionsEventHandler implements EventHandler<ActionEvent> {
-
+public class MultipleChoiceOptionsEventHandler implements EventHandler<ActionEvent> {
     private Question question;
     private Player player;
     private Option chosenOption;
     private Label playerPoints;
 
-    public OptionsEventHandler(Option option, Label playerPoints, Player player, Question question) {
+    public MultipleChoiceOptionsEventHandler(Option option, Label playerPoints, Player player, MultipleChoiceQuestion question) {
         this.chosenOption = option;
         this.playerPoints = playerPoints;
         this.player = player;

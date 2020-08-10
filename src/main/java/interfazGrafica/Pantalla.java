@@ -1,5 +1,6 @@
 package interfazGrafica;
-import interfazGrafica.Eventos.OptionsEventHandler;
+import interfazGrafica.Eventos.BooleanOptionsEventHandler;
+import interfazGrafica.Eventos.MultipleChoiceOptionsEventHandler;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -11,7 +12,6 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import modelo.*;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -55,7 +55,7 @@ public class Pantalla extends Application{
         questionText.setFont(new Font("Arial", 30));
         questionText.setStyle("-fx-border-color: black;");
 
-        Question question = getBooleanQuesiton();
+        BooleanQuestion question = getBooleanQuesiton();
         fillQuestionText(question, questionText);
 
         //----------------------------------------------------------------------
@@ -77,20 +77,35 @@ public class Pantalla extends Application{
         contenedorPrincipal.setPadding(new Insets(300));
 
         Scene escena = new Scene(contenedorPrincipal);
+        StackPane boludeo = new StackPane();
+        Scene escenaDos = new Scene(boludeo);
 
         stage.setScene(escena);
+
+
+
 
         stage.show();
     }
 
-    private void fillWithEvents(Button[] buttons, Question question, Label playerPoints, Player player) {
+    private void fillWithEvents(Button[] buttons, BooleanQuestion question, Label playerPoints, Player player) {
         int i = 0;
         for(Button aButton : buttons) {
-            OptionsEventHandler optionsEventHandler = new OptionsEventHandler(question.getOptions().get(i), playerPoints, player, question);
-            aButton.setOnAction(optionsEventHandler);
+            BooleanOptionsEventHandler booleanOptionsEventHandler = new BooleanOptionsEventHandler(question.getOptions().get(i), playerPoints, player, question);
+            aButton.setOnAction(booleanOptionsEventHandler);
             i++;
         }
     }
+
+    private void fillWithEvents(Button[] buttons, MultipleChoiceQuestion question, Label playerPoints, Player player) {
+        int i = 0;
+        for(Button aButton : buttons) {
+            MultipleChoiceOptionsEventHandler multipleChoiceOptionsEventHandler = new MultipleChoiceOptionsEventHandler(question.getOptions().get(i), playerPoints, player, question);
+            aButton.setOnAction(multipleChoiceOptionsEventHandler);
+            i++;
+        }
+    }
+
 
     private Button[] getQuestionOptions(Question question) {
         String[] answerOptions = question.getAnswerOptions();
