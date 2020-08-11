@@ -1,6 +1,5 @@
 package interfazGrafica;
 
-import interfazGrafica.Eventos.BooleanOptionsEventHandler;
 import interfazGrafica.Eventos.MultipleChoiceOptionsEventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -13,57 +12,38 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import modelo.*;
 
-import java.util.Arrays;
-import java.util.List;
-
 public class Round {
+    Turn[] turns = new Turn[2];
 
 
     public Round() {
     }
 
     public void start(Stage stage, BooleanQuestion question, Player[] players) {
+
+        //----------------------------------------------------------------------
+        //--------------------------Principal Container-------------------------
+        //----------------------------------------------------------------------
+        VBox contenedorPrincipal = new VBox();
+        contenedorPrincipal.setSpacing(100);
+        contenedorPrincipal.setPadding(new Insets(300));
+
+        for(int i = 0; i <= 1; i++) {
+            turns[i] = new Turn(players[i], contenedorPrincipal);
+        }
+
+        Scene escena = new Scene(contenedorPrincipal);
+
         //----------------------------------------------------------------------
         //--------------------------PlayerOne and points labels-----------------
         //----------------------------------------------------------------------
 
-        Label playerText = new Label();
-        playerText.setTextFill(Color.BLACK);
-        playerText.setFont(new Font("Arial", 30));
 
-        Label playerPoints = new Label();
-        playerPoints.setTextFill(Color.BLACK);
-        playerPoints.setFont(new Font("Arial", 30));
-
-        playerText.setText(players[0].getText());
-        Integer auxPlayerPoints = players[0].getPoints();
-        playerPoints.setText(auxPlayerPoints.toString());
-
-        HBox playerContenedorHorizontal = new HBox(playerText, playerPoints);
-        playerContenedorHorizontal.setSpacing(10);
-
+        turns[0].createPlayerLabels();
+        turns[1].createPlayerLabels();
 
         //----------------------------------------------------------------------
-        //--------------------------PlayerTwo and points labels-----------------
-        //----------------------------------------------------------------------
-
-        Label playerTextTwo = new Label();
-        playerTextTwo.setTextFill(Color.BLACK);
-        playerTextTwo.setFont(new Font("Arial", 30));
-
-        Label playerPointsTwo = new Label();
-        playerPointsTwo.setTextFill(Color.BLACK);
-        playerPointsTwo.setFont(new Font("Arial", 30));
-
-        playerTextTwo.setText(players[1].getText());
-        Integer auxPlayerPointsTwo = players[1].getPoints();
-        playerPointsTwo.setText(auxPlayerPointsTwo.toString());
-
-        HBox playerContenedorHorizontalTwo = new HBox(playerTextTwo, playerPointsTwo);
-        playerContenedorHorizontalTwo.setSpacing(10);
-
-        //----------------------------------------------------------------------
-        //--------------------------Question text label-------------------------
+        //--------------------------QuestionTwo text label----------------------
         //----------------------------------------------------------------------
         Label questionText = new Label();
         questionText.setTextFill(Color.BLUE);
@@ -72,71 +52,24 @@ public class Round {
 
         fillQuestionText(question, questionText);
 
-        //----------------------------------------------------------------------
-        //--------------------------QuestionTwo text label-------------------------
-        //-------------------------------------------------------------------
+        turns[0].setQuestionLabel(questionText);
+        turns[1].setQuestionLabel(questionText);
 
-        Label questionTextTwo = new Label();
-        questionTextTwo.setTextFill(Color.BLUE);
-        questionTextTwo.setFont(new Font("Arial", 30));
-        questionTextTwo.setStyle("-fx-border-color: black;");
-
-        fillQuestionText(question, questionTextTwo);
 
         //----------------------------------------------------------------------
         //--------------------------Buttons creation----------------------------
         //----------------------------------------------------------------------
-        Button[] buttons = getQuestionOptions(question);
+        turns[0].setButtons(question);
+        turns[1].setButtons(question);
+
+        turns[0].fillWithEvents(question, turns[1]);
+        turns[1].fillWithEvents(question, turns[0]);
 
 
-        HBox contenedorHorizontal = new HBox();
-        fillContainer(contenedorHorizontal, buttons);
-        contenedorHorizontal.setSpacing(400);
-
-        //----------------------------------------------------------------------
-        //--------------------------ButtonsTwo creation----------------------------
-        //----------------------------------------------------------------------
-        Button[] buttonsTwo = getQuestionOptions(question);
-
-
-        HBox contenedorHorizontalTwo = new HBox();
-        fillContainer(contenedorHorizontalTwo, buttonsTwo);
-        contenedorHorizontalTwo.setSpacing(400);
-
-        //----------------------------------------------------------------------
-        //--------------------------PrincipalTwo Container-------------------------
-        //----------------------------------------------------------------------
-        VBox contenedorPrincipalTwo = new VBox(playerContenedorHorizontalTwo, questionTextTwo, contenedorHorizontalTwo);
-        contenedorPrincipalTwo.setSpacing(100);
-        contenedorPrincipalTwo.setPadding(new Insets(300));
-        Scene escenaTwo = new Scene(contenedorPrincipalTwo);
-
-        fillWithEvents(buttons, question, playerPoints, players[0], stage, escenaTwo);
-
-        //----------------------------------------------------------------------
-        //--------------------------Principal Container-------------------------
-        //----------------------------------------------------------------------
-        VBox contenedorPrincipal = new VBox(playerContenedorHorizontal, questionText, contenedorHorizontal);
-        contenedorPrincipal.setSpacing(100);
-        contenedorPrincipal.setPadding(new Insets(300));
-
-        Scene escena = new Scene(contenedorPrincipal);
+        turns[0].startScene();
         stage.setScene(escena);
 
-        fillWithEvents(buttonsTwo, question, playerPointsTwo, players[1], stage, escena);
 
-
-        //fillWithEvents(buttons, question, playerPointsTwo, players[1], playerNumber, stage, escena);
-
-    }
-
-    private void fillWithEvents(Button[] buttons, BooleanQuestion question, Label playerPoints, Player player, Stage stage, Scene escena) {
-        int i = 0;
-        for(Button aButton : buttons) {
-            BooleanOptionsEventHandler booleanOptionsEventHandler = new BooleanOptionsEventHandler(question.getOptions().get(i), playerPoints, player, question, stage, escena);
-            aButton.setOnAction(booleanOptionsEventHandler);
-            i++;
-        }
     }
 
     private void fillWithEvents(Button[] buttons, MultipleChoiceQuestion question, Label playerPoints, Player player) {
@@ -149,25 +82,9 @@ public class Round {
     }
 
 
-    private Button[] getQuestionOptions(Question question) {
-        String[] answerOptions = question.getAnswerOptions();
-        Button[] buttons = new Button[answerOptions.length];
-        int i = 0;
-        for(String aString : answerOptions){
-            buttons[i] = new Button(aString);
-            i++;
-        }
-        return buttons;
-    }
-
     private void fillQuestionText(Question question, Label questionText) {
         questionText.setText(question.getText());
     }
 
-    private void fillContainer(HBox contenedorHorizontal, Button[] buttons) {
-        for(Button aButton : buttons){
-            contenedorHorizontal.getChildren().add(aButton);
-        }
-    }
 
 }
