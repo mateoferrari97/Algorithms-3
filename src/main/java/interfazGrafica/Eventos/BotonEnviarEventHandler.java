@@ -44,6 +44,7 @@ public class BotonEnviarEventHandler implements EventHandler<ActionEvent> {
             if (players.size() < 2) {
                 players.add(new Player(textField.getText()));
                 mensaje.setText("Jugador " + String.valueOf(players.size() + 1) + " ingrese su nombre");
+                this.textField.clear();
                 if (players.size() == 2) {
                     this.round.start(stage, this.players);
                 }
