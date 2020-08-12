@@ -1,5 +1,12 @@
 package modelo;
 
+import modelo.options.CorrectOptionScorer;
+import modelo.options.IncorrectOptionScorer;
+import modelo.options.Option;
+import modelo.questions.BooleanQuestion;
+import modelo.questions.Question;
+import modelo.scorers.PenaltyScorer;
+import modelo.scorers.QuestionScorer;
 import org.junit.Assert;
 import org.junit.Test;
 

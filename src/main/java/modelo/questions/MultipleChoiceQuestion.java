@@ -1,6 +1,9 @@
-package modelo;
+package modelo.questions;
 
 import exceptions.InvalidSizeException;
+import modelo.*;
+import modelo.options.Option;
+import modelo.scorers.QuestionScorer;
 
 import java.util.List;
 
@@ -44,5 +47,10 @@ public class MultipleChoiceQuestion extends Question {
             aOption.calculatePoints(scorer, this.points);
         }
         scorer.score(player,this.points);
+    }
+
+    @Override
+    public Question question(String text, List<Option> options, QuestionScorer scorer) throws InvalidSizeException {
+        return new MultipleChoiceQuestion(text,options,scorer);
     }
 }

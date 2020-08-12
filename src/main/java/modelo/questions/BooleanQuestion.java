@@ -1,4 +1,8 @@
-package modelo;
+package modelo.questions;
+import modelo.*;
+import modelo.options.Option;
+import modelo.scorers.QuestionScorer;
+
 import java.util.List;
 
 public class BooleanQuestion extends Question {
@@ -20,11 +24,15 @@ public class BooleanQuestion extends Question {
     }
 
 
-
     public void score(Player player, List<Option> playerAnswers) {
         for(Option aOption : playerAnswers){
             aOption.calculatePoints(scorer, this.points);
         }
         scorer.score(player,this.points);
+    }
+
+    @Override
+    public Question question(String text, List<Option> options, QuestionScorer scorer) {
+        return new BooleanQuestion(text,options,scorer);
     }
 }

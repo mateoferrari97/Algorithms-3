@@ -1,4 +1,5 @@
 package interfazGrafica;
+
 import interfazGrafica.Eventos.BooleanOptionsEventHandler;
 import interfazGrafica.Eventos.MultipleChoiceOptionsEventHandler;
 import javafx.application.Application;
@@ -6,12 +7,23 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import modelo.*;
+import modelo.Player;
+import modelo.options.CorrectOptionScorer;
+import modelo.options.IncorrectOptionScorer;
+import modelo.options.Option;
+import modelo.questions.BooleanQuestion;
+import modelo.questions.MultipleChoiceQuestion;
+import modelo.questions.Question;
+import modelo.scorers.BooleanScorer;
+import modelo.scorers.QuestionScorer;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -57,6 +69,10 @@ public class Pantalla extends Application{
 
         BooleanQuestion question = getBooleanQuesiton();
         fillQuestionText(question, questionText);
+
+        ArrayList<Question> questionArrayList = new ArrayList<Question>();
+
+
 
         //----------------------------------------------------------------------
         //--------------------------Buttons creation----------------------------

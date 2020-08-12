@@ -1,5 +1,8 @@
-package modelo;
+package modelo.scorers;
 
+
+import modelo.Player;
+import modelo.Points;
 
 public interface QuestionScorer {
     void score(Player player, Points points);

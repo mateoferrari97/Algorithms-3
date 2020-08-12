@@ -1,6 +1,8 @@
-package modelo;
+package modelo.options;
 
-import java.util.List;
+import com.google.gson.JsonObject;
+import modelo.Points;
+import modelo.scorers.QuestionScorer;
 
 public class Option {
     private String text;
@@ -29,5 +31,15 @@ public class Option {
 
     public String getText() {
         return this.text;
+    }
+
+
+    public static Option unmarshal(JsonObject json){
+        String text = json.get("text").getAsString();
+        boolean isCorrect = json.get("optionScorer").getAsBoolean();
+       if(isCorrect){
+           return new Option(text,new CorrectOptionScorer());
+       }
+        return new Option(text,new IncorrectOptionScorer());
     }
 }

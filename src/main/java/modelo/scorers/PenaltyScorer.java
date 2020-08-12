@@ -1,21 +1,19 @@
-package modelo;
+package modelo.scorers;
 
+import modelo.Player;
+import modelo.Points;
 
-public class MultipleChoiceScorer implements QuestionScorer {
+public class PenaltyScorer implements QuestionScorer {
 
     public void score(Player player, Points points) {
         points.givePointsToPlayer(player);
     }
 
-
     public void reward(Points points) {
-        points.gainAPoint();
+        points.increasePoints();
     }
 
     public void punish(Points points) {
-        points.changeScoreToZero();
+        points.decreasePoints();
     }
-
-
-
 }

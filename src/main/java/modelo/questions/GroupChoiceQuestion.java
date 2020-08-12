@@ -1,10 +1,16 @@
-package modelo;
+package modelo.questions;
 
 import exceptions.InvalidSizeException;
+import modelo.*;
+import modelo.options.Option;
+import modelo.scorers.QuestionScorer;
+
 import java.util.List;
 
 public class GroupChoiceQuestion extends Question {
     protected List<Option> optionsB;
+
+    public GroupChoiceQuestion(String text, List<Option> options, QuestionScorer scorer){}
 
     public GroupChoiceQuestion(String test, List<Option> optionsA, List<Option> optionsB, QuestionScorer scorer) throws InvalidSizeException {
         super();
@@ -44,7 +50,12 @@ public class GroupChoiceQuestion extends Question {
 
         scorer.score(player,this.points);
     }
-       
+
+    @Override
+    public Question question(String text, List<Option> options, QuestionScorer scorer) throws InvalidSizeException {
+        return new GroupChoiceQuestion(text,options,scorer);
+    }
+
     @Override
     public void score(Player player, List<Option> playerAnswers) {
         

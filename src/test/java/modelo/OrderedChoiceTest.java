@@ -1,6 +1,13 @@
 package modelo;
 
 import exceptions.InvalidSizeException;
+import modelo.options.CorrectOptionScorer;
+import modelo.options.IncorrectOptionScorer;
+import modelo.options.Option;
+import modelo.questions.OrderedChoiceQuestion;
+import modelo.questions.Question;
+import modelo.scorers.OrderedScorer;
+import modelo.scorers.QuestionScorer;
 import org.junit.Assert;
 import org.junit.Test;
 
