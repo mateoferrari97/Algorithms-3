@@ -23,8 +23,8 @@ public class GroupChoiceQuestion extends Question {
     }
 
     public void score(Player player, List<Option> playerOptionsOne, List<Option> playerOptionsTwo){
-        Integer optionsASize = playerOptionsOne.size();
-        Integer optionsBSize = playerOptionsTwo.size();
+        Integer optionsASize = options.size();
+        Integer optionsBSize = optionsB.size();
 
         Points pointsA = new Points();
         Points pointsB = new Points();
@@ -32,11 +32,11 @@ public class GroupChoiceQuestion extends Question {
         for (Option aOption : playerOptionsOne) {aOption.calculatePoints(scorer, pointsA);}
         for (Option aOption : playerOptionsTwo) { aOption.calculatePoints(scorer, pointsB);}
 
-        if (pointsA.getPoints() != optionsASize && pointsA.getPoints() != 0) {
+        if (pointsA.getPoints() != optionsASize && pointsA.getPoints() != optionsBSize && pointsA.getPoints() != 0) {
             this.points.changeScoreToZero();
             return;
         }
-        if (pointsB.getPoints() != optionsBSize && pointsB.getPoints() != 0) {
+        if (pointsB.getPoints() != optionsASize && pointsB.getPoints() != optionsBSize && pointsB.getPoints() != 0) {
             this.points.changeScoreToZero();
             return;
         }
