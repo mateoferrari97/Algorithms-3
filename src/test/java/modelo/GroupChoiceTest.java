@@ -74,5 +74,4 @@ public class GroupChoiceTest {
         // Then
         Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
     }
-
 }

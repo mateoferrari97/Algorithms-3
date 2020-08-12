@@ -9,8 +9,8 @@ public abstract class Question {
     protected Points points;
     protected Multiplicator multiplicator;
 
-    public void multiplicate(Integer factor){
-        this.multiplicator.multiplicate(this.points, factor);
+    public void multiplicate(){
+        this.multiplicator.multiplicate(this.points);
     }
 
     public abstract void score(Player player, List<Option> playerAnswers);
