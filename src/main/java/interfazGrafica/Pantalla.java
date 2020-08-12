@@ -8,13 +8,15 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import modelo.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 
 public class Pantalla extends Application{
-    Round round;
-    Player[] players = new Player[2];
+    private Round round;
+    private PlayerNames playerNames = new PlayerNames();
+    private List<Player> players = new ArrayList<Player>();
 
 
     public static void main(String[] args){
@@ -25,15 +27,11 @@ public class Pantalla extends Application{
     public void start(Stage stage) throws Exception {
         stage.setTitle("Kahoot");
 
-        players[0] = new Player();
-        players[1] = new Player();
-        players[0].setText("PlayerOne:");
-        players[1].setText("PlayerTwo:");
 
-        BooleanQuestion question = getBooleanQuesiton();
+        this.round = new Round(getBooleanQuesiton());
 
-        this.round = new Round();
-        this.round.start(stage, question, this.players);
+        playerNames.start(stage, players, round);
+
 
 
         stage.show();

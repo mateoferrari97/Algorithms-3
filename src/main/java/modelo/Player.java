@@ -4,6 +4,12 @@ public class Player {
     private String  name;
     private Integer points = 0;
 
+    public Player() {}
+
+    public Player(String name) {
+        this.setText(name);
+    }
+
     public Integer getPoints() {
         return points;
     }

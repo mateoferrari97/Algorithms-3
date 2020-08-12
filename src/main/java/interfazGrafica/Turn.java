@@ -71,7 +71,7 @@ public class Turn {
         for(Button aButton : buttons){
             this.buttonsContainer.getChildren().add(aButton);
         }
-        this.buttonsContainer.setSpacing(400);
+        this.buttonsContainer.setSpacing(300);
     }
 
     private void getQuestionOptions(Question question) {

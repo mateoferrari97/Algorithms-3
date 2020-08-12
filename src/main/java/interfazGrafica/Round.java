@@ -12,14 +12,18 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import modelo.*;
 
+import java.util.List;
+
 public class Round {
     Turn[] turns = new Turn[2];
+    BooleanQuestion question;
 
 
-    public Round() {
+    public Round(BooleanQuestion question) {
+        this.question = question;
     }
 
-    public void start(Stage stage, BooleanQuestion question, Player[] players) {
+    public void start(Stage stage, List<Player> players) {
 
         //----------------------------------------------------------------------
         //--------------------------Principal Container-------------------------
@@ -29,7 +33,7 @@ public class Round {
         contenedorPrincipal.setPadding(new Insets(300));
 
         for(int i = 0; i <= 1; i++) {
-            turns[i] = new Turn(players[i], contenedorPrincipal);
+            turns[i] = new Turn(players.get(i), contenedorPrincipal);
         }
 
         Scene escena = new Scene(contenedorPrincipal);
@@ -50,7 +54,7 @@ public class Round {
         questionText.setFont(new Font("Arial", 30));
         questionText.setStyle("-fx-border-color: black;");
 
-        fillQuestionText(question, questionText);
+        fillQuestionText(questionText);
 
         turns[0].setQuestionLabel(questionText);
         turns[1].setQuestionLabel(questionText);
@@ -68,6 +72,7 @@ public class Round {
 
         turns[0].startScene();
         stage.setScene(escena);
+        stage.setFullScreen(true);
 
 
     }
@@ -82,7 +87,7 @@ public class Round {
     }
 
 
-    private void fillQuestionText(Question question, Label questionText) {
+    private void fillQuestionText(Label questionText) {
         questionText.setText(question.getText());
     }
 
