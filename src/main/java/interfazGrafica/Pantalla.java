@@ -22,14 +22,13 @@ public class Pantalla extends Application{
 
     @Override
     public void start(Stage stage) throws Exception {
+        stage.setTitle("Kahoot");
         this.game.init();
         this.init();
-        PlayerNames.start(stage, this.game);
-        stage.show();
-    }
+        Play nextScene = new Play(stage);
+        PlayerNames.start(stage, this.game,nextScene);
 
-    private void init(Stage stage) {
-        stage.setTitle("Kahoot");
+        stage.show();
     }
 
 

@@ -22,13 +22,16 @@ public class Game {
     }
 
     public Player getNextPlayer() {
+        Integer aux = this.currentPlayer;
         if (this.currentPlayer < MAX_PLAYERS) {
-            Integer currentPlayer = this.currentPlayer;
             this.currentPlayer++;
-            return this.players[currentPlayer];
+            return this.players[aux];
         }
-
-        this.currentPlayer = 0;
+        else{
+            this.currentPlayer = 0;
+            this.currentPlayer++;
+            return this.players[aux];
+        }
     }
 
     private void createPlayers() {

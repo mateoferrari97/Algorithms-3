@@ -19,7 +19,7 @@ import modelo.Player;
 import java.util.List;
 
 public class PlayerNames {
-    static void start(Stage stage, Game game) {
+    static void start(Stage stage, Game game, Play nextScene) {
         Text bienvenida = new Text("Bienvenido a Kahoot!");
         bienvenida.setFill(Color.BLACK);
         bienvenida.setStyle("-fx-font: 24 arial;");
@@ -45,7 +45,7 @@ public class PlayerNames {
         BotonLimpiarEventHandler botonLimpiarEventHandler = new BotonLimpiarEventHandler(texto);
         botonLimpiarTexto.setOnAction(botonLimpiarEventHandler);
 
-        BotonEnviarEventHandler botonEnviarEventHandler = new BotonEnviarEventHandler(texto, etiqueta, game.getNextPlayer(), stage);
+        BotonEnviarEventHandler botonEnviarEventHandler = new BotonEnviarEventHandler(texto, etiqueta, game.getNextPlayer(), nextScene, stage, game);
         botonEnviar.setOnAction(botonEnviarEventHandler);
 
         TextoEventHandler textoEventHandler = new TextoEventHandler(botonEnviar);
