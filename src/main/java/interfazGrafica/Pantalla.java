@@ -14,10 +14,7 @@ import java.util.List;
 
 
 public class Pantalla extends Application{
-    private Round round;
-    private PlayerNames playerNames = new PlayerNames();
-    private List<Player> players = new ArrayList<Player>();
-
+    private Game game = new Game();
 
     public static void main(String[] args){
         launch(args);
@@ -25,16 +22,14 @@ public class Pantalla extends Application{
 
     @Override
     public void start(Stage stage) throws Exception {
-        stage.setTitle("Kahoot");
-
-
-        this.round = new Round(getBooleanQuesiton());
-
-        playerNames.start(stage, players, round);
-
-
-
+        this.game.init();
+        this.init();
+        PlayerNames.start(stage, this.game);
         stage.show();
+    }
+
+    private void init(Stage stage) {
+        stage.setTitle("Kahoot");
     }
 
 

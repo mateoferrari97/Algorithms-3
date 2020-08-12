@@ -14,20 +14,17 @@ import java.util.List;
 
 public class BotonEnviarEventHandler implements EventHandler<ActionEvent> {
 
-    private Text mensaje;
     private TextField textField;
     private Label label;
-    private List<Player> players;
+    private Player player;
     private Stage stage;
-    private Round round;
+    private Integer playersSize = 0;
 
-    public BotonEnviarEventHandler(Text mensaje, TextField textField, Label label, List<Player> players, Stage stage, Round round) {
-        this.mensaje = mensaje;
+    public BotonEnviarEventHandler(TextField textField, Label label, Player player, Stage stage) {
         this.textField = textField;
         this.label = label;
-        this.players = players;
+        this.player = player;
         this.stage = stage;
-        this.round = round;
     }
 
     @Override
@@ -41,11 +38,11 @@ public class BotonEnviarEventHandler implements EventHandler<ActionEvent> {
 
         } else {
 
-            if (players.size() < 2) {
-                players.add(new Player(textField.getText()));
-                mensaje.setText("Jugador " + String.valueOf(players.size() + 1) + " ingrese su nombre");
+            if (playersSize < 2) {
+                this.player.setText(textField.getText());
                 this.textField.clear();
-                if (players.size() == 2) {
+                this.playersSize++;
+                if (this.playersSize == 2) {
                     this.round.start(stage, this.players);
                 }
             }

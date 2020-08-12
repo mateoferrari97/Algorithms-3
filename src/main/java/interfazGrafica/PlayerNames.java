@@ -13,22 +13,16 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import modelo.Game;
 import modelo.Player;
 
 import java.util.List;
 
 public class PlayerNames {
-
-    public void start(Stage stage, List<Player> players, Round round) {
-
+    static void start(Stage stage, Game game) {
         Text bienvenida = new Text("Bienvenido a Kahoot!");
         bienvenida.setFill(Color.BLACK);
         bienvenida.setStyle("-fx-font: 24 arial;");
-
-
-        Text mensaje = new Text();
-        mensaje.setText("Jugador " + String.valueOf(players.size() + 1) + " ingrese su nombre");
-
 
         TextField texto = new TextField();
         texto.setPromptText("Escriba aqui");
@@ -44,19 +38,18 @@ public class PlayerNames {
         HBox contenedorHorizontal = new HBox(botonEnviar, botonLimpiarTexto);
         contenedorHorizontal.setSpacing(10);
 
-        VBox contenedorPrincipal = new VBox(bienvenida, mensaje, texto, contenedorHorizontal, etiqueta);
+        VBox contenedorPrincipal = new VBox(bienvenida, texto, contenedorHorizontal, etiqueta);
         contenedorPrincipal.setSpacing(10);
         contenedorPrincipal.setPadding(new Insets(20));
 
         BotonLimpiarEventHandler botonLimpiarEventHandler = new BotonLimpiarEventHandler(texto);
         botonLimpiarTexto.setOnAction(botonLimpiarEventHandler);
 
-        BotonEnviarEventHandler botonEnviarEventHandler = new BotonEnviarEventHandler(mensaje, texto, etiqueta, players, stage, round);
+        BotonEnviarEventHandler botonEnviarEventHandler = new BotonEnviarEventHandler(texto, etiqueta, game.getNextPlayer(), stage);
         botonEnviar.setOnAction(botonEnviarEventHandler);
 
         TextoEventHandler textoEventHandler = new TextoEventHandler(botonEnviar);
         texto.setOnKeyPressed(textoEventHandler);
-
 
         Scene scene = new Scene(contenedorPrincipal, 300, 250);
         stage.setScene(scene);

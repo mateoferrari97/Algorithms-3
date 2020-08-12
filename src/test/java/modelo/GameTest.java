@@ -30,7 +30,7 @@ public class GameTest {
 
             List<Question> questions = Arrays.asList(booleanQuestion,multipleChoiceQuestion);
 
-            Game game = new Game(questions);
+            Game game = new Game();
 
             // When
 

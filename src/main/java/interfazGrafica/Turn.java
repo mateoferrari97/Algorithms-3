@@ -23,9 +23,11 @@ public class Turn {
     public Turn(Player player, VBox contenedorPrincipal) {
         this.contenedorPrincipal = contenedorPrincipal;
         this.player = player;
-
     }
 
+    public void start() {
+        System.out.println("Holi");
+    }
 
     public void createPlayerLabels() {
         Label playerText = new Label();
@@ -44,14 +46,14 @@ public class Turn {
 
     }
 
-    public void fillWithEvents(BooleanQuestion question, Turn turn) {
+   /* public void fillWithEvents(BooleanQuestion question, Turn turn) {
         int i = 0;
         for(Button aButton : this.buttons) {
             BooleanOptionsEventHandler booleanOptionsEventHandler = new BooleanOptionsEventHandler(question.getOptions().get(i), this.playerPoints, this.player, question, turn);
             aButton.setOnAction(booleanOptionsEventHandler);
             i++;
         }
-    }
+    }*/
 
     public void setQuestionLabel(Label questionText) {
         this.questionText = questionText;
