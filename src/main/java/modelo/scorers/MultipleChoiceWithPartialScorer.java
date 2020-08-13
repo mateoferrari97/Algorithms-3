@@ -1,6 +1,9 @@
-package modelo;
+package modelo.scorers;
 
-public class PenaltyScorer implements QuestionScorer {
+import modelo.Player;
+import modelo.Points;
+
+public class MultipleChoiceWithPartialScorer implements QuestionScorer {
 
     public void score(Player player, Points points) {
         points.givePointsToPlayer(player);
@@ -11,6 +14,7 @@ public class PenaltyScorer implements QuestionScorer {
     }
 
     public void punish(Points points) {
-        points.decreasePoints();
+        points.changeScoreToZero();
     }
+
 }
