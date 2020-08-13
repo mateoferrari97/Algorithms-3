@@ -15,8 +15,25 @@ public class Round {
 
         for(Player player : players){
             this.players.add(player);
-            this.turns.add(new Turn(player));
+            this.turns.add(new Turn(player, question));
         }
+    }
+
+    public Turn getTurn(Game game) {
+        if(currentTurn == turns.size() - 1){
+            game.setNextRound();
+            return turns.get(currentTurn);
+        }
+        Turn turn = turns.get(currentTurn);
+        currentTurn++;
+        return turn;
+    }
+
+    public Question getQuestion() {
+        return this.question;
+    }
+
+    public void finsh(List<Option> answers) {
     }
 /*
     public void start() {

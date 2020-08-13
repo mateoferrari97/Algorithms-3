@@ -1,24 +1,43 @@
 package interfazGrafica.Eventos;
 
-import interfazGrafica.Turn;
+import interfazGrafica.EndGame;
+import interfazGrafica.Play;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 import modelo.*;
 
 public class BooleanOptionsEventHandler implements EventHandler<ActionEvent> {
+    private final Play nextScene;
+    private final Stage stage;
+    private Round round;
+    private Option option;
+    private Game game;
     private Turn turn;
-    private Option answer;
 
-    public BooleanOptionsEventHandler(Option answer, Turn turn) {
-        this.answer = answer;
+    public BooleanOptionsEventHandler(Option option, Round round, Turn turn, Game game, Play nextScene, Stage stage) {
+        this.round = round;
         this.turn = turn;
+        this.option = option;
+        this.game = game;
+        this.nextScene = nextScene;
+        this.stage = stage;
     }
 
     @Override
     public void handle(ActionEvent actionEvent) {
-/*        this.turn.addAnswer(this.answer);
+        this.turn.addPlayerAnswer(this.option);
         this.turn.finish();
-        this.round.next();*/
+
+        //this.round = this.game.getNextRound();
+        if(game.getNextRound() == null){
+            EndGame end = new EndGame(stage);
+        }else{
+            nextScene.start(game);
+        }
+
+
+        //this.turn = this.round.getTurn();
     }
 }

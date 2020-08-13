@@ -45,7 +45,7 @@ public class PlayerNames {
         BotonLimpiarEventHandler botonLimpiarEventHandler = new BotonLimpiarEventHandler(texto);
         botonLimpiarTexto.setOnAction(botonLimpiarEventHandler);
 
-        BotonEnviarEventHandler botonEnviarEventHandler = new BotonEnviarEventHandler(texto, etiqueta, game.getNextPlayer(), nextScene, stage, game);
+        BotonEnviarEventHandler botonEnviarEventHandler = new BotonEnviarEventHandler(texto, etiqueta, nextScene, game);
         botonEnviar.setOnAction(botonEnviarEventHandler);
 
         TextoEventHandler textoEventHandler = new TextoEventHandler(botonEnviar);

@@ -5,9 +5,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Game {
-    private Integer currentPlayer = 0;
     private final Integer MAX_PLAYERS = 2;
     private Player[] players = new Player[this.MAX_PLAYERS];
+    private Integer currentPlayer = 0;
 
     private List<Round> rounds = new ArrayList<>();
     private Integer currentRound = 0;
@@ -22,16 +22,22 @@ public class Game {
     }
 
     public Player getNextPlayer() {
-        Integer aux = this.currentPlayer;
-        if (this.currentPlayer < MAX_PLAYERS) {
-            this.currentPlayer++;
-            return this.players[aux];
+        if(currentPlayer == players.length){
+            currentPlayer = 0;
+            return null;
         }
-        else{
-            this.currentPlayer = 0;
-            this.currentPlayer++;
-            return this.players[aux];
+        Player player = players[currentPlayer];
+        currentPlayer++;
+        return player;
+    }
+
+    public Round getNextRound() {
+        if(currentRound == rounds.size()){
+            currentRound = 0;
+            return null;
         }
+        Round round = rounds.get(currentRound);
+        return round;
     }
 
     private void createPlayers() {
@@ -48,6 +54,14 @@ public class Game {
         Question question = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer);
 
         this.rounds.add(new Round(players, question));
+
+        List<Option> newoptions = Arrays.asList(
+                new Option("True", new CorrectOptionScorer()),
+                new Option("False", new IncorrectOptionScorer()));
+        QuestionScorer newscorer = new BooleanScorer();
+        Question newquestion = new BooleanQuestion("El cafe es lo mejor", newoptions, newscorer);
+
+        this.rounds.add(new Round(players, newquestion));
     }
 
 /*
@@ -68,5 +82,10 @@ public class Game {
 
     private void finish() {
         System.out.println("Game finished");
+    }
+
+
+    public void setNextRound() {
+        currentRound++;
     }
 }

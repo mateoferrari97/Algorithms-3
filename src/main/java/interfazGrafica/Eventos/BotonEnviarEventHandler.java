@@ -20,16 +20,12 @@ public class BotonEnviarEventHandler implements EventHandler<ActionEvent> {
     private Play nextScene;
     private TextField textField;
     private Label label;
-    private Player player;
-    private Stage stage;
-    private Integer playersSize = 0;
+    private Integer amountOfPlayers = 0;
 
-    public BotonEnviarEventHandler(TextField textField, Label label, Player player, Play nextScene, Stage stage, Game game) {
+    public BotonEnviarEventHandler(TextField textField, Label label, Play nextScene, Game game) {
         this.textField = textField;
         this.label = label;
-        this.player = player;
         this.nextScene = nextScene;
-        this.stage = stage;
         this.game = game;
     }
 
@@ -43,17 +39,16 @@ public class BotonEnviarEventHandler implements EventHandler<ActionEvent> {
             this.textField.requestFocus();
 
         } else {
-
-            if (playersSize < 2) {
-                this.player.setText(textField.getText());
+            Player player = this.game.getNextPlayer();
+            if (amountOfPlayers < this.game.getPlayers().length) {
+                amountOfPlayers++;
+                player.setText(textField.getText());
                 this.textField.clear();
-                this.playersSize++;
+                this.textField.requestFocus();
+                if(amountOfPlayers == this.game.getPlayers().length){
+                    this.nextScene.start(this.game);
+                }
             }
-
-            if(playersSize == 2){
-                this.nextScene.start(this.game);
-            }
-
 
         }
 

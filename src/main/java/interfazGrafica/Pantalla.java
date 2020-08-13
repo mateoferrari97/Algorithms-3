@@ -24,7 +24,6 @@ public class Pantalla extends Application{
     public void start(Stage stage) throws Exception {
         stage.setTitle("Kahoot");
         this.game.init();
-        this.init();
         Play nextScene = new Play(stage);
         PlayerNames.start(stage, this.game,nextScene);
 
