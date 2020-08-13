@@ -134,7 +134,7 @@ public class Pantalla extends Application{
                 new Option("NO", new IncorrectOptionScorer()));
 
         QuestionScorer scorer = new BooleanScorer();
-        BooleanQuestion question = new BooleanQuestion("Vamos a aprobar algoritmos 3?", options, scorer);
+        BooleanQuestion question = new BooleanQuestion("Vamos a aprobar algoritmos 3?", options, scorer, new Multiplicator());
 
         return question;
     }

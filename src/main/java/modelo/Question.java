@@ -7,13 +7,12 @@ public abstract class Question {
     protected QuestionScorer scorer;
     protected List<Option> options;
     protected Points points;
-    protected Multiplicator multiplicator;
+    protected Consumable consumable;
 
-    public void multiplicate(){
-        this.multiplicator.multiplicate(this.points);
-    }
 
-    public abstract void score(Player player, List<Option> playerAnswers);
+    public abstract void selectOptions(List<Option> playerAnswers);
+
+    public abstract void score(Player player);
 
     public String getText() {
         return this.text;
@@ -33,6 +32,7 @@ public abstract class Question {
         return this.options;
     }
 
-    public void score(Player player, List<Option> playerOptionsLetters, List<Option> playerOptionsNumbers){}
+    public boolean isCorrect(){return (this.points.getPoints() > 0);}
+
 }
 

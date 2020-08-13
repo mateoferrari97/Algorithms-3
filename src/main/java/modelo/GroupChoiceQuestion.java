@@ -5,7 +5,7 @@ import java.util.List;
 
 public class GroupChoiceQuestion extends Question {
 
-    public GroupChoiceQuestion(String test, List<Option> options, QuestionScorer scorer) throws InvalidSizeException {
+    public GroupChoiceQuestion(String test, List<Option> options, QuestionScorer scorer, Consumable consumable) throws InvalidSizeException {
         super();
 
         Integer optionsSize = options.size();
@@ -18,10 +18,11 @@ public class GroupChoiceQuestion extends Question {
         this.text = text;
         this.scorer = scorer;
         this.points = new Points();
+        this.consumable = consumable;
     }
 
     @Override
-    public void score(Player player, List<Option> playerAnswers) {
+    public void selectOptions(List<Option> playerAnswers) {
 
         Points minPoints = new Points();
         Points maxPoints = new Points();
@@ -35,6 +36,16 @@ public class GroupChoiceQuestion extends Question {
 
         if (pointsDone.equals(minPoints) || pointsDone.equals(maxPoints)) { this.points.gainAPoint();}
 
+        if (!(this.isCorrect())) {
+            this.consumable.useWithIncorrectAnswer();
+        }
+
+        for (Option aOption : playerAnswers) { aOption.changeState(aOption);}
+    }
+
+    @Override
+    public void score(Player player) {
+        this.consumable.multiplicate(this.points);
         scorer.score(player, this.points);
     }
 }

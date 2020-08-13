@@ -15,7 +15,7 @@ public class MultiplicatorTest {
         //Given
         Points points = new Points();
         points.gainAPoint();
-        x1Multiplicator x1Multiplicator = new x1Multiplicator();
+        Multiplicator x1Multiplicator = new Multiplicator();
         Integer expectedPoints = 1;
 
         //When
@@ -30,7 +30,8 @@ public class MultiplicatorTest {
         //Given
         Points points = new Points();
         points.gainAPoint();
-        x2Multiplicator x2Multiplicator = new x2Multiplicator();
+        Multiplicator x2Multiplicator = new Multiplicator();
+        x2Multiplicator.setFactor(2);
         Integer expectedPoints = 2;
 
         //When
@@ -40,27 +41,13 @@ public class MultiplicatorTest {
         Assert.assertEquals(points.getPoints(), expectedPoints);
     }
 
-    @Test
-    public void testx3MultiplicatorTriplePointsWhenActvated() {
-        //Given
-        Points points = new Points();
-        points.gainAPoint();
-        x3Multiplicator x3Multiplicator = new x3Multiplicator();
-        Integer expectedPoints = 3;
-
-        //When
-        x3Multiplicator.multiplicate(points);
-
-        //Then
-        Assert.assertEquals(points.getPoints(), expectedPoints);
-    }
 
     @Test
     public void MultiplicatorTurnPointsTo0WhenDeactivated() {
         //Given
         Points points = new Points();
         points.gainAPoint();
-        x1Multiplicator x1Multiplicator = new x1Multiplicator();
+        Multiplicator x1Multiplicator = new Multiplicator();
         x1Multiplicator.deactivate();
         Integer expectedPoints = 0;
 
