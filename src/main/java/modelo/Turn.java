@@ -1,5 +1,8 @@
 package modelo;
 
+import modelo.options.Option;
+import modelo.questions.Question;
+
 import java.util.ArrayList;
 import java.util.List;
 

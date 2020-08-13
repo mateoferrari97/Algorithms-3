@@ -4,9 +4,12 @@ import interfazGrafica.EndGame;
 import interfazGrafica.Play;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.Label;
+
 import javafx.stage.Stage;
 import modelo.*;
+
+import modelo.options.Option;
+
 
 public class BooleanOptionsEventHandler implements EventHandler<ActionEvent> {
     private final Play nextScene;

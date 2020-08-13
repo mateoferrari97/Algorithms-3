@@ -3,7 +3,10 @@ package interfazGrafica.Eventos;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
-import modelo.*;
+import modelo.Player;
+import modelo.options.Option;
+import modelo.questions.MultipleChoiceQuestion;
+import modelo.questions.Question;
 
 import java.util.ArrayList;
 import java.util.List;

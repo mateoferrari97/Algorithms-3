@@ -1,5 +1,9 @@
 package modelo;
 
+import modelo.options.*;
+import modelo.questions.*;
+import modelo.scorers.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

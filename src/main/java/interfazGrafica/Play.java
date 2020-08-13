@@ -6,7 +6,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -14,6 +13,7 @@ import javafx.stage.Stage;
 import modelo.*;
 import modelo.Round;
 import modelo.Turn;
+import modelo.options.Option;
 
 public class Play extends VBox {
     Stage stage;

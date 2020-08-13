@@ -1,14 +1,19 @@
 package interfazGrafica;
-import interfazGrafica.Eventos.BooleanOptionsEventHandler;
-import interfazGrafica.Eventos.MultipleChoiceOptionsEventHandler;
+
 import javafx.application.Application;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.*;
+
 import javafx.stage.Stage;
 import modelo.*;
 
-import java.util.ArrayList;
+import modelo.options.CorrectOptionScorer;
+import modelo.options.IncorrectOptionScorer;
+import modelo.options.Option;
+import modelo.questions.BooleanQuestion;
+
+import modelo.scorers.BooleanScorer;
+import modelo.scorers.QuestionScorer;
+
+
 import java.util.Arrays;
 import java.util.List;
 
