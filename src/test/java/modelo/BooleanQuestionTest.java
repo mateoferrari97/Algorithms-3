@@ -147,8 +147,8 @@ public class BooleanQuestionTest {
 
         // When
         player1.activateConsumable(scoreExclusivity);
-        player2.activateConsumable(scoreExclusivity);
         question1.selectOptions(player1Options);
+        player2.activateConsumable(scoreExclusivity);
         question2.selectOptions(player2Options);
         question1.score(player1);
         question2.score(player2);

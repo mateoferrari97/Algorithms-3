@@ -38,12 +38,11 @@ public class OrderedChoiceQuestion extends Question {
                 i++;
             }
         }
-        if (!(this.isCorrect())) {
-            this.consumable.useWithIncorrectAnswer();
-        }
+
     }
 
     public void score(Player player) {
+        if (!(this.isCorrect())) { this.consumable.useWithIncorrectAnswer();}
         this.consumable.multiplicate(this.points);
         this.scorer.score(player, this.points);
     }

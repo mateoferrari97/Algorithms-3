@@ -49,10 +49,6 @@ public class GroupChoiceQuestion extends Question {
 
         if (pointsDone.equals(minPoints) || pointsDone.equals(maxPoints)) { this.points.gainAPoint();}
 
-        if (!(this.isCorrect())) {
-            this.consumable.useWithIncorrectAnswer();
-        }
-
         for (Option aOption : playerAnswers) { aOption.changeState(aOption);}
     }
 
@@ -80,6 +76,7 @@ public class GroupChoiceQuestion extends Question {
 
     @Override
     public void score(Player player) {
+        if (!(this.isCorrect())) this.consumable.useWithIncorrectAnswer();
         this.consumable.multiplicate(this.points);
         scorer.score(player, this.points);
     }

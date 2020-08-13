@@ -40,11 +40,11 @@ public class MultipleChoiceQuestion extends Question {
             aOption.calculatePoints(scorer, this.points);
         }
 
-        if (!(this.isCorrect())) this.consumable.useWithIncorrectAnswer();
     }
 
     @Override
     public void score(Player player) {
+        if (!(this.isCorrect())) this.consumable.useWithIncorrectAnswer();
         this.consumable.multiplicate(this.points);
         scorer.score(player,this.points);
     }

@@ -74,7 +74,6 @@ public class ScoreExclusivityTest {
         scoreExclusivity.activate();
         scoreExclusivity.activate();
         scoreExclusivity.useWithIncorrectAnswer();
-
         scoreExclusivity.multiplicate(points);
 
         //Then
