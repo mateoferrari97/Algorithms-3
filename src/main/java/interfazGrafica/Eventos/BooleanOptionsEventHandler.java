@@ -31,7 +31,8 @@ public class BooleanOptionsEventHandler implements EventHandler<ActionEvent> {
     public void handle(ActionEvent actionEvent) {
         List<Option> options = new ArrayList();
         options.add(this.chosenOption);
-        this.question.score(this.player, options);
+        this.question.selectOptions(options);
+        this.question.score(this.player);
         Integer auxPlayerPoints = player.getPoints();
         playerPoints.setText(auxPlayerPoints.toString());
     }

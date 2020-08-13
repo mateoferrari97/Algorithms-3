@@ -5,8 +5,10 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import exceptions.InvalidJsonRecognizerClassException;
 import exceptions.InvalidSizeException;
+import consumables.Consumable;
 import modelo.Player;
 import modelo.Points;
+import consumables.ScoreExclusivity;
 import modelo.options.Option;
 import modelo.scorers.QuestionScorer;
 
@@ -16,16 +18,17 @@ import java.util.List;
 public class OrderedChoiceQuestion extends Question {
     private Option nextOption;
 
-    public OrderedChoiceQuestion(String text, List<Option> options, QuestionScorer scorer) {
+    public OrderedChoiceQuestion(String text, List<Option> options, QuestionScorer scorer, Consumable consumable) {
         super();
         this.options = options;
         this.nextOption = options.get(1);
         this.text = text;
         this.scorer = scorer;
         this.points = new Points();
+        this.consumable = consumable;
     }
 
-    public void score(Player player, List<Option> playerAnswers) {
+    public void selectOptions(List<Option> playerAnswers) {
         int i = 2;
         for(Option aOption : playerAnswers){
             aOption.calculatePoints(this.scorer, this.points);
@@ -34,8 +37,14 @@ public class OrderedChoiceQuestion extends Question {
                 this.nextOption = this.options.get(i);
                 i++;
             }
-
         }
+        if (!(this.isCorrect())) {
+            this.consumable.useWithIncorrectAnswer();
+        }
+    }
+
+    public void score(Player player) {
+        this.consumable.multiplicate(this.points);
         this.scorer.score(player, this.points);
     }
 
@@ -55,7 +64,7 @@ public class OrderedChoiceQuestion extends Question {
             QuestionScorer questionScorer = selectScorer(scorerString);
 
             //Question question = question(text, options, questionScorer);
-            return new OrderedChoiceQuestion(text, options, questionScorer);
+            return new OrderedChoiceQuestion(text, options, questionScorer, new ScoreExclusivity());
         } catch (Exception e) {
             throw e;
         }

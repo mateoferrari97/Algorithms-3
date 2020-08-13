@@ -13,6 +13,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import consumables.Multiplicator;
 import modelo.Player;
 import modelo.options.CorrectOptionScorer;
 import modelo.options.IncorrectOptionScorer;
@@ -150,7 +151,7 @@ public class Pantalla extends Application{
                 new Option("NO", new IncorrectOptionScorer()));
 
         QuestionScorer scorer = new BooleanScorer();
-        BooleanQuestion question = new BooleanQuestion("Vamos a aprobar algoritmos 3?", options, scorer);
+        BooleanQuestion question = new BooleanQuestion("Vamos a aprobar algoritmos 3?", options, scorer, new Multiplicator());
 
         return question;
     }

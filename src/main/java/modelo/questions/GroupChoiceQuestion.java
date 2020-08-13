@@ -5,8 +5,11 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import exceptions.InvalidJsonRecognizerClassException;
 import exceptions.InvalidSizeException;
+import consumables.Consumable;
 import modelo.Player;
 import modelo.Points;
+import consumables.ScoreExclusivity;
+import modelo.options.CorrectOptionScorer;
 import modelo.options.Option;
 import modelo.scorers.QuestionScorer;
 
@@ -14,47 +17,43 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GroupChoiceQuestion extends Question {
-    protected List<Option> optionsB;
 
-    public GroupChoiceQuestion(String text, List<Option> options, QuestionScorer scorer){}
-
-    public GroupChoiceQuestion(String test, List<Option> optionsA, List<Option> optionsB, QuestionScorer scorer) throws InvalidSizeException {
+    public GroupChoiceQuestion(String text, List<Option> options, QuestionScorer scorer, Consumable consumable) throws InvalidSizeException {
         super();
 
-        Integer optionsSize = optionsA.size() + optionsB.size();
+        Integer optionsSize = options.size();
         if (optionsSize < 2 || optionsSize > 6) {
             String error = "invalid options size: want minimum 2, maximum 6. got: " + optionsSize;
             throw new InvalidSizeException(error);
         }
 
-        this.options = optionsA;
-        this.optionsB = optionsB;
+        this.options = options;
         this.text = text;
         this.scorer = scorer;
         this.points = new Points();
+        this.consumable = consumable;
     }
 
-    public void score(Player player, List<Option> playerOptionsOne, List<Option> playerOptionsTwo){
-        Integer optionsASize = playerOptionsOne.size();
-        Integer optionsBSize = playerOptionsTwo.size();
+    @Override
+    public void selectOptions(List<Option> playerAnswers) {
 
-        Points pointsA = new Points();
-        Points pointsB = new Points();
+        Points minPoints = new Points();
+        Points maxPoints = new Points();
+        Points pointsDone = new Points();
 
-        for (Option aOption : playerOptionsOne) {aOption.calculatePoints(scorer, pointsA);}
-        for (Option aOption : playerOptionsTwo) { aOption.calculatePoints(scorer, pointsB);}
+        Option CorrectOption = new Option("", new CorrectOptionScorer());
+        for (Option aOption : options) { CorrectOption.calculatePoints(this.scorer, maxPoints);}
 
-        if (pointsA.getPoints() != optionsASize && pointsA.getPoints() != 0) {
-            this.points.changeScoreToZero();
-            return;
+        for (Option aOption : playerAnswers) { aOption.changeState(aOption);}
+        for (Option aOption : options) { aOption.calculatePoints(this.scorer, pointsDone);}
+
+        if (pointsDone.equals(minPoints) || pointsDone.equals(maxPoints)) { this.points.gainAPoint();}
+
+        if (!(this.isCorrect())) {
+            this.consumable.useWithIncorrectAnswer();
         }
-        if (pointsB.getPoints() != optionsBSize && pointsB.getPoints() != 0) {
-            this.points.changeScoreToZero();
-            return;
-        }
-        this.points.gainAPoint();
 
-        scorer.score(player,this.points);
+        for (Option aOption : playerAnswers) { aOption.changeState(aOption);}
     }
 
     public static Question unmarshal(JsonObject json) throws InvalidJsonRecognizerClassException, InvalidSizeException {
@@ -73,15 +72,17 @@ public class GroupChoiceQuestion extends Question {
             QuestionScorer questionScorer = selectScorer(scorerString);
 
             //Question question = question(text, options, questionScorer);
-            return new GroupChoiceQuestion(text, options, questionScorer);
+            return new GroupChoiceQuestion(text, options, questionScorer, new ScoreExclusivity());
         } catch (Exception e) {
             throw e;
         }
     }
 
     @Override
-    public void score(Player player, List<Option> playerAnswers) {
-        
+    public void score(Player player) {
+        this.consumable.multiplicate(this.points);
+        scorer.score(player, this.points);
     }
 }
+
 
