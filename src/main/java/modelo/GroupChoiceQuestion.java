@@ -4,50 +4,39 @@ import exceptions.InvalidSizeException;
 import java.util.List;
 
 public class GroupChoiceQuestion extends Question {
-    protected List<Option> optionsB;
 
-    public GroupChoiceQuestion(String test, List<Option> optionsA, List<Option> optionsB, QuestionScorer scorer) throws InvalidSizeException {
+    public GroupChoiceQuestion(String test, List<Option> options, QuestionScorer scorer) throws InvalidSizeException {
         super();
 
-        Integer optionsSize = optionsA.size() + optionsB.size();
+        Integer optionsSize = options.size();
         if (optionsSize < 2 || optionsSize > 6) {
             String error = "invalid options size: want minimum 2, maximum 6. got: " + optionsSize;
             throw new InvalidSizeException(error);
         }
 
-        this.options = optionsA;
-        this.optionsB = optionsB;
+        this.options = options;
         this.text = text;
         this.scorer = scorer;
         this.points = new Points();
     }
 
-    public void score(Player player, List<Option> playerOptionsOne, List<Option> playerOptionsTwo){
-        Integer optionsASize = options.size();
-        Integer optionsBSize = optionsB.size();
-
-        Points pointsA = new Points();
-        Points pointsB = new Points();
-
-        for (Option aOption : playerOptionsOne) {aOption.calculatePoints(scorer, pointsA);}
-        for (Option aOption : playerOptionsTwo) { aOption.calculatePoints(scorer, pointsB);}
-
-        if (pointsA.getPoints() != optionsASize && pointsA.getPoints() != optionsBSize && pointsA.getPoints() != 0) {
-            this.points.changeScoreToZero();
-            return;
-        }
-        if (pointsB.getPoints() != optionsASize && pointsB.getPoints() != optionsBSize && pointsB.getPoints() != 0) {
-            this.points.changeScoreToZero();
-            return;
-        }
-        this.points.gainAPoint();
-
-        scorer.score(player,this.points);
-    }
-       
     @Override
     public void score(Player player, List<Option> playerAnswers) {
-        
+
+        Points minPoints = new Points();
+        Points maxPoints = new Points();
+        Points pointsDone = new Points();
+
+        Option CorrectOption = new Option("", new CorrectOptionScorer());
+        for (Option aOption : options) { CorrectOption.calculatePoints(this.scorer, maxPoints);}
+
+        for (Option aOption : playerAnswers) { aOption.changeState(aOption);}
+        for (Option aOption : options) { aOption.calculatePoints(this.scorer, pointsDone);}
+
+        if (pointsDone.equals(minPoints) || pointsDone.equals(maxPoints)) { this.points.gainAPoint();}
+
+        scorer.score(player, this.points);
     }
 }
+
 

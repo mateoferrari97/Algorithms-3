@@ -11,31 +11,26 @@ public class GroupChoiceTest {
     @Test
     public void testGroupChoiceQuestionIncreasePlayerPointsWhenCorrectGroupSeparation() throws InvalidSizeException {
         // Given
-        List<Option> lettersGroup = Arrays.asList(
-                new Option("A", new CorrectOptionScorer()),
-                new Option("B", new CorrectOptionScorer()),
-                new Option("C", new CorrectOptionScorer()));
-
-        List<Option> numbersGroup = Arrays.asList(
-                new Option("1", new IncorrectOptionScorer()),
-                new Option("2", new IncorrectOptionScorer()));
-
-        QuestionScorer scorer = new BooleanScorer();
-        Question question = new GroupChoiceQuestion("Separar en numeros y letras", lettersGroup, numbersGroup, scorer);
-
         Player player = new Player();
-        List<Option> playerOptionsLetters = Arrays.asList(
-                new Option("A", new CorrectOptionScorer()),
-                new Option("B", new CorrectOptionScorer()),
-                new Option("C", new CorrectOptionScorer()));
-
-        List<Option> playerOptionsNumbers = Arrays.asList(
-                new Option("1", new IncorrectOptionScorer()),
-                new Option("2", new IncorrectOptionScorer()));
         Integer expectedPlayerPoints = 1;
 
+        List<Option> options = Arrays.asList(
+                new Option("A", new CorrectOptionScorer()),
+                new Option("B", new CorrectOptionScorer()),
+                new Option("C", new CorrectOptionScorer()),
+                new Option("1", new IncorrectOptionScorer()),
+                new Option("2", new IncorrectOptionScorer()));
+
+
+        QuestionScorer scorer = new BooleanScorer();
+        Question question = new GroupChoiceQuestion("Separar en numeros y letras", options, scorer);
+
+        List<Option> playerOptions = Arrays.asList(
+                options.get(3),
+                options.get(4));
+
         // When
-        question.score(player,playerOptionsLetters, playerOptionsNumbers);
+        question.score(player, playerOptions);
 
         // Then
         Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
@@ -44,34 +39,31 @@ public class GroupChoiceTest {
     @Test
     public void testGroupChoiceQuestionDontIncreasePlayerPointsWhenInorrectGroupSeparation() throws InvalidSizeException {
 
-        List<Option> lettersGroup = Arrays.asList(
+        // Given
+        Player player = new Player();
+        Integer expectedPlayerPoints = 0;
+
+        List<Option> options = Arrays.asList(
                 new Option("A", new CorrectOptionScorer()),
                 new Option("B", new CorrectOptionScorer()),
-                new Option("C", new CorrectOptionScorer()));
-
-        List<Option> numbersGroup = Arrays.asList(
+                new Option("C", new CorrectOptionScorer()),
                 new Option("1", new IncorrectOptionScorer()),
                 new Option("2", new IncorrectOptionScorer()));
 
         QuestionScorer scorer = new BooleanScorer();
-        Question question = new GroupChoiceQuestion("Separar en numeros y letras", lettersGroup, numbersGroup, scorer);
+        Question question = new GroupChoiceQuestion("Separar en numeros y letras", options, scorer);
 
 
-        Player player = new Player();
-        List<Option> playerOptionsLetters = Arrays.asList(
-                new Option("A", new CorrectOptionScorer()),
-                new Option("B", new CorrectOptionScorer()),
-                new Option("1", new IncorrectOptionScorer()));
-
-        List<Option> playerOptionsNumbers = Arrays.asList(
-                new Option("C", new CorrectOptionScorer()),
-                new Option("2", new IncorrectOptionScorer()));
-        Integer expectedPlayerPoints = 0;
+        List<Option> playerOptions = Arrays.asList(
+                options.get(0),
+                options.get(1),
+                options.get(3));
 
         // When
-        question.score(player, playerOptionsLetters, playerOptionsNumbers);
+        question.score(player, playerOptions);
 
         // Then
         Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
     }
+
 }

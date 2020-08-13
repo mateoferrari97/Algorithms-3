@@ -35,4 +35,6 @@ public class Points {
     public void multiplicate(Integer multiplicator){
         factor = multiplicator;
     }
+
+    public boolean equals(Points otherPoints) {return (this.points == otherPoints.getPoints());}
 }
