@@ -1,6 +1,7 @@
 package modelo;
 
 import exceptions.InvalidSizeException;
+import exceptions.NoMoreConsumablesException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -69,7 +70,7 @@ public class GroupChoiceTest {
     }
 
     @Test
-    public void testGroupChoiceDoublePointsWhenScoreExclusivityActivatedAndOnePlayerAnswerIncorrectly() throws InvalidSizeException {
+    public void testGroupChoiceDoublePointsWhenScoreExclusivityActivatedAndOnePlayerAnswerIncorrectly() throws InvalidSizeException, NoMoreConsumablesException {
         // Given
         ScoreExclusivity scoreExclusivity = new ScoreExclusivity();
 
@@ -98,7 +99,7 @@ public class GroupChoiceTest {
                 options.get(4));
 
         // When
-        scoreExclusivity.activate();
+        player1.activateConsumable(scoreExclusivity);
         question1.selectOptions(player1Options);
         question2.selectOptions(player2Options);
         question1.score(player1);
@@ -110,7 +111,7 @@ public class GroupChoiceTest {
     }
 
     @Test
-    public void testGroupChoiceQuadruplePointsWhenScoreExclusivityActivatedAndOnePlayerAnswerIncorrectly() throws InvalidSizeException {
+    public void testGroupChoiceQuadruplePointsWhenScoreExclusivityActivatedAndOnePlayerAnswerIncorrectly() throws InvalidSizeException, NoMoreConsumablesException {
         // Given
         ScoreExclusivity scoreExclusivity = new ScoreExclusivity();
 
@@ -138,8 +139,8 @@ public class GroupChoiceTest {
         Integer expectedPlayer2Points = 4;
 
         // When
-        scoreExclusivity.activate();
-        scoreExclusivity.activate();
+        player1.activateConsumable(scoreExclusivity);
+        player2.activateConsumable(scoreExclusivity);
         question1.selectOptions(player1Options);
         question2.selectOptions(player2Options);
         question1.score(player1);
@@ -151,7 +152,7 @@ public class GroupChoiceTest {
     }
 
     @Test
-    public void testGroupChoiceDontModifyPointsWhenScoreExclusivityActivatedNoIncorrectAnswers() throws InvalidSizeException {
+    public void testGroupChoiceDontModifyPointsWhenScoreExclusivityActivatedNoIncorrectAnswers() throws InvalidSizeException, NoMoreConsumablesException {
         // Given
         ScoreExclusivity scoreExclusivity = new ScoreExclusivity();
 
@@ -180,7 +181,7 @@ public class GroupChoiceTest {
         Integer expectedPlayer2Points = 0;
 
         // When
-        scoreExclusivity.activate();
+        player1.activateConsumable(scoreExclusivity);
         question1.selectOptions(player1Options);
         question2.selectOptions(player2Options);
         question1.score(player1);

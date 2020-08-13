@@ -1,6 +1,7 @@
 package modelo;
 
 import exceptions.InvalidSizeException;
+import exceptions.NoMoreConsumablesException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -67,7 +68,7 @@ public class MultipleChoicePartialTest {
     }
 
     @Test
-    public void testMultipleChoicePartialDoublePointsWhenScoreExclusivityActivatedAndOnePlayerAnswerIncorrectly() throws InvalidSizeException {
+    public void testMultipleChoicePartialDoublePointsWhenScoreExclusivityActivatedAndOnePlayerAnswerIncorrectly() throws InvalidSizeException, NoMoreConsumablesException {
         // Given
         ScoreExclusivity scoreExclusivity = new ScoreExclusivity();
         // Given
@@ -100,7 +101,7 @@ public class MultipleChoicePartialTest {
 
 
         // When
-        scoreExclusivity.activate();
+        player1.activateConsumable(scoreExclusivity);
         question1.selectOptions(player1Options);
         question2.selectOptions(player2Options);
         question1.score(player1);
@@ -112,7 +113,7 @@ public class MultipleChoicePartialTest {
     }
 
     @Test
-    public void testMultipleChoicePartialQuadruplePointsWhenScoreExclusivityActivatedAndOnePlayerAnswerIncorrectly() throws InvalidSizeException {
+    public void testMultipleChoicePartialQuadruplePointsWhenScoreExclusivityActivatedAndOnePlayerAnswerIncorrectly() throws InvalidSizeException, NoMoreConsumablesException {
         // Given
         ScoreExclusivity scoreExclusivity = new ScoreExclusivity();
         // Given
@@ -144,8 +145,8 @@ public class MultipleChoicePartialTest {
 
 
         // When
-        scoreExclusivity.activate();
-        scoreExclusivity.activate();
+        player1.activateConsumable(scoreExclusivity);
+        player2.activateConsumable(scoreExclusivity);
         question1.selectOptions(player1Options);
         question2.selectOptions(player2Options);
         question1.score(player1);
@@ -157,7 +158,7 @@ public class MultipleChoicePartialTest {
     }
 
     @Test
-    public void testMultipleChoicePartialDontModifyPointsWhenScoreExclusivityActivatedNoIncorrectAnswers() throws InvalidSizeException {
+    public void testMultipleChoicePartialDontModifyPointsWhenScoreExclusivityActivatedNoIncorrectAnswers() throws InvalidSizeException, NoMoreConsumablesException {
         // Given
         ScoreExclusivity scoreExclusivity = new ScoreExclusivity();
         List<Option> options = Arrays.asList(
@@ -183,7 +184,7 @@ public class MultipleChoicePartialTest {
         Integer expectedPlayer2Points = 0;
 
         // When
-        scoreExclusivity.activate();
+        player1.activateConsumable(scoreExclusivity);
         question1.selectOptions(player1Options);
         question2.selectOptions(player2Options);
         question1.score(player1);

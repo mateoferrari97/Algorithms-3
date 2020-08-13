@@ -1,5 +1,6 @@
 package modelo;
 
+import exceptions.NoMoreConsumablesException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -54,7 +55,7 @@ public class BooleanQuestionTest {
 
 
     @Test
-    public void testBooleanQuestionDoublePointsWhenScoreExclusivityActivatedAndOnePlayerAnswerIncorrectly(){
+    public void testBooleanQuestionDoublePointsWhenScoreExclusivityActivatedAndOnePlayerAnswerIncorrectly() throws NoMoreConsumablesException {
         // Given
         ScoreExclusivity scoreExclusivity = new ScoreExclusivity();
         List<Option> options = Arrays.asList(
@@ -76,7 +77,7 @@ public class BooleanQuestionTest {
 
 
         // When
-        scoreExclusivity.activate();
+        player1.activateConsumable(scoreExclusivity);
         question1.selectOptions(player1Options);
         question2.selectOptions(player2Options);
         question1.score(player1);
@@ -88,7 +89,7 @@ public class BooleanQuestionTest {
     }
 
     @Test
-    public void testBooleanQuestionQuadruplePointsWhenScoreExclusivityTwoTimesActivatedAndOnePlayerAnswerIncorrectly(){
+    public void testBooleanQuestionQuadruplePointsWhenScoreExclusivityTwoTimesActivatedAndOnePlayerAnswerIncorrectly() throws NoMoreConsumablesException {
         // Given
         ScoreExclusivity scoreExclusivity = new ScoreExclusivity();
         List<Option> options = Arrays.asList(
@@ -110,8 +111,8 @@ public class BooleanQuestionTest {
 
 
         // When
-        scoreExclusivity.activate();
-        scoreExclusivity.activate();
+        player1.activateConsumable(scoreExclusivity);
+        player2.activateConsumable(scoreExclusivity);
         question1.selectOptions(player1Options);
         question2.selectOptions(player2Options);
         question1.score(player1);
@@ -123,7 +124,7 @@ public class BooleanQuestionTest {
     }
 
     @Test
-    public void testBooleanQuestionDontModifyPointsWhenScoreExclusivityActivatedNoIncorrectAnswers(){
+    public void testBooleanQuestionDontModifyPointsWhenScoreExclusivityActivatedNoIncorrectAnswers() throws NoMoreConsumablesException {
         // Given
         ScoreExclusivity scoreExclusivity = new ScoreExclusivity();
         List<Option> options = Arrays.asList(
@@ -145,7 +146,7 @@ public class BooleanQuestionTest {
 
 
         // When
-        scoreExclusivity.activate();
+        player1.activateConsumable(scoreExclusivity);
         question1.selectOptions(player1Options);
         question2.selectOptions(player2Options);
         question1.score(player1);

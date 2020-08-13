@@ -1,6 +1,7 @@
 package modelo;
 
 import exceptions.InvalidSizeException;
+import exceptions.NoMoreConsumablesException;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
@@ -104,7 +105,7 @@ public class MultipleChoiceTest {
     }
 
     @Test
-    public void testMultipleChoiceDoublePointsWhenScoreExclusivityActivatedAndOnePlayerAnswerIncorrectly() throws InvalidSizeException {
+    public void testMultipleChoiceDoublePointsWhenScoreExclusivityActivatedAndOnePlayerAnswerIncorrectly() throws InvalidSizeException, NoMoreConsumablesException {
         // Given
         ScoreExclusivity scoreExclusivity = new ScoreExclusivity();
         List<Option> options = Arrays.asList(
@@ -136,7 +137,7 @@ public class MultipleChoiceTest {
 
 
         // When
-        scoreExclusivity.activate();
+        player1.activateConsumable(scoreExclusivity);
         question1.selectOptions(player1Options);
         question2.selectOptions(player2Options);
         question1.score(player1);
@@ -148,7 +149,7 @@ public class MultipleChoiceTest {
     }
 
     @Test
-    public void testMultipleChoiceQuadruplePointsWhenScoreExclusivityActivatedAndOnePlayerAnswerIncorrectly() throws InvalidSizeException {
+    public void testMultipleChoiceQuadruplePointsWhenScoreExclusivityActivatedAndOnePlayerAnswerIncorrectly() throws InvalidSizeException, NoMoreConsumablesException {
         // Given
         ScoreExclusivity scoreExclusivity = new ScoreExclusivity();
         List<Option> options = Arrays.asList(
@@ -179,8 +180,8 @@ public class MultipleChoiceTest {
         Integer expectedPlayer2Points = 4;
 
         // When
-        scoreExclusivity.activate();
-        scoreExclusivity.activate();
+        player1.activateConsumable(scoreExclusivity);
+        player2.activateConsumable(scoreExclusivity);
         question1.selectOptions(player1Options);
         question2.selectOptions(player2Options);
         question1.score(player1);
@@ -192,7 +193,7 @@ public class MultipleChoiceTest {
     }
 
     @Test
-    public void testMultipleChoiceDontModifyPointsWhenScoreExclusivityActivatedNoIncorrectAnswers() throws InvalidSizeException {
+    public void testMultipleChoiceDontModifyPointsWhenScoreExclusivityActivatedNoIncorrectAnswers() throws InvalidSizeException, NoMoreConsumablesException {
         // Given
         ScoreExclusivity scoreExclusivity = new ScoreExclusivity();
         List<Option> options = Arrays.asList(
@@ -222,7 +223,7 @@ public class MultipleChoiceTest {
         Integer expectedPlayer2Points = 0;
 
         // When
-        scoreExclusivity.activate();
+        player1.activateConsumable(scoreExclusivity);
         question1.selectOptions(player1Options);
         question2.selectOptions(player2Options);
         question1.score(player1);
