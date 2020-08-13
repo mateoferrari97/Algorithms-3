@@ -1,10 +1,16 @@
 package modelo.questions;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import exceptions.InvalidJsonRecognizerClassException;
 import exceptions.InvalidSizeException;
-import modelo.*;
+import modelo.Player;
+import modelo.Points;
 import modelo.options.Option;
 import modelo.scorers.QuestionScorer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GroupChoiceQuestion extends Question {
@@ -51,9 +57,26 @@ public class GroupChoiceQuestion extends Question {
         scorer.score(player,this.points);
     }
 
-    @Override
-    public Question question(String text, List<Option> options, QuestionScorer scorer) throws InvalidSizeException {
-        return new GroupChoiceQuestion(text,options,scorer);
+    public static Question unmarshal(JsonObject json) throws InvalidJsonRecognizerClassException, InvalidSizeException {
+        try {
+
+            String text = json.get("text").getAsString();
+            String scorerString = json.get("scorer").getAsString();
+
+            List<Option> options = new ArrayList<Option>();
+            JsonArray arrayOptions = json.getAsJsonArray("options");
+            for (JsonElement jsonOption : arrayOptions) {
+                Option option = Option.unmarshal(jsonOption.getAsJsonObject());
+                options.add(option);
+            }
+
+            QuestionScorer questionScorer = selectScorer(scorerString);
+
+            //Question question = question(text, options, questionScorer);
+            return new GroupChoiceQuestion(text, options, questionScorer);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     @Override

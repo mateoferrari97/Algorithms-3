@@ -1,5 +1,9 @@
 package modelo;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import exceptions.InvalidJsonRecognizerClassException;
+import exceptions.InvalidSizeException;
 import modelo.options.CorrectOptionScorer;
 import modelo.options.IncorrectOptionScorer;
 import modelo.options.Option;
@@ -122,5 +126,29 @@ public class BooleanQuestionPenaltyTest {
 
         // Then
         Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
+    }
+
+    @Test
+    public void testUnmarshalBooleanQuestionWithPenaltyAndTestHowItWorks() throws InvalidJsonRecognizerClassException, InvalidSizeException {
+
+        String jString = "{\"text\": \"vamos a aprobar algoritmos 3?\",\"scorer\": \"PenaltyScorer\",\"options\":[{\"text\": \"si\",\"optionScorer\": true},{\"text\": \"no\",\"optionScorer\": false}]}";
+
+        JsonParser parser = new JsonParser();
+        JsonObject jObj = parser.parse(jString).getAsJsonObject();
+
+        Question question = BooleanQuestion.unmarshal(jObj);
+
+        Player player = new Player();
+        player.setPoints(5);
+        List<Option> playerOptions = Arrays.asList(new Option("si", new CorrectOptionScorer()));
+        Integer expectedPlayerPoints = 6;
+
+        // When
+        question.score(player, playerOptions);
+
+        // Then
+        Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
+
+
     }
 }
