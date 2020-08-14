@@ -1,5 +1,7 @@
 package modelo;
-
+import modelo.scorers.*;
+import modelo.questions.*;
+import modelo.options.*;
 import exceptions.InvalidSizeException;
 import org.junit.Assert;
 import org.junit.Test;
