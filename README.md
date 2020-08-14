@@ -1,4 +1,5 @@
-[![Build Status](https://travis-ci.org/mateoferrari97/Kahoot.svg?branch=develop)](https://travis-ci.org/mateoferrari97/Kahoot)
+
+[![Build Status](https://travis-ci.org/mateoferrari97/Algoritmos3.svg?branch=develop)](https://travis-ci.org/mateoferrari97/Algoritmos3)
 
 # TP2 Algoritmos 3: Kahoot
 
