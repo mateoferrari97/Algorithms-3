@@ -8,6 +8,12 @@ public class Player {
     private Integer points = 0;
     private Integer consumablesAmount = 2;
 
+    public Player() {}
+
+    public Player(String name) {
+        this.setText(name);
+    }
+
     public Integer getPoints() {
         return points;
     }
