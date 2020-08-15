@@ -1,13 +1,13 @@
 package utils;
 
 import modelo.Points;
-import modelo.options.Option;
-import modelo.scorers.PenaltyScorer;
-import modelo.scorers.QuestionScorer;
+import modelo.options.*;
+import modelo.scorers.*;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.spy;
 
 public class QuestionFactoryTest {
     private QuestionScorer penaltyScorerMock = spy(new PenaltyScorer());
@@ -15,9 +15,9 @@ public class QuestionFactoryTest {
 
     @Test
     public void testUnmarshalCorrectOption(){
-        String jsonString = "";
+        String jsonString = "{\"text\": \"si\",\"optionScorer\": true}";
         OptionFactory optionFactory = new OptionFactory();
-        Option option = optionFactory.umarshall(jsonString);
+        Option option = optionFactory.unmarshal(jsonString);
 
         Assert.assertEquals(option.getText(),"si");
 
@@ -28,9 +28,9 @@ public class QuestionFactoryTest {
 
     @Test
     public void testUnmarshalIncorrectOption(){
-        String jsonString = "";
+        String jsonString = "{\"text\": \"si\",\"optionScorer\": false}";
         OptionFactory optionFactory = new OptionFactory();
-        Option option = optionFactory.umarshall(jsonString);
+        Option option = optionFactory.unmarshal(jsonString);
 
         Assert.assertEquals(option.getText(),"si");
 
