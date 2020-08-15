@@ -1,38 +1,46 @@
 package interfazGrafica.Eventos;
 
+import interfazGrafica.EndGame;
+import interfazGrafica.Play;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.Label;
-import modelo.Player;
-import modelo.options.Option;
-import modelo.questions.BooleanQuestion;
-import modelo.questions.Question;
 
-import java.util.ArrayList;
-import java.util.List;
+import javafx.stage.Stage;
+import modelo.*;
+
+import modelo.options.Option;
 
 
 public class BooleanOptionsEventHandler implements EventHandler<ActionEvent> {
+    private final Play nextScene;
+    private final Stage stage;
+    private Round round;
+    private Option option;
+    private Game game;
+    private Turn turn;
 
-    private Question question;
-    private Player player;
-    private Option chosenOption;
-    private Label playerPoints;
-
-    public BooleanOptionsEventHandler(Option option, Label playerPoints, Player player, BooleanQuestion question) {
-        this.chosenOption = option;
-        this.playerPoints = playerPoints;
-        this.player = player;
-        this.question = question;
-
+    public BooleanOptionsEventHandler(Option option, Round round, Turn turn, Game game, Play nextScene, Stage stage) {
+        this.round = round;
+        this.turn = turn;
+        this.option = option;
+        this.game = game;
+        this.nextScene = nextScene;
+        this.stage = stage;
     }
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        List<Option> options = new ArrayList();
-        options.add(this.chosenOption);
-        this.question.score(this.player, options);
-        Integer auxPlayerPoints = player.getPoints();
-        playerPoints.setText(auxPlayerPoints.toString());
+        this.turn.addPlayerAnswer(this.option);
+        this.turn.finish();
+
+        //this.round = this.game.getNextRound();
+        if(game.getNextRound() == null){
+            EndGame end = new EndGame(stage);
+        }else{
+            nextScene.start(game);
+        }
+
+
+        //this.turn = this.round.getTurn();
     }
 }
