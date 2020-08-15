@@ -28,6 +28,7 @@ public class BooleanOptionsEventHandler implements EventHandler<ActionEvent> {
         this.stage = stage;
     }
 
+  
     @Override
     public void handle(ActionEvent actionEvent) {
         this.turn.addPlayerAnswer(this.option);
@@ -45,3 +46,5 @@ public class BooleanOptionsEventHandler implements EventHandler<ActionEvent> {
         }
     }
 }
+
+

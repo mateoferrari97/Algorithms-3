@@ -1,6 +1,7 @@
 package modelo;
 
 import exceptions.InvalidSizeException;
+import consumables.Multiplicator;
 import modelo.options.*;
 import modelo.questions.*;
 import modelo.scorers.*;
@@ -56,7 +57,7 @@ public class Game {
                 new Option("si", new CorrectOptionScorer()),
                 new Option("no", new IncorrectOptionScorer()));
         QuestionScorer scorer = new BooleanScorer();
-        Question question = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer);
+        Question question = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer, new Multiplicator());
 
         this.rounds.add(new Round(players, question));
 
@@ -64,7 +65,7 @@ public class Game {
                 new Option("True", new CorrectOptionScorer()),
                 new Option("False", new IncorrectOptionScorer()));
         QuestionScorer newscorer = new BooleanScorer();
-        Question newquestion = new BooleanQuestion("El cafe es lo mejor", newoptions, newscorer);
+        Question newquestion = new BooleanQuestion("El cafe es lo mejor", newoptions, newscorer, new Multiplicator());
 
         this.rounds.add(new Round(players, newquestion));
 

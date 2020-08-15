@@ -26,13 +26,13 @@ public class Points {
         this.factor = 0;
     }
 
-    public void gainAPoint() {
-        this.points = 1;
-    }
+    public void gainAPoint() { this.points = 1; }
 
     public Integer getPoints() {return (this.points * this.factor);}
   
     public void multiplicate(Integer multiplicator){
-        factor = multiplicator;
+        this.points = this.points * multiplicator;
     }
+
+    public boolean equals(Points otherPoints) {return (this.points == otherPoints.getPoints());}
 }

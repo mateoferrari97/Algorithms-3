@@ -1,7 +1,7 @@
 package modelo.questions;
 
 import exceptions.InvalidJsonRecognizerClassException;
-import modelo.Multiplicator;
+import consumables.Consumable;
 import modelo.Player;
 import modelo.Points;
 import modelo.options.Option;
@@ -15,13 +15,13 @@ public abstract class Question {
     protected QuestionScorer scorer;
     protected List<Option> options;
     protected Points points;
-    protected Multiplicator multiplicator;
+    protected Consumable consumable;
 
-    public void multiplicate(Integer factor){
-        this.multiplicator.multiplicate(this.points, factor);
-    }
+    public abstract void selectOptions(List<Option> playerAnswers);
 
-    public abstract void score(Player player, List<Option> playerAnswers);
+    public abstract void score(Player player);
+
+    public boolean isCorrect(){return (this.points.getPoints() > 0);}
 
     public String getText() {
         return this.text;
@@ -41,7 +41,7 @@ public abstract class Question {
         return this.options;
     }
 
-    public void score(Player player, List<Option> playerOptionsLetters, List<Option> playerOptionsNumbers){}
+
 
     public List<Option> getCorrectOptions() {
         List<Option> options = new LinkedList<>();
