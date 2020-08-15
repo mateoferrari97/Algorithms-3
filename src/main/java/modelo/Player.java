@@ -1,8 +1,12 @@
 package modelo;
 
+import consumables.Consumable;
+import exceptions.NoMoreConsumablesException;
+
 public class Player {
     private String  name;
     private Integer points = 0;
+    private Integer consumablesAmount = 2;
 
     public Player() {}
 
@@ -31,5 +35,11 @@ public class Player {
 
     public String getText() {
         return this.name;
+    }
+
+    public void activateConsumable(Consumable consumable) throws NoMoreConsumablesException {
+        consumablesAmount--;
+        if (consumablesAmount < 0) throw new NoMoreConsumablesException("El jugador no posee ningun consumible.");
+        consumable.activate();
     }
 }

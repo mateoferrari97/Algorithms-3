@@ -17,7 +17,8 @@ public class Turn {
     }
 
     public void finish() {
-        question.score(player, answers);
+        question.selectOptions(answers);
+        question.score(player);
     }
 
     public Player getPlayer() {
