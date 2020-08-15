@@ -12,35 +12,36 @@ import modelo.options.Option;
 
 
 public class BooleanOptionsEventHandler implements EventHandler<ActionEvent> {
-    private final Play nextScene;
+    private final Play nextPlay;
     private final Stage stage;
     private Round round;
     private Option option;
     private Game game;
     private Turn turn;
 
-    public BooleanOptionsEventHandler(Option option, Round round, Turn turn, Game game, Play nextScene, Stage stage) {
+    public BooleanOptionsEventHandler(Option option, Round round, Turn turn, Game game, Play nextPlay, Stage stage) {
         this.round = round;
         this.turn = turn;
         this.option = option;
         this.game = game;
-        this.nextScene = nextScene;
+        this.nextPlay = nextPlay;
         this.stage = stage;
     }
 
     @Override
     public void handle(ActionEvent actionEvent) {
         this.turn.addPlayerAnswer(this.option);
+
+        if (this.turn.getAmountChosenOptions() != this.turn.getAmountCurrentOptions()) {
+            return;
+        }
+
         this.turn.finish();
 
-        //this.round = this.game.getNextRound();
         if(game.getNextRound() == null){
             EndGame end = new EndGame(stage);
         }else{
-            nextScene.start(game);
+            nextPlay.start(game);
         }
-
-
-        //this.turn = this.round.getTurn();
     }
 }

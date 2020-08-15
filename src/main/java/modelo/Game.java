@@ -1,5 +1,6 @@
 package modelo;
 
+import exceptions.InvalidSizeException;
 import modelo.options.*;
 import modelo.questions.*;
 import modelo.scorers.*;
@@ -16,7 +17,7 @@ public class Game {
     private List<Round> rounds = new ArrayList<>();
     private Integer currentRound = 0;
 
-    public void init() {
+    public void init() throws InvalidSizeException {
         createPlayers();
         createRounds();
     }
@@ -50,7 +51,7 @@ public class Game {
         }
     }
 
-    private void createRounds() {
+    private void createRounds() throws InvalidSizeException {
         List<Option> options = Arrays.asList(
                 new Option("si", new CorrectOptionScorer()),
                 new Option("no", new IncorrectOptionScorer()));
@@ -66,6 +67,18 @@ public class Game {
         Question newquestion = new BooleanQuestion("El cafe es lo mejor", newoptions, newscorer);
 
         this.rounds.add(new Round(players, newquestion));
+
+        List<Option> multipleChoice = Arrays.asList(
+                new Option("2 + 2", new CorrectOptionScorer()),
+                new Option("2 * 2", new CorrectOptionScorer()),
+                new Option("1 + 3", new CorrectOptionScorer()),
+                new Option("2^2", new CorrectOptionScorer()),
+                new Option("1 - 3", new IncorrectOptionScorer()));
+
+        QuestionScorer multipleChoiceScorer = new MultipleChoiceScorer();
+        Question multipleChoiceQuestion = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", multipleChoice, multipleChoiceScorer);
+
+        this.rounds.add(new Round(players, multipleChoiceQuestion));
     }
 
 /*

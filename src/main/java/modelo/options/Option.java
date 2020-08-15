@@ -42,4 +42,8 @@ public class Option {
        }
         return new Option(text,new IncorrectOptionScorer());
     }
+
+    public boolean isCorrect() {
+        return scorer.isCorrect();
+    }
 }

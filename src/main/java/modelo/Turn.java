@@ -28,9 +28,15 @@ public class Turn {
         answers.add(option);
     }
 
-
-
     public List<Option> getAnswers() {
         return this.answers;
+    }
+
+    public Integer getAmountChosenOptions() {
+        return this.question.getCorrectOptions().size();
+    }
+
+    public Integer getAmountCurrentOptions() {
+        return this.answers.size();
     }
 }

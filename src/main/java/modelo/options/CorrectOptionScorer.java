@@ -13,4 +13,7 @@ public class CorrectOptionScorer implements IOptionScorer {
         option.changeToIncorrect();
     }
 
+    public boolean isCorrect() {
+        return true;
+    }
 }

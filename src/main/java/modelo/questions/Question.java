@@ -7,6 +7,7 @@ import modelo.Points;
 import modelo.options.Option;
 import modelo.scorers.*;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public abstract class Question {
@@ -41,6 +42,17 @@ public abstract class Question {
     }
 
     public void score(Player player, List<Option> playerOptionsLetters, List<Option> playerOptionsNumbers){}
+
+    public List<Option> getCorrectOptions() {
+        List<Option> options = new LinkedList<>();
+        for (Option option: this.options) {
+            if (option.isCorrect()) {
+                options.add(option);
+            }
+        }
+
+        return options;
+    }
 
      static QuestionScorer selectScorer(String scorerString) throws InvalidJsonRecognizerClassException {
         switch (scorerString) {
