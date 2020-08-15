@@ -1,4 +1,5 @@
 package modelo;
+import consumables.Multiplicator;
 import modelo.scorers.*;
 import modelo.questions.*;
 import modelo.options.*;
@@ -18,7 +19,7 @@ public class GameTest {
                     new Option("si", new CorrectOptionScorer()),
                     new Option("no", new IncorrectOptionScorer()));
             QuestionScorer booleanScorer = new PenaltyScorer();
-            Question booleanQuestion = new BooleanQuestion("vamos a aprobar algoritmos 3?", booleanOptions, booleanScorer);
+            Question booleanQuestion = new BooleanQuestion("vamos a aprobar algoritmos 3?", booleanOptions, booleanScorer, new Multiplicator());
 
             List<Option> multipleChoiceOptions = Arrays.asList(
                     new Option("2 + 2", new CorrectOptionScorer()),
@@ -28,7 +29,7 @@ public class GameTest {
                     new Option("1 - 3", new IncorrectOptionScorer()));
 
             QuestionScorer multipleChoiceScorer = new MultipleChoiceScorer();
-            Question multipleChoiceQuestion = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", multipleChoiceOptions, multipleChoiceScorer);
+            Question multipleChoiceQuestion = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", multipleChoiceOptions, multipleChoiceScorer, new Multiplicator());
 
             List<Question> questions = Arrays.asList(booleanQuestion,multipleChoiceQuestion);
 
