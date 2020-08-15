@@ -9,11 +9,11 @@ public class ScoreExclusivity implements Consumable {
 
     public ScoreExclusivity () {
         this.multiplicator = new Multiplicator();
+        this.multiplicator.deactivate();
     }
 
     public void activate() {
         this.multiplicator.upgrade();
-        this.multiplicator.deactivate();
     }
 
     public void useWithCorrectAnswer () {}

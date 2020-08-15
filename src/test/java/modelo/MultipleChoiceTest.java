@@ -2,6 +2,7 @@ package modelo;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import consumables.Multiplicator;
 import consumables.ScoreExclusivity;
 import exceptions.InvalidJsonRecognizerClassException;
 import exceptions.InvalidSizeException;
@@ -35,7 +36,7 @@ public class MultipleChoiceTest {
                 new Option("1 - 3", new IncorrectOptionScorer()));
 
         QuestionScorer scorer = new MultipleChoiceScorer();
-        Question question = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer, new ScoreExclusivity());
+        Question question = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer, new Multiplicator());
 
         Player player = new Player();
         List<Option> playerOptions = Arrays.asList(
@@ -64,7 +65,7 @@ public class MultipleChoiceTest {
                 new Option("1 - 3", new IncorrectOptionScorer()));
 
         QuestionScorer scorer = new MultipleChoiceScorer();
-        Question question = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer, new ScoreExclusivity());
+        Question question = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer, new Multiplicator());
 
         Player player = new Player();
         List<Option> playerOptions = Arrays.asList(
@@ -112,7 +113,7 @@ public class MultipleChoiceTest {
 
         //Act and Assert
         thrown.expect(InvalidSizeException.class);
-        Question question = new MultipleChoiceQuestion("Elegir los paises pertenecientes al continente asiatico", options, scorer, new ScoreExclusivity());
+        Question question = new MultipleChoiceQuestion("Elegir los paises pertenecientes al continente asiatico", options, scorer, new Multiplicator());
 
     }
 

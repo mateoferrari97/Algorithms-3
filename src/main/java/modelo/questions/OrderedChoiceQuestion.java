@@ -3,6 +3,7 @@ package modelo.questions;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import consumables.Multiplicator;
 import exceptions.InvalidJsonRecognizerClassException;
 import exceptions.InvalidSizeException;
 import consumables.Consumable;
@@ -38,11 +39,11 @@ public class OrderedChoiceQuestion extends Question {
                 i++;
             }
         }
-
+        if (!(this.isCorrect())) { this.consumable.useWithIncorrectAnswer();}
     }
 
     public void score(Player player) {
-        if (!(this.isCorrect())) { this.consumable.useWithIncorrectAnswer();}
+
         this.consumable.multiplicate(this.points);
         this.scorer.score(player, this.points);
     }
@@ -63,7 +64,7 @@ public class OrderedChoiceQuestion extends Question {
             QuestionScorer questionScorer = selectScorer(scorerString);
 
             //Question question = question(text, options, questionScorer);
-            return new OrderedChoiceQuestion(text, options, questionScorer, new ScoreExclusivity());
+            return new OrderedChoiceQuestion(text, options, questionScorer, new Multiplicator());
         } catch (Exception e) {
             throw e;
         }

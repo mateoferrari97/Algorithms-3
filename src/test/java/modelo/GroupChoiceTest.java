@@ -1,5 +1,6 @@
 package modelo;
 
+import consumables.Multiplicator;
 import consumables.ScoreExclusivity;
 import exceptions.InvalidSizeException;
 import modelo.options.CorrectOptionScorer;
@@ -32,7 +33,7 @@ public class GroupChoiceTest {
 
 
         QuestionScorer scorer = new BooleanScorer();
-        Question question = new GroupChoiceQuestion("Separar en numeros y letras", options, scorer, new ScoreExclusivity());
+        Question question = new GroupChoiceQuestion("Separar en numeros y letras", options, scorer, new Multiplicator());
 
         List<Option> playerOptions = Arrays.asList(
                 options.get(3),
@@ -61,7 +62,7 @@ public class GroupChoiceTest {
                 new Option("2", new IncorrectOptionScorer()));
 
         QuestionScorer scorer = new BooleanScorer();
-        Question question = new GroupChoiceQuestion("Separar en numeros y letras", options, scorer, new ScoreExclusivity());
+        Question question = new GroupChoiceQuestion("Separar en numeros y letras", options, scorer, new Multiplicator());
 
 
         List<Option> playerOptions = Arrays.asList(

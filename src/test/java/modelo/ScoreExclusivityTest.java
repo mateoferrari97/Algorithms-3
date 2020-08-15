@@ -7,41 +7,6 @@ import org.junit.Test;
 
 public class ScoreExclusivityTest {
 
-    @Test
-    public void testScoreExclusivityDontModifyPointsWhenNotActivatedAndCorrectAnswers(){
-        //Given
-        Integer expectedPoints = 1;
-        Points points  = new Points();
-        points.gainAPoint();
-
-        ScoreExclusivity scoreExclusivity = new ScoreExclusivity();
-
-        //When
-        scoreExclusivity.multiplicate(points);
-
-        //Then
-        Assert.assertEquals(points.getPoints(),expectedPoints);
-
-    }
-
-    @Test
-    public void testScoreExclusivityDontModifyPointsWhenNotActivatedAndOnePlayerAnswerIncorrectly(){
-        //Given
-        Integer expectedPoints = 1;
-        Points points  = new Points();
-        points.gainAPoint();
-
-        ScoreExclusivity scoreExclusivity = new ScoreExclusivity();
-
-        //When
-        scoreExclusivity.useWithCorrectAnswer();
-        scoreExclusivity.useWithCorrectAnswer();
-        scoreExclusivity.multiplicate(points);
-
-        //Then
-        Assert.assertEquals(points.getPoints(),expectedPoints);
-
-    }
 
     @Test
     public void testScoreExclusivityDoublePointsWhenActivatedAndOnePlayerAnswerIncorrectly(){

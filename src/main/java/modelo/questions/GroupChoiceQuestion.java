@@ -3,6 +3,7 @@ package modelo.questions;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import consumables.Multiplicator;
 import exceptions.InvalidJsonRecognizerClassException;
 import exceptions.InvalidSizeException;
 import consumables.Consumable;
@@ -50,6 +51,8 @@ public class GroupChoiceQuestion extends Question {
         if (pointsDone.equals(minPoints) || pointsDone.equals(maxPoints)) { this.points.gainAPoint();}
 
         for (Option aOption : playerAnswers) { aOption.changeState(aOption);}
+
+        if (!(this.isCorrect())) this.consumable.useWithIncorrectAnswer();
     }
 
     public static Question unmarshal(JsonObject json) throws InvalidJsonRecognizerClassException, InvalidSizeException {
@@ -68,7 +71,7 @@ public class GroupChoiceQuestion extends Question {
             QuestionScorer questionScorer = selectScorer(scorerString);
 
             //Question question = question(text, options, questionScorer);
-            return new GroupChoiceQuestion(text, options, questionScorer, new ScoreExclusivity());
+            return new GroupChoiceQuestion(text, options, questionScorer, new Multiplicator());
         } catch (Exception e) {
             throw e;
         }
@@ -76,7 +79,6 @@ public class GroupChoiceQuestion extends Question {
 
     @Override
     public void score(Player player) {
-        if (!(this.isCorrect())) this.consumable.useWithIncorrectAnswer();
         this.consumable.multiplicate(this.points);
         scorer.score(player, this.points);
     }

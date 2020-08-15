@@ -2,6 +2,7 @@ package modelo;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import consumables.Multiplicator;
 import consumables.ScoreExclusivity;
 import exceptions.InvalidJsonRecognizerClassException;
 import exceptions.InvalidSizeException;
@@ -30,7 +31,7 @@ public class OrderedChoiceTest {
                 new Option("Cuarto", new IncorrectOptionScorer()));
 
         QuestionScorer scorer = new OrderedScorer();
-        Question question = new OrderedChoiceQuestion("ordene correctamente las siguientes opciones", options, scorer, new ScoreExclusivity());
+        Question question = new OrderedChoiceQuestion("ordene correctamente las siguientes opciones", options, scorer, new Multiplicator());
 
         Player player = new Player();
         List<Option> playerOptions = options;
@@ -54,7 +55,7 @@ public class OrderedChoiceTest {
                 new Option("Cuarto", new IncorrectOptionScorer()));
 
         QuestionScorer scorer = new OrderedScorer();
-        Question question = new OrderedChoiceQuestion("ordene correctamente las siguientes opciones", options, scorer, new ScoreExclusivity());
+        Question question = new OrderedChoiceQuestion("ordene correctamente las siguientes opciones", options, scorer, new Multiplicator());
 
         Player player = new Player();
         List<Option> playerOptions = Arrays.asList(

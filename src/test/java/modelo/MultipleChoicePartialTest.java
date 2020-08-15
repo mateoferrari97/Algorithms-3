@@ -2,6 +2,7 @@ package modelo;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import consumables.Multiplicator;
 import consumables.ScoreExclusivity;
 import exceptions.InvalidJsonRecognizerClassException;
 import exceptions.InvalidSizeException;
@@ -32,7 +33,7 @@ public class MultipleChoicePartialTest {
                 new Option("1 - 3", new IncorrectOptionScorer()));
 
         QuestionScorer scorer = new MultipleChoiceWithPartialScorer();
-        Question question = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer, new ScoreExclusivity());
+        Question question = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer, new Multiplicator());
 
         Player player = new Player();
         List<Option> playerOptions = Arrays.asList(
@@ -61,7 +62,7 @@ public class MultipleChoicePartialTest {
                 new Option("1 - 3", new IncorrectOptionScorer()));
 
         QuestionScorer scorer = new MultipleChoiceWithPartialScorer();
-        Question question = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer, new ScoreExclusivity());
+        Question question = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer, new Multiplicator());
 
         Player player = new Player();
         List<Option> playerOptions = Arrays.asList(

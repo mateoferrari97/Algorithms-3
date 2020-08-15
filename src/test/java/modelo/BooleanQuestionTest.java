@@ -2,6 +2,7 @@ package modelo;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import consumables.Multiplicator;
 import consumables.ScoreExclusivity;
 import exceptions.InvalidJsonRecognizerClassException;
 import exceptions.InvalidSizeException;
@@ -28,7 +29,7 @@ public class BooleanQuestionTest {
                 new Option("si", new CorrectOptionScorer()),
                 new Option("no", new IncorrectOptionScorer()));
         QuestionScorer scorer = new BooleanScorer();
-        Question question = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer, new ScoreExclusivity());
+        Question question = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer, new Multiplicator());
 
         Player player = new Player();
         List<Option> playerOptions = Arrays.asList(new Option("si", new CorrectOptionScorer()));
@@ -49,7 +50,7 @@ public class BooleanQuestionTest {
                 new Option("si", new CorrectOptionScorer()),
                 new Option("no", new IncorrectOptionScorer()));
         QuestionScorer scorer = new BooleanScorer();
-        Question question = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer, new ScoreExclusivity());
+        Question question = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer, new Multiplicator());
 
         Player player = new Player();
         player.setPoints(5);

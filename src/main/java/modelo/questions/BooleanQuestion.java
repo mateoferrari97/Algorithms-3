@@ -3,6 +3,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import consumables.Consumable;
+import consumables.Multiplicator;
 import consumables.ScoreExclusivity;
 import exceptions.InvalidJsonRecognizerClassException;
 import exceptions.InvalidSizeException;
@@ -29,11 +30,11 @@ public class BooleanQuestion extends Question {
         for(Option aOption : playerAnswers){
             aOption.calculatePoints(scorer, this.points);
         }
+        if (!(this.isCorrect())) this.consumable.useWithIncorrectAnswer();
     }
 
     @Override
     public void score(Player player) {
-        if (!(this.isCorrect())) this.consumable.useWithIncorrectAnswer();
         this.consumable.multiplicate(this.points);
         scorer.score(player,this.points);
     }
@@ -54,7 +55,7 @@ public class BooleanQuestion extends Question {
             QuestionScorer questionScorer = selectScorer(scorerString);
 
             //Question question = question(text, options, questionScorer);
-            return new BooleanQuestion(text, options, questionScorer, new ScoreExclusivity());
+            return new BooleanQuestion(text, options, questionScorer, new Multiplicator());
         } catch (Exception e) {
             throw e;
         }
