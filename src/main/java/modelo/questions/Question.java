@@ -16,6 +16,7 @@ public abstract class Question {
     protected List<Option> options;
     protected Points points;
     protected Consumable consumable;
+    protected String type;
 
     public abstract void selectOptions(List<Option> playerAnswers);
 
@@ -40,8 +41,6 @@ public abstract class Question {
     public List<Option> getOptions(){
         return this.options;
     }
-
-
 
     public List<Option> getCorrectOptions() {
         List<Option> options = new LinkedList<>();
@@ -70,6 +69,10 @@ public abstract class Question {
                 String error = "invalid Question Scorer class";
                 throw new InvalidJsonRecognizerClassException(error);
         }
+    }
+
+    public String getType() {
+        return this.type;
     }
 }
 

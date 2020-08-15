@@ -14,6 +14,7 @@ import modelo.options.Option;
 import modelo.scorers.QuestionScorer;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class OrderedChoiceQuestion extends Question {
@@ -27,6 +28,7 @@ public class OrderedChoiceQuestion extends Question {
         this.scorer = scorer;
         this.points = new Points();
         this.consumable = consumable;
+        this.type = "ordered choice";
     }
 
     public void selectOptions(List<Option> playerAnswers) {
@@ -70,4 +72,8 @@ public class OrderedChoiceQuestion extends Question {
         }
     }
 
+    @Override
+    public List<Option> getCorrectOptions() {
+        return this.options;
+    }
 }
