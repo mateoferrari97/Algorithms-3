@@ -44,5 +44,14 @@ public class PlayerTest {
         player.activateConsumable(scoreExclusivity);
 
     }
+    @Test
+    public void testSetAndGetNameShouldBeOK() {
+        Player player = new Player();
+        String name = "jose";
+
+        player.setName(name);
+        Assert.assertEquals(name, player.getName());
+
+    }
 }
 
