@@ -26,6 +26,7 @@ public class GroupChoiceQuestion extends Question {
         this.scorer = scorer;
         this.points = new Points();
         this.consumable = consumable;
+        this.type = "GroupChoice";
     }
 
     @Override

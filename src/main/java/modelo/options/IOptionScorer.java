@@ -8,4 +8,5 @@ public interface IOptionScorer {
 
     void changeState(Option option);
 
+    boolean isCorrect();
 }

@@ -1,6 +1,9 @@
 package interfazGrafica;
 
 import interfazGrafica.Eventos.BooleanOptionsEventHandler;
+import interfazGrafica.Eventos.GroupChoiceEventHandler;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -75,8 +78,17 @@ public class Play extends VBox {
         Play nextScene = new Play(this.stage);
         for(Button aButton : buttons) {
             Option option = round.getQuestion().getOptions().get(i);
-            BooleanOptionsEventHandler booleanOptionsEventHandler = new BooleanOptionsEventHandler(option, round, turn, game, nextScene, this.stage);
-            aButton.setOnAction(booleanOptionsEventHandler);
+
+            EventHandler<ActionEvent> handler;
+            switch (round.getQuestion().getType()) {
+                case "group choice":
+                    handler = new GroupChoiceEventHandler(option, round, turn, game, nextScene, this.stage);
+                default:
+                    handler = new BooleanOptionsEventHandler(option, round, turn, game, nextScene, this.stage);
+            }
+
+            EventHandler<ActionEvent> optionsEventHandler = handler;
+            aButton.setOnAction(optionsEventHandler);
             i++;
         }
     }

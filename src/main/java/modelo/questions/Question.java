@@ -6,6 +6,7 @@ import modelo.Points;
 import modelo.options.Option;
 import modelo.scorers.QuestionScorer;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public abstract class Question {
@@ -14,6 +15,7 @@ public abstract class Question {
     protected List<Option> options;
     protected Points points;
     protected Consumable consumable;
+    protected String type;
 
     public abstract void selectOptions(List<Option> playerAnswers);
 
@@ -39,6 +41,19 @@ public abstract class Question {
         return this.options;
     }
 
+    public List<Option> getCorrectOptions() {
+        List<Option> options = new LinkedList<>();
+        for (Option option: this.options) {
+            if (option.isCorrect()) {
+                options.add(option);
+            }
+        }
+
+        return options;
+    }
+    public String getType() {
+        return this.type;
+    }
 }
 
 

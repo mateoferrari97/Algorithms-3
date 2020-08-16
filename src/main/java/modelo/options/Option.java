@@ -1,5 +1,6 @@
 package modelo.options;
 
+import com.google.gson.JsonObject;
 import modelo.Points;
 import modelo.scorers.QuestionScorer;
 
@@ -32,4 +33,8 @@ public class Option {
         return this.text;
     }
 
+
+    public boolean isCorrect() {
+        return scorer.isCorrect();
+    }
 }

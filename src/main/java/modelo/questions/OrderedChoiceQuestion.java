@@ -19,6 +19,7 @@ public class OrderedChoiceQuestion extends Question {
         this.scorer = scorer;
         this.points = new Points();
         this.consumable = consumable;
+        this.type = "OrderedChoice";
     }
 
     public void selectOptions(List<Option> playerAnswers) {
@@ -40,4 +41,8 @@ public class OrderedChoiceQuestion extends Question {
         this.scorer.score(player, this.points);
     }
 
+    @Override
+    public List<Option> getCorrectOptions() {
+        return this.options;
+    }
 }
