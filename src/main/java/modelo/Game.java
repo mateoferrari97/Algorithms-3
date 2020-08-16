@@ -37,12 +37,16 @@ public class Game {
     }
 
     public Round getNextRound() {
-        if(currentRound == rounds.size()){
+        if(currentRound >= rounds.size()){
             currentRound = 0;
             return null;
         }
         Round round = rounds.get(currentRound);
         return round;
+    }
+
+    public void setNextRound() {
+        currentRound++;
     }
 
     private void createPlayers() {
@@ -90,30 +94,5 @@ public class Game {
         Question newquestion = new BooleanQuestion("El cafe es lo mejor", newoptions, newscorer, new Multiplicator());
 
         this.rounds.add(new Round(players, newquestion));
-    }
-
-/*
-    private void start() {
-        this.rounds.get(this.currentRound).start();
-    }
-
-    private void next() {
-        Integer nextRound = this.currentRound + 1;
-        if (nextRound >= this.rounds.size()) {
-            this.finish();
-        }
-
-        this.rounds.get(nextRound).next(this);
-        this.currentRound++;
-    }
-*/
-
-    private void finish() {
-        System.out.println("Game finished");
-    }
-
-
-    public void setNextRound() {
-        currentRound++;
     }
 }
