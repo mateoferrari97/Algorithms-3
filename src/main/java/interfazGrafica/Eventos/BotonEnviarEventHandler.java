@@ -37,7 +37,7 @@ public class BotonEnviarEventHandler implements EventHandler<ActionEvent> {
             Player player = this.game.getNextPlayer();
             if (amountOfPlayers < this.game.getPlayers().length) {
                 amountOfPlayers++;
-                player.setText(textField.getText());
+                player.setName(textField.getText());
                 this.textField.clear();
                 this.textField.requestFocus();
                 if(amountOfPlayers == this.game.getPlayers().length){

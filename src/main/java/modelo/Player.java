@@ -11,7 +11,7 @@ public class Player {
     public Player() {}
 
     public Player(String name) {
-        this.setText(name);
+        this.setName(name);
     }
 
     public Integer getPoints() {
@@ -29,11 +29,11 @@ public class Player {
         }
     }
 
-    public void setText(String name){
+    public void setName(String name){
         this.name = name;
     }
 
-    public String getText() {
+    public String getName() {
         return this.name;
     }
 

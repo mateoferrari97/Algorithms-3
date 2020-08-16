@@ -1,11 +1,10 @@
 package modelo.questions;
 
-import exceptions.InvalidJsonRecognizerClassException;
 import consumables.Consumable;
 import modelo.Player;
 import modelo.Points;
 import modelo.options.Option;
-import modelo.scorers.*;
+import modelo.scorers.QuestionScorer;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -52,25 +51,6 @@ public abstract class Question {
 
         return options;
     }
-
-     static QuestionScorer selectScorer(String scorerString) throws InvalidJsonRecognizerClassException {
-        switch (scorerString) {
-            case "PenaltyScorer":
-                return new PenaltyScorer();
-            case "MultipleChoiceWithPartialScorer":
-                return new MultipleChoiceWithPartialScorer();
-            case "OrderedScorer":
-                return new OrderedScorer();
-            case "MultipleChoiceScorer":
-                return new MultipleChoiceScorer();
-            case "BooleanScorer":
-                return new BooleanScorer();
-            default:
-                String error = "invalid Question Scorer class";
-                throw new InvalidJsonRecognizerClassException(error);
-        }
-    }
-
     public String getType() {
         return this.type;
     }

@@ -1,11 +1,15 @@
 package modelo;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 import static org.junit.Assert.fail;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.spy;
-
+@RunWith(PowerMockRunner.class)
+@PrepareForTest({Player.class})
 public class PointsTest {
     private Player playerMock = spy(new Player());
 
@@ -47,4 +51,5 @@ public class PointsTest {
             fail("unexpected failure in testDecreasePointsAndGiveItToPlayer");
         }
     }
+
 }

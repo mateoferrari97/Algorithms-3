@@ -121,7 +121,7 @@ public class Play extends VBox {
 
 
         Player player = turn.getPlayer();
-        playerText.setText(player.getText());
+        playerText.setText(player.getName());
         playerPoints.setText(player.getPoints().toString());
 
         HBox playerContenedorHorizontal = new HBox(playerText, playerPoints);

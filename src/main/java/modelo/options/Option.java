@@ -34,15 +34,6 @@ public class Option {
     }
 
 
-    public static Option unmarshal(JsonObject json){
-        String text = json.get("text").getAsString();
-        boolean isCorrect = json.get("optionScorer").getAsBoolean();
-       if(isCorrect){
-           return new Option(text,new CorrectOptionScorer());
-       }
-        return new Option(text,new IncorrectOptionScorer());
-    }
-
     public boolean isCorrect() {
         return scorer.isCorrect();
     }
