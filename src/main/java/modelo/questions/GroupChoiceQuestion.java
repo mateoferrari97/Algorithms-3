@@ -1,20 +1,13 @@
 package modelo.questions;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import consumables.Multiplicator;
-import exceptions.InvalidJsonRecognizerClassException;
-import exceptions.InvalidSizeException;
 import consumables.Consumable;
+import exceptions.InvalidSizeException;
 import modelo.Player;
 import modelo.Points;
-import consumables.ScoreExclusivity;
 import modelo.options.CorrectOptionScorer;
 import modelo.options.Option;
 import modelo.scorers.QuestionScorer;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GroupChoiceQuestion extends Question {
@@ -55,27 +48,6 @@ public class GroupChoiceQuestion extends Question {
         if (!(this.isCorrect())) this.consumable.useWithIncorrectAnswer();
     }
 
-    public static Question unmarshal(JsonObject json) throws InvalidJsonRecognizerClassException, InvalidSizeException {
-        try {
-
-            String text = json.get("text").getAsString();
-            String scorerString = json.get("scorer").getAsString();
-
-            List<Option> options = new ArrayList<Option>();
-            JsonArray arrayOptions = json.getAsJsonArray("options");
-            for (JsonElement jsonOption : arrayOptions) {
-                Option option = Option.unmarshal(jsonOption.getAsJsonObject());
-                options.add(option);
-            }
-
-            QuestionScorer questionScorer = selectScorer(scorerString);
-
-            //Question question = question(text, options, questionScorer);
-            return new GroupChoiceQuestion(text, options, questionScorer, new Multiplicator());
-        } catch (Exception e) {
-            throw e;
-        }
-    }
 
     @Override
     public void score(Player player) {

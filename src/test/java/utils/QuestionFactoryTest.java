@@ -1,5 +1,7 @@
 package utils;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import modelo.Points;
 import modelo.options.Option;
 import modelo.scorers.PenaltyScorer;
@@ -20,7 +22,7 @@ public class QuestionFactoryTest {
     private Points pointsMock = Mockito.spy(new Points());
 
     @Test
-    public void testUnmarshalCorrectOption(){
+    public void testUnmarshalCorrectOptionFromAString(){
         String jsonString = "{\"text\": \"si\",\"optionScorer\": true}";
         OptionFactory optionFactory = new OptionFactory();
         Option option = optionFactory.unmarshal(jsonString);
@@ -33,7 +35,7 @@ public class QuestionFactoryTest {
     }
 
     @Test
-    public void testUnmarshalIncorrectOption(){
+    public void testUnmarshalIncorrectOptionFromAString(){
         String jsonString = "{\"text\": \"si\",\"optionScorer\": false}";
         OptionFactory optionFactory = new OptionFactory();
         Option option = optionFactory.unmarshal(jsonString);
@@ -43,4 +45,38 @@ public class QuestionFactoryTest {
         Mockito.doNothing().when(penaltyScorerMock).punish(pointsMock);
         option.calculatePoints(penaltyScorerMock,pointsMock);
     }
+
+    @Test
+    public void testUnmarshalCorrectOptionFromAJObject(){
+        String jsonString = "{\"text\": \"si\",\"optionScorer\": true}";
+        JsonParser parser = new JsonParser();
+        JsonObject jObj = parser.parse(jsonString).getAsJsonObject();
+
+        OptionFactory optionFactory = new OptionFactory();
+        Option option = optionFactory.unmarshal(jObj);
+
+        Assert.assertEquals(option.getText(),"si");
+
+        Mockito.doNothing().when(penaltyScorerMock).reward(pointsMock);
+        option.calculatePoints(penaltyScorerMock,pointsMock);
+
+    }
+
+    @Test
+    public void testUnmarshalIncorrectOptionFromAJObject(){
+        String jsonString = "{\"text\": \"si\",\"optionScorer\": false}";
+        JsonParser parser = new JsonParser();
+        JsonObject jObj = parser.parse(jsonString).getAsJsonObject();
+        OptionFactory optionFactory = new OptionFactory();
+        Option option = optionFactory.unmarshal(jObj);
+
+        Assert.assertEquals(option.getText(),"si");
+
+        Mockito.doNothing().when(penaltyScorerMock).punish(pointsMock);
+        option.calculatePoints(penaltyScorerMock,pointsMock);
+    }
+
+
+
+
 }
