@@ -2,10 +2,6 @@ package modelo.game;
 
 import consumables.Consumable;
 import consumables.ScoreExclusivity;
-import modelo.Game;
-import modelo.Player;
-import modelo.Round;
-import modelo.Turn;
 import modelo.options.*;
 import modelo.questions.*;
 import modelo.scorers.*;

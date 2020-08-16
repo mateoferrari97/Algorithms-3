@@ -5,9 +5,9 @@ import interfazGrafica.Play;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
-import modelo.Game;
-import modelo.Round;
-import modelo.Turn;
+import modelo.game.Game;
+import modelo.game.Round;
+import modelo.game.Turn;
 import modelo.options.Option;
 
 public class GroupChoiceEventHandler implements EventHandler<ActionEvent> {

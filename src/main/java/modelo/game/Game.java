@@ -1,4 +1,4 @@
-package modelo;
+package modelo.game;
 
 import exceptions.InvalidSizeException;
 import consumables.Multiplicator;

@@ -13,9 +13,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import modelo.*;
-import modelo.Round;
-import modelo.Turn;
+import modelo.game.Game;
+import modelo.game.Player;
+import modelo.game.Round;
+import modelo.game.Turn;
 import modelo.options.Option;
 
 public class Play extends VBox {

@@ -3,6 +3,7 @@ package modelo;
 import consumables.Multiplicator;
 import consumables.ScoreExclusivity;
 import exceptions.InvalidSizeException;
+import modelo.game.Player;
 import modelo.options.CorrectOptionScorer;
 import modelo.options.IncorrectOptionScorer;
 import modelo.options.Option;

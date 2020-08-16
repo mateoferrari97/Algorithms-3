@@ -1,9 +1,6 @@
 package modelo.game;
 
 import exceptions.InvalidSizeException;
-import modelo.Game;
-import modelo.Player;
-import modelo.Round;
 import modelo.scorers.*;
 import modelo.questions.*;
 
@@ -16,9 +13,6 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import static org.mockito.Mockito.*;
 
 @RunWith(PowerMockRunner.class)
 @PowerMockIgnore({"javax.management.*"})

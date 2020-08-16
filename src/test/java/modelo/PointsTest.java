@@ -1,5 +1,7 @@
 package modelo;
 
+import modelo.game.Player;
+import modelo.game.Points;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;

@@ -2,8 +2,6 @@ package modelo.game;
 
 import consumables.Consumable;
 import consumables.ScoreExclusivity;
-import modelo.Player;
-import modelo.Turn;
 import modelo.options.CorrectOptionScorer;
 import modelo.options.IOptionScorer;
 import modelo.options.Option;
