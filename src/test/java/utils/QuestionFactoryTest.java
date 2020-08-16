@@ -1,82 +1,202 @@
 package utils;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import modelo.Points;
+import exceptions.InvalidJsonRecognizerClassException;
+import exceptions.InvalidSizeException;
+import modelo.Player;
+import modelo.options.CorrectOptionScorer;
+import modelo.options.IncorrectOptionScorer;
 import modelo.options.Option;
-import modelo.scorers.PenaltyScorer;
-import modelo.scorers.QuestionScorer;
+import modelo.questions.Question;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mockito;
-import org.powermock.core.classloader.annotations.PowerMockIgnore;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 
-@RunWith(PowerMockRunner.class)
-@PowerMockIgnore({"javax.management.*"})
-@PrepareForTest({QuestionScorer.class, Points.class})
+import java.util.Arrays;
+import java.util.List;
+
 public class QuestionFactoryTest {
-    private QuestionScorer penaltyScorerMock = Mockito.spy(new PenaltyScorer());
-    private Points pointsMock = Mockito.spy(new Points());
 
     @Test
-    public void testUnmarshalCorrectOptionFromAString(){
-        String jsonString = "{\"text\": \"si\",\"optionScorer\": true}";
-        OptionFactory optionFactory = new OptionFactory();
-        Option option = optionFactory.unmarshal(jsonString);
+    public void testUnmarshalBooleanQuestionWithPenaltyAndTestHowItWorks() throws InvalidJsonRecognizerClassException, InvalidSizeException {
 
-        Assert.assertEquals(option.getText(),"si");
+        String jString = "{\"text\": \"vamos a aprobar algoritmos 3?\",\"type\": \"BooleanQuestion\",\"scorer\": \"PenaltyScorer\",\"options\":[{\"text\": \"si\",\"optionScorer\": true},{\"text\": \"no\",\"optionScorer\": false}]}";
+        QuestionFactory QFactory = new QuestionFactory();
 
-        Mockito.doNothing().when(penaltyScorerMock).reward(pointsMock);
-        option.calculatePoints(penaltyScorerMock,pointsMock);
+        Question question = QFactory.unmarshal(jString);
+
+        Player player = new Player();
+        player.setPoints(5);
+        List<Option> playerOptions = Arrays.asList(new Option("si", new CorrectOptionScorer()));
+        Integer expectedPlayerPoints = 6;
+
+        // When
+        question.selectOptions(playerOptions);
+        question.score(player);
+
+        // Then
+        Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
+
 
     }
 
     @Test
-    public void testUnmarshalIncorrectOptionFromAString(){
-        String jsonString = "{\"text\": \"si\",\"optionScorer\": false}";
-        OptionFactory optionFactory = new OptionFactory();
-        Option option = optionFactory.unmarshal(jsonString);
+    public void testUnmarshalBooleanQuestionAndTestHowItWorks() throws InvalidJsonRecognizerClassException, InvalidSizeException {
 
-        Assert.assertEquals(option.getText(),"si");
+        String jString = "{\"text\": \"vamos a aprobar algoritmos 3?\",\"type\": \"BooleanQuestion\",\"scorer\": \"BooleanScorer\",\"options\":[{\"text\": \"si\",\"optionScorer\": true},{\"text\": \"no\",\"optionScorer\": false}]}";
+        QuestionFactory QFactory = new QuestionFactory();
 
-        Mockito.doNothing().when(penaltyScorerMock).punish(pointsMock);
-        option.calculatePoints(penaltyScorerMock,pointsMock);
+        Question question = QFactory.unmarshal(jString);
+
+
+        Player player = new Player();
+        List<Option> playerOptions = Arrays.asList(new Option("si", new CorrectOptionScorer()));
+        Integer expectedPlayerPoints = 1;
+
+        // When
+        question.selectOptions(playerOptions);
+        question.score(player);
+
+        // Then
+        Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
     }
 
     @Test
-    public void testUnmarshalCorrectOptionFromAJObject(){
-        String jsonString = "{\"text\": \"si\",\"optionScorer\": true}";
-        JsonParser parser = new JsonParser();
-        JsonObject jObj = parser.parse(jsonString).getAsJsonObject();
+    public void testUnmarshalMultipleChoiceQuestionWithPartialAndTestHowItWorks() throws InvalidJsonRecognizerClassException, InvalidSizeException {
 
-        OptionFactory optionFactory = new OptionFactory();
-        Option option = optionFactory.unmarshal(jObj);
+        String jString = "{\"text\": \"elegir las opciones que dan como resultado igual a 4\",\"type\": \"MultipleChoiceQuestion\",\"scorer\": \"MultipleChoiceWithPartialScorer\",\"options\":[{\"text\": \"2 + 2\",\"optionScorer\": true},{\"text\": \"2 * 2\",\"optionScorer\": true},{\"text\": \"1 + 3\",\"optionScorer\": true},{\"text\": \"2^2\",\"optionScorer\": true},{\"text\": \"1 - 3\",\"optionScorer\": false}]}";
+        QuestionFactory QFactory = new QuestionFactory();
 
-        Assert.assertEquals(option.getText(),"si");
+        Question question = QFactory.unmarshal(jString);
 
-        Mockito.doNothing().when(penaltyScorerMock).reward(pointsMock);
-        option.calculatePoints(penaltyScorerMock,pointsMock);
+        Player player = new Player();
+        List<Option> playerOptions = Arrays.asList(
+                new Option("2 + 2", new CorrectOptionScorer()),
+                new Option("2 * 2", new CorrectOptionScorer()),
+                new Option("1 + 3", new CorrectOptionScorer()),
+                new Option("1 - 3", new IncorrectOptionScorer()));
+        Integer expectedPlayerPoints = 0;
+
+        // When
+        question.selectOptions(playerOptions);
+        question.score(player);
+
+        // Then
+        Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
+    }
+
+    @Test
+    public void testUnmarshalMultipleChoiceQuestionWithPenaltyAndTestHowItWorks() throws InvalidJsonRecognizerClassException, InvalidSizeException {
+
+        String jString = "{\"text\": \"elegir las opciones que dan como resultado igual a 4\",\"type\": \"MultipleChoiceQuestion\",\"scorer\": \"PenaltyScorer\",\"options\":[{\"text\": \"2 + 2\",\"optionScorer\": true},{\"text\": \"2 * 2\",\"optionScorer\": true},{\"text\": \"1 + 3\",\"optionScorer\": true},{\"text\": \"2^2\",\"optionScorer\": true},{\"text\": \"1 - 3\",\"optionScorer\": false}]}";
+
+        QuestionFactory QFactory = new QuestionFactory();
+        Question question = QFactory.unmarshal(jString);
+
+        Player player = new Player();
+        player.setPoints(7);
+        List<Option> playerOptions = Arrays.asList(
+                new Option("2 + 2", new CorrectOptionScorer()),
+                new Option("5 - 1", new CorrectOptionScorer()),
+                new Option("5 / 1", new IncorrectOptionScorer()));
+        Integer expectedPlayerPoints = 8;
+
+        // When
+        question.selectOptions(playerOptions);
+        question.score(player);
+
+        // Then
+        Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
 
     }
 
     @Test
-    public void testUnmarshalIncorrectOptionFromAJObject(){
-        String jsonString = "{\"text\": \"si\",\"optionScorer\": false}";
-        JsonParser parser = new JsonParser();
-        JsonObject jObj = parser.parse(jsonString).getAsJsonObject();
-        OptionFactory optionFactory = new OptionFactory();
-        Option option = optionFactory.unmarshal(jObj);
+    public void testUnmarshalMultipleChoiceQuestionAndTestHowItWorks() throws InvalidJsonRecognizerClassException, InvalidSizeException {
 
-        Assert.assertEquals(option.getText(),"si");
+        String jString = "{\"text\": \"elegir las opciones que dan como resultado igual a 4\",\"type\": \"MultipleChoiceQuestion\",\"scorer\": \"MultipleChoiceScorer\",\"options\":[{\"text\": \"2 + 2\",\"optionScorer\": true},{\"text\": \"2 * 2\",\"optionScorer\": true},{\"text\": \"1 + 3\",\"optionScorer\": true},{\"text\": \"2^2\",\"optionScorer\": true},{\"text\": \"1 - 3\",\"optionScorer\": false}]}";
+        QuestionFactory QFactory = new QuestionFactory();
+        Question question = QFactory.unmarshal(jString);
 
-        Mockito.doNothing().when(penaltyScorerMock).punish(pointsMock);
-        option.calculatePoints(penaltyScorerMock,pointsMock);
+
+        Player player = new Player();
+        List<Option> playerOptions = Arrays.asList(
+                new Option("2 + 2", new CorrectOptionScorer()),
+                new Option("2 * 2", new CorrectOptionScorer()),
+                new Option("1 + 3", new CorrectOptionScorer()),
+                new Option("5 - 1", new CorrectOptionScorer()));
+        Integer expectedPlayerPoints = 1;
+
+        // When
+        question.selectOptions(playerOptions);
+        question.score(player);
+
+        // Then
+        Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
+
     }
 
+    @Test
+    public void testUnmarshalOrderedChoiceQuestionAndTestHowItWorks() throws InvalidJsonRecognizerClassException, InvalidSizeException {
 
+        String jString = "{\"text\": \"ordene correctamente las siguientes opciones\",\"type\": \"OrderedChoiceQuestion\",\"scorer\": \"OrderedScorer\",\"options\": [{\"text\": \"Primero\",\"optionScorer\": true},{\"text\": \"Segundo\",\"optionScorer\": false},{\"text\": \"Tercero\",\"optionScorer\": false},{\"text\": \"Cuarto\",\"optionScorer\": false}]}";
+        QuestionFactory QFactory = new QuestionFactory();
+        Question question = QFactory.unmarshal(jString);
+
+
+        List<Option> options = Arrays.asList(
+                new Option("Primero", new CorrectOptionScorer()),
+                new Option("Segundo", new IncorrectOptionScorer()),
+                new Option("Tercero", new IncorrectOptionScorer()),
+                new Option("Cuarto", new IncorrectOptionScorer()));
+
+        Player player = new Player();
+        List<Option> playerOptions = Arrays.asList(
+                options.get(0),
+                options.get(1),
+                options.get(3),
+                options.get(2));
+        Integer expectedPlayerPoints = 0;
+
+        // When
+        question.selectOptions(playerOptions);
+        question.score(player);
+
+        // Then
+        Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
+
+    }
+
+    @Test
+    public void testUnmarshalArrayOfBooleanQuestionWithPenaltyAndBooleandTestHowItWorks() throws InvalidJsonRecognizerClassException, InvalidSizeException {
+
+        String jString = "[{\"text\": \"vamos a aprobar algoritmos 3?\",\"type\": \"BooleanQuestion\",\"scorer\": \"PenaltyScorer\",\"options\":[{\"text\": \"si\",\"optionScorer\": true},{\"text\": \"no\",\"optionScorer\": false}]},{\"text\": \"vamos a aprobar algoritmos 3?\",\"type\": \"BooleanQuestion\",\"scorer\": \"BooleanScorer\",\"options\":[{\"text\": \"si\",\"optionScorer\": true},{\"text\": \"no\",\"optionScorer\": false}]}]";
+        QuestionFactory QFactory = new QuestionFactory();
+
+        List<Question> questions = QFactory.unmarshalArrayOfQuestions(jString);
+
+        Question question1 = questions.get(0);
+        Player player1 = new Player();
+        player1.setPoints(5);
+        List<Option> playerOptions1 = Arrays.asList(new Option("si", new CorrectOptionScorer()));
+        Integer expectedPlayer1Points = 6;
+
+        // When
+        question1.selectOptions(playerOptions1);
+        question1.score(player1);
+
+        // Then
+        Assert.assertEquals(player1.getPoints(), expectedPlayer1Points);
+
+        Question question2 = questions.get(1);
+        Player player2 = new Player();
+        List<Option> playerOptions2 = Arrays.asList(new Option("si", new CorrectOptionScorer()));
+        Integer expectedPlayer2Points = 1;
+
+        // When
+        question2.selectOptions(playerOptions2);
+        question2.score(player2);
+
+        // Then
+        Assert.assertEquals(player2.getPoints(), expectedPlayer2Points);
+    }
 
 
 }

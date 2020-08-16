@@ -18,6 +18,23 @@ public class QuestionFactory {
     public QuestionFactory() {
     }
 
+    public List<Question> unmarshalArrayOfQuestions(String json) throws InvalidSizeException, InvalidJsonRecognizerClassException {
+        JsonParser parser = new JsonParser();
+        JsonArray jObj = parser.parse(json).getAsJsonArray();
+
+        return QuestionFactory.unmarshalArrayOfQuestions(jObj);
+
+    }
+    public static List<Question> unmarshalArrayOfQuestions(JsonArray json) throws InvalidSizeException, InvalidJsonRecognizerClassException {
+        List<Question> questions = new ArrayList<Question>();
+        for (JsonElement jsonOption : json) {
+            Question question = QuestionFactory.unmarshal(jsonOption.getAsJsonObject());
+            questions.add(question);
+        }
+        return questions;
+    }
+
+
     public Question unmarshal(String json) throws InvalidSizeException, InvalidJsonRecognizerClassException {
         JsonParser parser = new JsonParser();
         JsonObject jObj = parser.parse(json).getAsJsonObject();
