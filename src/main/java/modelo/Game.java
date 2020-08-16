@@ -14,7 +14,6 @@ public class Game {
     private final Integer MAX_PLAYERS = 2;
     private Player[] players = new Player[this.MAX_PLAYERS];
     private Integer currentPlayer = 0;
-
     private List<Round> rounds = new ArrayList<>();
     private Integer currentRound = 0;
 

@@ -1,5 +1,6 @@
-package modelo;
+package modelo.game;
 import consumables.Multiplicator;
+import modelo.Game;
 import modelo.scorers.*;
 import modelo.questions.*;
 import modelo.options.*;
