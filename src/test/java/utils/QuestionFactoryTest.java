@@ -1,17 +1,23 @@
 package utils;
 
 import modelo.Points;
-import modelo.options.*;
-import modelo.scorers.*;
+import modelo.options.Option;
+import modelo.scorers.PenaltyScorer;
+import modelo.scorers.QuestionScorer;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mockito;
+import org.powermock.core.classloader.annotations.PowerMockIgnore;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.spy;
-
+@RunWith(PowerMockRunner.class)
+@PowerMockIgnore({"javax.management.*"})
+@PrepareForTest({QuestionScorer.class, Points.class})
 public class QuestionFactoryTest {
-    private QuestionScorer penaltyScorerMock = spy(new PenaltyScorer());
-    private Points pointsMock = spy(new Points());
+    private QuestionScorer penaltyScorerMock = Mockito.spy(new PenaltyScorer());
+    private Points pointsMock = Mockito.spy(new Points());
 
     @Test
     public void testUnmarshalCorrectOption(){
@@ -21,7 +27,7 @@ public class QuestionFactoryTest {
 
         Assert.assertEquals(option.getText(),"si");
 
-        doNothing().when(penaltyScorerMock).reward(pointsMock);
+        Mockito.doNothing().when(penaltyScorerMock).reward(pointsMock);
         option.calculatePoints(penaltyScorerMock,pointsMock);
 
     }
@@ -34,7 +40,7 @@ public class QuestionFactoryTest {
 
         Assert.assertEquals(option.getText(),"si");
 
-        doNothing().when(penaltyScorerMock).punish(pointsMock);
+        Mockito.doNothing().when(penaltyScorerMock).punish(pointsMock);
         option.calculatePoints(penaltyScorerMock,pointsMock);
     }
 }
