@@ -13,6 +13,7 @@ import modelo.options.Option;
 import modelo.scorers.QuestionScorer;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class MultipleChoiceQuestion extends Question {
@@ -33,6 +34,7 @@ public class MultipleChoiceQuestion extends Question {
         this.scorer = scorer;
         this.points = new Points();
         this.consumable = consumable;
+        this.type = "multiple choice";
     }
 
     @Override

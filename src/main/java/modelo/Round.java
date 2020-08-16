@@ -9,7 +9,6 @@ import java.util.List;
 public class Round {
     private Integer currentTurn = 0;
     private List<Turn> turns = new ArrayList<>();
-
     private List<Player> players = new ArrayList<>();
     private Question question;
 
@@ -35,21 +34,4 @@ public class Round {
     public Question getQuestion() {
         return this.question;
     }
-
-    public void finsh(List<Option> answers) {
-    }
-/*
-    public void start() {
-        this.turns.get(currentTurn).start();
-    }
-
-    public void next(Game game) {
-        Integer nextTurn = this.currentTurn + 1;
-        if (nextTurn >= this.turns.size()) {
-            game.next();
-        } else {
-            this.turns.get(nextTurn).next();
-            this.currentTurn++;
-        }
-    }*/
 }
