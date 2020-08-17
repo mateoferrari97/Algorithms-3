@@ -9,6 +9,6 @@ public final class ErrorMessage {
     public static final String INVALID_GROUP_CHOICE_OPTION_LIMIT_OF_SIZE = "invalid options size: want minimum 2, maximum 6. got: ";
     public static final String INVALID_MULTIPLE_CHOICE_LIMIT_OF_SIZE = "invalid options size: want minimum 2, maximum 5. got: ";
 
-    //consumables
+    //modelo.consumables
     public static final String PLAYER_HAS_NO_MORE_CONSUMABLES_ERROR ="El jugador no posee ningun consumible.";
 }

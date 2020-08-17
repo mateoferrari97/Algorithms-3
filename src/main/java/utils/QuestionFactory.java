@@ -4,7 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import consumables.Multiplicator;
+import modelo.consumables.Multiplicator;
 import exceptions.InvalidJsonRecognizerClassException;
 import exceptions.InvalidSizeException;
 import modelo.options.Option;

@@ -1,8 +1,7 @@
 package modelo.game;
 
-import consumables.Consumable;
 import exceptions.NoMoreConsumablesException;
-
+import modelo.consumables.*;
 import static constantes.ErrorMessage.PLAYER_HAS_NO_MORE_CONSUMABLES_ERROR;
 
 public class Player {

@@ -1,5 +1,5 @@
 package modelo.questions;
-import consumables.Consumable;
+import modelo.consumables.Consumable;
 import modelo.game.Player;
 import modelo.game.Points;
 import modelo.options.Option;

@@ -1,7 +1,7 @@
 package modelo;
 
-import consumables.Multiplicator;
-import consumables.ScoreExclusivity;
+import modelo.consumables.Multiplicator;
+import modelo.consumables.ScoreExclusivity;
 import exceptions.InvalidSizeException;
 import exceptions.NoMoreConsumablesException;
 import modelo.game.Player;

@@ -1,6 +1,6 @@
 package modelo.questions;
 
-import consumables.Consumable;
+import modelo.consumables.Consumable;
 import exceptions.InvalidSizeException;
 import modelo.game.Player;
 import modelo.game.Points;
