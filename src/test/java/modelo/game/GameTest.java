@@ -57,4 +57,11 @@ public class GameTest {
 
         Assert.assertNull(game.getNextPlayer());
     }
+
+    @Test
+    public void testGet2PlayersFromTheGame() throws InvalidJsonRecognizerClassException, InvalidSizeException, IOException {
+        game.init();
+        Player[] players = game.getPlayers();
+        Assert.assertEquals(players.length, 2);
+    }
 }

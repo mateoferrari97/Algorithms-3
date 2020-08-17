@@ -197,6 +197,4 @@ public class QuestionFactoryTest {
         // Then
         Assert.assertEquals(player2.getPoints(), expectedPlayer2Points);
     }
-
-
 }

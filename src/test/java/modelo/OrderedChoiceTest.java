@@ -219,4 +219,18 @@ public class OrderedChoiceTest {
         Assert.assertEquals(player1.getPoints(), expectedPlayer1Points);
         Assert.assertEquals(player2.getPoints(), expectedPlayer2Points);
     }
+
+    @Test
+    public void testGetOptionsFromOrderedChoiceQuestion() throws InvalidSizeException {
+        // Given
+        List<Option> opt = Arrays.asList(
+                new Option("Primero", new CorrectOptionScorer()),
+                new Option("Segundo", new IncorrectOptionScorer()));
+
+        QuestionScorer scorer = new OrderedScorer();
+        Question question = new OrderedChoiceQuestion("ordene correctamente las siguientes opciones", opt, scorer, new Multiplicator());
+
+        List<Option> options = question.getOptions();
+        Assert.assertEquals(opt,options);
+    }
 }
