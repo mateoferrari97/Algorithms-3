@@ -6,6 +6,7 @@ import modelo.game.Points;
 import modelo.options.Option;
 import modelo.scorers.QuestionScorer;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import static constantes.Constantes.ORDERED_CHOICE_QUESTION_TYPE;
@@ -40,7 +41,6 @@ public class OrderedChoiceQuestion extends Question {
     }
 
     public void score(Player player) {
-
         this.consumable.multiplicate(this.points);
         this.scorer.score(player, this.points);
     }
@@ -49,4 +49,5 @@ public class OrderedChoiceQuestion extends Question {
     public List<Option> getCorrectOptions() {
         return this.options;
     }
+
 }

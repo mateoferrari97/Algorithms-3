@@ -46,4 +46,5 @@ public class MultipleChoiceQuestion extends Question {
         scorer.score(player, this.points);
     }
 
+
 }

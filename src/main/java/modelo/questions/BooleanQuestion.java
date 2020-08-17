@@ -35,4 +35,5 @@ public class BooleanQuestion extends Question {
         this.consumable.multiplicate(this.points);
         scorer.score(player, this.points);
     }
+
 }
