@@ -71,7 +71,7 @@ public class OrderedChoiceTest {
         Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
     }
 
-    @Test
+  /* @Test
     public void testGroupChoiceDoublePointsWhenScoreExclusivityActivatedAndOnePlayerAnswerIncorrectly() throws InvalidSizeException, NoMoreConsumablesException {
         // Given
         ScoreExclusivity scoreExclusivity = new ScoreExclusivity();
@@ -218,7 +218,7 @@ public class OrderedChoiceTest {
         // Then
         Assert.assertEquals(player1.getPoints(), expectedPlayer1Points);
         Assert.assertEquals(player2.getPoints(), expectedPlayer2Points);
-    }
+    } */
 
     @Test
     public void testGetCorrectOptionsFromOrderedChoiceQuestion() throws InvalidSizeException {

@@ -36,17 +36,4 @@ public class Pantalla extends Application{
 
         stage.show();
     }
-
-
-    private BooleanQuestion getBooleanQuesiton() {
-        List<Option> options = Arrays.asList(
-                new Option("SI", new CorrectOptionScorer()),
-                new Option("NO", new IncorrectOptionScorer()));
-
-        QuestionScorer scorer = new BooleanScorer();
-        BooleanQuestion question = new BooleanQuestion("Vamos a aprobar algoritmos 3?", options, scorer, new Multiplicator());
-
-        return question;
-    }
-
 }

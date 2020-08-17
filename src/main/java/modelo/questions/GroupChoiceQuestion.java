@@ -44,7 +44,7 @@ public class GroupChoiceQuestion extends Question {
         }
 
         for (Option aOption : playerAnswers) {
-            aOption.changeState(aOption);
+            aOption.changeState();
         }
         for (Option aOption : options) {
             aOption.calculatePoints(this.scorer, pointsDone);
@@ -55,7 +55,7 @@ public class GroupChoiceQuestion extends Question {
         }
 
         for (Option aOption : playerAnswers) {
-            aOption.changeState(aOption);
+            aOption.changeState();
         }
 
         if (!(this.isCorrect())) this.consumable.useWithIncorrectAnswer();

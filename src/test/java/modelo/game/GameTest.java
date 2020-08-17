@@ -64,4 +64,112 @@ public class GameTest {
         Player[] players = game.getPlayers();
         Assert.assertEquals(players.length, 2);
     }
+
+    @Test
+    public void gameInitializeWithWinnerAndLoserEqualsToNull() throws InvalidJsonRecognizerClassException, InvalidSizeException, IOException {
+        game.init();
+
+        Assert.assertNull(game.getWinner());
+        Assert.assertNull(game.getLoser());
+    }
+
+    @Test
+    public void GameAfterARoundChangePlayerOneToWinnerAndPayerTwoToLoserBecauseOfTherePoints() throws InvalidJsonRecognizerClassException, InvalidSizeException, IOException {
+        game.init();
+
+        Player[] players = game.getPlayers();
+
+        Player playerOne = players[0];
+        Player playerTwo = players[1];
+
+        playerOne.setPoints(1);
+        playerTwo.setPoints(0);
+
+        game.getNextRound();
+
+        Assert.assertEquals(playerOne, game.getWinner());
+        Assert.assertEquals(playerTwo, game.getLoser());
+    }
+
+    @Test
+    public void GameAfterARoundSetWinnerAndLoserToNullIfThePlayersHaveTheSameScore() throws InvalidJsonRecognizerClassException, InvalidSizeException, IOException {
+        game.init();
+
+        Player[] players = game.getPlayers();
+
+        Player playerOne = players[0];
+        Player playerTwo = players[1];
+
+        playerOne.setPoints(1);
+        playerTwo.setPoints(1);
+
+        game.getNextRound();
+
+        Assert.assertNull(game.getWinner());
+        Assert.assertNull(game.getLoser());
+    }
+
+    @Test
+    public void getFirstPlayer() throws InvalidJsonRecognizerClassException, InvalidSizeException, IOException {
+        game.init();
+
+        Player[] players = game.getPlayers();
+
+        Player playerOne = players[0];
+
+        Assert.assertEquals(playerOne, game.getFirstPlayer());
+    }
+
+    @Test
+    public void GameAfterARoundChangePlayerTwoToWinnerAndPayerOneToLoserBecauseOfTherePoints() throws InvalidJsonRecognizerClassException, InvalidSizeException, IOException {
+        game.init();
+
+        Player[] players = game.getPlayers();
+
+        Player playerOne = players[0];
+        Player playerTwo = players[1];
+
+        playerOne.setPoints(0);
+        playerTwo.setPoints(1);
+
+        game.getNextRound();
+
+        Assert.assertEquals(playerTwo, game.getWinner());
+        Assert.assertEquals(playerOne, game.getLoser());
+    }
+
+    @Test
+    public void getDrawIsTrueIfBothPlayersHaveTheSamePoints() throws InvalidJsonRecognizerClassException, InvalidSizeException, IOException {
+        game.init();
+
+        Player[] players = game.getPlayers();
+
+        Player playerOne = players[0];
+        Player playerTwo = players[1];
+
+        playerOne.setPoints(1);
+        playerTwo.setPoints(1);
+
+        game.getNextRound();
+
+        Assert.assertTrue(game.getDraw());
+    }
+
+    @Test
+    public void getDrawIsFalseIfPlayersHaveDifferentScore() throws InvalidJsonRecognizerClassException, InvalidSizeException, IOException {
+        game.init();
+
+        Player[] players = game.getPlayers();
+
+        Player playerOne = players[0];
+        Player playerTwo = players[1];
+
+        playerOne.setPoints(0);
+        playerTwo.setPoints(1);
+
+        game.getNextRound();
+
+        Assert.assertFalse(game.getDraw());
+    }
 }
+

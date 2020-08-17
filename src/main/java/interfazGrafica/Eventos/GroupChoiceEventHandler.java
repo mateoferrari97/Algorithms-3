@@ -38,7 +38,7 @@ public class GroupChoiceEventHandler implements EventHandler<ActionEvent> {
         this.turn.finish();
 
         if(game.getNextRound() == null){
-            EndGame end = new EndGame(stage);
+            EndGame end = new EndGame(stage, game);
         }else{
             nextPlay.start(game);
         }

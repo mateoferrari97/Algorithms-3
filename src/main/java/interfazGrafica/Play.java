@@ -44,7 +44,6 @@ public class Play extends VBox {
         createPlayerLabels(turn);
 
         createQuestionLabel(round);
-
         createAnswerOptionsButtons(round, turn, game);
 
 

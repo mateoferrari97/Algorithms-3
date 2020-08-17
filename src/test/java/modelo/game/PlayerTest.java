@@ -62,5 +62,39 @@ public class PlayerTest {
         Assert.assertEquals(name, player.getName());
 
     }
+
+    @Test
+    public void StateToDraw() {
+        Player player = new Player();
+
+        player.changeStateToDraw();
+
+        Assert.assertFalse(player.isWinner());
+        Assert.assertTrue(player.isTied());
+
+    }
+
+    @Test
+    public void StateToWinner() {
+        Player player = new Player();
+
+        player.changeStateToWinner();
+
+        Assert.assertFalse(player.isTied());
+        Assert.assertTrue(player.isWinner());
+    }
+
+    @Test
+    public void playerChangeStateFromTiedToWinner() {
+        Player player = new Player();
+
+        player.changeStateToDraw();
+
+        Assert.assertTrue(player.isTied());
+
+        player.changeStateToWinner();
+
+        Assert.assertTrue(player.isWinner());
+    }
 }
 
