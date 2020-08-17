@@ -9,6 +9,8 @@ import modelo.scorers.QuestionScorer;
 
 import java.util.List;
 
+import static constantes.ErrorMessage.INVALID_MULTIPLE_CHOICE_LIMIT_OF_SIZE;
+
 public class MultipleChoiceQuestion extends Question {
 
 
@@ -17,8 +19,7 @@ public class MultipleChoiceQuestion extends Question {
 
         Integer optionsSize = options.size();
         if (optionsSize < 2 || optionsSize > 5) {
-            String error = "invalid options size: want minimum 2, maximum 5. got: " + optionsSize;
-            throw new InvalidSizeException(error);
+            throw new InvalidSizeException(INVALID_MULTIPLE_CHOICE_LIMIT_OF_SIZE + optionsSize);
         }
 
 

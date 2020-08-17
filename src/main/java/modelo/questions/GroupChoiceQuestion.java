@@ -10,6 +10,8 @@ import modelo.scorers.QuestionScorer;
 
 import java.util.List;
 
+import static constantes.ErrorMessage.INVALID_GROUP_CHOICE_OPTION_LIMIT_OF_SIZE;
+
 public class GroupChoiceQuestion extends Question {
 
     public GroupChoiceQuestion(String text, List<Option> options, QuestionScorer scorer, Consumable consumable) throws InvalidSizeException {
@@ -17,8 +19,7 @@ public class GroupChoiceQuestion extends Question {
 
         Integer optionsSize = options.size();
         if (optionsSize < 2 || optionsSize > 6) {
-            String error = "invalid options size: want minimum 2, maximum 6. got: " + optionsSize;
-            throw new InvalidSizeException(error);
+            throw new InvalidSizeException(INVALID_GROUP_CHOICE_OPTION_LIMIT_OF_SIZE+optionsSize);
         }
 
         this.options = options;

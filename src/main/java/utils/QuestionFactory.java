@@ -14,6 +14,9 @@ import modelo.scorers.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static constantes.ErrorMessage.INVALID_QUESTION_ERROR;
+import static constantes.ErrorMessage.INVALID_QUESTION_SCORER_ERROR;
+
 public class QuestionFactory {
     public QuestionFactory() {
     }
@@ -69,8 +72,7 @@ public class QuestionFactory {
             case "MultipleChoiceQuestion":
                 return new MultipleChoiceQuestion(text,options,scorer,new Multiplicator());
             default:
-                String error = "invalid Question class";
-                throw new InvalidJsonRecognizerClassException(error);
+                throw new InvalidJsonRecognizerClassException(INVALID_QUESTION_ERROR);
         }
 
 
@@ -91,8 +93,7 @@ public class QuestionFactory {
             case "BooleanScorer":
                 return new BooleanScorer();
             default:
-                String error = "invalid Question Scorer class";
-                throw new InvalidJsonRecognizerClassException(error);
+                throw new InvalidJsonRecognizerClassException(INVALID_QUESTION_SCORER_ERROR);
         }
     }
 }
