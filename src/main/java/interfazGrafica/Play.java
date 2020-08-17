@@ -60,7 +60,7 @@ public class Play extends VBox {
         for(Button aButton : buttons){
             buttonsContainer.getChildren().add(aButton);
         }
-        buttonsContainer.setSpacing(300);
+        buttonsContainer.setSpacing(150);
         this.getChildren().add(buttonsContainer);
     }
 

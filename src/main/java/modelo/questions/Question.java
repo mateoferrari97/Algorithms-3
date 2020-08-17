@@ -43,16 +43,7 @@ public abstract class Question {
         return this.options;
     }
 
-    public List<Option> getCorrectOptions() {
-        List<Option> options = new LinkedList<>();
-        for (Option option : this.options) {
-            if (option.isCorrect()) {
-                options.add(option);
-            }
-        }
-
-        return options;
-    }
+    public abstract List<Option> getCorrectOptions();
 
     public String getType() {
         return this.type;
