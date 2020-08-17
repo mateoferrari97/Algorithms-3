@@ -1,6 +1,6 @@
 package exceptions;
 
-public class InvalidJsonRecognizerClassException  extends Exception {
+public class InvalidJsonRecognizerClassException extends Exception {
     public InvalidJsonRecognizerClassException(String message) {
         super(message);
     }

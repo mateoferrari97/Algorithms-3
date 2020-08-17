@@ -26,15 +26,17 @@ public class OrderedChoiceQuestion extends Question {
 
     public void selectOptions(List<Option> playerAnswers) {
         int i = 2;
-        for(Option aOption : playerAnswers){
+        for (Option aOption : playerAnswers) {
             aOption.calculatePoints(this.scorer, this.points);
             this.nextOption.changeState(this.nextOption);
-            if(i < this.options.size()) {
+            if (i < this.options.size()) {
                 this.nextOption = this.options.get(i);
                 i++;
             }
         }
-        if (!(this.isCorrect())) { this.consumable.useWithIncorrectAnswer();}
+        if (!(this.isCorrect())) {
+            this.consumable.useWithIncorrectAnswer();
+        }
     }
 
     public void score(Player player) {

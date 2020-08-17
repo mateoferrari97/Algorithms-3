@@ -23,11 +23,11 @@ public class Constantes {
 
     public static final String QUESTIONS_FILE_PATH = "src/main/java/modelo/game/questions.json";
 
-    public static final String OPTION_GET_TEXT ="text" ;
+    public static final String OPTION_GET_TEXT = "text";
     public static final String OPTION_GET_SCORER = "optionScorer";
 
     // game
-    public static final String END_GAME_LABEL ="END OF GAME";
+    public static final String END_GAME_LABEL = "END OF GAME";
     public static final String GAME_TITLE = "Kahoot";
     public static final Integer MAX_PLAYERS = 2;
 

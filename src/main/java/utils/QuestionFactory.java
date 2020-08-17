@@ -4,7 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import modelo.consumables.Multiplicator;
+import modelo.consumables.*;
 import exceptions.InvalidJsonRecognizerClassException;
 import exceptions.InvalidSizeException;
 import modelo.options.Option;
@@ -29,6 +29,7 @@ public class QuestionFactory {
         return QuestionFactory.unmarshalArrayOfQuestions(jObj);
 
     }
+
     public static List<Question> unmarshalArrayOfQuestions(JsonArray json) throws InvalidSizeException, InvalidJsonRecognizerClassException {
         List<Question> questions = new ArrayList<Question>();
         for (JsonElement jsonOption : json) {
@@ -52,7 +53,7 @@ public class QuestionFactory {
         String type = json.get(QUESTION_GET_TYPE).getAsString();
 
         List<Option> options = new ArrayList<Option>();
-        JsonArray arrayOptions = json.getAsJsonArray(QUESTION_GET_OPTIONS );
+        JsonArray arrayOptions = json.getAsJsonArray(QUESTION_GET_OPTIONS);
         for (JsonElement jsonOption : arrayOptions) {
             Option option = OptionFactory.unmarshal(jsonOption.getAsJsonObject());
             options.add(option);
@@ -62,21 +63,19 @@ public class QuestionFactory {
         return selectQuestion(type, text, options, questionScorer);
     }
 
-    static Question selectQuestion(String type, String text, List<Option> options, QuestionScorer scorer) throws InvalidJsonRecognizerClassException,InvalidSizeException  {
+    static Question selectQuestion(String type, String text, List<Option> options, QuestionScorer scorer) throws InvalidJsonRecognizerClassException, InvalidSizeException {
         switch (type) {
             case BOOLEAN_QUESTION_TYPE:
-                return new BooleanQuestion(text,options,scorer,new Multiplicator());
+                return new BooleanQuestion(text, options, scorer, new Multiplicator());
             case GROUP_CHOCIE_QUESTION_TYPE:
-                return new GroupChoiceQuestion(text,options,scorer,new Multiplicator());
+                return new GroupChoiceQuestion(text, options, scorer, new Multiplicator());
             case ORDERED_CHOICE_QUESTION_TYPE:
-                return new OrderedChoiceQuestion(text,options,scorer,new Multiplicator());
+                return new OrderedChoiceQuestion(text, options, scorer, new Multiplicator());
             case MULTIPLE_CHOICE_QUESTION_TYPE:
-                return new MultipleChoiceQuestion(text,options,scorer,new Multiplicator());
+                return new MultipleChoiceQuestion(text, options, scorer, new Multiplicator());
             default:
                 throw new InvalidJsonRecognizerClassException(INVALID_QUESTION_ERROR);
         }
-
-
 
 
     }

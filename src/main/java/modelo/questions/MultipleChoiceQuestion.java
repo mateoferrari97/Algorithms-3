@@ -34,7 +34,7 @@ public class MultipleChoiceQuestion extends Question {
 
     @Override
     public void selectOptions(List<Option> playerAnswers) {
-        for(Option aOption : playerAnswers){
+        for (Option aOption : playerAnswers) {
             aOption.calculatePoints(scorer, this.points);
         }
         if (!(this.isCorrect())) this.consumable.useWithIncorrectAnswer();
@@ -43,7 +43,7 @@ public class MultipleChoiceQuestion extends Question {
     @Override
     public void score(Player player) {
         this.consumable.multiplicate(this.points);
-        scorer.score(player,this.points);
+        scorer.score(player, this.points);
     }
 
 }

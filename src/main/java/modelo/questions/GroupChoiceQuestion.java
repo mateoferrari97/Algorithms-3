@@ -20,7 +20,7 @@ public class GroupChoiceQuestion extends Question {
 
         Integer optionsSize = options.size();
         if (optionsSize < 2 || optionsSize > 6) {
-            throw new InvalidSizeException(INVALID_GROUP_CHOICE_OPTION_LIMIT_OF_SIZE+optionsSize);
+            throw new InvalidSizeException(INVALID_GROUP_CHOICE_OPTION_LIMIT_OF_SIZE + optionsSize);
         }
 
         this.options = options;
@@ -39,14 +39,24 @@ public class GroupChoiceQuestion extends Question {
         Points pointsDone = new Points();
 
         Option CorrectOption = new Option("", new CorrectOptionScorer());
-        for (Option aOption : options) { CorrectOption.calculatePoints(this.scorer, maxPoints);}
+        for (Option aOption : options) {
+            CorrectOption.calculatePoints(this.scorer, maxPoints);
+        }
 
-        for (Option aOption : playerAnswers) { aOption.changeState(aOption);}
-        for (Option aOption : options) { aOption.calculatePoints(this.scorer, pointsDone);}
+        for (Option aOption : playerAnswers) {
+            aOption.changeState(aOption);
+        }
+        for (Option aOption : options) {
+            aOption.calculatePoints(this.scorer, pointsDone);
+        }
 
-        if (pointsDone.equals(minPoints) || pointsDone.equals(maxPoints)) { this.points.gainAPoint();}
+        if (pointsDone.equals(minPoints) || pointsDone.equals(maxPoints)) {
+            this.points.gainAPoint();
+        }
 
-        for (Option aOption : playerAnswers) { aOption.changeState(aOption);}
+        for (Option aOption : playerAnswers) {
+            aOption.changeState(aOption);
+        }
 
         if (!(this.isCorrect())) this.consumable.useWithIncorrectAnswer();
     }

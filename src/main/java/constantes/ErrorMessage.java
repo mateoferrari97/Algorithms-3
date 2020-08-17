@@ -10,5 +10,5 @@ public final class ErrorMessage {
     public static final String INVALID_MULTIPLE_CHOICE_LIMIT_OF_SIZE = "invalid options size: want minimum 2, maximum 5. got: ";
 
     //modelo.consumables
-    public static final String PLAYER_HAS_NO_MORE_CONSUMABLES_ERROR ="El jugador no posee ningun consumible.";
+    public static final String PLAYER_HAS_NO_MORE_CONSUMABLES_ERROR = "El jugador no posee ningun consumible.";
 }
