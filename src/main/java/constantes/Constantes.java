@@ -23,4 +23,10 @@ public class Constantes {
 
     public static final String OPTION_GET_TEXT ="text" ;
     public static final String OPTION_GET_SCORER = "optionScorer";
+
+    // game
+    public static final String END_GAME_LABEL ="END OF GAME";
+    public static final String GAME_TITLE = "Kahoot";
+
+
 }
