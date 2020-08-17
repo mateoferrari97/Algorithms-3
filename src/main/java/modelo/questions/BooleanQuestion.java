@@ -6,7 +6,6 @@ import modelo.game.Points;
 import modelo.options.Option;
 import modelo.scorers.QuestionScorer;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import static constantes.Constantes.BOOLEAN_QUESTION_TYPE;
@@ -37,14 +36,4 @@ public class BooleanQuestion extends Question {
         scorer.score(player, this.points);
     }
 
-    public List<Option> getCorrectOptions() {
-        List<Option> options = new LinkedList<>();
-        for (Option option : this.options) {
-            if (option.isCorrect()) {
-                options.add(option);
-            }
-        }
-
-        return options;
-    }
 }

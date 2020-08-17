@@ -7,7 +7,6 @@ import modelo.game.Points;
 import modelo.options.Option;
 import modelo.scorers.QuestionScorer;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import static constantes.Constantes.MULTIPLE_CHOICE_QUESTION_TYPE;
@@ -47,15 +46,5 @@ public class MultipleChoiceQuestion extends Question {
         scorer.score(player, this.points);
     }
 
-    public List<Option> getCorrectOptions() {
-        List<Option> options = new LinkedList<>();
-        for (Option option : this.options) {
-            if (option.isCorrect()) {
-                options.add(option);
-            }
-        }
-
-        return options;
-    }
 
 }
