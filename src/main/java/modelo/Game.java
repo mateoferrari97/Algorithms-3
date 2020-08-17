@@ -87,6 +87,16 @@ public class Game {
 
         this.rounds.add(new Round(players, question));
 
+        List<Option> groupChoiceOptions = Arrays.asList(
+                new Option("A", new CorrectOptionScorer()),
+                new Option("B", new CorrectOptionScorer()),
+                new Option("C", new CorrectOptionScorer()),
+                new Option("1", new IncorrectOptionScorer()),
+                new Option("2", new IncorrectOptionScorer()));
+        QuestionScorer groupChoiceScorer = new BooleanScorer();
+        Question groupChoiceQuestion = new GroupChoiceQuestion("Separar en numeros y letras", groupChoiceOptions, groupChoiceScorer, new Multiplicator());
+        this.rounds.add(new Round(players, groupChoiceQuestion));
+
         List<Option> newoptions = Arrays.asList(
                 new Option("True", new CorrectOptionScorer()),
                 new Option("False", new IncorrectOptionScorer()));
@@ -94,5 +104,6 @@ public class Game {
         Question newquestion = new BooleanQuestion("El cafe es lo mejor", newoptions, newscorer, new Multiplicator());
 
         this.rounds.add(new Round(players, newquestion));
+
     }
 }

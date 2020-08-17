@@ -1,10 +1,14 @@
 package interfazGrafica;
 
+import Group.SelectableGroup;
+import Group.UnselectableGroup;
+import interfazGrafica.Draggable.*;
 import interfazGrafica.Eventos.BooleanOptionsEventHandler;
-import interfazGrafica.Eventos.GroupChoiceEventHandler;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -12,11 +16,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import modelo.*;
 import modelo.Round;
 import modelo.Turn;
 import modelo.options.Option;
+import Group.OptionGroup;
 
 public class Play extends VBox {
     Stage stage;
@@ -26,7 +32,7 @@ public class Play extends VBox {
         this.stage = stage;
     }
 
-    public void start(Game game){
+    public void start(Game game) {
 
         Round round = game.getNextRound();
         Turn turn = round.getTurn(game);
@@ -34,31 +40,100 @@ public class Play extends VBox {
         this.setSpacing(100);
         this.setPadding(new Insets(300));
 
-
         Scene scene = new Scene(this);
 
-
         createPlayerLabels(turn);
-
         createQuestionLabel(round);
 
-        createAnswerOptionsButtons(round, turn, game);
+        switch (round.getQuestion().getType()) {
+            case "group choice":
+                createAnswerDraggableOptions(round, turn, game);
+                createTargeteableGroups(round, turn, game);
+                break;
+            default:
+                createAnswerOptionsButtons(round, turn, game);
+        }
 
 
+
+
+        this.setSpacing(30);
         this.stage.setScene(scene);
     }
 
     //----------------------------------------------------------------------
     //--------------------------Buttons creation----------------------------
     //----------------------------------------------------------------------
+
+    private void createTargeteableGroups(Round round, Turn turn, Game game){
+        Text grupoATexto = new Text("Grupo A");
+        grupoATexto.setScaleX(2.0);
+        grupoATexto.setScaleY(2.0);
+
+        Text grupoBTexto = new Text("Grupo B");
+        grupoBTexto.setScaleX(2.0);
+        grupoBTexto.setScaleY(2.0);
+
+        VBox grupoA = new VBox();
+        VBox grupoB = new VBox();
+
+        setAsTarget(grupoATexto, grupoA, game, round, turn, new SelectableGroup());
+        setAsTarget(grupoBTexto, grupoB, game, round, turn, new UnselectableGroup());
+
+        HBox contenedorGrupos = new HBox();
+        VBox contenedorGrupoA = new VBox();
+        VBox contenedorGrupoB = new VBox();
+        contenedorGrupos.getChildren().add(contenedorGrupoA);
+        contenedorGrupos.getChildren().add(contenedorGrupoB);
+        contenedorGrupoA.getChildren().add(grupoATexto);
+        contenedorGrupoA.getChildren().add(grupoA);
+        contenedorGrupoB.getChildren().add(grupoBTexto);
+        contenedorGrupoB.getChildren().add(grupoB);
+        contenedorGrupos.setAlignment(Pos.CENTER);
+        contenedorGrupos.setSpacing(200);
+        contenedorGrupoA.setSpacing(15);
+        contenedorGrupoB.setSpacing(15);
+        grupoA.setSpacing(10);
+        grupoB.setSpacing(10);
+
+        this.getChildren().add(contenedorGrupos);
+    }
+
+    private void createAnswerDraggableOptions(Round round, Turn turn, Game game) {
+        Text[] text = getQuestionTextOptions(round, turn, game);
+        HBox textContainer = new HBox();
+        for(Text aText : text){
+            textContainer.getChildren().add(aText);
+        }
+        textContainer.setAlignment(Pos.CENTER);
+        textContainer.setSpacing(100);
+        this.getChildren().add(textContainer);
+    }
+
     private void createAnswerOptionsButtons(Round round, Turn turn, Game game) {
         Button[] buttons = getQuestionOptions(round, turn, game);
         HBox buttonsContainer = new HBox();
         for(Button aButton : buttons){
             buttonsContainer.getChildren().add(aButton);
         }
+        buttonsContainer.setAlignment(Pos.CENTER);
         buttonsContainer.setSpacing(300);
         this.getChildren().add(buttonsContainer);
+    }
+
+    private Text[] getQuestionTextOptions(Round round, Turn turn, Game game) {
+        String[] answerOptions = round.getQuestion().getAnswerOptions();
+        Text[] texts = new Text[answerOptions.length];
+        int i = 0;
+        for(String aString : answerOptions){
+            texts[i] = new Text(aString);
+            texts[i].setScaleX(2.0);
+            texts[i].setScaleY(2.0);
+
+            i++;
+        }
+        fillTextWithEvents(texts);
+        return texts;
     }
 
     private Button[] getQuestionOptions(Round round, Turn turn, Game game) {
@@ -73,6 +148,15 @@ public class Play extends VBox {
         return buttons;
     }
 
+    public void fillTextWithEvents(Text[] texts) {
+        int i = 0;
+        //Play nextScene = new Play(this.stage);
+        for(Text aText : texts) {
+            setAsDraggable(aText);
+            i++;
+        }
+    }
+
     public void fillWithEvents(Button[] buttons, Round round, Turn turn, Game game) {
         int i = 0;
         Play nextScene = new Play(this.stage);
@@ -82,7 +166,7 @@ public class Play extends VBox {
             EventHandler<ActionEvent> handler;
             switch (round.getQuestion().getType()) {
                 case "group choice":
-                    handler = new GroupChoiceEventHandler(option, round, turn, game, nextScene, this.stage);
+                    //handler = new GroupChoiceEventHandler(option, round, turn, game, nextScene, this.stage);
                 default:
                     handler = new BooleanOptionsEventHandler(option, round, turn, game, nextScene, this.stage);
             }
@@ -133,4 +217,22 @@ public class Play extends VBox {
     public void update() {
         
     }
+
+
+    void setAsDraggable(Text text) {
+        Play nextScene = new Play(this.stage);
+        text.setOnDragDetected(new DragDetectedEvenHandler(text));
+        text.setOnDragDone(new DragDoneEventHandler(text));
+    }
+
+    void setAsTarget(Text target, VBox vBox, Game game, Round round, Turn turn, OptionGroup typeOfGroup) {
+        Play nextScene = new Play(this.stage);
+        target.setOnDragOver(new DragOverEventHandler());
+        target.setOnDragEntered(new DragEnteredEventHandler(target));
+        target.setOnDragExited(new DragExitedEventHandler(target));
+        target.setOnDragDropped(new DragDroppedEventHandler(vBox, game, round, turn, nextScene, this.stage, typeOfGroup));
+    }
+
+
 }
+
