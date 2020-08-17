@@ -1,6 +1,6 @@
 package modelo.game;
 
-import consumables.ScoreExclusivity;
+import modelo.consumables.ScoreExclusivity;
 import exceptions.NoMoreConsumablesException;
 import org.junit.Assert;
 import org.junit.Rule;

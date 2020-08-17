@@ -3,7 +3,7 @@ package interfazGrafica;
 import javafx.application.Application;
 
 import javafx.stage.Stage;
-import consumables.Multiplicator;
+import modelo.consumables.Multiplicator;
 import modelo.game.Game;
 import modelo.options.CorrectOptionScorer;
 import modelo.options.IncorrectOptionScorer;
@@ -17,6 +17,8 @@ import modelo.scorers.QuestionScorer;
 import java.util.Arrays;
 import java.util.List;
 
+import static constantes.Constantes.GAME_TITLE;
+
 
 public class Pantalla extends Application{
     private Game game = new Game();
@@ -27,7 +29,7 @@ public class Pantalla extends Application{
 
     @Override
     public void start(Stage stage) throws Exception {
-        stage.setTitle("Kahoot");
+        stage.setTitle(GAME_TITLE);
         this.game.init();
         Play nextScene = new Play(stage);
         PlayerNames.start(stage, this.game,nextScene);

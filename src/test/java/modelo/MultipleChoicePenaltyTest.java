@@ -1,6 +1,6 @@
 package modelo;
 
-import consumables.Multiplicator;
+import modelo.consumables.Multiplicator;
 import exceptions.InvalidSizeException;
 import modelo.game.Player;
 import modelo.options.CorrectOptionScorer;

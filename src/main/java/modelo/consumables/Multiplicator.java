@@ -1,4 +1,4 @@
-package consumables;
+package modelo.consumables;
 
 import modelo.game.Points;
 

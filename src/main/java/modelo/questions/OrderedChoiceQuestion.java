@@ -1,12 +1,14 @@
 package modelo.questions;
 
-import consumables.Consumable;
+import modelo.consumables.*;
 import modelo.game.Player;
 import modelo.game.Points;
 import modelo.options.Option;
 import modelo.scorers.QuestionScorer;
 
 import java.util.List;
+
+import static constantes.Constantes.ORDERED_CHOICE_QUESTION_TYPE;
 
 public class OrderedChoiceQuestion extends Question {
     private Option nextOption;
@@ -19,20 +21,22 @@ public class OrderedChoiceQuestion extends Question {
         this.scorer = scorer;
         this.points = new Points();
         this.consumable = consumable;
-        this.type = "OrderedChoice";
+        this.type = ORDERED_CHOICE_QUESTION_TYPE;
     }
 
     public void selectOptions(List<Option> playerAnswers) {
         int i = 2;
-        for(Option aOption : playerAnswers){
+        for (Option aOption : playerAnswers) {
             aOption.calculatePoints(this.scorer, this.points);
             this.nextOption.changeState(this.nextOption);
-            if(i < this.options.size()) {
+            if (i < this.options.size()) {
                 this.nextOption = this.options.get(i);
                 i++;
             }
         }
-        if (!(this.isCorrect())) { this.consumable.useWithIncorrectAnswer();}
+        if (!(this.isCorrect())) {
+            this.consumable.useWithIncorrectAnswer();
+        }
     }
 
     public void score(Player player) {

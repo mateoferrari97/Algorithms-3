@@ -19,6 +19,8 @@ import modelo.game.Round;
 import modelo.game.Turn;
 import modelo.options.Option;
 
+import static constantes.Constantes.GROUP_CHOCIE_QUESTION_TYPE;
+
 public class Play extends VBox {
     Stage stage;
 
@@ -82,7 +84,7 @@ public class Play extends VBox {
 
             EventHandler<ActionEvent> handler;
             switch (round.getQuestion().getType()) {
-                case "group choice":
+                case GROUP_CHOCIE_QUESTION_TYPE:
                     handler = new GroupChoiceEventHandler(option, round, turn, game, nextScene, this.stage);
                 default:
                     handler = new BooleanOptionsEventHandler(option, round, turn, game, nextScene, this.stage);

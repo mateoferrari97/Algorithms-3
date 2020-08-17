@@ -11,9 +11,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static constantes.Constantes.MAX_PLAYERS;
+import static constantes.Constantes.QUESTIONS_FILE_PATH;
+
 public class Game {
-    private final Integer MAX_PLAYERS = 2;
-    private Player[] players = new Player[this.MAX_PLAYERS];
+    private Player[] players = new Player[MAX_PLAYERS];
     private Integer currentPlayer = 0;
     private List<Round> rounds = new ArrayList<>();
     private Integer currentRound = 0;
@@ -51,14 +53,14 @@ public class Game {
     }
 
     private void createPlayers() {
-        for (int i = 0; i < this.MAX_PLAYERS; i++) {
+        for (int i = 0; i < MAX_PLAYERS; i++) {
             this.players[i] = new Player();
         }
     }
 
     private void createRounds() throws InvalidSizeException, IOException, InvalidJsonRecognizerClassException {
 
-        List<Question> questions = getQuestionFromFile("src/main/java/modelo/game/questions.json");
+        List<Question> questions = getQuestionFromFile(QUESTIONS_FILE_PATH);
 
         for (Question question : questions) {
             this.rounds.add(new Round(players, question));

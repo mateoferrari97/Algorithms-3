@@ -6,6 +6,9 @@ import modelo.options.CorrectOptionScorer;
 import modelo.options.IncorrectOptionScorer;
 import modelo.options.Option;
 
+import static constantes.Constantes.OPTION_GET_SCORER;
+import static constantes.Constantes.OPTION_GET_TEXT;
+
 public class OptionFactory {
     public OptionFactory() {
     }
@@ -18,8 +21,8 @@ public class OptionFactory {
     }
 
     public static Option unmarshal(JsonObject json) {
-        String text = json.get("text").getAsString();
-        boolean isCorrect = json.get("optionScorer").getAsBoolean();
+        String text = json.get(OPTION_GET_TEXT).getAsString();
+        boolean isCorrect = json.get(OPTION_GET_SCORER).getAsBoolean();
         if (isCorrect) {
             return new Option(text, new CorrectOptionScorer());
         }

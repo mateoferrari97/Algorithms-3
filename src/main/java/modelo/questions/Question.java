@@ -1,6 +1,6 @@
 package modelo.questions;
 
-import consumables.Consumable;
+import modelo.consumables.*;
 import modelo.game.Player;
 import modelo.game.Points;
 import modelo.options.Option;
@@ -21,7 +21,9 @@ public abstract class Question {
 
     public abstract void score(Player player);
 
-    public boolean isCorrect(){return (this.points.getPoints() > 0);}
+    public boolean isCorrect() {
+        return (this.points.getPoints() > 0);
+    }
 
     public String getText() {
         return this.text;
@@ -30,20 +32,20 @@ public abstract class Question {
     public String[] getAnswerOptions() {
         int i = 0;
         String[] answersOptions = new String[this.options.size()];
-        for(Option aOption : options){
+        for (Option aOption : options) {
             answersOptions[i] = aOption.getText();
             i++;
         }
         return answersOptions;
     }
 
-    public List<Option> getOptions(){
+    public List<Option> getOptions() {
         return this.options;
     }
 
     public List<Option> getCorrectOptions() {
         List<Option> options = new LinkedList<>();
-        for (Option option: this.options) {
+        for (Option option : this.options) {
             if (option.isCorrect()) {
                 options.add(option);
             }
@@ -51,6 +53,7 @@ public abstract class Question {
 
         return options;
     }
+
     public String getType() {
         return this.type;
     }

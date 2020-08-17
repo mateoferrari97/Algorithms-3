@@ -1,6 +1,6 @@
 package modelo.questions;
 
-import consumables.Consumable;
+import modelo.consumables.*;
 import exceptions.InvalidSizeException;
 import modelo.game.Player;
 import modelo.game.Points;
@@ -10,6 +10,9 @@ import modelo.scorers.QuestionScorer;
 
 import java.util.List;
 
+import static constantes.Constantes.GROUP_CHOCIE_QUESTION_TYPE;
+import static constantes.ErrorMessage.INVALID_GROUP_CHOICE_OPTION_LIMIT_OF_SIZE;
+
 public class GroupChoiceQuestion extends Question {
 
     public GroupChoiceQuestion(String text, List<Option> options, QuestionScorer scorer, Consumable consumable) throws InvalidSizeException {
@@ -17,8 +20,7 @@ public class GroupChoiceQuestion extends Question {
 
         Integer optionsSize = options.size();
         if (optionsSize < 2 || optionsSize > 6) {
-            String error = "invalid options size: want minimum 2, maximum 6. got: " + optionsSize;
-            throw new InvalidSizeException(error);
+            throw new InvalidSizeException(INVALID_GROUP_CHOICE_OPTION_LIMIT_OF_SIZE + optionsSize);
         }
 
         this.options = options;
@@ -26,7 +28,7 @@ public class GroupChoiceQuestion extends Question {
         this.scorer = scorer;
         this.points = new Points();
         this.consumable = consumable;
-        this.type = "GroupChoice";
+        this.type = GROUP_CHOCIE_QUESTION_TYPE;
     }
 
     @Override
@@ -37,14 +39,24 @@ public class GroupChoiceQuestion extends Question {
         Points pointsDone = new Points();
 
         Option CorrectOption = new Option("", new CorrectOptionScorer());
-        for (Option aOption : options) { CorrectOption.calculatePoints(this.scorer, maxPoints);}
+        for (Option aOption : options) {
+            CorrectOption.calculatePoints(this.scorer, maxPoints);
+        }
 
-        for (Option aOption : playerAnswers) { aOption.changeState(aOption);}
-        for (Option aOption : options) { aOption.calculatePoints(this.scorer, pointsDone);}
+        for (Option aOption : playerAnswers) {
+            aOption.changeState(aOption);
+        }
+        for (Option aOption : options) {
+            aOption.calculatePoints(this.scorer, pointsDone);
+        }
 
-        if (pointsDone.equals(minPoints) || pointsDone.equals(maxPoints)) { this.points.gainAPoint();}
+        if (pointsDone.equals(minPoints) || pointsDone.equals(maxPoints)) {
+            this.points.gainAPoint();
+        }
 
-        for (Option aOption : playerAnswers) { aOption.changeState(aOption);}
+        for (Option aOption : playerAnswers) {
+            aOption.changeState(aOption);
+        }
 
         if (!(this.isCorrect())) this.consumable.useWithIncorrectAnswer();
     }
