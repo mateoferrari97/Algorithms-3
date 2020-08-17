@@ -8,6 +8,8 @@ import modelo.scorers.QuestionScorer;
 
 import java.util.List;
 
+import static constantes.Constantes.ORDERED_CHOICE_QUESTION_TYPE;
+
 public class OrderedChoiceQuestion extends Question {
     private Option nextOption;
 
@@ -19,7 +21,7 @@ public class OrderedChoiceQuestion extends Question {
         this.scorer = scorer;
         this.points = new Points();
         this.consumable = consumable;
-        this.type = "OrderedChoice";
+        this.type = ORDERED_CHOICE_QUESTION_TYPE;
     }
 
     public void selectOptions(List<Option> playerAnswers) {

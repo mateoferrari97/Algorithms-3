@@ -9,6 +9,7 @@ import modelo.scorers.QuestionScorer;
 
 import java.util.List;
 
+import static constantes.Constantes.MULTIPLE_CHOICE_QUESTION_TYPE;
 import static constantes.ErrorMessage.INVALID_MULTIPLE_CHOICE_LIMIT_OF_SIZE;
 
 public class MultipleChoiceQuestion extends Question {
@@ -28,7 +29,7 @@ public class MultipleChoiceQuestion extends Question {
         this.scorer = scorer;
         this.points = new Points();
         this.consumable = consumable;
-        this.type = "MultipleChoice";
+        this.type = MULTIPLE_CHOICE_QUESTION_TYPE;
     }
 
     @Override

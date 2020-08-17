@@ -10,6 +10,7 @@ import modelo.scorers.QuestionScorer;
 
 import java.util.List;
 
+import static constantes.Constantes.GROUP_CHOCIE_QUESTION_TYPE;
 import static constantes.ErrorMessage.INVALID_GROUP_CHOICE_OPTION_LIMIT_OF_SIZE;
 
 public class GroupChoiceQuestion extends Question {
@@ -27,7 +28,7 @@ public class GroupChoiceQuestion extends Question {
         this.scorer = scorer;
         this.points = new Points();
         this.consumable = consumable;
-        this.type = "GroupChoice";
+        this.type = GROUP_CHOCIE_QUESTION_TYPE;
     }
 
     @Override

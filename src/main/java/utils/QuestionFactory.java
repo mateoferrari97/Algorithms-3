@@ -14,6 +14,7 @@ import modelo.scorers.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static constantes.Constantes.*;
 import static constantes.ErrorMessage.INVALID_QUESTION_ERROR;
 import static constantes.ErrorMessage.INVALID_QUESTION_SCORER_ERROR;
 
@@ -46,30 +47,30 @@ public class QuestionFactory {
     }
 
     public static Question unmarshal(JsonObject json) throws InvalidJsonRecognizerClassException, InvalidSizeException {
-        String text = json.get("text").getAsString();
-        String scorerString = json.get("scorer").getAsString();
-        String type = json.get("type").getAsString();
+        String text = json.get(QUESTION_GET_TEXT).getAsString();
+        String scorerType = json.get(QUESTION_GET_SCORER_TYPE).getAsString();
+        String type = json.get(QUESTION_GET_TYPE).getAsString();
 
         List<Option> options = new ArrayList<Option>();
-        JsonArray arrayOptions = json.getAsJsonArray("options");
+        JsonArray arrayOptions = json.getAsJsonArray(QUESTION_GET_OPTIONS );
         for (JsonElement jsonOption : arrayOptions) {
             Option option = OptionFactory.unmarshal(jsonOption.getAsJsonObject());
             options.add(option);
         }
 
-        QuestionScorer questionScorer = selectScorer(scorerString);
+        QuestionScorer questionScorer = selectScorer(scorerType);
         return selectQuestion(type, text, options, questionScorer);
     }
 
     static Question selectQuestion(String type, String text, List<Option> options, QuestionScorer scorer) throws InvalidJsonRecognizerClassException,InvalidSizeException  {
         switch (type) {
-            case "BooleanQuestion":
+            case BOOLEAN_QUESTION_TYPE:
                 return new BooleanQuestion(text,options,scorer,new Multiplicator());
-            case "GroupChoiceQuestion":
+            case GROUP_CHOCIE_QUESTION_TYPE:
                 return new GroupChoiceQuestion(text,options,scorer,new Multiplicator());
-            case "OrderedChoiceQuestion":
+            case ORDERED_CHOICE_QUESTION_TYPE:
                 return new OrderedChoiceQuestion(text,options,scorer,new Multiplicator());
-            case "MultipleChoiceQuestion":
+            case MULTIPLE_CHOICE_QUESTION_TYPE:
                 return new MultipleChoiceQuestion(text,options,scorer,new Multiplicator());
             default:
                 throw new InvalidJsonRecognizerClassException(INVALID_QUESTION_ERROR);
@@ -80,17 +81,17 @@ public class QuestionFactory {
 
     }
 
-    static QuestionScorer selectScorer(String scorerString) throws InvalidJsonRecognizerClassException {
-        switch (scorerString) {
-            case "PenaltyScorer":
+    static QuestionScorer selectScorer(String scorerType) throws InvalidJsonRecognizerClassException {
+        switch (scorerType) {
+            case PENALTY_SCORER_TYPE:
                 return new PenaltyScorer();
-            case "MultipleChoiceWithPartialScorer":
+            case MULTIPLE_CHOICE_PARTIAL_SCORER_TYPE:
                 return new MultipleChoiceWithPartialScorer();
-            case "OrderedScorer":
+            case ORDERED_SCORER_TYPE:
                 return new OrderedScorer();
-            case "MultipleChoiceScorer":
+            case MULTIPLE_CHOICE_SCORER_TYPE:
                 return new MultipleChoiceScorer();
-            case "BooleanScorer":
+            case BOOLEAN_SCORER_TYPE:
                 return new BooleanScorer();
             default:
                 throw new InvalidJsonRecognizerClassException(INVALID_QUESTION_SCORER_ERROR);

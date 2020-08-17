@@ -7,6 +7,8 @@ import modelo.scorers.QuestionScorer;
 
 import java.util.List;
 
+import static constantes.Constantes.BOOLEAN_QUESTION_TYPE;
+
 public class BooleanQuestion extends Question {
     public BooleanQuestion(String text, List<Option> options, QuestionScorer scorer, Consumable consumable) {
         super();
@@ -15,7 +17,7 @@ public class BooleanQuestion extends Question {
         this.scorer = scorer;
         this.points = new Points();
         this.consumable = consumable;
-        this.type = "boolean";
+        this.type = BOOLEAN_QUESTION_TYPE;
     }
 
 
