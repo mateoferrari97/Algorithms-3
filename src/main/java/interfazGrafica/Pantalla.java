@@ -4,8 +4,7 @@ import javafx.application.Application;
 
 import javafx.stage.Stage;
 import consumables.Multiplicator;
-import modelo.Player;
-import modelo.*;
+import modelo.game.Game;
 import modelo.options.CorrectOptionScorer;
 import modelo.options.IncorrectOptionScorer;
 import modelo.options.Option;

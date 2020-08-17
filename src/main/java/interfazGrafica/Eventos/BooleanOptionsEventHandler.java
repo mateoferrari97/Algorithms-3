@@ -6,8 +6,10 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
 import javafx.stage.Stage;
-import modelo.*;
 
+import modelo.game.Game;
+import modelo.game.Round;
+import modelo.game.Turn;
 import modelo.options.Option;
 
 

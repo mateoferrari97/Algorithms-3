@@ -2,7 +2,7 @@ package utils;
 
 import exceptions.InvalidJsonRecognizerClassException;
 import exceptions.InvalidSizeException;
-import modelo.Player;
+import modelo.game.Player;
 import modelo.options.CorrectOptionScorer;
 import modelo.options.IncorrectOptionScorer;
 import modelo.options.Option;
@@ -197,6 +197,4 @@ public class QuestionFactoryTest {
         // Then
         Assert.assertEquals(player2.getPoints(), expectedPlayer2Points);
     }
-
-
 }

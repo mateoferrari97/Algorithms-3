@@ -3,6 +3,8 @@ package modelo;
 import consumables.Multiplicator;
 import consumables.ScoreExclusivity;
 import exceptions.InvalidSizeException;
+import exceptions.NoMoreConsumablesException;
+import modelo.game.Player;
 import modelo.options.CorrectOptionScorer;
 import modelo.options.IncorrectOptionScorer;
 import modelo.options.Option;
@@ -10,7 +12,6 @@ import modelo.questions.GroupChoiceQuestion;
 import modelo.questions.Question;
 import modelo.scorers.BooleanScorer;
 import modelo.scorers.QuestionScorer;
-import exceptions.NoMoreConsumablesException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -199,5 +200,23 @@ public class GroupChoiceTest {
         // Then
         Assert.assertEquals(player1.getPoints(), expectedPlayer1Points);
         Assert.assertEquals(player2.getPoints(), expectedPlayer2Points);
+    }
+
+    @Test
+    public void testThrowInvalidSizeExceptionWhenTheOptionsAre6() {
+        List<Option> options = Arrays.asList(
+                new Option("A", new CorrectOptionScorer()),
+                new Option("B", new CorrectOptionScorer()),
+                new Option("C", new CorrectOptionScorer()),
+                new Option("1", new IncorrectOptionScorer()),
+                new Option("asd", new IncorrectOptionScorer()),
+                new Option("2", new IncorrectOptionScorer()));
+        try {
+                QuestionScorer sc = new BooleanScorer();
+                Question question = new GroupChoiceQuestion("Separar en numeros y letras", options, sc, new Multiplicator());
+
+        } catch (Exception e){
+            Assert.assertEquals(e.getMessage(),"invalid options size: want minimum 2, maximum 6. got: 6");
+        }
     }
 }

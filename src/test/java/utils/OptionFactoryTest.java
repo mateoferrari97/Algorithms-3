@@ -2,7 +2,7 @@ package utils;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import modelo.Points;
+import modelo.game.Points;
 import modelo.options.Option;
 import modelo.scorers.PenaltyScorer;
 import modelo.scorers.QuestionScorer;

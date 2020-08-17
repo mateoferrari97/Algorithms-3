@@ -1,4 +1,4 @@
-package modelo;
+package modelo.game;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

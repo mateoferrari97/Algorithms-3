@@ -1,6 +1,5 @@
-package modelo;
+package modelo.game;
 
-import modelo.options.Option;
 import modelo.questions.Question;
 
 import java.util.ArrayList;

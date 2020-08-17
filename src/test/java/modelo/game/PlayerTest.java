@@ -1,4 +1,4 @@
-package modelo;
+package modelo.game;
 
 import consumables.ScoreExclusivity;
 import exceptions.NoMoreConsumablesException;

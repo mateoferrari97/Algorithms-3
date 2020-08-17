@@ -4,6 +4,7 @@ import consumables.Multiplicator;
 import consumables.ScoreExclusivity;
 import exceptions.InvalidSizeException;
 import exceptions.NoMoreConsumablesException;
+import modelo.game.Player;
 import modelo.options.CorrectOptionScorer;
 import modelo.options.IncorrectOptionScorer;
 import modelo.options.Option;
@@ -217,5 +218,19 @@ public class OrderedChoiceTest {
         // Then
         Assert.assertEquals(player1.getPoints(), expectedPlayer1Points);
         Assert.assertEquals(player2.getPoints(), expectedPlayer2Points);
+    }
+
+    @Test
+    public void testGetCorrectOptionsFromOrderedChoiceQuestion() throws InvalidSizeException {
+        // Given
+        List<Option> opt = Arrays.asList(
+                new Option("Primero", new CorrectOptionScorer()),
+                new Option("Segundo", new IncorrectOptionScorer()));
+
+        QuestionScorer scorer = new OrderedScorer();
+        Question question = new OrderedChoiceQuestion("ordene correctamente las siguientes opciones", opt, scorer, new Multiplicator());
+
+        List<Option> options = question.getCorrectOptions();
+        Assert.assertEquals(opt,options);
     }
 }

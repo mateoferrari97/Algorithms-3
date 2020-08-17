@@ -43,25 +43,19 @@ public class QuestionFactory {
     }
 
     public static Question unmarshal(JsonObject json) throws InvalidJsonRecognizerClassException, InvalidSizeException {
-        try {
-            String text = json.get("text").getAsString();
-            String scorerString = json.get("scorer").getAsString();
-            String type = json.get("type").getAsString();
+        String text = json.get("text").getAsString();
+        String scorerString = json.get("scorer").getAsString();
+        String type = json.get("type").getAsString();
 
-            List<Option> options = new ArrayList<Option>();
-            JsonArray arrayOptions = json.getAsJsonArray("options");
-            for (JsonElement jsonOption : arrayOptions) {
-                Option option = OptionFactory.unmarshal(jsonOption.getAsJsonObject());
-                options.add(option);
-            }
-
-            QuestionScorer questionScorer = selectScorer(scorerString);
-
-            //Question question = question(text, options, questionScorer);
-            return selectQuestion(type,text,options,questionScorer);
-        } catch (Exception e) {
-            throw e;
+        List<Option> options = new ArrayList<Option>();
+        JsonArray arrayOptions = json.getAsJsonArray("options");
+        for (JsonElement jsonOption : arrayOptions) {
+            Option option = OptionFactory.unmarshal(jsonOption.getAsJsonObject());
+            options.add(option);
         }
+
+        QuestionScorer questionScorer = selectScorer(scorerString);
+        return selectQuestion(type, text, options, questionScorer);
     }
 
     static Question selectQuestion(String type, String text, List<Option> options, QuestionScorer scorer) throws InvalidJsonRecognizerClassException,InvalidSizeException  {

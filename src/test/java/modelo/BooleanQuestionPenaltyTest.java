@@ -1,6 +1,7 @@
 package modelo;
 
 import consumables.Multiplicator;
+import modelo.game.Player;
 import modelo.options.CorrectOptionScorer;
 import modelo.options.IncorrectOptionScorer;
 import modelo.options.Option;

@@ -1,7 +1,7 @@
 package modelo.scorers;
 
-import modelo.Player;
-import modelo.Points;
+import modelo.game.Player;
+import modelo.game.Points;
 
 public class OrderedScorer implements QuestionScorer {
 

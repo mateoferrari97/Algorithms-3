@@ -1,8 +1,6 @@
 package consumables;
 
-import consumables.Consumable;
-import consumables.Multiplicator;
-import modelo.Points;
+import modelo.game.Points;
 
 public class ScoreExclusivity implements Consumable {
     private Multiplicator multiplicator;

@@ -13,10 +13,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import modelo.Game;
-import modelo.Player;
-
-import java.util.List;
+import modelo.game.Game;
 
 public class PlayerNames {
     static void start(Stage stage, Game game, Play nextScene) {
