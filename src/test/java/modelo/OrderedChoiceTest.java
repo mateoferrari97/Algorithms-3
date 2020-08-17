@@ -221,7 +221,7 @@ public class OrderedChoiceTest {
     }
 
     @Test
-    public void testGetOptionsFromOrderedChoiceQuestion() throws InvalidSizeException {
+    public void testGetCorrectOptionsFromOrderedChoiceQuestion() throws InvalidSizeException {
         // Given
         List<Option> opt = Arrays.asList(
                 new Option("Primero", new CorrectOptionScorer()),
@@ -230,7 +230,7 @@ public class OrderedChoiceTest {
         QuestionScorer scorer = new OrderedScorer();
         Question question = new OrderedChoiceQuestion("ordene correctamente las siguientes opciones", opt, scorer, new Multiplicator());
 
-        List<Option> options = question.getOptions();
+        List<Option> options = question.getCorrectOptions();
         Assert.assertEquals(opt,options);
     }
 }
