@@ -1,11 +1,26 @@
 package modelo.game;
 
-import exceptions.InvalidSizeException;
+import com.google.gson.JsonElement;
 import consumables.Multiplicator;
-import modelo.options.*;
-import modelo.questions.*;
-import modelo.scorers.*;
+import exceptions.InvalidJsonRecognizerClassException;
+import exceptions.InvalidSizeException;
+import modelo.options.CorrectOptionScorer;
+import modelo.options.IncorrectOptionScorer;
+import modelo.options.Option;
+import modelo.questions.BooleanQuestion;
+import modelo.questions.MultipleChoiceQuestion;
+import modelo.questions.OrderedChoiceQuestion;
+import modelo.questions.Question;
+import modelo.scorers.BooleanScorer;
+import modelo.scorers.MultipleChoiceScorer;
+import modelo.scorers.OrderedScorer;
+import modelo.scorers.QuestionScorer;
+import utils.OptionFactory;
+import utils.QuestionFactory;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -55,7 +70,17 @@ public class Game {
         }
     }
 
-    private void createRounds() throws InvalidSizeException {
+    private void createRounds() throws InvalidSizeException, IOException, InvalidJsonRecognizerClassException {
+
+        List<Question> questions = getQuestionFromFile("preguntas.json");
+
+        for (Question question : questions) {
+            this.rounds.add(new Round(players, question));
+        }
+
+
+
+
         List<Option> multipleChoice = Arrays.asList(
                 new Option("2 + 2", new CorrectOptionScorer()),
                 new Option("2 * 2", new CorrectOptionScorer()),
@@ -95,4 +120,21 @@ public class Game {
 
         this.rounds.add(new Round(players, newquestion));
     }
+
+    private List<Question> getQuestionFromFile(String fileName) throws IOException, InvalidSizeException, InvalidJsonRecognizerClassException {
+        QuestionFactory questionFactory = new QuestionFactory();
+        String questionsString = getStringFromFile(fileName);
+
+        return questionFactory.unmarshalArrayOfQuestions(questionsString);
+    }
+
+    private String getStringFromFile(String fileName) throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(fileName));
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(reader.readLine());
+        reader.close();
+        return stringBuilder.toString();
+
+    }
+
 }
