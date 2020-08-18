@@ -4,15 +4,14 @@ import Group.OptionGroup;
 import interfazGrafica.EndGame;
 import interfazGrafica.Play;
 import javafx.event.EventHandler;
-import javafx.scene.Group;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import modelo.Game;
-import modelo.Round;
-import modelo.Turn;
+import modelo.game.Game;
+import modelo.game.Round;
+import modelo.game.Turn;
 import modelo.options.Option;
 
 import java.util.List;
@@ -67,7 +66,7 @@ public class GroupChoiceDragDroppedEventHandler implements EventHandler<DragEven
         this.turn.finish();
 
         if(game.getNextRound() == null){
-            EndGame end = new EndGame(stage);
+            EndGame end = new EndGame(stage, game);
         }else{
             nextPlay.start(game);
         }

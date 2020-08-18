@@ -1,7 +1,9 @@
 package modelo;
 
 import exceptions.InvalidSizeException;
-import consumables.Multiplicator;
+import modelo.consumables.Multiplicator;
+import modelo.game.Player;
+import modelo.game.Round;
 import modelo.options.*;
 import modelo.questions.*;
 import modelo.scorers.*;

@@ -8,8 +8,6 @@ import javafx.scene.input.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import modelo.Game;
-import modelo.Round;
-import modelo.Turn;
 import modelo.options.Option;
 
 import java.util.List;

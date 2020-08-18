@@ -49,7 +49,7 @@ public class Play extends VBox {
         createQuestionLabel(round);
 
         switch (round.getQuestion().getType()) {
-            case "group choice":
+            case "GroupChoiceQuestion":
                 createAnswerDraggableOptions(round, turn, game);
                 createTargeteableGroups(round, turn, game);
                 break;
