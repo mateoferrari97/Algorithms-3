@@ -16,7 +16,7 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 
-public class MultipleChoicePenaltyTest {
+public class MultipleChoicePenaltyIT {
     @Test
     public void testMultipleChoiceQuestionWithPenaltyIncreasePlayerPointsWhenOptionIsCorrectAndDecreaseWhenOptionIsIncorrect() throws InvalidSizeException {
         // Given
