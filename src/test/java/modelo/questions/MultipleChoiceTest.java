@@ -1,4 +1,4 @@
-package modelo.questions;
+package modelo;
 
 import exceptions.InvalidSizeException;
 import modelo.consumables.Multiplicator;
@@ -51,7 +51,7 @@ public class MultipleChoiceTest {
                 new Option("1 - 3", new IncorrectOptionScorer()));
 
         QuestionScorer scorer = new MultipleChoiceScorer();
-        Question question = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer, new Multiplicator());
+        Question question = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer);
 
         List<Option> correctOptions = Arrays.asList(
                 options.get(0),
@@ -72,7 +72,7 @@ public class MultipleChoiceTest {
                 new Option("1 - 3", new IncorrectOptionScorer()));
 
         QuestionScorer scorer = new MultipleChoiceScorer();
-        Question question = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer, new Multiplicator());
+        Question question = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer);
 
         String[] textOptions = new String[5];
         textOptions[0] = "2 + 2";
@@ -94,7 +94,7 @@ public class MultipleChoiceTest {
                 new Option("1 - 3", new IncorrectOptionScorer()));
 
         QuestionScorer scorer = new MultipleChoiceScorer();
-        Question question = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer, new Multiplicator());
+        Question question = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer);
 
         String expectedType = "MultipleChoiceQuestion";
 

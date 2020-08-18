@@ -4,7 +4,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import modelo.consumables.*;
 import exceptions.InvalidJsonRecognizerClassException;
 import exceptions.InvalidSizeException;
 import modelo.options.Option;
@@ -66,13 +65,13 @@ public class QuestionFactory {
     static Question selectQuestion(String type, String text, List<Option> options, QuestionScorer scorer) throws InvalidJsonRecognizerClassException, InvalidSizeException {
         switch (type) {
             case BOOLEAN_QUESTION_TYPE:
-                return new BooleanQuestion(text, options, scorer, new Multiplicator());
+                return new BooleanQuestion(text, options, scorer);
             case GROUP_CHOCIE_QUESTION_TYPE:
-                return new GroupChoiceQuestion(text, options, scorer, new ScoreExclusivity());
+                return new GroupChoiceQuestion(text, options, scorer);
             case ORDERED_CHOICE_QUESTION_TYPE:
-                return new OrderedChoiceQuestion(text, options, scorer, new ScoreExclusivity());
+                return new OrderedChoiceQuestion(text, options, scorer);
             case MULTIPLE_CHOICE_QUESTION_TYPE:
-                return new MultipleChoiceQuestion(text, options, scorer, new Multiplicator());
+                return new MultipleChoiceQuestion(text, options, scorer);
             default:
                 throw new InvalidJsonRecognizerClassException(INVALID_QUESTION_ERROR);
         }

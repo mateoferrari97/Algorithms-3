@@ -1,11 +1,12 @@
 package modelo;
 
-import modelo.consumables.Multiplicator;
+
 import modelo.game.Player;
 import modelo.options.CorrectOptionScorer;
 import modelo.options.IncorrectOptionScorer;
 import modelo.options.Option;
 import modelo.questions.BooleanQuestion;
+import modelo.multiplicators.Multiplicator;
 import modelo.questions.Question;
 import modelo.scorers.PenaltyScorer;
 import modelo.scorers.QuestionScorer;
@@ -24,7 +25,7 @@ public class BooleanQuestionPenaltyIT {
                 new Option("si", new CorrectOptionScorer()),
                 new Option("no", new IncorrectOptionScorer()));
         QuestionScorer scorer = new PenaltyScorer();
-        Question question = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer, new Multiplicator());
+        Question question = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer);
 
         Player player = new Player();
         player.setPoints(5);
@@ -32,7 +33,7 @@ public class BooleanQuestionPenaltyIT {
         Integer expectedPlayerPoints = 4;
 
         // When
-        question.selectOptions(playerOptions);
+        question.selectOptions(playerOptions, this.points);
         question.score(player);
 
         // Then
@@ -46,7 +47,7 @@ public class BooleanQuestionPenaltyIT {
                 new Option("si", new CorrectOptionScorer()),
                 new Option("no", new IncorrectOptionScorer()));
         QuestionScorer scorer = new PenaltyScorer();
-        Question question = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer, new Multiplicator());
+        Question question = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer);
 
         Player player = new Player();
         player.setPoints(5);
@@ -54,7 +55,7 @@ public class BooleanQuestionPenaltyIT {
         Integer expectedPlayerPoints = 6;
 
         // When
-        question.selectOptions(playerOptions);
+        question.selectOptions(playerOptions, this.points);
         question.score(player);
 
         // Then
@@ -68,7 +69,7 @@ public class BooleanQuestionPenaltyIT {
                 new Option("si", new CorrectOptionScorer()),
                 new Option("no", new IncorrectOptionScorer()));
         QuestionScorer scorer = new PenaltyScorer();
-        Question question = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer, new Multiplicator());
+        Question question = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer);
 
         Player player = new Player();
         player.setPoints(0);
@@ -76,7 +77,7 @@ public class BooleanQuestionPenaltyIT {
         Integer expectedPlayerPoints = 0;
 
         // When
-        question.selectOptions(playerOptions);
+        question.selectOptions(playerOptions, this.points);
         question.score(player);
 
         // Then
@@ -90,9 +91,11 @@ public class BooleanQuestionPenaltyIT {
                 new Option("si", new CorrectOptionScorer()),
                 new Option("no", new IncorrectOptionScorer()));
         QuestionScorer scorer = new PenaltyScorer();
-        Multiplicator multiplicator = new Multiplicator();
-        multiplicator.setFactor(2);
-        Question question = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer, multiplicator);
+
+        Question question = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer);
+
+        List<Multiplicator> multiplicator = question.getMultiplicators();
+        question.multiplicate(multiplicator.get(0));
 
         Player player = new Player();
         player.setPoints(5);
@@ -100,7 +103,7 @@ public class BooleanQuestionPenaltyIT {
         Integer expectedPlayerPoints = 7;
 
         // When
-        question.selectOptions(playerOptions);
+        question.selectOptions(playerOptions, this.points);
         question.score(player);
 
         // Then
@@ -114,9 +117,12 @@ public class BooleanQuestionPenaltyIT {
                 new Option("si", new CorrectOptionScorer()),
                 new Option("no", new IncorrectOptionScorer()));
         QuestionScorer scorer = new PenaltyScorer();
-        Multiplicator multiplicator = new Multiplicator();
-        multiplicator.setFactor(3);
-        Question question = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer, multiplicator);
+
+
+        Question question = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer);
+
+        List<Multiplicator> multiplicator = question.getMultiplicators();
+        question.multiplicate(multiplicator.get(0));
 
         Player player = new Player();
         player.setPoints(5);
@@ -124,7 +130,7 @@ public class BooleanQuestionPenaltyIT {
         Integer expectedPlayerPoints = 8;
 
         // When
-        question.selectOptions(playerOptions);
+        question.selectOptions(playerOptions, this.points);
         question.score(player);
 
         // Then

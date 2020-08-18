@@ -1,6 +1,6 @@
 package modelo.game;
 
-import modelo.consumables.ScoreExclusivity;
+//import modelo.consumables.ScoreExclusivity;
 import exceptions.NoMoreConsumablesException;
 import org.junit.Assert;
 import org.junit.Rule;
@@ -31,7 +31,7 @@ public class PlayerTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    @Test
+   /* @Test
     public void testPlayerActivatesConsumableThreeTimesAndThrowsException() throws NoMoreConsumablesException {
         //Arrange
         ScoreExclusivity scoreExclusivity = new ScoreExclusivity();
@@ -43,7 +43,7 @@ public class PlayerTest {
         thrown.expect(NoMoreConsumablesException.class);
         player.activateConsumable(scoreExclusivity);
 
-    }
+    } */
 
     @Test
     public void testInstanceAndGetNameShouldBeOK() {

@@ -1,13 +1,13 @@
 package modelo;
 
-import modelo.consumables.Multiplicator;
-import modelo.consumables.ScoreExclusivity;
+
 import exceptions.NoMoreConsumablesException;
 import modelo.game.Player;
 import modelo.options.CorrectOptionScorer;
 import modelo.options.IncorrectOptionScorer;
 import modelo.options.Option;
 import modelo.questions.BooleanQuestion;
+import modelo.multiplicators.Multiplicator;
 import modelo.questions.Question;
 import modelo.scorers.BooleanScorer;
 import modelo.scorers.QuestionScorer;
@@ -26,14 +26,14 @@ public class BooleanQuestionIT {
                 new Option("si", new CorrectOptionScorer()),
                 new Option("no", new IncorrectOptionScorer()));
         QuestionScorer scorer = new BooleanScorer();
-        Question question = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer, new Multiplicator());
+        Question question = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer);
 
         Player player = new Player();
         List<Option> playerOptions = Arrays.asList(new Option("si", new CorrectOptionScorer()));
         Integer expectedPlayerPoints = 1;
 
         // When
-        question.selectOptions(playerOptions);
+        question.selectOptions(playerOptions, this.points);
         question.score(player);
 
         // Then
@@ -47,7 +47,7 @@ public class BooleanQuestionIT {
                 new Option("si", new CorrectOptionScorer()),
                 new Option("no", new IncorrectOptionScorer()));
         QuestionScorer scorer = new BooleanScorer();
-        Question question = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer, new Multiplicator());
+        Question question = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer);
 
         Player player = new Player();
         player.setPoints(5);
@@ -55,7 +55,7 @@ public class BooleanQuestionIT {
         Integer expectedPlayerPoints = 5;
 
         // When
-        question.selectOptions(playerOptions);
+        question.selectOptions(playerOptions, this.points);
         question.score(player);
 
         // Then
@@ -65,14 +65,13 @@ public class BooleanQuestionIT {
     @Test
     public void testBooleanQuestionDoublePointsWhenScoreExclusivityActivatedAndOnePlayerAnswerIncorrectly() throws NoMoreConsumablesException {
         // Given
-        ScoreExclusivity scoreExclusivity = new ScoreExclusivity();
         List<Option> options = Arrays.asList(
                 new Option("si", new CorrectOptionScorer()),
                 new Option("no", new IncorrectOptionScorer()));
         QuestionScorer scorer = new BooleanScorer();
 
-        Question question1 = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer, scoreExclusivity);
-        Question question2 = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer, scoreExclusivity);
+        Question question1 = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer);
+        Question question2 = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer);
 
         Player player1 = new Player();
         Player player2 = new Player();
@@ -83,11 +82,13 @@ public class BooleanQuestionIT {
         Integer expectedPlayer1Points = 0;
         Integer expectedPlayer2Points = 2;
 
+        List<Multiplicator> multiplicator = question2.getMultiplicators();
+        question2.multiplicate(multiplicator.get(0));
+
 
         // When
-        player1.activateConsumable(scoreExclusivity);
-        question1.selectOptions(player1Options);
-        question2.selectOptions(player2Options);
+        question1.selectOptions(player1Options, this.points);
+        question2.selectOptions(player2Options, this.points);
         question1.score(player1);
         question2.score(player2);
 
@@ -99,14 +100,13 @@ public class BooleanQuestionIT {
     @Test
     public void testBooleanQuestionQuadruplePointsWhenScoreExclusivityTwoTimesActivatedAndOnePlayerAnswerIncorrectly() throws NoMoreConsumablesException {
         // Given
-        ScoreExclusivity scoreExclusivity = new ScoreExclusivity();
         List<Option> options = Arrays.asList(
                 new Option("si", new CorrectOptionScorer()),
                 new Option("no", new IncorrectOptionScorer()));
         QuestionScorer scorer = new BooleanScorer();
 
-        Question question1 = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer, scoreExclusivity);
-        Question question2 = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer, scoreExclusivity);
+        Question question1 = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer);
+        Question question2 = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer);
 
         Player player1 = new Player();
         Player player2 = new Player();
@@ -119,10 +119,8 @@ public class BooleanQuestionIT {
 
 
         // When
-        player1.activateConsumable(scoreExclusivity);
-        question1.selectOptions(player1Options);
-        player2.activateConsumable(scoreExclusivity);
-        question2.selectOptions(player2Options);
+        question1.selectOptions(player1Options, this.points);
+        question2.selectOptions(player2Options, this.points);
         question1.score(player1);
         question2.score(player2);
 
@@ -131,17 +129,17 @@ public class BooleanQuestionIT {
         Assert.assertEquals(player2.getPoints(), expectedPlayer2Points);
     }
 
-    @Test
+   @Test
     public void testBooleanQuestionDontModifyPointsWhenScoreExclusivityActivatedNoIncorrectAnswers() throws NoMoreConsumablesException {
         // Given
-        ScoreExclusivity scoreExclusivity = new ScoreExclusivity();
+
         List<Option> options = Arrays.asList(
                 new Option("si", new CorrectOptionScorer()),
                 new Option("no", new IncorrectOptionScorer()));
         QuestionScorer scorer = new BooleanScorer();
 
-        Question question1 = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer, scoreExclusivity);
-        Question question2 = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer, scoreExclusivity);
+        Question question1 = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer);
+        Question question2 = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer);
 
         Player player1 = new Player();
         Player player2 = new Player();
@@ -154,9 +152,8 @@ public class BooleanQuestionIT {
 
 
         // When
-        player1.activateConsumable(scoreExclusivity);
-        question1.selectOptions(player1Options);
-        question2.selectOptions(player2Options);
+        question1.selectOptions(player1Options, this.points);
+        question2.selectOptions(player2Options, this.points);
         question1.score(player1);
         question2.score(player2);
 

@@ -1,7 +1,7 @@
 package modelo.game;
 
-import modelo.consumables.Consumable;
-import modelo.consumables.ScoreExclusivity;
+
+
 import modelo.options.CorrectOptionScorer;
 import modelo.options.IOptionScorer;
 import modelo.options.Option;
@@ -22,7 +22,7 @@ import java.util.List;
 import static org.mockito.Mockito.*;
 
 
-@RunWith(PowerMockRunner.class)
+ @RunWith(PowerMockRunner.class)
 @PowerMockIgnore({"javax.management.*"})
 @PrepareForTest({Player.class, BooleanScorer.class, BooleanQuestion.class,ArrayList.class})
 
@@ -32,8 +32,7 @@ public class TurnTest {
     private Option optionMock = spy(new Option("",optionScorer));
     private List<Option> optionsMock = new ArrayList<>();
     private BooleanScorer scorerMock= spy(new BooleanScorer());
-    private Consumable consumable = spy(new ScoreExclusivity());
-    private Question questionMock = spy(new BooleanQuestion( "",optionsMock,scorerMock, consumable));
+    private Question questionMock = spy(new BooleanQuestion( "",optionsMock,scorerMock));
 
     public Turn setUpTurn(){
         return new Turn(playerMock,questionMock);
@@ -83,12 +82,12 @@ public class TurnTest {
     @Test
     public void finish() {
         Turn turn = setUpTurn();
-        doCallRealMethod().when(questionMock).selectOptions(any(ArrayList.class));
+        doCallRealMethod().when(questionMock).selectOptions(any(ArrayList.class), this.points);
         doCallRealMethod().when(questionMock).score(any(Player.class));
 
         turn.finish();
 
-        verify(questionMock, times(1)).selectOptions(optionsMock);
+        verify(questionMock, times(1)).selectOptions(optionsMock, this.points);
         verify(questionMock, times(1)).score(playerMock);
     }
 }

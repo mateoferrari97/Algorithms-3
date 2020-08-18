@@ -1,5 +1,6 @@
 package modelo.game;
 
+import modelo.multiplicators.ScoreExclusivity;
 import modelo.questions.Question;
 
 import java.util.ArrayList;
@@ -17,6 +18,24 @@ public class Round {
         for(Player player : players){
             this.players.add(player);
             this.turns.add(new Turn(player, question));
+        }
+    }
+
+    public void finish(){
+        if(currentTurn == turns.size()) {
+            comparateScore();
+            for(Turn aTurn : turns){
+                aTurn.getPoints().givePointsToPlayer(aTurn.getPlayer());
+            }
+        }
+    }
+
+    private void comparateScore() {
+         Points playerOnePoints = turns.get(0).getPoints();
+         Points playerTwoPoints = turns.get(1).getPoints();
+        if(playerOnePoints.getPoints() == playerTwoPoints.getPoints()){
+            playerOnePoints.dontMultiplicate();
+            playerTwoPoints.dontMultiplicate();
         }
     }
 

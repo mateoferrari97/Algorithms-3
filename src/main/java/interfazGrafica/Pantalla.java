@@ -3,7 +3,7 @@ package interfazGrafica;
 import javafx.application.Application;
 
 import javafx.stage.Stage;
-import modelo.consumables.Multiplicator;
+
 import modelo.game.Game;
 import modelo.options.CorrectOptionScorer;
 import modelo.options.IncorrectOptionScorer;
@@ -33,7 +33,7 @@ public class Pantalla extends Application{
         this.game.init();
         Play nextScene = new Play(stage);
         PlayerNames.start(stage, this.game,nextScene);
-
+        //GroupChoice.start(stage, this.game, nextScene);
         stage.show();
     }
 }

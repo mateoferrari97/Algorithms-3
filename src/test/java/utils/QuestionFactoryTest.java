@@ -29,7 +29,7 @@ public class QuestionFactoryTest {
         Integer expectedPlayerPoints = 6;
 
         // When
-        question.selectOptions(playerOptions);
+        question.selectOptions(playerOptions, this.points);
         question.score(player);
 
         // Then
@@ -52,7 +52,7 @@ public class QuestionFactoryTest {
         Integer expectedPlayerPoints = 1;
 
         // When
-        question.selectOptions(playerOptions);
+        question.selectOptions(playerOptions, this.points);
         question.score(player);
 
         // Then
@@ -76,7 +76,7 @@ public class QuestionFactoryTest {
         Integer expectedPlayerPoints = 0;
 
         // When
-        question.selectOptions(playerOptions);
+        question.selectOptions(playerOptions, this.points);
         question.score(player);
 
         // Then
@@ -100,7 +100,7 @@ public class QuestionFactoryTest {
         Integer expectedPlayerPoints = 8;
 
         // When
-        question.selectOptions(playerOptions);
+        question.selectOptions(playerOptions, this.points);
         question.score(player);
 
         // Then
@@ -125,7 +125,7 @@ public class QuestionFactoryTest {
         Integer expectedPlayerPoints = 1;
 
         // When
-        question.selectOptions(playerOptions);
+        question.selectOptions(playerOptions, this.points);
         question.score(player);
 
         // Then
@@ -156,7 +156,7 @@ public class QuestionFactoryTest {
         Integer expectedPlayerPoints = 0;
 
         // When
-        question.selectOptions(playerOptions);
+        question.selectOptions(playerOptions, this.points);
         question.score(player);
 
         // Then
@@ -179,7 +179,7 @@ public class QuestionFactoryTest {
         Integer expectedPlayer1Points = 6;
 
         // When
-        question1.selectOptions(playerOptions1);
+        question1.selectOptions(playerOptions1, this.points);
         question1.score(player1);
 
         // Then
@@ -191,7 +191,7 @@ public class QuestionFactoryTest {
         Integer expectedPlayer2Points = 1;
 
         // When
-        question2.selectOptions(playerOptions2);
+        question2.selectOptions(playerOptions2, this.points);
         question2.score(player2);
 
         // Then
