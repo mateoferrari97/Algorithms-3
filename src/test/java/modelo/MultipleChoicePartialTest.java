@@ -1,7 +1,6 @@
 package modelo;
 
-import modelo.consumables.Multiplicator;
-import modelo.consumables.ScoreExclusivity;
+
 import exceptions.InvalidSizeException;
 import exceptions.NoMoreConsumablesException;
 import modelo.game.Player;
@@ -30,7 +29,7 @@ public class MultipleChoicePartialTest {
                 new Option("1 - 3", new IncorrectOptionScorer()));
 
         QuestionScorer scorer = new MultipleChoiceWithPartialScorer();
-        Question question = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer, new Multiplicator());
+        Question question = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer);
 
         Player player = new Player();
         List<Option> playerOptions = Arrays.asList(
@@ -41,7 +40,7 @@ public class MultipleChoicePartialTest {
         Integer expectedPlayerPoints = 4;
 
         // When
-        question.selectOptions(playerOptions);
+        question.selectOptions(playerOptions, this.points);
         question.score(player);
 
         // Then
@@ -59,7 +58,7 @@ public class MultipleChoicePartialTest {
                 new Option("1 - 3", new IncorrectOptionScorer()));
 
         QuestionScorer scorer = new MultipleChoiceWithPartialScorer();
-        Question question = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer, new Multiplicator());
+        Question question = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer);
 
         Player player = new Player();
         List<Option> playerOptions = Arrays.asList(
@@ -70,7 +69,7 @@ public class MultipleChoicePartialTest {
         Integer expectedPlayerPoints = 0;
 
         // When
-        question.selectOptions(playerOptions);
+        question.selectOptions(playerOptions, this.points);
         question.score(player);
 
         // Then
@@ -80,8 +79,6 @@ public class MultipleChoicePartialTest {
     @Test
     public void testMultipleChoicePartialDoublePointsWhenScoreExclusivityActivatedAndOnePlayerAnswerIncorrectly() throws InvalidSizeException, NoMoreConsumablesException {
         // Given
-        ScoreExclusivity scoreExclusivity = new ScoreExclusivity();
-        // Given
         List<Option> options = Arrays.asList(
                 new Option("2 + 2", new CorrectOptionScorer()),
                 new Option("2 * 2", new CorrectOptionScorer()),
@@ -90,8 +87,8 @@ public class MultipleChoicePartialTest {
                 new Option("1 - 3", new IncorrectOptionScorer()));
         QuestionScorer scorer = new MultipleChoiceWithPartialScorer();
 
-        Question question1 = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer, scoreExclusivity);
-        Question question2 = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer, scoreExclusivity);
+        Question question1 = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer);
+        Question question2 = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer);
 
         List<Option> player1Options = Arrays.asList(
                 new Option("2 + 2", new CorrectOptionScorer()),
@@ -111,9 +108,8 @@ public class MultipleChoicePartialTest {
 
 
         // When
-        player1.activateConsumable(scoreExclusivity);
-        question1.selectOptions(player1Options);
-        question2.selectOptions(player2Options);
+        question1.selectOptions(player1Options, this.points);
+        question2.selectOptions(player2Options, this.points);
         question1.score(player1);
         question2.score(player2);
 
@@ -125,8 +121,6 @@ public class MultipleChoicePartialTest {
     @Test
     public void testMultipleChoicePartialQuadruplePointsWhenScoreExclusivityActivatedAndOnePlayerAnswerIncorrectly() throws InvalidSizeException, NoMoreConsumablesException {
         // Given
-        ScoreExclusivity scoreExclusivity = new ScoreExclusivity();
-        // Given
         List<Option> options = Arrays.asList(
                 new Option("2 + 2", new CorrectOptionScorer()),
                 new Option("2 * 2", new CorrectOptionScorer()),
@@ -135,8 +129,8 @@ public class MultipleChoicePartialTest {
                 new Option("1 - 3", new IncorrectOptionScorer()));
         QuestionScorer scorer = new MultipleChoiceWithPartialScorer();
 
-        Question question1 = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer, scoreExclusivity);
-        Question question2 = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer, scoreExclusivity);
+        Question question1 = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer);
+        Question question2 = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer);
 
         List<Option> player1Options = Arrays.asList(
                 new Option("2 + 2", new CorrectOptionScorer()),
@@ -155,10 +149,8 @@ public class MultipleChoicePartialTest {
 
 
         // When
-        player1.activateConsumable(scoreExclusivity);
-        player2.activateConsumable(scoreExclusivity);
-        question1.selectOptions(player1Options);
-        question2.selectOptions(player2Options);
+        question1.selectOptions(player1Options, this.points);
+        question2.selectOptions(player2Options, this.points);
         question1.score(player1);
         question2.score(player2);
 
@@ -170,7 +162,6 @@ public class MultipleChoicePartialTest {
     @Test
     public void testMultipleChoicePartialDontModifyPointsWhenScoreExclusivityActivatedNoIncorrectAnswers() throws InvalidSizeException, NoMoreConsumablesException {
         // Given
-        ScoreExclusivity scoreExclusivity = new ScoreExclusivity();
         List<Option> options = Arrays.asList(
                 new Option("2 + 2", new CorrectOptionScorer()),
                 new Option("2 * 2", new CorrectOptionScorer()),
@@ -179,8 +170,8 @@ public class MultipleChoicePartialTest {
                 new Option("1 - 3", new IncorrectOptionScorer()));
         QuestionScorer scorer = new MultipleChoiceWithPartialScorer();
 
-        Question question1 = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer, scoreExclusivity);
-        Question question2 = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer, scoreExclusivity);
+        Question question1 = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer);
+        Question question2 = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer);
 
         List<Option> player1Options = Arrays.asList(
                 new Option("2 + 2", new CorrectOptionScorer()));
@@ -194,9 +185,8 @@ public class MultipleChoicePartialTest {
         Integer expectedPlayer2Points = 0;
 
         // When
-        player1.activateConsumable(scoreExclusivity);
-        question1.selectOptions(player1Options);
-        question2.selectOptions(player2Options);
+        question1.selectOptions(player1Options, this.points);
+        question2.selectOptions(player2Options, this.points);
         question1.score(player1);
         question2.score(player2);
 

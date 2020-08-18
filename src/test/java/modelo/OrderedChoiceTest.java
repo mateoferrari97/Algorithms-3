@@ -1,7 +1,6 @@
 package modelo;
 
-import modelo.consumables.Multiplicator;
-import modelo.consumables.ScoreExclusivity;
+
 import exceptions.InvalidSizeException;
 import exceptions.NoMoreConsumablesException;
 import modelo.game.Player;
@@ -29,14 +28,14 @@ public class OrderedChoiceTest {
                 new Option("Cuarto", new IncorrectOptionScorer()));
 
         QuestionScorer scorer = new OrderedScorer();
-        Question question = new OrderedChoiceQuestion("ordene correctamente las siguientes opciones", options, scorer, new Multiplicator());
+        Question question = new OrderedChoiceQuestion("ordene correctamente las siguientes opciones", options, scorer);
 
         Player player = new Player();
         List<Option> playerOptions = options;
         Integer expectedPlayerPoints = 1;
 
         // When
-        question.selectOptions(playerOptions);
+        question.selectOptions(playerOptions, this.points);
         question.score(player);
 
         // Then
@@ -53,7 +52,7 @@ public class OrderedChoiceTest {
                 new Option("Cuarto", new IncorrectOptionScorer()));
 
         QuestionScorer scorer = new OrderedScorer();
-        Question question = new OrderedChoiceQuestion("ordene correctamente las siguientes opciones", options, scorer, new Multiplicator());
+        Question question = new OrderedChoiceQuestion("ordene correctamente las siguientes opciones", options, scorer);
 
         Player player = new Player();
         List<Option> playerOptions = Arrays.asList(
@@ -64,17 +63,16 @@ public class OrderedChoiceTest {
         Integer expectedPlayerPoints = 0;
 
         // When
-        question.selectOptions(playerOptions);
+        question.selectOptions(playerOptions, this.points);
         question.score(player);
 
         // Then
         Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
     }
 
-  /* @Test
+   @Test
     public void testGroupChoiceDoublePointsWhenScoreExclusivityActivatedAndOnePlayerAnswerIncorrectly() throws InvalidSizeException, NoMoreConsumablesException {
         // Given
-        ScoreExclusivity scoreExclusivity = new ScoreExclusivity();
         List<Option> options = Arrays.asList(
                 new Option("Primero", new CorrectOptionScorer()),
                 new Option("Segundo", new IncorrectOptionScorer()),
@@ -88,8 +86,8 @@ public class OrderedChoiceTest {
                 new Option("Cuarto", new IncorrectOptionScorer()));
 
         QuestionScorer scorer = new OrderedScorer();
-        Question question1= new OrderedChoiceQuestion("ordene correctamente las siguientes opciones", options, scorer, scoreExclusivity);
-        Question question2 = new OrderedChoiceQuestion("ordene correctamente las siguientes opciones", options2, scorer, scoreExclusivity);
+        Question question1= new OrderedChoiceQuestion("ordene correctamente las siguientes opciones", options, scorer);
+        Question question2 = new OrderedChoiceQuestion("ordene correctamente las siguientes opciones", options2, scorer);
 
         List<Option> player1Options = Arrays.asList(
                 options.get(0),
@@ -109,9 +107,8 @@ public class OrderedChoiceTest {
         Integer expectedPlayer2Points = 2;
 
         // When
-        player1.activateConsumable(scoreExclusivity);
-        question1.selectOptions(player1Options);
-        question2.selectOptions(player2Options);
+        question1.selectOptions(player1Options, this.points);
+        question2.selectOptions(player2Options, this.points);
         question1.score(player1);
         question2.score(player2);
 
@@ -123,7 +120,6 @@ public class OrderedChoiceTest {
     @Test
     public void testGroupChoiceQuadruplePointsWhenScoreExclusivityActivatedAndOnePlayerAnswerIncorrectly() throws InvalidSizeException, NoMoreConsumablesException {
         // Given
-        ScoreExclusivity scoreExclusivity = new ScoreExclusivity();
 
         List<Option> options = Arrays.asList(
                 new Option("Primero", new CorrectOptionScorer()),
@@ -138,8 +134,8 @@ public class OrderedChoiceTest {
                 new Option("Cuarto", new IncorrectOptionScorer()));
 
         QuestionScorer scorer = new OrderedScorer();
-        Question question1= new OrderedChoiceQuestion("ordene correctamente las siguientes opciones", options, scorer, scoreExclusivity);
-        Question question2 = new OrderedChoiceQuestion("ordene correctamente las siguientes opciones", options2, scorer, scoreExclusivity);
+        Question question1= new OrderedChoiceQuestion("ordene correctamente las siguientes opciones", options, scorer);
+        Question question2 = new OrderedChoiceQuestion("ordene correctamente las siguientes opciones", options2, scorer);
 
         List<Option> player1Options = Arrays.asList(
                 options.get(0),
@@ -159,10 +155,8 @@ public class OrderedChoiceTest {
         Integer expectedPlayer2Points = 4;
 
         // When
-        player1.activateConsumable(scoreExclusivity);
-        player2.activateConsumable(scoreExclusivity);
-        question1.selectOptions(player1Options);
-        question2.selectOptions(player2Options);
+        question1.selectOptions(player1Options, this.points);
+        question2.selectOptions(player2Options, this.points);
         question1.score(player1);
         question2.score(player2);
 
@@ -174,7 +168,6 @@ public class OrderedChoiceTest {
     @Test
     public void testGroupChoiceDontModifyPointsWhenScoreExclusivityActivatedNoIncorrectAnswers() throws InvalidSizeException, NoMoreConsumablesException {
         // Given
-        ScoreExclusivity scoreExclusivity = new ScoreExclusivity();
         List<Option> options = Arrays.asList(
                 new Option("Primero", new CorrectOptionScorer()),
                 new Option("Segundo", new IncorrectOptionScorer()),
@@ -188,8 +181,8 @@ public class OrderedChoiceTest {
                 new Option("Cuarto", new IncorrectOptionScorer()));
 
         QuestionScorer scorer = new OrderedScorer();
-        Question question1= new OrderedChoiceQuestion("ordene correctamente las siguientes opciones", options, scorer, scoreExclusivity);
-        Question question2 = new OrderedChoiceQuestion("ordene correctamente las siguientes opciones", options2, scorer, scoreExclusivity);
+        Question question1= new OrderedChoiceQuestion("ordene correctamente las siguientes opciones", options, scorer);
+        Question question2 = new OrderedChoiceQuestion("ordene correctamente las siguientes opciones", options2, scorer);
 
         List<Option> player1Options = Arrays.asList(
                 options.get(0),
@@ -209,17 +202,15 @@ public class OrderedChoiceTest {
         Integer expectedPlayer2Points = 0;
 
         // When
-        player1.activateConsumable(scoreExclusivity);
-        question1.selectOptions(player1Options);
-        question2.selectOptions(player2Options);
+        question1.selectOptions(player1Options, this.points);
+        question2.selectOptions(player2Options, this.points);
         question1.score(player1);
         question2.score(player2);
 
         // Then
         Assert.assertEquals(player1.getPoints(), expectedPlayer1Points);
         Assert.assertEquals(player2.getPoints(), expectedPlayer2Points);
-    } */
-
+    }
     @Test
     public void testGetCorrectOptionsFromOrderedChoiceQuestion() throws InvalidSizeException {
         // Given
@@ -228,7 +219,7 @@ public class OrderedChoiceTest {
                 new Option("Segundo", new IncorrectOptionScorer()));
 
         QuestionScorer scorer = new OrderedScorer();
-        Question question = new OrderedChoiceQuestion("ordene correctamente las siguientes opciones", opt, scorer, new Multiplicator());
+        Question question = new OrderedChoiceQuestion("ordene correctamente las siguientes opciones", opt, scorer);
 
         List<Option> options = question.getCorrectOptions();
         Assert.assertEquals(opt,options);

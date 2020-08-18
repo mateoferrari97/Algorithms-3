@@ -1,7 +1,6 @@
 package modelo;
 
-import modelo.consumables.Multiplicator;
-import modelo.consumables.ScoreExclusivity;
+
 import exceptions.InvalidSizeException;
 import exceptions.NoMoreConsumablesException;
 import modelo.game.Player;
@@ -34,14 +33,14 @@ public class GroupChoiceTest {
 
 
         QuestionScorer scorer = new BooleanScorer();
-        Question question = new GroupChoiceQuestion("Separar en numeros y letras", options, scorer, new Multiplicator());
+        Question question = new GroupChoiceQuestion("Separar en numeros y letras", options, scorer);
 
         List<Option> playerOptions = Arrays.asList(
                 options.get(3),
                 options.get(4));
 
         // When
-        question.selectOptions(playerOptions);
+        question.selectOptions(playerOptions, this.points);
         question.score(player);
 
         // Then
@@ -63,7 +62,7 @@ public class GroupChoiceTest {
                 new Option("2", new IncorrectOptionScorer()));
 
         QuestionScorer scorer = new BooleanScorer();
-        Question question = new GroupChoiceQuestion("Separar en numeros y letras", options, scorer, new Multiplicator());
+        Question question = new GroupChoiceQuestion("Separar en numeros y letras", options, scorer);
 
 
         List<Option> playerOptions = Arrays.asList(
@@ -72,7 +71,7 @@ public class GroupChoiceTest {
                 options.get(3));
 
         // When
-        question.selectOptions(playerOptions);
+        question.selectOptions(playerOptions, this.points);
         question.score(player);
 
         // Then
@@ -82,9 +81,6 @@ public class GroupChoiceTest {
     @Test
     public void testGroupChoiceDoublePointsWhenScoreExclusivityActivatedAndOnePlayerAnswerIncorrectly() throws InvalidSizeException, NoMoreConsumablesException {
         // Given
-        ScoreExclusivity scoreExclusivity = new ScoreExclusivity();
-
-
         Player player1 = new Player();
         Player player2 = new Player();
         Integer expectedPlayer1Points = 0;
@@ -98,8 +94,8 @@ public class GroupChoiceTest {
                 new Option("2", new IncorrectOptionScorer()));
 
         QuestionScorer scorer = new BooleanScorer();
-        Question question1 = new GroupChoiceQuestion("Separar en numeros y letras", options, scorer, scoreExclusivity);
-        Question question2 = new GroupChoiceQuestion("Separar en numeros y letras", options, scorer, scoreExclusivity);
+        Question question1 = new GroupChoiceQuestion("Separar en numeros y letras", options, scorer);
+        Question question2 = new GroupChoiceQuestion("Separar en numeros y letras", options, scorer);
 
         List<Option> player1Options = Arrays.asList(
                 options.get(0));
@@ -109,9 +105,8 @@ public class GroupChoiceTest {
                 options.get(4));
 
         // When
-        player1.activateConsumable(scoreExclusivity);
-        question1.selectOptions(player1Options);
-        question2.selectOptions(player2Options);
+        question1.selectOptions(player1Options, this.points);
+        question2.selectOptions(player2Options, this.points);
         question1.score(player1);
         question2.score(player2);
 
@@ -123,7 +118,6 @@ public class GroupChoiceTest {
     @Test
     public void testGroupChoiceQuadruplePointsWhenScoreExclusivityActivatedAndOnePlayerAnswerIncorrectly() throws InvalidSizeException, NoMoreConsumablesException {
         // Given
-        ScoreExclusivity scoreExclusivity = new ScoreExclusivity();
 
         List<Option> options = Arrays.asList(
                 new Option("A", new CorrectOptionScorer()),
@@ -133,8 +127,8 @@ public class GroupChoiceTest {
                 new Option("2", new IncorrectOptionScorer()));
 
         QuestionScorer scorer = new BooleanScorer();
-        Question question1 = new GroupChoiceQuestion("Separar en numeros y letras", options, scorer, scoreExclusivity);
-        Question question2 = new GroupChoiceQuestion("Separar en numeros y letras", options, scorer, scoreExclusivity);
+        Question question1 = new GroupChoiceQuestion("Separar en numeros y letras", options, scorer);
+        Question question2 = new GroupChoiceQuestion("Separar en numeros y letras", options, scorer);
 
         List<Option> player1Options = Arrays.asList(
                 options.get(0));
@@ -149,10 +143,8 @@ public class GroupChoiceTest {
         Integer expectedPlayer2Points = 4;
 
         // When
-        player1.activateConsumable(scoreExclusivity);
-        player2.activateConsumable(scoreExclusivity);
-        question1.selectOptions(player1Options);
-        question2.selectOptions(player2Options);
+        question1.selectOptions(player1Options, this.points);
+        question2.selectOptions(player2Options, this.points);
         question1.score(player1);
         question2.score(player2);
 
@@ -164,7 +156,6 @@ public class GroupChoiceTest {
     @Test
     public void testGroupChoiceDontModifyPointsWhenScoreExclusivityActivatedNoIncorrectAnswers() throws InvalidSizeException, NoMoreConsumablesException {
         // Given
-        ScoreExclusivity scoreExclusivity = new ScoreExclusivity();
 
         List<Option> options = Arrays.asList(
                 new Option("A", new CorrectOptionScorer()),
@@ -174,8 +165,8 @@ public class GroupChoiceTest {
                 new Option("2", new IncorrectOptionScorer()));
 
         QuestionScorer scorer = new BooleanScorer();
-        Question question1 = new GroupChoiceQuestion("Separar en numeros y letras", options, scorer, scoreExclusivity);
-        Question question2 = new GroupChoiceQuestion("Separar en numeros y letras", options, scorer, scoreExclusivity);
+        Question question1 = new GroupChoiceQuestion("Separar en numeros y letras", options, scorer);
+        Question question2 = new GroupChoiceQuestion("Separar en numeros y letras", options, scorer);
 
         List<Option> player1Options = Arrays.asList(
                 options.get(3),
@@ -191,9 +182,8 @@ public class GroupChoiceTest {
         Integer expectedPlayer2Points = 0;
 
         // When
-        player1.activateConsumable(scoreExclusivity);
-        question1.selectOptions(player1Options);
-        question2.selectOptions(player2Options);
+        question1.selectOptions(player1Options, this.points);
+        question2.selectOptions(player2Options, this.points);
         question1.score(player1);
         question2.score(player2);
 
@@ -213,7 +203,7 @@ public class GroupChoiceTest {
                 new Option("2", new IncorrectOptionScorer()));
         try {
                 QuestionScorer sc = new BooleanScorer();
-                Question question = new GroupChoiceQuestion("Separar en numeros y letras", options, sc, new Multiplicator());
+                Question question = new GroupChoiceQuestion("Separar en numeros y letras", options, sc);
 
         } catch (Exception e){
             Assert.assertEquals(e.getMessage(),"invalid options size: want minimum 2, maximum 6. got: 6");
