@@ -143,8 +143,8 @@ public class Play extends VBox {
     //----------------------------------------------------------------------
 
     private void createAnswerDraggableOptions(Round round, Turn turn, Game game) {
-        Text[] text = getQuestionTextOptions(round, turn, game);
         HBox textContainer = new HBox();
+        Text[] text = getQuestionTextOptions(round, turn, game, textContainer);
         for(Text aText : text){
             textContainer.getChildren().add(aText);
         }
@@ -153,7 +153,7 @@ public class Play extends VBox {
         this.getChildren().add(textContainer);
     }
 
-    private Text[] getQuestionTextOptions(Round round, Turn turn, Game game) {
+    private Text[] getQuestionTextOptions(Round round, Turn turn, Game game, HBox hBox) {
         String[] answerOptions = round.getQuestion().getAnswerOptions();
         Text[] texts = new Text[answerOptions.length];
         int i = 0;
@@ -163,21 +163,21 @@ public class Play extends VBox {
             texts[i].setScaleY(2.0);
             i++;
         }
-        fillTextWithEvents(texts);
+        fillTextWithEvents(texts, hBox);
         return texts;
     }
 
-    public void fillTextWithEvents(Text[] texts) {
+    public void fillTextWithEvents(Text[] texts, HBox hBox) {
         int i = 0;
         for(Text aText : texts) {
-            setAsDraggable(aText);
+            setAsDraggable(aText, hBox);
             i++;
         }
     }
 
-    void setAsDraggable(Text text) {
+    void setAsDraggable(Text text, HBox hBox) {
         text.setOnDragDetected(new DragDetectedEvenHandler(text));
-        text.setOnDragDone(new DragDoneEventHandler(text));
+        text.setOnDragDone(new DragDoneEventHandler(text, hBox));
     }
 
     //----------------------------------------------------------------------
