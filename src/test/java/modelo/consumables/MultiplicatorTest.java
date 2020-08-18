@@ -1,6 +1,5 @@
-package modelo;
+package modelo.consumables;
 
-import modelo.consumables.Multiplicator;
 import modelo.game.Points;
 import org.junit.Assert;
 import org.junit.Test;

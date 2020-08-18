@@ -1,4 +1,4 @@
-package modelo;
+package modelo.consumables;
 
 import modelo.consumables.ScoreExclusivity;
 import modelo.game.Points;
