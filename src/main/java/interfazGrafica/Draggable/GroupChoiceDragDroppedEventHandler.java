@@ -17,7 +17,7 @@ import modelo.options.Option;
 
 import java.util.List;
 
-public class DragDroppedEventHandler implements EventHandler<DragEvent> {
+public class GroupChoiceDragDroppedEventHandler implements EventHandler<DragEvent> {
 
     private Game game;
     private Round round;
@@ -28,7 +28,7 @@ public class DragDroppedEventHandler implements EventHandler<DragEvent> {
     private OptionGroup typeOfGroup;
 
 
-    public DragDroppedEventHandler(VBox vBox, Game game, Round round, Turn turn, Play nextPlay, Stage stage, OptionGroup typeOfGroup){
+    public GroupChoiceDragDroppedEventHandler(VBox vBox, Game game, Round round, Turn turn, Play nextPlay, Stage stage, OptionGroup typeOfGroup){
         this.vBox = vBox;
         this.turn = turn;
         this.game = game;

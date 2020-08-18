@@ -4,11 +4,11 @@ import Group.SelectableGroup;
 import Group.UnselectableGroup;
 import interfazGrafica.Draggable.*;
 import interfazGrafica.Eventos.BooleanOptionsEventHandler;
+import interfazGrafica.Draggable.GroupChoiceDragDroppedEventHandler;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -223,17 +223,7 @@ public class Play extends VBox {
         target.setOnDragOver(new DragOverEventHandler());
         target.setOnDragEntered(new DragEnteredEventHandler(target));
         target.setOnDragExited(new DragExitedEventHandler(target));
-        target.setOnDragDropped(new DragDroppedEventHandler(vBox, game, round, turn, nextScene, this.stage, typeOfGroup));
+        target.setOnDragDropped(new GroupChoiceDragDroppedEventHandler(vBox, game, round, turn, nextScene, this.stage, typeOfGroup));
     }
-
-
-
-
-
-
-
-
-
-
 }
 
