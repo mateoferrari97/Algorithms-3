@@ -29,19 +29,24 @@ public class OrderedChoiceQuestion extends Question {
         int i = 2;
         for (Option aOption : playerAnswers) {
             aOption.calculatePoints(this.scorer, this.points);
-            this.nextOption.changeState(this.nextOption);
+            this.nextOption.changeState();
             if (i < this.options.size()) {
                 this.nextOption = this.options.get(i);
                 i++;
             }
         }
-        if (!(this.isCorrect())) {
-            this.consumable.useWithIncorrectAnswer();
+        for(int j = 1; j < options.size() - 1; j++){
+            options.get(j).changeState();
         }
+        this.nextOption = options.get(1);
+
+      /*  if (!(this.isCorrect())) {
+            this.consumable.useWithIncorrectAnswer();
+        }*/
     }
 
     public void score(Player player) {
-        this.consumable.multiplicate(this.points);
+        //this.consumable.multiplicate(this.points);
         this.scorer.score(player, this.points);
     }
 

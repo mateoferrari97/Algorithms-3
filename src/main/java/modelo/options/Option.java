@@ -16,8 +16,8 @@ public class Option {
         this.scorer.calculatePoints(scorer, points);
     }
 
-    public void changeState(Option option) {
-        scorer.changeState(option);
+    public void changeState() {
+        scorer.changeState(this);
     }
 
     public void changeToCorrect() {

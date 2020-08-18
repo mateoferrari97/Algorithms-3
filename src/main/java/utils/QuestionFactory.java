@@ -68,9 +68,9 @@ public class QuestionFactory {
             case BOOLEAN_QUESTION_TYPE:
                 return new BooleanQuestion(text, options, scorer, new Multiplicator());
             case GROUP_CHOCIE_QUESTION_TYPE:
-                return new GroupChoiceQuestion(text, options, scorer, new Multiplicator());
+                return new GroupChoiceQuestion(text, options, scorer, new ScoreExclusivity());
             case ORDERED_CHOICE_QUESTION_TYPE:
-                return new OrderedChoiceQuestion(text, options, scorer, new Multiplicator());
+                return new OrderedChoiceQuestion(text, options, scorer, new ScoreExclusivity());
             case MULTIPLE_CHOICE_QUESTION_TYPE:
                 return new MultipleChoiceQuestion(text, options, scorer, new Multiplicator());
             default:

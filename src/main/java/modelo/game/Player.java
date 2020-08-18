@@ -8,6 +8,7 @@ public class Player {
     private String  name;
     private Integer points = 0;
     private Integer consumablesAmount = 2;
+    private State state;
 
     public Player() {}
 
@@ -43,5 +44,25 @@ public class Player {
         if (consumablesAmount < 0)
             throw new NoMoreConsumablesException(PLAYER_HAS_NO_MORE_CONSUMABLES_ERROR);
         consumable.activate();
+    }
+
+    public void changeStateToDraw() {
+        this.state = new Tied();
+    }
+
+    public void changeStateToWinner() {
+        this.state = new Winner();
+    }
+
+    public void changeStateToLoser() {
+        this.state = new Loser();
+    }
+
+    public boolean isWinner() {
+        return this.state.isWinner();
+    }
+
+    public boolean isTied() {
+        return this.state.isTied();
     }
 }

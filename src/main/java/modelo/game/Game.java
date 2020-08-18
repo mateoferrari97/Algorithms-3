@@ -40,6 +40,7 @@ public class Game {
     }
 
     public Round getNextRound() {
+        setWinner();
         if(currentRound >= rounds.size()){
             currentRound = 0;
             return null;
@@ -56,6 +57,55 @@ public class Game {
         for (int i = 0; i < MAX_PLAYERS; i++) {
             this.players[i] = new Player();
         }
+        setWinner();
+    }
+
+    private void setWinner() {
+        if(players[0].getPoints() == players[1].getPoints()){
+            players[0].changeStateToDraw();
+            players[1].changeStateToDraw();
+        }
+        else if(players[0].getPoints() > players[1].getPoints()){
+            players[0].changeStateToWinner();
+            players[1].changeStateToLoser();
+        }
+
+        else{
+            players[0].changeStateToLoser();
+            players[1].changeStateToWinner();
+        }
+
+    }
+
+    public Player getWinner() {
+        Player winner = null;
+        for(Player aPlayer : players){
+            if(aPlayer.isTied()){
+                return null;
+            }
+            if(aPlayer.isWinner()){
+                winner = aPlayer;
+            }
+        }
+        return winner;
+    }
+
+    public Player getLoser() {
+        Player loser = null;
+        for(Player aPlayer : players){
+            if(aPlayer.isTied()){
+                return null;
+            }
+            if(!aPlayer.isWinner()){
+                loser = aPlayer;
+            }
+        }
+
+        return loser;
+    }
+
+    public boolean getDraw() {
+        return players[0].isTied();
     }
 
     private void createRounds() throws InvalidSizeException, IOException, InvalidJsonRecognizerClassException {
@@ -77,8 +127,6 @@ public class Game {
 
     private String getStringFromFile(String fileName) throws IOException {
 
-       // JsonReader reader = new JsonReader(new FileReader(fileName));
-        // reader.beginArray();
         BufferedReader reader = new BufferedReader(new FileReader(fileName));
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(reader.readLine());
@@ -87,4 +135,7 @@ public class Game {
 
     }
 
+    public Player getFirstPlayer() {
+        return players[0];
+    }
 }
