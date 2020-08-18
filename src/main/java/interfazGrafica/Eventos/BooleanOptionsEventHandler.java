@@ -2,6 +2,7 @@ package interfazGrafica.Eventos;
 
 import interfazGrafica.EndGame;
 import interfazGrafica.Play;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
@@ -20,14 +21,21 @@ public class BooleanOptionsEventHandler implements EventHandler<ActionEvent> {
     private Option option;
     private Game game;
     private Turn turn;
+    private Timeline timeline;
+    private Timeline timeline2;
+    private Timeline timeline3;
 
-    public BooleanOptionsEventHandler(Option option, Round round, Turn turn, Game game, Play nextPlay, Stage stage) {
+    public BooleanOptionsEventHandler(Option option, Round round, Turn turn, Game game, Play nextPlay, Stage stage, Timeline timeline, Timeline timeline2, Timeline timeline3) {
         this.round = round;
         this.turn = turn;
         this.option = option;
         this.game = game;
         this.nextPlay = nextPlay;
         this.stage = stage;
+        this.timeline = timeline;
+        this.timeline2 = timeline2;
+        this.timeline3 = timeline3;
+
     }
 
     @Override
@@ -38,6 +46,9 @@ public class BooleanOptionsEventHandler implements EventHandler<ActionEvent> {
             return;
         }
 
+        this.timeline.stop();
+        this.timeline2.stop();
+        this.timeline3.stop();
         this.turn.finish();
 
         if(game.getNextRound() == null){
