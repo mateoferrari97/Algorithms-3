@@ -1,6 +1,6 @@
-package consumables;
+package modelo.consumables;
 
-import modelo.Points;
+import modelo.game.Points;
 
 public interface Consumable {
 

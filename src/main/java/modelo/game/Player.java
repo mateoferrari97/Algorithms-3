@@ -1,17 +1,19 @@
-package modelo;
+package modelo.game;
 
-import consumables.Consumable;
 import exceptions.NoMoreConsumablesException;
+import modelo.consumables.*;
+import static constantes.ErrorMessage.PLAYER_HAS_NO_MORE_CONSUMABLES_ERROR;
 
 public class Player {
     private String  name;
     private Integer points = 0;
     private Integer consumablesAmount = 2;
+    private State state;
 
     public Player() {}
 
     public Player(String name) {
-        this.setText(name);
+        this.setName(name);
     }
 
     public Integer getPoints() {
@@ -29,17 +31,38 @@ public class Player {
         }
     }
 
-    public void setText(String name){
+    public void setName(String name){
         this.name = name;
     }
 
-    public String getText() {
+    public String getName() {
         return this.name;
     }
 
     public void activateConsumable(Consumable consumable) throws NoMoreConsumablesException {
         consumablesAmount--;
-        if (consumablesAmount < 0) throw new NoMoreConsumablesException("El jugador no posee ningun consumible.");
+        if (consumablesAmount < 0)
+            throw new NoMoreConsumablesException(PLAYER_HAS_NO_MORE_CONSUMABLES_ERROR);
         consumable.activate();
+    }
+
+    public void changeStateToDraw() {
+        this.state = new Tied();
+    }
+
+    public void changeStateToWinner() {
+        this.state = new Winner();
+    }
+
+    public void changeStateToLoser() {
+        this.state = new Loser();
+    }
+
+    public boolean isWinner() {
+        return this.state.isWinner();
+    }
+
+    public boolean isTied() {
+        return this.state.isTied();
     }
 }

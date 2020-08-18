@@ -1,6 +1,7 @@
 package modelo;
 
-import consumables.ScoreExclusivity;
+import modelo.consumables.ScoreExclusivity;
+import modelo.game.Points;
 import org.junit.Assert;
 import org.junit.Test;
 

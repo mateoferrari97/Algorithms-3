@@ -1,6 +1,6 @@
 package modelo.options;
 
-import modelo.Points;
+import modelo.game.Points;
 import modelo.scorers.QuestionScorer;
 
 public class IncorrectOptionScorer implements IOptionScorer {

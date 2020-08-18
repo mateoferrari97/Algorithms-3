@@ -18,11 +18,14 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import modelo.*;
-import modelo.Round;
-import modelo.Turn;
+import modelo.game.Game;
+import modelo.game.Player;
+import modelo.game.Round;
+import modelo.game.Turn;
 import modelo.options.Option;
 import Group.OptionGroup;
+
+import static constantes.Constantes.GROUP_CHOCIE_QUESTION_TYPE;
 
 public class Play extends VBox {
     Stage stage;
@@ -61,15 +64,13 @@ public class Play extends VBox {
     //----------------------------------------------------------------------
     //--------------------------Buttons creation----------------------------
     //----------------------------------------------------------------------
-
     private void createAnswerOptionsButtons(Round round, Turn turn, Game game) {
         Button[] buttons = getQuestionOptions(round, turn, game);
         HBox buttonsContainer = new HBox();
         for(Button aButton : buttons){
             buttonsContainer.getChildren().add(aButton);
         }
-        buttonsContainer.setAlignment(Pos.CENTER);
-        buttonsContainer.setSpacing(300);
+        buttonsContainer.setSpacing(150);
         this.getChildren().add(buttonsContainer);
     }
 
@@ -100,7 +101,6 @@ public class Play extends VBox {
     //----------------------------------------------------------------------
     //--------------------------Question text label-------------------------
     //----------------------------------------------------------------------
-
     private void createQuestionLabel(Round round) {
         Label questionText = new Label();
         questionText.setTextFill(Color.BLUE);
@@ -126,7 +126,7 @@ public class Play extends VBox {
 
 
         Player player = turn.getPlayer();
-        playerText.setText(player.getText());
+        playerText.setText(player.getName());
         playerPoints.setText(player.getPoints().toString());
 
         HBox playerContenedorHorizontal = new HBox(playerText, playerPoints);

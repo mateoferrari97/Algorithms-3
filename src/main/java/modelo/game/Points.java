@@ -1,4 +1,4 @@
-package modelo;
+package modelo.game;
 
 public class Points {
     private Integer points;

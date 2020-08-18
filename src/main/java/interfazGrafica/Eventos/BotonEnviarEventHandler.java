@@ -6,8 +6,8 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
-import modelo.Game;
-import modelo.Player;
+import modelo.game.Game;
+import modelo.game.Player;
 
 public class BotonEnviarEventHandler implements EventHandler<ActionEvent> {
 
@@ -37,7 +37,7 @@ public class BotonEnviarEventHandler implements EventHandler<ActionEvent> {
             Player player = this.game.getNextPlayer();
             if (amountOfPlayers < this.game.getPlayers().length) {
                 amountOfPlayers++;
-                player.setText(textField.getText());
+                player.setName(textField.getText());
                 this.textField.clear();
                 this.textField.requestFocus();
                 if(amountOfPlayers == this.game.getPlayers().length){

@@ -1,7 +1,6 @@
 package modelo.options;
 
-import com.google.gson.JsonObject;
-import modelo.Points;
+import modelo.game.Points;
 import modelo.scorers.QuestionScorer;
 
 public class Option {
@@ -17,8 +16,8 @@ public class Option {
         this.scorer.calculatePoints(scorer, points);
     }
 
-    public void changeState(Option option) {
-        scorer.changeState(option);
+    public void changeState() {
+        scorer.changeState(this);
     }
 
     public void changeToCorrect() {
@@ -33,15 +32,6 @@ public class Option {
         return this.text;
     }
 
-
-    public static Option unmarshal(JsonObject json){
-        String text = json.get("text").getAsString();
-        boolean isCorrect = json.get("optionScorer").getAsBoolean();
-       if(isCorrect){
-           return new Option(text,new CorrectOptionScorer());
-       }
-        return new Option(text,new IncorrectOptionScorer());
-    }
 
     public boolean isCorrect() {
         return scorer.isCorrect();

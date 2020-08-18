@@ -1,21 +1,17 @@
 package modelo.questions;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import consumables.Multiplicator;
-import exceptions.InvalidJsonRecognizerClassException;
+import modelo.consumables.*;
 import exceptions.InvalidSizeException;
-import consumables.Consumable;
-import modelo.Player;
-import modelo.Points;
-import consumables.ScoreExclusivity;
+import modelo.game.Player;
+import modelo.game.Points;
 import modelo.options.CorrectOptionScorer;
 import modelo.options.Option;
 import modelo.scorers.QuestionScorer;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static constantes.Constantes.GROUP_CHOCIE_QUESTION_TYPE;
+import static constantes.ErrorMessage.INVALID_GROUP_CHOICE_OPTION_LIMIT_OF_SIZE;
 
 public class GroupChoiceQuestion extends Question {
 
@@ -24,8 +20,7 @@ public class GroupChoiceQuestion extends Question {
 
         Integer optionsSize = options.size();
         if (optionsSize < 2 || optionsSize > 6) {
-            String error = "invalid options size: want minimum 2, maximum 6. got: " + optionsSize;
-            throw new InvalidSizeException(error);
+            throw new InvalidSizeException(INVALID_GROUP_CHOICE_OPTION_LIMIT_OF_SIZE + optionsSize);
         }
 
         this.options = options;
@@ -33,7 +28,7 @@ public class GroupChoiceQuestion extends Question {
         this.scorer = scorer;
         this.points = new Points();
         this.consumable = consumable;
-        this.type = "group choice";
+        this.type = GROUP_CHOCIE_QUESTION_TYPE;
     }
 
     @Override
@@ -44,39 +39,28 @@ public class GroupChoiceQuestion extends Question {
         Points pointsDone = new Points();
 
         Option CorrectOption = new Option("", new CorrectOptionScorer());
-        for (Option aOption : options) { CorrectOption.calculatePoints(this.scorer, maxPoints);}
+        for (Option aOption : options) {
+            CorrectOption.calculatePoints(this.scorer, maxPoints);
+        }
 
-        for (Option aOption : playerAnswers) { aOption.changeState(aOption);}
-        for (Option aOption : options) { aOption.calculatePoints(this.scorer, pointsDone);}
+        for (Option aOption : playerAnswers) {
+            aOption.changeState();
+        }
+        for (Option aOption : options) {
+            aOption.calculatePoints(this.scorer, pointsDone);
+        }
 
-        if (pointsDone.equals(minPoints) || pointsDone.equals(maxPoints)) { this.points.gainAPoint();}
+        if (pointsDone.equals(minPoints) || pointsDone.equals(maxPoints)) {
+            this.points.gainAPoint();
+        }
 
-        for (Option aOption : playerAnswers) { aOption.changeState(aOption);}
+        for (Option aOption : playerAnswers) {
+            aOption.changeState();
+        }
 
         if (!(this.isCorrect())) this.consumable.useWithIncorrectAnswer();
     }
 
-    public static Question unmarshal(JsonObject json) throws InvalidJsonRecognizerClassException, InvalidSizeException {
-        try {
-
-            String text = json.get("text").getAsString();
-            String scorerString = json.get("scorer").getAsString();
-
-            List<Option> options = new ArrayList<Option>();
-            JsonArray arrayOptions = json.getAsJsonArray("options");
-            for (JsonElement jsonOption : arrayOptions) {
-                Option option = Option.unmarshal(jsonOption.getAsJsonObject());
-                options.add(option);
-            }
-
-            QuestionScorer questionScorer = selectScorer(scorerString);
-
-            //Question question = question(text, options, questionScorer);
-            return new GroupChoiceQuestion(text, options, questionScorer, new Multiplicator());
-        } catch (Exception e) {
-            throw e;
-        }
-    }
 
     @Override
     public void score(Player player) {

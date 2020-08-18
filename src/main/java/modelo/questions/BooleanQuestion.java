@@ -1,18 +1,14 @@
 package modelo.questions;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import consumables.Consumable;
-import consumables.Multiplicator;
-import consumables.ScoreExclusivity;
-import exceptions.InvalidJsonRecognizerClassException;
-import exceptions.InvalidSizeException;
-import modelo.*;
+
+import modelo.consumables.*;
+import modelo.game.Player;
+import modelo.game.Points;
 import modelo.options.Option;
 import modelo.scorers.QuestionScorer;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static constantes.Constantes.BOOLEAN_QUESTION_TYPE;
 
 public class BooleanQuestion extends Question {
     public BooleanQuestion(String text, List<Option> options, QuestionScorer scorer, Consumable consumable) {
@@ -22,13 +18,13 @@ public class BooleanQuestion extends Question {
         this.scorer = scorer;
         this.points = new Points();
         this.consumable = consumable;
-        this.type = "boolean";
+        this.type = BOOLEAN_QUESTION_TYPE;
     }
 
 
     @Override
     public void selectOptions(List<Option> playerAnswers) {
-        for(Option aOption : playerAnswers){
+        for (Option aOption : playerAnswers) {
             aOption.calculatePoints(scorer, this.points);
         }
         if (!(this.isCorrect())) this.consumable.useWithIncorrectAnswer();
@@ -37,30 +33,7 @@ public class BooleanQuestion extends Question {
     @Override
     public void score(Player player) {
         this.consumable.multiplicate(this.points);
-        scorer.score(player,this.points);
+        scorer.score(player, this.points);
     }
-
-    public static Question unmarshal(JsonObject json) throws InvalidJsonRecognizerClassException, InvalidSizeException {
-        try {
-
-            String text = json.get("text").getAsString();
-            String scorerString = json.get("scorer").getAsString();
-
-            List<Option> options = new ArrayList<Option>();
-            JsonArray arrayOptions = json.getAsJsonArray("options");
-            for (JsonElement jsonOption : arrayOptions) {
-                Option option = Option.unmarshal(jsonOption.getAsJsonObject());
-                options.add(option);
-            }
-
-            QuestionScorer questionScorer = selectScorer(scorerString);
-
-            //Question question = question(text, options, questionScorer);
-            return new BooleanQuestion(text, options, questionScorer, new Multiplicator());
-        } catch (Exception e) {
-            throw e;
-        }
-    }
-
 
 }

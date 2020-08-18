@@ -1,21 +1,15 @@
 package modelo.questions;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import consumables.Multiplicator;
-import exceptions.InvalidJsonRecognizerClassException;
-import exceptions.InvalidSizeException;
-import consumables.Consumable;
-import modelo.Player;
-import modelo.Points;
-import consumables.ScoreExclusivity;
+import modelo.consumables.*;
+import modelo.game.Player;
+import modelo.game.Points;
 import modelo.options.Option;
 import modelo.scorers.QuestionScorer;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
+import static constantes.Constantes.ORDERED_CHOICE_QUESTION_TYPE;
 
 public class OrderedChoiceQuestion extends Question {
     private Option nextOption;
@@ -28,52 +22,37 @@ public class OrderedChoiceQuestion extends Question {
         this.scorer = scorer;
         this.points = new Points();
         this.consumable = consumable;
-        this.type = "ordered choice";
+        this.type = ORDERED_CHOICE_QUESTION_TYPE;
     }
 
     public void selectOptions(List<Option> playerAnswers) {
         int i = 2;
-        for(Option aOption : playerAnswers){
+        for (Option aOption : playerAnswers) {
             aOption.calculatePoints(this.scorer, this.points);
-            this.nextOption.changeState(this.nextOption);
-            if(i < this.options.size()) {
+            this.nextOption.changeState();
+            if (i < this.options.size()) {
                 this.nextOption = this.options.get(i);
                 i++;
             }
         }
-        if (!(this.isCorrect())) { this.consumable.useWithIncorrectAnswer();}
+        for(int j = 1; j < options.size() - 1; j++){
+            options.get(j).changeState();
+        }
+        this.nextOption = options.get(1);
+
+      /*  if (!(this.isCorrect())) {
+            this.consumable.useWithIncorrectAnswer();
+        }*/
     }
 
     public void score(Player player) {
-
-        this.consumable.multiplicate(this.points);
+        //this.consumable.multiplicate(this.points);
         this.scorer.score(player, this.points);
-    }
-
-    public static Question unmarshal(JsonObject json) throws InvalidJsonRecognizerClassException, InvalidSizeException {
-        try {
-
-            String text = json.get("text").getAsString();
-            String scorerString = json.get("scorer").getAsString();
-
-            List<Option> options = new ArrayList<Option>();
-            JsonArray arrayOptions = json.getAsJsonArray("options");
-            for (JsonElement jsonOption : arrayOptions) {
-                Option option = Option.unmarshal(jsonOption.getAsJsonObject());
-                options.add(option);
-            }
-
-            QuestionScorer questionScorer = selectScorer(scorerString);
-
-            //Question question = question(text, options, questionScorer);
-            return new OrderedChoiceQuestion(text, options, questionScorer, new Multiplicator());
-        } catch (Exception e) {
-            throw e;
-        }
     }
 
     @Override
     public List<Option> getCorrectOptions() {
         return this.options;
     }
+
 }

@@ -1,7 +1,6 @@
-package consumables;
+package modelo.consumables;
 
-import consumables.Consumable;
-import modelo.Points;
+import modelo.game.Points;
 
 public class Multiplicator implements Consumable {
     protected Integer factor;

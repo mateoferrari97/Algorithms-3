@@ -1,11 +1,9 @@
 package modelo;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import consumables.Multiplicator;
-import consumables.ScoreExclusivity;
-import exceptions.InvalidJsonRecognizerClassException;
-import exceptions.InvalidSizeException;
+import modelo.consumables.Multiplicator;
+import modelo.consumables.ScoreExclusivity;
+import exceptions.NoMoreConsumablesException;
+import modelo.game.Player;
 import modelo.options.CorrectOptionScorer;
 import modelo.options.IncorrectOptionScorer;
 import modelo.options.Option;
@@ -13,7 +11,6 @@ import modelo.questions.BooleanQuestion;
 import modelo.questions.Question;
 import modelo.scorers.BooleanScorer;
 import modelo.scorers.QuestionScorer;
-import exceptions.NoMoreConsumablesException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -64,31 +61,6 @@ public class BooleanQuestionTest {
         // Then
         Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
     }
-
-
-    @Test
-    public void testUnmarshalBooleanQuestionAndTestHowItWorks() throws InvalidJsonRecognizerClassException, InvalidSizeException {
-
-        String jString = "{\"text\": \"vamos a aprobar algoritmos 3?\",\"scorer\": \"BooleanScorer\",\"options\":[{\"text\": \"si\",\"optionScorer\": true},{\"text\": \"no\",\"optionScorer\": false}]}";
-
-        JsonParser parser = new JsonParser();
-        JsonObject jObj = parser.parse(jString).getAsJsonObject();
-
-        Question question = BooleanQuestion.unmarshal(jObj);
-
-        Player player = new Player();
-        List<Option> playerOptions = Arrays.asList(new Option("si", new CorrectOptionScorer()));
-        Integer expectedPlayerPoints = 1;
-
-        // When
-        question.selectOptions(playerOptions);
-        question.score(player);
-
-        // Then
-        Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
-    }
-
-
 
     @Test
     public void testBooleanQuestionDoublePointsWhenScoreExclusivityActivatedAndOnePlayerAnswerIncorrectly() throws NoMoreConsumablesException {
