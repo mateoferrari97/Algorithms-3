@@ -73,9 +73,9 @@ public class Play extends VBox {
     private void createMultiplicatorButton(Round round, Turn turn) {
         List<Button> buttons = new ArrayList<>();
 
-        for(Multiplicator aMultiplicator : turn.getMultiplicator()){
+        for(Multiplicator aMultiplicator : round.getMultiplicator()){
             Button button = new Button(aMultiplicator.getText());
-            MultiplicatorEventHandler multiplicatorEventHandler = new MultiplicatorEventHandler(aMultiplicator, turn);
+            MultiplicatorEventHandler multiplicatorEventHandler = new MultiplicatorEventHandler(aMultiplicator, turn, round);
             button.setOnAction(multiplicatorEventHandler);
             buttons.add(button);
         }

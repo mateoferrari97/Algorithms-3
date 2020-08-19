@@ -57,6 +57,7 @@ public class RoundIT {
         Turn turnOne = round.getTurn(gameMock);
         Turn turnTwo = round.getTurn(gameMock);
 
+        List<Multiplicator> multiplicators = round.getMultiplicator();
 
         List<Option> playerOneOptions = Arrays.asList(new Option("no", new IncorrectOptionScorer()));
         List<Option> playerTwoOptions = Arrays.asList(new Option("no", new IncorrectOptionScorer()));

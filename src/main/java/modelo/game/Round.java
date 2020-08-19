@@ -1,5 +1,6 @@
 package modelo.game;
 
+import modelo.multiplicators.Multiplicator;
 import modelo.multiplicators.ScoreExclusivity;
 import modelo.questions.Question;
 
@@ -11,6 +12,7 @@ public class Round {
     private List<Turn> turns = new ArrayList<>();
     private List<Player> players = new ArrayList<>();
     private Question question;
+    private Multiplicator multiplicator;
 
     public Round(Player[] players, Question question) {
         this.question = question;
@@ -23,15 +25,30 @@ public class Round {
 
     public void finish(){
         if(currentTurn == turns.size()) {
-            for(Turn aTurn : turns){
-                if(aTurn.getUsedMultiplicator() != null){
-                    aTurn.getUsedMultiplicator().multiplicate(aTurn.getPoints());
+            if(multiplicator == null){
+                for(Turn aTurn : turns){
+                    if(aTurn.getUsedMultiplicator() != null) {
+                        aTurn.multiplicatePoints();
+                    }
+                }
+            }
+            else{
+                for(Turn aTurn : turns){
+                    multiplicator.multiplicate(aTurn.getPoints());
                 }
             }
             for(Turn aTurn : turns){
                 aTurn.getPoints().givePointsToPlayer(aTurn.getPlayer());
             }
         }
+    }
+
+    public List<Multiplicator> getMultiplicator() {
+        List<Multiplicator> multiplicators = this.question.getMultiplicators();
+        if(multiplicators.size() == 1){
+            this.multiplicator = multiplicators.get(0);
+        }
+        return multiplicators;
     }
 
     public Turn getTurn(Game game) {
@@ -51,5 +68,14 @@ public class Round {
 
     public List<Turn> getTurns() {
         return turns;
+    }
+
+    public void multiplicate(Multiplicator multiplicator, Turn turn) {
+        if(this.multiplicator != null){
+            this.multiplicator.activate();
+        }
+        else {
+            turn.multiplicate(multiplicator);
+        }
     }
 }

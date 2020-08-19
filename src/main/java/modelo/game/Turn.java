@@ -1,6 +1,7 @@
 package modelo.game;
 
 
+import modelo.multiplicators.Multiplicate;
 import modelo.multiplicators.Multiplicator;
 import modelo.options.Option;
 import modelo.questions.Question;
@@ -55,10 +56,6 @@ public class Turn {
         return this.amountOfCurrentOptions;
     }
 
-    public List<Multiplicator> getMultiplicator() {
-        return this.question.getMultiplicators();
-    }
-
     public void multiplicate(Multiplicator multiplicator) {
         this.multiplicator = multiplicator;
         multiplicator.activate();
@@ -66,6 +63,10 @@ public class Turn {
 
     public Points getPoints() {
         return this.points;
+    }
+
+    public void multiplicatePoints() {
+        this.multiplicator.multiplicate(this.points);
     }
 
     public Multiplicator getUsedMultiplicator() {
