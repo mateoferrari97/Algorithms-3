@@ -14,13 +14,11 @@ public class Turn {
     private Question question;
     private List<Option> answers = new ArrayList<>();
     private Integer amountOfCurrentOptions;
-    private List<Multiplicator> multiplicators;
 
     public Turn(Player aPlayer, Question question) {
         this.question = question;
         this.player = aPlayer;
         this.amountOfCurrentOptions = 0;
-        this.multiplicators = question.getMultiplicators();
         this.points = new Points();
     }
 
@@ -57,7 +55,7 @@ public class Turn {
     }
 
     public List<Multiplicator> getMultiplicator() {
-        return this.multiplicators;
+        return this.question.getMultiplicators();
     }
 
     public void multiplicate(Multiplicator multiplicator) {

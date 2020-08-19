@@ -3,6 +3,7 @@ package modelo;
 
 import exceptions.NoMoreConsumablesException;
 import modelo.game.Player;
+import modelo.game.Points;
 import modelo.options.CorrectOptionScorer;
 import modelo.options.IncorrectOptionScorer;
 import modelo.options.Option;
@@ -20,7 +21,7 @@ import java.util.List;
 public class BooleanQuestionIT {
 
     @Test
-    public void testBooleanQuestionIncreasePlayerPointsWhenOptionIsCorrect() {
+    public void testBooleanQuestionIncreasePointsWhenOptionIsCorrect() {
         // Given
         List<Option> options = Arrays.asList(
                 new Option("si", new CorrectOptionScorer()),
@@ -28,20 +29,20 @@ public class BooleanQuestionIT {
         QuestionScorer scorer = new BooleanScorer();
         Question question = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer);
 
-        Player player = new Player();
         List<Option> playerOptions = Arrays.asList(new Option("si", new CorrectOptionScorer()));
-        Integer expectedPlayerPoints = 1;
+        Integer expectedPoints = 1;
+
+        Points points = new Points();
 
         // When
-        question.selectOptions(playerOptions, this.points);
-        question.score(player);
+        question.selectOptions(playerOptions, points);
 
         // Then
-        Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
+        Assert.assertEquals(points.getPoints(), expectedPoints);
     }
 
     @Test
-    public void testBooleanQuestionDontIncreasePlayerPointsWhenOptionIsIncorrect() {
+    public void testBooleanQuestionDontIncreasePointsWhenOptionIsIncorrect() {
         // Given
         List<Option> options = Arrays.asList(
                 new Option("si", new CorrectOptionScorer()),
@@ -49,117 +50,16 @@ public class BooleanQuestionIT {
         QuestionScorer scorer = new BooleanScorer();
         Question question = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer);
 
-        Player player = new Player();
-        player.setPoints(5);
+
         List<Option> playerOptions = Arrays.asList(new Option("no", new IncorrectOptionScorer()));
-        Integer expectedPlayerPoints = 5;
+        Integer expectedPoints = 0;
+
+        Points points = new Points();
 
         // When
-        question.selectOptions(playerOptions, this.points);
-        question.score(player);
+        question.selectOptions(playerOptions, points);
 
         // Then
-        Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
+        Assert.assertEquals(points.getPoints(), expectedPoints);
     }
-
-    @Test
-    public void testBooleanQuestionDoublePointsWhenScoreExclusivityActivatedAndOnePlayerAnswerIncorrectly() throws NoMoreConsumablesException {
-        // Given
-        List<Option> options = Arrays.asList(
-                new Option("si", new CorrectOptionScorer()),
-                new Option("no", new IncorrectOptionScorer()));
-        QuestionScorer scorer = new BooleanScorer();
-
-        Question question1 = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer);
-        Question question2 = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer);
-
-        Player player1 = new Player();
-        Player player2 = new Player();
-
-        List<Option> player1Options = Arrays.asList(new Option("no", new IncorrectOptionScorer()));
-        List<Option> player2Options = Arrays.asList(new Option("si", new CorrectOptionScorer()));
-
-        Integer expectedPlayer1Points = 0;
-        Integer expectedPlayer2Points = 2;
-
-        List<Multiplicator> multiplicator = question2.getMultiplicators();
-        question2.multiplicate(multiplicator.get(0));
-
-
-        // When
-        question1.selectOptions(player1Options, this.points);
-        question2.selectOptions(player2Options, this.points);
-        question1.score(player1);
-        question2.score(player2);
-
-        // Then
-        Assert.assertEquals(player1.getPoints(), expectedPlayer1Points);
-        Assert.assertEquals(player2.getPoints(), expectedPlayer2Points);
-    }
-
-    @Test
-    public void testBooleanQuestionQuadruplePointsWhenScoreExclusivityTwoTimesActivatedAndOnePlayerAnswerIncorrectly() throws NoMoreConsumablesException {
-        // Given
-        List<Option> options = Arrays.asList(
-                new Option("si", new CorrectOptionScorer()),
-                new Option("no", new IncorrectOptionScorer()));
-        QuestionScorer scorer = new BooleanScorer();
-
-        Question question1 = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer);
-        Question question2 = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer);
-
-        Player player1 = new Player();
-        Player player2 = new Player();
-
-        List<Option> player1Options = Arrays.asList(new Option("no", new IncorrectOptionScorer()));
-        List<Option> player2Options = Arrays.asList(new Option("si", new CorrectOptionScorer()));
-
-        Integer expectedPlayer1Points = 0;
-        Integer expectedPlayer2Points = 4;
-
-
-        // When
-        question1.selectOptions(player1Options, this.points);
-        question2.selectOptions(player2Options, this.points);
-        question1.score(player1);
-        question2.score(player2);
-
-        // Then
-        Assert.assertEquals(player1.getPoints(), expectedPlayer1Points);
-        Assert.assertEquals(player2.getPoints(), expectedPlayer2Points);
-    }
-
-   @Test
-    public void testBooleanQuestionDontModifyPointsWhenScoreExclusivityActivatedNoIncorrectAnswers() throws NoMoreConsumablesException {
-        // Given
-
-        List<Option> options = Arrays.asList(
-                new Option("si", new CorrectOptionScorer()),
-                new Option("no", new IncorrectOptionScorer()));
-        QuestionScorer scorer = new BooleanScorer();
-
-        Question question1 = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer);
-        Question question2 = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer);
-
-        Player player1 = new Player();
-        Player player2 = new Player();
-
-        List<Option> player1Options = Arrays.asList(new Option("si", new CorrectOptionScorer()));
-        List<Option> player2Options = Arrays.asList(new Option("si", new CorrectOptionScorer()));
-
-        Integer expectedPlayer1Points = 0;
-        Integer expectedPlayer2Points = 0;
-
-
-        // When
-        question1.selectOptions(player1Options, this.points);
-        question2.selectOptions(player2Options, this.points);
-        question1.score(player1);
-        question2.score(player2);
-
-        // Then
-        Assert.assertEquals(player1.getPoints(), expectedPlayer1Points);
-        Assert.assertEquals(player2.getPoints(), expectedPlayer2Points);
-    }
-
 }

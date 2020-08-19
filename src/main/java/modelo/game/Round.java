@@ -30,13 +30,13 @@ public class Round {
         }
     }
 
-    private void comparateScore() {
+    private void comparateScore() { // tambien lo hace para el multiplicate y no lo tiene que hacer
          Points playerOnePoints = turns.get(0).getPoints();
          Points playerTwoPoints = turns.get(1).getPoints();
-        if(playerOnePoints.getPoints() == playerTwoPoints.getPoints()){
+         if(playerOnePoints.getPoints() == playerTwoPoints.getPoints()){ // unico problema si los dos responden mal
             playerOnePoints.dontMultiplicate();
             playerTwoPoints.dontMultiplicate();
-        }
+         }
     }
 
     public Turn getTurn(Game game) {

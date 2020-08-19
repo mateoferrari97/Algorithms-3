@@ -22,7 +22,7 @@ import java.util.List;
 import static org.mockito.Mockito.*;
 
 
- @RunWith(PowerMockRunner.class)
+@RunWith(PowerMockRunner.class)
 @PowerMockIgnore({"javax.management.*"})
 @PrepareForTest({Player.class, BooleanScorer.class, BooleanQuestion.class,ArrayList.class})
 
@@ -82,12 +82,10 @@ public class TurnTest {
     @Test
     public void finish() {
         Turn turn = setUpTurn();
-        doCallRealMethod().when(questionMock).selectOptions(any(ArrayList.class), this.points);
-        doCallRealMethod().when(questionMock).score(any(Player.class));
+        doCallRealMethod().when(questionMock).selectOptions(any(ArrayList.class), turn.getPoints());
 
         turn.finish();
 
-        verify(questionMock, times(1)).selectOptions(optionsMock, this.points);
-        verify(questionMock, times(1)).score(playerMock);
+        verify(questionMock, times(1)).selectOptions(optionsMock, turn.getPoints());
     }
 }

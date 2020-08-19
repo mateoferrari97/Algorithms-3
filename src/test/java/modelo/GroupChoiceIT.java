@@ -4,6 +4,7 @@ package modelo;
 import exceptions.InvalidSizeException;
 import exceptions.NoMoreConsumablesException;
 import modelo.game.Player;
+import modelo.game.Points;
 import modelo.options.CorrectOptionScorer;
 import modelo.options.IncorrectOptionScorer;
 import modelo.options.Option;
@@ -19,10 +20,9 @@ import java.util.List;
 
 public class GroupChoiceIT {
     @Test
-    public void testGroupChoiceQuestionIncreasePlayerPointsWhenCorrectGroupSeparation() throws InvalidSizeException {
+    public void testGroupChoiceQuestionIncreasePointsWhenCorrectGroupSeparation() throws InvalidSizeException {
         // Given
-        Player player = new Player();
-        Integer expectedPlayerPoints = 1;
+        Integer expectedPoints = 1;
 
         List<Option> options = Arrays.asList(
                 new Option("A", new CorrectOptionScorer()),
@@ -39,20 +39,21 @@ public class GroupChoiceIT {
                 options.get(3),
                 options.get(4));
 
+        Points points = new Points();
+
         // When
-        question.selectOptions(playerOptions, this.points);
-        question.score(player);
+        question.selectOptions(playerOptions, points);
+
 
         // Then
-        Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
+        Assert.assertEquals(points.getPoints(), expectedPoints);
     }
 
     @Test
-    public void testGroupChoiceQuestionDontIncreasePlayerPointsWhenInorrectGroupSeparation() throws InvalidSizeException {
+    public void testGroupChoiceQuestionDontIncreasePointsWhenInorrectGroupSeparation() throws InvalidSizeException {
 
         // Given
-        Player player = new Player();
-        Integer expectedPlayerPoints = 0;
+        Integer expectedPoints = 0;
 
         List<Option> options = Arrays.asList(
                 new Option("A", new CorrectOptionScorer()),
@@ -70,126 +71,12 @@ public class GroupChoiceIT {
                 options.get(1),
                 options.get(3));
 
-        // When
-        question.selectOptions(playerOptions, this.points);
-        question.score(player);
-
-        // Then
-        Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
-    }
-
-    @Test
-    public void testGroupChoiceDoublePointsWhenScoreExclusivityActivatedAndOnePlayerAnswerIncorrectly() throws InvalidSizeException, NoMoreConsumablesException {
-        // Given
-        Player player1 = new Player();
-        Player player2 = new Player();
-        Integer expectedPlayer1Points = 0;
-        Integer expectedPlayer2Points = 2;
-
-        List<Option> options = Arrays.asList(
-                new Option("A", new CorrectOptionScorer()),
-                new Option("B", new CorrectOptionScorer()),
-                new Option("C", new CorrectOptionScorer()),
-                new Option("1", new IncorrectOptionScorer()),
-                new Option("2", new IncorrectOptionScorer()));
-
-        QuestionScorer scorer = new BooleanScorer();
-        Question question1 = new GroupChoiceQuestion("Separar en numeros y letras", options, scorer);
-        Question question2 = new GroupChoiceQuestion("Separar en numeros y letras", options, scorer);
-
-        List<Option> player1Options = Arrays.asList(
-                options.get(0));
-
-        List<Option> player2Options = Arrays.asList(
-                options.get(3),
-                options.get(4));
+        Points points = new Points();
 
         // When
-        question1.selectOptions(player1Options, this.points);
-        question2.selectOptions(player2Options, this.points);
-        question1.score(player1);
-        question2.score(player2);
+        question.selectOptions(playerOptions, points);
 
         // Then
-        Assert.assertEquals(player1.getPoints(), expectedPlayer1Points);
-        Assert.assertEquals(player2.getPoints(), expectedPlayer2Points);
-    }
-
-    @Test
-    public void testGroupChoiceQuadruplePointsWhenScoreExclusivityActivatedAndOnePlayerAnswerIncorrectly() throws InvalidSizeException, NoMoreConsumablesException {
-        // Given
-
-        List<Option> options = Arrays.asList(
-                new Option("A", new CorrectOptionScorer()),
-                new Option("B", new CorrectOptionScorer()),
-                new Option("C", new CorrectOptionScorer()),
-                new Option("1", new IncorrectOptionScorer()),
-                new Option("2", new IncorrectOptionScorer()));
-
-        QuestionScorer scorer = new BooleanScorer();
-        Question question1 = new GroupChoiceQuestion("Separar en numeros y letras", options, scorer, scoreExclusivity);
-        Question question2 = new GroupChoiceQuestion("Separar en numeros y letras", options, scorer, scoreExclusivity);
-
-        List<Option> player1Options = Arrays.asList(
-                options.get(0));
-
-        List<Option> player2Options = Arrays.asList(
-                options.get(3),
-                options.get(4));
-
-        Player player1 = new Player();
-        Player player2 = new Player();
-        Integer expectedPlayer1Points = 0;
-        Integer expectedPlayer2Points = 4;
-
-        // When
-        question1.selectOptions(player1Options, this.points);
-        question2.selectOptions(player2Options, this.points);
-        question1.score(player1);
-        question2.score(player2);
-
-        // Then
-        Assert.assertEquals(player1.getPoints(), expectedPlayer1Points);
-        Assert.assertEquals(player2.getPoints(), expectedPlayer2Points);
-    }
-
-    @Test
-    public void testGroupChoiceDontModifyPointsWhenScoreExclusivityActivatedNoIncorrectAnswers() throws InvalidSizeException, NoMoreConsumablesException {
-        // Given
-
-        List<Option> options = Arrays.asList(
-                new Option("A", new CorrectOptionScorer()),
-                new Option("B", new CorrectOptionScorer()),
-                new Option("C", new CorrectOptionScorer()),
-                new Option("1", new IncorrectOptionScorer()),
-                new Option("2", new IncorrectOptionScorer()));
-
-        QuestionScorer scorer = new BooleanScorer();
-        Question question1 = new GroupChoiceQuestion("Separar en numeros y letras", options, scorer);
-        Question question2 = new GroupChoiceQuestion("Separar en numeros y letras", options, scorer);
-
-        List<Option> player1Options = Arrays.asList(
-                options.get(3),
-                options.get(4));
-
-        List<Option> player2Options = Arrays.asList(
-                options.get(3),
-                options.get(4));
-
-        Player player1 = new Player();
-        Player player2 = new Player();
-        Integer expectedPlayer1Points = 0;
-        Integer expectedPlayer2Points = 0;
-
-        // When
-        player1.activateConsumable(scoreExclusivity);
-        question1.selectOptions(player1Options);
-        question2.selectOptions(player2Options);
-        question1.score(player1);
-        question2.score(player2);
-
-        // Then
-        Assert.assertEquals(player1.getPoints(), expectedPlayer1Points);
-        Assert.assertEquals(player2.getPoints(), expectedPlayer2Points);
+        Assert.assertEquals(points.getPoints(), expectedPoints);
     }
 }

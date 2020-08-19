@@ -1,7 +1,6 @@
 package modelo.multiplicators;
 
 import modelo.game.Points;
-import modelo.multiplicators.Multiplicator;
 
 public class Multiplicate implements Multiplicator {
     private String text;
@@ -20,10 +19,5 @@ public class Multiplicate implements Multiplicator {
     @Override
     public void multiplicate(Points points) {
         points.multiplicate(this.multiplicate);
-    }
-
-    @Override
-    public Multiplicator getScoreExclusivity() {
-        return null;
     }
 }

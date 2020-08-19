@@ -2,6 +2,7 @@ package modelo;
 
 
 import modelo.game.Player;
+import modelo.game.Points;
 import modelo.options.CorrectOptionScorer;
 import modelo.options.IncorrectOptionScorer;
 import modelo.options.Option;
@@ -19,7 +20,7 @@ import java.util.List;
 public class BooleanQuestionPenaltyIT {
 
     @Test
-    public void testBooleanQuestionWithPenaltyDecreasePlayerPointsWhenOptionIsIncorrect() {
+    public void testBooleanQuestionWithPenaltyDecreasePointsWhenOptionIsIncorrect() {
         // Given
         List<Option> options = Arrays.asList(
                 new Option("si", new CorrectOptionScorer()),
@@ -27,21 +28,19 @@ public class BooleanQuestionPenaltyIT {
         QuestionScorer scorer = new PenaltyScorer();
         Question question = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer);
 
-        Player player = new Player();
-        player.setPoints(5);
+        Points points = new Points();
         List<Option> playerOptions = Arrays.asList(new Option("no", new IncorrectOptionScorer()));
-        Integer expectedPlayerPoints = 4;
+        Integer expectedPoints = -1;
 
         // When
-        question.selectOptions(playerOptions, this.points);
-        question.score(player);
+        question.selectOptions(playerOptions, points);
 
         // Then
-        Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
+        Assert.assertEquals(points.getPoints(), expectedPoints);
     }
 
     @Test
-    public void testBooleanQuestionWithPenaltyIncreasePlayerPointsWhenOptionIsCorrect() {
+    public void testBooleanQuestionWithPenaltyIncreasePointsWhenOptionIsCorrect() {
         // Given
         List<Option> options = Arrays.asList(
                 new Option("si", new CorrectOptionScorer()),
@@ -49,91 +48,14 @@ public class BooleanQuestionPenaltyIT {
         QuestionScorer scorer = new PenaltyScorer();
         Question question = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer);
 
-        Player player = new Player();
-        player.setPoints(5);
+        Points points = new Points();
         List<Option> playerOptions = Arrays.asList(new Option("si", new CorrectOptionScorer()));
-        Integer expectedPlayerPoints = 6;
+        Integer expectedPoints = 1;
 
         // When
-        question.selectOptions(playerOptions, this.points);
-        question.score(player);
+        question.selectOptions(playerOptions, points);
 
         // Then
-        Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
-    }
-
-    @Test
-    public void testBooleanQuestionWithPenaltyDontDecreasePlayerPointsWhenOptionIsIncorrectAndPlayerHasntPoints() {
-        // Given
-        List<Option> options = Arrays.asList(
-                new Option("si", new CorrectOptionScorer()),
-                new Option("no", new IncorrectOptionScorer()));
-        QuestionScorer scorer = new PenaltyScorer();
-        Question question = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer);
-
-        Player player = new Player();
-        player.setPoints(0);
-        List<Option> playerOptions = Arrays.asList(new Option("no", new IncorrectOptionScorer()));
-        Integer expectedPlayerPoints = 0;
-
-        // When
-        question.selectOptions(playerOptions, this.points);
-        question.score(player);
-
-        // Then
-        Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
-    }
-
-    @Test
-    public void testBooleanQuestionWithPenaltyGivesDoubleThePointsToPlayerWhenUsingDoubleMultiplicatorWhenOptionIsCorrect() {
-        // Given
-        List<Option> options = Arrays.asList(
-                new Option("si", new CorrectOptionScorer()),
-                new Option("no", new IncorrectOptionScorer()));
-        QuestionScorer scorer = new PenaltyScorer();
-
-        Question question = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer);
-
-        List<Multiplicator> multiplicator = question.getMultiplicators();
-        question.multiplicate(multiplicator.get(0));
-
-        Player player = new Player();
-        player.setPoints(5);
-        List<Option> playerOptions = Arrays.asList(new Option("si", new CorrectOptionScorer()));
-        Integer expectedPlayerPoints = 7;
-
-        // When
-        question.selectOptions(playerOptions, this.points);
-        question.score(player);
-
-        // Then
-        Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
-    }
-
-    @Test
-    public void testBooleanQuestionWithPenaltyGivesTripleThePointsToPlayerWhenUsingTripleMultiplicatorWhenOptionIsCorrect() {
-        // Given
-        List<Option> options = Arrays.asList(
-                new Option("si", new CorrectOptionScorer()),
-                new Option("no", new IncorrectOptionScorer()));
-        QuestionScorer scorer = new PenaltyScorer();
-
-
-        Question question = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer);
-
-        List<Multiplicator> multiplicator = question.getMultiplicators();
-        question.multiplicate(multiplicator.get(0));
-
-        Player player = new Player();
-        player.setPoints(5);
-        List<Option> playerOptions = Arrays.asList(new Option("si", new CorrectOptionScorer()));
-        Integer expectedPlayerPoints = 8;
-
-        // When
-        question.selectOptions(playerOptions, this.points);
-        question.score(player);
-
-        // Then
-        Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
+        Assert.assertEquals(points.getPoints(), expectedPoints);
     }
 }

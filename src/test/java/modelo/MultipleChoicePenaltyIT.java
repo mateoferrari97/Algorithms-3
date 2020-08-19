@@ -3,6 +3,7 @@ package modelo;
 
 import exceptions.InvalidSizeException;
 import modelo.game.Player;
+import modelo.game.Points;
 import modelo.options.CorrectOptionScorer;
 import modelo.options.IncorrectOptionScorer;
 import modelo.options.Option;
@@ -19,7 +20,7 @@ import java.util.List;
 
 public class MultipleChoicePenaltyIT {
     @Test
-    public void testMultipleChoiceQuestionWithPenaltyIncreasePlayerPointsWhenOptionIsCorrectAndDecreaseWhenOptionIsIncorrect() throws InvalidSizeException {
+    public void testMultipleChoiceQuestionWithPenaltyIncreasePointsWhenOptionIsCorrectAndDecreaseWhenOptionIsIncorrect() throws InvalidSizeException {
         // Given
         List<Option> options = Arrays.asList(
                 new Option("2 + 2", new CorrectOptionScorer()),
@@ -31,23 +32,24 @@ public class MultipleChoicePenaltyIT {
         QuestionScorer scorer = new PenaltyScorer();
         Question question = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer);
 
-        Player player = new Player();
-        player.setPoints(7);
+        Points points = new Points();
+
         List<Option> playerOptions = Arrays.asList(
                 new Option("2 + 2", new CorrectOptionScorer()),
                 new Option("5 - 1", new CorrectOptionScorer()),
                 new Option("5 / 1", new IncorrectOptionScorer()));
-        Integer expectedPlayerPoints = 8;
+
+        Integer expectedPoints = 1;
 
         // When
-        question.selectOptions(playerOptions, this.points);
-        question.score(player);
+        question.selectOptions(playerOptions, points);
+
 
         // Then
-        Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
+        Assert.assertEquals(points.getPoints(), expectedPoints);
     }
     @Test
-    public void testMultipleChoiceQuestionWithPenaltyIncreasePlayerPointsWhenAllOptionAreCorrect() throws InvalidSizeException {
+    public void testMultipleChoiceQuestionWithPenaltyIncreasePointsWhenAllOptionAreCorrect() throws InvalidSizeException {
         // Given
         List<Option> options = Arrays.asList(
                 new Option("2 + 2", new CorrectOptionScorer()),
@@ -59,24 +61,24 @@ public class MultipleChoicePenaltyIT {
         QuestionScorer scorer = new PenaltyScorer();
         Question question = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer);
 
-        Player player = new Player();
+        Points points = new Points();
         List<Option> playerOptions = Arrays.asList(
                 new Option("2 + 2", new CorrectOptionScorer()),
                 new Option("5 - 1", new CorrectOptionScorer()),
                 new Option("2^2", new CorrectOptionScorer()));
-        player.setPoints(7);
-        Integer expectedPlayerPoints = 10;
+
+
+        Integer expectedPoints = 3;
 
         // When
-        question.selectOptions(playerOptions, this.points);
-        question.score(player);
+        question.selectOptions(playerOptions, points);
 
         // Then
-        Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
+        Assert.assertEquals(points.getPoints(), expectedPoints);
     }
 
     @Test
-    public void testMultipleChoiceQuestionWithPenaltyDontDecreasePlayerPointsWhenAllOptionAreIncorrectAndPlayerHasntPoints() throws InvalidSizeException {
+    public void testMultipleChoiceQuestionWithPenaltyDecreasePointsWhenAllOptionAreIncorrectAndPlayer() throws InvalidSizeException {
         // Given
         List<Option> options = Arrays.asList(
                 new Option("2 + 2", new CorrectOptionScorer()),
@@ -88,83 +90,16 @@ public class MultipleChoicePenaltyIT {
         QuestionScorer scorer = new PenaltyScorer();
         Question question = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer);
 
-        Player player = new Player();
+        Points points = new Points();
         List<Option> playerOptions = Arrays.asList(
                 new Option("5 / 1", new IncorrectOptionScorer()),
                 new Option("1 / 1", new IncorrectOptionScorer()));
-        Integer expectedPlayerPoints = 0;
+        Integer expectedPoints = -2;
 
         // When
-        question.selectOptions(playerOptions, this.points);
-        question.score(player);
+        question.selectOptions(playerOptions, points);
 
         // Then
-        Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
+        Assert.assertEquals(points.getPoints(), expectedPoints);
     }
-
-    @Test
-    public void testMultipleChoiceQuestionWithPenaltyPlayerUseDoubleMultiplicatorAndLosesDoubleThePoints() throws InvalidSizeException {
-        // Given
-        List<Option> options = Arrays.asList(
-                new Option("2 + 2", new CorrectOptionScorer()),
-                new Option("5 - 1", new CorrectOptionScorer()),
-                new Option("5 / 1", new IncorrectOptionScorer()),
-                new Option("1 / 1", new IncorrectOptionScorer()),
-                new Option("2^2", new CorrectOptionScorer()));
-
-        QuestionScorer scorer = new PenaltyScorer();
-
-        Question question = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer);
-
-        List<Multiplicator> multiplicator = question.getMultiplicators();
-        question.multiplicate(multiplicator.get(0));
-
-        Player player = new Player();
-        player.setPoints(7);
-        List<Option> playerOptions = Arrays.asList(
-                new Option("5 / 1", new IncorrectOptionScorer()),
-                new Option("1 / 1", new IncorrectOptionScorer()),
-                new Option("2^2", new CorrectOptionScorer()));
-        Integer expectedPlayerPoints = 5;
-
-        // When
-        question.selectOptions(playerOptions, this.points);
-        question.score(player);
-
-        // Then
-        Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
-    }
-
-    @Test
-    public void testMultipleChoiceQuestionWithPenaltyPlayerUsesTripleMultiplicatorAndWinsTripleThePoints() throws InvalidSizeException {
-        // Given
-        List<Option> options = Arrays.asList(
-                new Option("2 + 2", new CorrectOptionScorer()),
-                new Option("5 - 1", new CorrectOptionScorer()),
-                new Option("5 / 1", new IncorrectOptionScorer()),
-                new Option("1 / 1", new IncorrectOptionScorer()),
-                new Option("2^2", new CorrectOptionScorer()));
-
-        QuestionScorer scorer = new PenaltyScorer();
-
-        Question question = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer);
-
-        List<Multiplicator> multiplicator = question.getMultiplicators();
-        question.multiplicate(multiplicator.get(1));
-
-        Player player = new Player();
-        List<Option> playerOptions = Arrays.asList(
-                new Option("2 + 2", new CorrectOptionScorer()),
-                new Option("5 - 1", new CorrectOptionScorer()),
-                new Option("2^2", new CorrectOptionScorer()));
-        Integer expectedPlayerPoints = 9;
-
-        // When
-        question.selectOptions(playerOptions, this.points);
-        question.score(player);
-
-        // Then
-        Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
-    }
-
 }

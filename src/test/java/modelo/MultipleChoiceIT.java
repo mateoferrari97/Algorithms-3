@@ -4,6 +4,7 @@ package modelo;
 import exceptions.InvalidSizeException;
 import exceptions.NoMoreConsumablesException;
 import modelo.game.Player;
+import modelo.game.Points;
 import modelo.options.CorrectOptionScorer;
 import modelo.options.IncorrectOptionScorer;
 import modelo.options.Option;
@@ -22,7 +23,7 @@ import java.util.List;
 public class MultipleChoiceIT {
 
     @Test
-    public void testMultipleChoiceQuestionIncreasePlayerPointsWhenAllOptionsAreCorrect() throws InvalidSizeException {
+    public void testMultipleChoiceQuestionIncreasePointsWhenAllOptionsAreCorrect() throws InvalidSizeException {
         // Given
         List<Option> options = Arrays.asList(
                 new Option("2 + 2", new CorrectOptionScorer()),
@@ -34,24 +35,25 @@ public class MultipleChoiceIT {
         QuestionScorer scorer = new MultipleChoiceScorer();
         Question question = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer);
 
-        Player player = new Player();
+        Points points = new Points();
         List<Option> playerOptions = Arrays.asList(
                 new Option("2 + 2", new CorrectOptionScorer()),
                 new Option("2 * 2", new CorrectOptionScorer()),
                 new Option("1 + 3", new CorrectOptionScorer()),
                 new Option("5 - 1", new CorrectOptionScorer()));
-        Integer expectedPlayerPoints = 1;
+
+        Integer expectedPoints = 1;
 
         // When
-        question.selectOptions(playerOptions, this.points);
-        question.score(player);
+        question.selectOptions(playerOptions, points);
+
 
         // Then
-        Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
+        Assert.assertEquals(points.getPoints(), expectedPoints);
     }
 
     @Test
-    public void testMultipleChoiceQuestionDontIncreasePlayerPointsForIncorectOption() throws InvalidSizeException {
+    public void testMultipleChoiceQuestionDontIncreasePointsForIncorectOption() throws InvalidSizeException {
         // Given
         List<Option> options = Arrays.asList(
                 new Option("2 + 2", new CorrectOptionScorer()),
@@ -63,20 +65,21 @@ public class MultipleChoiceIT {
         QuestionScorer scorer = new MultipleChoiceScorer();
         Question question = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer);
 
-        Player player = new Player();
+        Points points = new Points();
         List<Option> playerOptions = Arrays.asList(
                 new Option("2 + 2", new CorrectOptionScorer()),
                 new Option("2 * 2", new CorrectOptionScorer()),
                 new Option("1 + 3", new CorrectOptionScorer()),
                 new Option("1 - 3", new IncorrectOptionScorer()));
-        Integer expectedPlayerPoints = 0;
+
+        Integer expectedPoints = 0;
 
         // When
-        question.selectOptions(playerOptions, this.points);
-        question.score(player);
+        question.selectOptions(playerOptions, points);
+
 
         // Then
-        Assert.assertEquals(player.getPoints(), expectedPlayerPoints);
+        Assert.assertEquals(points.getPoints(), expectedPoints);
     }
 
     @Rule
@@ -111,129 +114,5 @@ public class MultipleChoiceIT {
         thrown.expect(InvalidSizeException.class);
         Question question = new MultipleChoiceQuestion("Elegir los paises pertenecientes al continente asiatico", options, scorer);
 
-    }
-
-    @Test
-    public void testMultipleChoiceDoublePointsWhenScoreExclusivityActivatedAndOnePlayerAnswerIncorrectly() throws InvalidSizeException, NoMoreConsumablesException {
-        // Given
-
-        List<Option> options = Arrays.asList(
-                new Option("2 + 2", new CorrectOptionScorer()),
-                new Option("2 * 2", new CorrectOptionScorer()),
-                new Option("1 + 3", new CorrectOptionScorer()),
-                new Option("2^2", new CorrectOptionScorer()),
-                new Option("1 - 3", new IncorrectOptionScorer()));
-
-        QuestionScorer scorer = new MultipleChoiceScorer();
-        Question question1 = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer);
-        Question question2 = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer);
-
-        List<Option> player1Options = Arrays.asList(
-                new Option("2 + 2", new CorrectOptionScorer()),
-                new Option("2 * 2", new CorrectOptionScorer()),
-                new Option("1 + 3", new CorrectOptionScorer()),
-                new Option("1 - 3", new IncorrectOptionScorer()));
-
-        List<Option> player2Options = Arrays.asList(
-                new Option("2 + 2", new CorrectOptionScorer()),
-                new Option("2 * 2", new CorrectOptionScorer()),
-                new Option("1 + 3", new CorrectOptionScorer()));
-
-        Player player1 = new Player();
-        Player player2 = new Player();
-        Integer expectedPlayer1Points = 0;
-        Integer expectedPlayer2Points = 2;
-
-
-        // When
-        question1.selectOptions(player1Options, this.points);
-        question2.selectOptions(player2Options, this.points);
-        question1.score(player1);
-        question2.score(player2);
-
-        // Then
-        Assert.assertEquals(player1.getPoints(), expectedPlayer1Points);
-        Assert.assertEquals(player2.getPoints(), expectedPlayer2Points);
-    }
-
-    @Test
-    public void testMultipleChoiceQuadruplePointsWhenScoreExclusivityActivatedAndOnePlayerAnswerIncorrectly() throws InvalidSizeException, NoMoreConsumablesException {
-        // Given
-        List<Option> options = Arrays.asList(
-                new Option("2 + 2", new CorrectOptionScorer()),
-                new Option("2 * 2", new CorrectOptionScorer()),
-                new Option("1 + 3", new CorrectOptionScorer()),
-                new Option("2^2", new CorrectOptionScorer()),
-                new Option("1 - 3", new IncorrectOptionScorer()));
-
-        QuestionScorer scorer = new MultipleChoiceScorer();
-        Question question1 = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer);
-        Question question2 = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer);
-
-        List<Option> player1Options = Arrays.asList(
-                new Option("2 + 2", new CorrectOptionScorer()),
-                new Option("2 * 2", new CorrectOptionScorer()),
-                new Option("1 + 3", new CorrectOptionScorer()),
-                new Option("1 - 3", new IncorrectOptionScorer()));
-
-        List<Option> player2Options = Arrays.asList(
-                new Option("2 + 2", new CorrectOptionScorer()),
-                new Option("2 * 2", new CorrectOptionScorer()),
-                new Option("1 + 3", new CorrectOptionScorer()));
-
-        Player player1 = new Player();
-        Player player2 = new Player();
-        Integer expectedPlayer1Points = 0;
-        Integer expectedPlayer2Points = 4;
-
-        // When
-        question1.selectOptions(player1Options, this.points);
-        question2.selectOptions(player2Options, this.points);
-        question1.score(player1);
-        question2.score(player2);
-
-        // Then
-        Assert.assertEquals(player1.getPoints(), expectedPlayer1Points);
-        Assert.assertEquals(player2.getPoints(), expectedPlayer2Points);
-    }
-
-    @Test
-    public void testMultipleChoiceDontModifyPointsWhenScoreExclusivityActivatedNoIncorrectAnswers() throws InvalidSizeException, NoMoreConsumablesException {
-        // Given
-        List<Option> options = Arrays.asList(
-                new Option("2 + 2", new CorrectOptionScorer()),
-                new Option("2 * 2", new CorrectOptionScorer()),
-                new Option("1 + 3", new CorrectOptionScorer()),
-                new Option("2^2", new CorrectOptionScorer()),
-                new Option("1 - 3", new IncorrectOptionScorer()));
-
-        QuestionScorer scorer = new MultipleChoiceScorer();
-        Question question1 = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer);
-        Question question2 = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer);
-
-        List<Option> player1Options = Arrays.asList(
-                new Option("2 + 2", new CorrectOptionScorer()),
-                new Option("2 * 2", new CorrectOptionScorer()),
-                new Option("1 + 3", new CorrectOptionScorer()));
-
-        List<Option> player2Options = Arrays.asList(
-                new Option("2 + 2", new CorrectOptionScorer()),
-                new Option("2 * 2", new CorrectOptionScorer()),
-                new Option("1 + 3", new CorrectOptionScorer()));
-
-        Player player1 = new Player();
-        Player player2 = new Player();
-        Integer expectedPlayer1Points = 0;
-        Integer expectedPlayer2Points = 0;
-
-        // When
-        question1.selectOptions(player1Options, this.points);
-        question2.selectOptions(player2Options, this.points);
-        question1.score(player1);
-        question2.score(player2);
-
-        // Then
-        Assert.assertEquals(player1.getPoints(), expectedPlayer1Points);
-        Assert.assertEquals(player2.getPoints(), expectedPlayer2Points);
     }
 }

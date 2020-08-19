@@ -7,7 +7,4 @@ public interface Multiplicator {
     String getText();
 
     void multiplicate(Points points);
-
-    Multiplicator getScoreExclusivity();
-
 }

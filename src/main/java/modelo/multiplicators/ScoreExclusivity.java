@@ -23,9 +23,4 @@ public class ScoreExclusivity implements Multiplicator {
         timeUsed++;
     }
 
-    @Override
-    public ScoreExclusivity getScoreExclusivity() {
-        return this;
-    }
-
 }
