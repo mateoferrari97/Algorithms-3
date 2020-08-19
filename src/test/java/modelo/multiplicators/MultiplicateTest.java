@@ -34,7 +34,7 @@ public class MultiplicateTest {
         Assert.assertEquals(expectedString, multiplicate.getText());
     }
 
-    @Test
+   /* @Test
     public void multiplicate(){
 
         Points pointMock = spy(new Points());
@@ -46,6 +46,6 @@ public class MultiplicateTest {
         multiplicate.multiplicate(pointMock);
 
         verify(pointMock, times(1));
-    }
+    } */
 
 }

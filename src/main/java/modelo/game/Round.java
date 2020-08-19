@@ -23,26 +23,22 @@ public class Round {
 
     public void finish(){
         if(currentTurn == turns.size()) {
-            comparateScore();
+            for(Turn aTurn : turns){
+                if(aTurn.getUsedMultiplicator() != null){
+                    aTurn.getUsedMultiplicator().multiplicate(aTurn.getPoints());
+                }
+            }
             for(Turn aTurn : turns){
                 aTurn.getPoints().givePointsToPlayer(aTurn.getPlayer());
             }
         }
     }
 
-    private void comparateScore() { // tambien lo hace para el multiplicate y no lo tiene que hacer
-         Points playerOnePoints = turns.get(0).getPoints();
-         Points playerTwoPoints = turns.get(1).getPoints();
-         if(playerOnePoints.getPoints() == playerTwoPoints.getPoints()){ // unico problema si los dos responden mal
-            playerOnePoints.dontMultiplicate();
-            playerTwoPoints.dontMultiplicate();
-         }
-    }
-
     public Turn getTurn(Game game) {
         if(currentTurn == turns.size() - 1){
             game.setNextRound();
-            return turns.get(currentTurn);
+            currentTurn++;
+            return turns.get(currentTurn - 1);
         }
         Turn turn = turns.get(currentTurn);
         currentTurn++;
@@ -51,5 +47,9 @@ public class Round {
 
     public Question getQuestion() {
         return this.question;
+    }
+
+    public List<Turn> getTurns() {
+        return turns;
     }
 }

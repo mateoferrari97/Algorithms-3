@@ -1,6 +1,8 @@
 package modelo.multiplicators;
 
+import modelo.game.Player;
 import modelo.game.Points;
+import modelo.game.Round;
 
 public class Multiplicate implements Multiplicator {
     private String text;
@@ -14,6 +16,11 @@ public class Multiplicate implements Multiplicator {
     @Override
     public String getText() {
         return this.text;
+    }
+
+    @Override
+    public void activate() {
+
     }
 
     @Override

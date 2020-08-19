@@ -138,14 +138,8 @@ public class QuestionFactoryTest {
         QuestionFactory QFactory = new QuestionFactory();
         Question question = QFactory.unmarshal(jString);
 
-        List<Option> options = Arrays.asList(
-                new Option("Primero", new CorrectOptionScorer()),
-                new Option("Segundo", new IncorrectOptionScorer()),
-                new Option("Tercero", new IncorrectOptionScorer()),
-                new Option("Cuarto", new IncorrectOptionScorer()));
-
         Points points = new Points();
-        List<Option> playerOptions = options;
+        List<Option> playerOptions = question.getOptions();
         Integer expectedPoints = 1;
 
         // When
@@ -167,8 +161,8 @@ public class QuestionFactoryTest {
 
         Question question1 = questions.get(0);
 
-        List<Option> playerOptions1 = Arrays.asList(new Option("si", new IncorrectOptionScorer()));
-        Integer expectedPoints1 = 0;
+        List<Option> playerOptions1 = Arrays.asList(new Option("no", new IncorrectOptionScorer()));
+        Integer expectedPoints1 = -1;
 
         Points points1 = new Points();
 

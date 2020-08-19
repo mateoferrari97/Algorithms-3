@@ -41,4 +41,7 @@ public class Points {
 
     public boolean equals(Points otherPoints) {return (this.points == otherPoints.getPoints());}
 
+    public Integer getPointsWithoutMultiplicate() {
+        return this.points;
+    }
 }

@@ -44,7 +44,7 @@ public class TurnTest {
         Turn turn = setUpTurn();
         Integer expectedSize = 0;
 
-        Assert.assertEquals(expectedSize, turn.getAmountCurrentOptions());
+        Assert.assertEquals(expectedSize, turn.getAmountOfOptions());
     }
 
     @Test
@@ -82,7 +82,7 @@ public class TurnTest {
     @Test
     public void finish() {
         Turn turn = setUpTurn();
-        doCallRealMethod().when(questionMock).selectOptions(any(ArrayList.class), turn.getPoints());
+        doCallRealMethod().when(questionMock).selectOptions(any(ArrayList.class), any(Points.class));
 
         turn.finish();
 
