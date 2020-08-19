@@ -13,6 +13,9 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static constantes.ErrorMessage.INVALID_QUESTION_ERROR;
+import static constantes.ErrorMessage.INVALID_QUESTION_SCORER_ERROR;
+
 public class QuestionFactoryTest {
 
     @Test
@@ -182,5 +185,30 @@ public class QuestionFactoryTest {
 
         // Then
         Assert.assertEquals(points2.getPoints(), expectedPoints2);
+    }
+
+    @Test
+    public void testUnexpectedQuestionClassJsonError(){
+        String jString = "{\"text\": \"ordene correctamente las siguientes opciones\",\"type\": \"OrderedChoiceQuestion\",\"scorer\": \"OrderedScorer\",\"options\": [{\"text\": \"Primero\",\"optionScorer\": true},{\"text\": \"Segundo\",\"optionScorer\": false},{\"text\": \"Tercero\",\"optionScorer\": false},{\"text\": \"Cuarto\",\"optionScorer\": false}]}";
+
+        try {
+            QuestionFactory QFactory = new QuestionFactory();
+            Question question = QFactory.unmarshal(jString);
+        }catch (Exception e){
+            Assert.assertEquals(e.getMessage(),INVALID_QUESTION_ERROR);
+        }
+
+    }
+    @Test
+    public void testUnexpectedQuestionScorerClassJsonError(){
+        String jString = "{\"text\": \"ordene correctamente las siguientes opciones\",\"type\": \"Roberto\",\"scorer\": \"Roberto\",\"options\": [{\"text\": \"Primero\",\"optionScorer\": true},{\"text\": \"Segundo\",\"optionScorer\": false},{\"text\": \"Tercero\",\"optionScorer\": false},{\"text\": \"Cuarto\",\"optionScorer\": false}]}";
+
+        try {
+            QuestionFactory QFactory = new QuestionFactory();
+            Question question = QFactory.unmarshal(jString);
+        }catch (Exception e){
+            Assert.assertEquals(e.getMessage(),INVALID_QUESTION_SCORER_ERROR);
+        }
+
     }
 }
