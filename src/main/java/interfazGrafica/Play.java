@@ -92,7 +92,7 @@ public class Play extends VBox {
         for(Button aButton : buttons) {
             Option option = round.getQuestion().getOptions().get(i);
             EventHandler<ActionEvent> handler;
-            handler = new BooleanOptionsEventHandler(option, round, turn, game, nextScene, this.stage);
+            handler = new BooleanOptionsEventHandler(option, round, turn, game, nextScene, this.stage, aButton);
             aButton.setOnAction(handler);
             i++;
         }

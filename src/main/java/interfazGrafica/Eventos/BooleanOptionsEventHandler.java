@@ -5,6 +5,7 @@ import interfazGrafica.Play;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import modelo.game.Game;
@@ -20,19 +21,23 @@ public class BooleanOptionsEventHandler implements EventHandler<ActionEvent> {
     private Option option;
     private Game game;
     private Turn turn;
+    private Button button;
 
-    public BooleanOptionsEventHandler(Option option, Round round, Turn turn, Game game, Play nextPlay, Stage stage) {
+    public BooleanOptionsEventHandler(Option option, Round round, Turn turn, Game game, Play nextPlay, Stage stage, Button button) {
         this.round = round;
         this.turn = turn;
         this.option = option;
         this.game = game;
         this.nextPlay = nextPlay;
         this.stage = stage;
+        this.button = button;
     }
 
     @Override
     public void handle(ActionEvent actionEvent) {
         this.turn.addPlayerAnswer(this.option);
+
+        this.button.setDisable(true);
 
         if (this.turn.getAmountChosenOptions() != this.turn.getAmountCurrentOptions()) {
             return;
