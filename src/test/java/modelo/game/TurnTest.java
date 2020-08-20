@@ -39,7 +39,7 @@ public class TurnTest {
     }
 
     @Test
-    public void getAmountCurrentOptions(){
+    public void testGetAmountCurrentOptions(){
 
         Turn turn = setUpTurn();
         Integer expectedSize = 0;
@@ -48,7 +48,7 @@ public class TurnTest {
     }
 
     @Test
-    public void getAmountChosenOptions() {
+    public void testGetAmountChosenOptions() {
         when(questionMock.getCorrectOptions()).thenReturn(optionsMock);
         Turn turn = setUpTurn();
         Integer expectedSize = 0;
@@ -57,14 +57,14 @@ public class TurnTest {
     }
 
     @Test
-    public void getAnswers() {
+    public void testGetAnswers() {
         Turn turn = setUpTurn();
 
         Assert.assertEquals(0 , turn.getAnswers().size());
     }
 
     @Test
-    public void addPlayerAnswer() {
+    public void testAddPlayerAnswer() {
         Turn turn = setUpTurn();
 
         turn.addPlayerAnswer(optionMock);
@@ -73,19 +73,28 @@ public class TurnTest {
     }
 
     @Test
-    public void getPlayer() {
+    public void testGetPlayer() {
         Turn turn = setUpTurn();
 
         Assert.assertEquals(playerMock,turn.getPlayer());
     }
 
     @Test
-    public void finish() {
+    public void testFinishTurn() {
         Turn turn = setUpTurn();
         doCallRealMethod().when(questionMock).selectOptions(any(ArrayList.class), any(Points.class));
 
         turn.finish();
 
         verify(questionMock, times(1)).selectOptions(optionsMock, turn.getPoints());
+    }
+
+    @Test
+    public void testIncreaseAmounthOfPoints(){
+        Turn turn = setUpTurn();
+        int amountOfOptions = turn.getAmountCurrentOptions();
+        turn.increaseAmountOfCurrentOptions();
+        Assert.assertEquals(amountOfOptions+1, turn.getAmountCurrentOptions().intValue());
+
     }
 }

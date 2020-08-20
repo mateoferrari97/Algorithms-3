@@ -1,6 +1,7 @@
 package modelo.game;
 
 
+import modelo.multiplicators.Multiplicator;
 import modelo.options.*;
 import modelo.questions.*;
 import modelo.scorers.*;
@@ -52,6 +53,15 @@ import static org.mockito.Mockito.*;
         Question question = round.getQuestion();
         Assert.assertEquals(question.getText(),"hola");
 
+    }
+    @Test
+    public void testGetMultiplicators(){
+        Round round = setUpRound();
+        List<Multiplicator> multiplicatorsMock = spy(new ArrayList<Multiplicator>());
+        doReturn(multiplicatorsMock).when(questionMock).getMultiplicators();
+
+        List<Multiplicator> multiplicators =round.getMultiplicator();
+        Assert.assertEquals(multiplicators,multiplicatorsMock);
     }
 
 }

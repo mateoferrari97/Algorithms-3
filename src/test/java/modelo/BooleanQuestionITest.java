@@ -1,14 +1,11 @@
 package modelo;
 
 
-import exceptions.NoMoreConsumablesException;
-import modelo.game.Player;
 import modelo.game.Points;
 import modelo.options.CorrectOptionScorer;
 import modelo.options.IncorrectOptionScorer;
 import modelo.options.Option;
 import modelo.questions.BooleanQuestion;
-import modelo.multiplicators.Multiplicator;
 import modelo.questions.Question;
 import modelo.scorers.BooleanScorer;
 import modelo.scorers.QuestionScorer;

@@ -30,4 +30,7 @@ public class Constantes {
     public static final String GAME_TITLE = "Kahoot";
     public static final Integer MAX_PLAYERS = 2;
 
+    // multiplicators
+    public static final String SCORE_EXCLUSIVITY_TEXT = "ScoreExclusivity";
+
 }

@@ -2,8 +2,6 @@ package modelo;
 
 
 import exceptions.InvalidSizeException;
-import exceptions.NoMoreConsumablesException;
-import modelo.game.Player;
 import modelo.game.Points;
 import modelo.options.CorrectOptionScorer;
 import modelo.options.IncorrectOptionScorer;
