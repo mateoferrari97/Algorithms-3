@@ -13,6 +13,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -41,18 +42,16 @@ public class Play extends VBox {
     public Play(Stage stage){
         super();
         this.stage = stage;
-        this.backgrounds = Arrays.asList("-fx-background-color: lightblue;", "-fx-background-color: yellow;", "-fx-background-color: lightorange;", "-fx-background-color: lightgreen;" );
+        this.backgrounds = Arrays.asList("-fx-background-color: lightblue;", "-fx-background-color: lightgreen;" );
     }
 
     public void start(Game game) {
 
         Round round = game.getNextRound();
         Turn turn = round.getTurn(game);
+        this.setPadding(new Insets(10));
 
-        this.setSpacing(100);
-        this.setPadding(new Insets(300));
-
-        Scene scene = new Scene(this);
+        Scene scene = new Scene(this, 900, 900);
         Random random = new Random();
         this.setStyle(this.backgrounds.get(random.nextInt(backgrounds.size())));
         //this.setStyle("-fx-background-color: lightorange;");
@@ -103,9 +102,13 @@ public class Play extends VBox {
         Button[] buttons = getQuestionOptions(round, turn, game);
         HBox buttonsContainer = new HBox();
         for(Button aButton : buttons){
+            aButton.setPrefSize(100,100);
+            aButton.setFont(Font.font("Impact", 18));
+            aButton.setStyle("-fx-background-color: #fa8072; -fx-border-color: white; -fx-border-width: 3px; -fx-text-fill: white;");
             buttonsContainer.getChildren().add(aButton);
         }
-        buttonsContainer.setSpacing(150);
+        buttonsContainer.setSpacing(20);
+        buttonsContainer.setAlignment(Pos.CENTER);
         this.getChildren().add(buttonsContainer);
     }
 
@@ -137,14 +140,17 @@ public class Play extends VBox {
     //--------------------------Question text label-------------------------
     //----------------------------------------------------------------------
     private void createQuestionLabel(Round round) {
-        Label questionText = new Label();
-        questionText.setTextFill(Color.BLUE);
+        HBox questionContainer = new HBox();
+        Label questionText = new Label(round.getQuestion().getText());
+        questionText.setStyle("-fx-background-color: white; -fx-padding: 10px; -fx-border-color: black; -fx-border-width: 3px");
         questionText.setFont(new Font("Arial", 30));
-        questionText.setStyle("-fx-border-color: black;");
 
-        questionText.setText(round.getQuestion().getText());
 
-        this.getChildren().add(questionText);
+        questionContainer.getChildren().add(questionText);
+
+        questionContainer.setAlignment(Pos.CENTER);
+
+        this.getChildren().add(questionContainer);
     }
 
     //----------------------------------------------------------------------
