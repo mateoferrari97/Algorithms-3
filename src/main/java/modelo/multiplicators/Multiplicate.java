@@ -1,12 +1,15 @@
 package modelo.multiplicators;
 
-import modelo.game.Player;
 import modelo.game.Points;
 import modelo.game.Round;
+import modelo.game.Turn;
+
+import java.util.List;
 
 public class Multiplicate implements Multiplicator {
     private String text;
     private Integer multiplicate;
+    private Turn turn;
 
     public Multiplicate(String text, Integer i) {
         this.text = text;
@@ -19,12 +22,12 @@ public class Multiplicate implements Multiplicator {
     }
 
     @Override
-    public void activate() {
-
+    public void activate(Turn turn) {
+        this.turn = turn;
     }
 
     @Override
-    public void multiplicate(Points points) {
-        points.multiplicate(this.multiplicate);
+    public void multiplicate(List<Turn> turns) {
+        this.turn.getPoints().multiplicate(this.multiplicate);
     }
 }

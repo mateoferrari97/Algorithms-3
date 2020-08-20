@@ -1,14 +1,16 @@
 package modelo.multiplicators;
 
-import modelo.game.Player;
 import modelo.game.Points;
 import modelo.game.Round;
+import modelo.game.Turn;
+
+import java.util.List;
 
 public interface Multiplicator {
 
     String getText();
 
-    void activate();
+    void activate(Turn turn);
 
-    void multiplicate(Points points);
+    void multiplicate(List<Turn> turns);
 }

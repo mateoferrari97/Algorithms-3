@@ -1,53 +1,45 @@
 package modelo.game;
 
+import modelo.multiplicators.Multiplicate;
 import modelo.multiplicators.Multiplicator;
 import modelo.multiplicators.ScoreExclusivity;
 import modelo.questions.Question;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Round {
     private Integer currentTurn = 0;
     private List<Turn> turns = new ArrayList<>();
     private List<Player> players = new ArrayList<>();
     private Question question;
-    private Multiplicator multiplicator;
+    private Set<Multiplicator> multiplcators = new HashSet<>();
 
     public Round(Player[] players, Question question) {
         this.question = question;
-
         for(Player player : players){
             this.players.add(player);
             this.turns.add(new Turn(player, question));
         }
+        currentTurn = 0;
     }
 
     public void finish(){
         if(currentTurn == turns.size()) {
-            if(multiplicator == null){
-                for(Turn aTurn : turns){
-                    if(aTurn.getUsedMultiplicator() != null) {
-                        aTurn.multiplicatePoints();
-                    }
-                }
+            for(Multiplicator aMultiplicator :multiplcators){
+                aMultiplicator.multiplicate(turns);
             }
-            else{
-                for(Turn aTurn : turns){
-                    multiplicator.multiplicate(aTurn.getPoints());
-                }
-            }
+
             for(Turn aTurn : turns){
-                aTurn.getPoints().givePointsToPlayer(aTurn.getPlayer());
+                aTurn.givePointsToPlayers();
             }
         }
     }
 
     public List<Multiplicator> getMultiplicator() {
         List<Multiplicator> multiplicators = this.question.getMultiplicators();
-        if(multiplicators.size() == 1){
-            this.multiplicator = multiplicators.get(0);
-        }
         return multiplicators;
     }
 
@@ -71,11 +63,8 @@ public class Round {
     }
 
     public void multiplicate(Multiplicator multiplicator, Turn turn) {
-        if(this.multiplicator != null){
-            this.multiplicator.activate();
-        }
-        else {
-            turn.multiplicate(multiplicator);
-        }
+        multiplcators.add(multiplicator);
+        multiplicator.activate(turn);
     }
+
 }

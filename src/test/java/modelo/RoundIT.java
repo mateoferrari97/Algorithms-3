@@ -57,7 +57,7 @@ public class RoundIT {
         Turn turnOne = round.getTurn(gameMock);
         Turn turnTwo = round.getTurn(gameMock);
 
-        List<Multiplicator> multiplicators = round.getMultiplicator();
+        //List<Multiplicator> multiplicators = round.getMultiplicator();
 
         List<Option> playerOneOptions = Arrays.asList(new Option("no", new IncorrectOptionScorer()));
         List<Option> playerTwoOptions = Arrays.asList(new Option("no", new IncorrectOptionScorer()));
@@ -108,13 +108,15 @@ public class RoundIT {
         Integer expectedPlayerOnePoints = 0;
         Integer expectedPlayerTwoPoints = 2;
 
+
+
         ScoreExclusivity scoreExclusivity = new ScoreExclusivity();
 
         //When
         question.selectOptions(playerOneOptions, turnOne.getPoints());
         question.selectOptions(playerTwoOptions, turnTwo.getPoints());
 
-        turnTwo.multiplicate(scoreExclusivity);
+        round.multiplicate(scoreExclusivity,turnOne);
 
         round.finish();
 
@@ -161,8 +163,8 @@ public class RoundIT {
         question.selectOptions(playerOneOptions, turnOne.getPoints());
         question.selectOptions(playerTwoOptions, turnTwo.getPoints());
 
-        turnOne.multiplicate(scoreExclusivity);
-        turnTwo.multiplicate(scoreExclusivity);
+        round.multiplicate(scoreExclusivity,turnOne);
+        round.multiplicate(scoreExclusivity,turnTwo);
 
         round.finish();
 
@@ -209,8 +211,8 @@ public class RoundIT {
         question.selectOptions(playerOneOptions, turnOne.getPoints());
         question.selectOptions(playerTwoOptions, turnTwo.getPoints());
 
-        turnOne.multiplicate(scoreExclusivity);
-        turnTwo.multiplicate(scoreExclusivity);
+        round.multiplicate(scoreExclusivity,turnOne);
+        round.multiplicate(scoreExclusivity,turnTwo);
 
         round.finish();
 
@@ -257,7 +259,8 @@ public class RoundIT {
         question.selectOptions(playerOneOptions, turnOne.getPoints());
         question.selectOptions(playerTwoOptions, turnTwo.getPoints());
 
-        turnTwo.multiplicate(multiplicator);
+
+        round.multiplicate(multiplicator,turnTwo);
 
         round.finish();
 
@@ -303,7 +306,7 @@ public class RoundIT {
         question.selectOptions(playerOneOptions, turnOne.getPoints());
         question.selectOptions(playerTwoOptions, turnTwo.getPoints());
 
-        turnTwo.multiplicate(multiplicator);
+        round.multiplicate(multiplicator,turnTwo);
 
         round.finish();
 

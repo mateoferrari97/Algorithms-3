@@ -1,6 +1,5 @@
 package modelo.multiplicators;
 
-import modelo.game.Player;
 import modelo.game.Points;
 import modelo.game.Round;
 import modelo.game.Turn;
@@ -9,7 +8,8 @@ import java.util.List;
 
 public class ScoreExclusivity implements Multiplicator {
     private Integer multiplicate = 1;
-    private Points lastPoints;
+    private Integer lastPoints;
+    private Turn lastTurn;
 
     @Override
     public String getText() {
@@ -17,26 +17,26 @@ public class ScoreExclusivity implements Multiplicator {
     }
 
     @Override
-    public void multiplicate(Points points) {
-        if(this.lastPoints != null){
-            if(this.lastPoints.getPointsWithoutMultiplicate() == points.getPointsWithoutMultiplicate()){
-                multiplicate = 1;
-                lastPoints.multiplicate(multiplicate);
+    public void multiplicate(List<Turn> turns) {
+        this.lastTurn = turns.get(0);
+        for(Turn aTurn : turns) {
+            if (this.lastPoints != null) {
+                if (this.lastPoints == aTurn.getPoints().getPointsWithoutMultiplicate()) {
+                    multiplicate = 1;
+                    lastTurn.getPoints().multiplicate(multiplicate);
+                } else if (this.lastPoints < aTurn.getPoints().getPointsWithoutMultiplicate()) {
+                    this.lastTurn.getPoints().multiplicate(1);
+                } else {
+                    multiplicate = 1;
+                }
             }
-            else if(this.lastPoints.getPointsWithoutMultiplicate() < points.getPointsWithoutMultiplicate()){
-                this.lastPoints.multiplicate(1);
-            }
-            else{
-                multiplicate = 1;
-            }
+            aTurn.getPoints().multiplicate(multiplicate);
+            this.lastPoints = aTurn.getPoints().getPointsWithoutMultiplicate();
         }
-        points.multiplicate(multiplicate);
-        this.lastPoints = points;
-
     }
 
     @Override
-    public void activate() {
+    public void activate(Turn turn) {
         multiplicate = multiplicate * 2;
     }
 }

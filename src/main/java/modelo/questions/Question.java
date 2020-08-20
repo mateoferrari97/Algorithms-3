@@ -2,6 +2,7 @@ package modelo.questions;
 
 
 import modelo.game.Points;
+import modelo.game.Round;
 import modelo.multiplicators.Multiplicator;
 import modelo.options.Option;
 import modelo.scorers.QuestionScorer;
@@ -54,7 +55,6 @@ public abstract class Question {
     public List<Multiplicator> getMultiplicators() {
         return this.multiplicator;
     }
-
 
 }
 
