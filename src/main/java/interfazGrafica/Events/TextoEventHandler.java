@@ -1,4 +1,4 @@
-package interfazGrafica.Eventos;
+package interfazGrafica.Events;
 
 import javafx.event.ActionEvent;
 import javafx.event.Event;

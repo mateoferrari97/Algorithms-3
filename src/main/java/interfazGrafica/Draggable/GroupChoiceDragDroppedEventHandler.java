@@ -1,5 +1,4 @@
 package interfazGrafica.Draggable;
-
 import modelo.game.OptionGroup;
 import interfazGrafica.EndGame;
 import interfazGrafica.Play;
