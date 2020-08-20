@@ -1,5 +1,7 @@
 package modelo;
 
+import exceptions.InvalidJsonRecognizerClassException;
+import exceptions.InvalidSizeException;
 import exceptions.NoMoreConsumablesException;
 import modelo.game.Game;
 import modelo.game.Player;
@@ -22,12 +24,14 @@ import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
+import utils.QuestionFactory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.spy;
 
 
 @RunWith(PowerMockRunner.class)
@@ -35,11 +39,10 @@ import static org.mockito.Mockito.*;
 @PrepareForTest({Player.class, BooleanScorer.class, BooleanQuestion.class, ArrayList.class})
 
 public class RoundIT {
-
+    private  Game gameMock = spy(new Game());
     @Test
     public void testRoundDontDecreasePlayerPointsWhenQuestionHavePenaltyScorerAndPlayerAnswerIncorrecltyWhenPlayerHasntPoints() {
         // Given
-        Game gameMock = spy(new Game());
         doNothing().when(gameMock).setNextRound();
 
         List<Option> options = Arrays.asList(
@@ -80,7 +83,6 @@ public class RoundIT {
     public void testRoundDoublePointsWithScoreExclusivityWhenQuestionDoesntHaveAPenaltyScorerAndOnePlayerAnswerIncorrectly() throws NoMoreConsumablesException {
         // Given
 
-        Game gameMock = spy(new Game());
         doNothing().when(gameMock).setNextRound();
 
 
@@ -129,7 +131,6 @@ public class RoundIT {
     public void testRoundQuadruplePointsWithScoreExclusivityTwoTimesActiveWhenQuestionDoesntHaveAPenaltyScorerAndOnePlayerAnswerIncorrectly() throws NoMoreConsumablesException {
         // Given
 
-        Game gameMock = spy(new Game());
         doNothing().when(gameMock).setNextRound();
 
 
@@ -177,7 +178,6 @@ public class RoundIT {
     public void testRoundDoesntMultiplicatePointsWithScoreExclusivityWhenQuestionDoesntHaveAPenaltyScorerAndBothPlayersAnswerCorrectly() throws NoMoreConsumablesException {
         // Given
 
-        Game gameMock = spy(new Game());
         doNothing().when(gameMock).setNextRound();
 
 
@@ -225,7 +225,6 @@ public class RoundIT {
     public void testRoundDoubleThePointsToPlayerWhenUsingDoubleMultiplicatorWhenOptionIsCorrectOfAQuestionWithPenalty() throws NoMoreConsumablesException {
         // Given
 
-        Game gameMock = spy(new Game());
         doNothing().when(gameMock).setNextRound();
 
 
@@ -272,7 +271,6 @@ public class RoundIT {
     public void testRoundTriplicateThePointsToPlayerWhenUsingTripleMultiplicatorWhenOptionIsCorrectOfAQuestionWithPenalty() throws NoMoreConsumablesException {
         // Given
 
-        Game gameMock = spy(new Game());
         doNothing().when(gameMock).setNextRound();
 
 
@@ -313,5 +311,42 @@ public class RoundIT {
         // Then
         Assert.assertEquals(turnOne.getPlayer().getPoints(), expectedPlayerOnePoints);
         Assert.assertEquals(turnTwo.getPlayer().getPoints(), expectedPlayerTwoPoints);
+    }
+
+    @Test
+    public void testIfOneOnePlayerCorrectAnsweredAndTheOtherBadIt() throws InvalidSizeException, InvalidJsonRecognizerClassException {
+        QuestionFactory qFactory = new QuestionFactory();
+        Question question = qFactory.unmarshal("{\"text\": \"elegir las opciones que dan como resultado igual a 4\",\"type\": \"MultipleChoiceQuestion\",\"scorer\": \"MultipleChoiceScorer\",\"options\": [{\"text\": \"2 + 2\",\"optionScorer\": true},{\"text\": \"2 * 2\",\"optionScorer\": true},{\"text\": \"1 + 3\",\"optionScorer\": true},{\"text\": \"2^2\",\"optionScorer\": true},{\"text\": \"1 - 3\",\"optionScorer\": false}]}");
+        Integer uno= 1;
+        Integer cero = 0;
+        Player[] players = new Player[2];
+
+        players[0] = new Player(); // este responde bien
+        players[1] = new Player(); // este responde mal
+
+
+        List<Option> playerOneOptions = Arrays.asList(
+                new Option("2 + 2", new CorrectOptionScorer()),
+                new Option("2 * 2",new CorrectOptionScorer()),
+                new Option("1 + 3",new CorrectOptionScorer()),
+                new Option("2^2", new CorrectOptionScorer()));
+        List<Option> playerTwoOptions = Arrays.asList(
+                new Option("1 - 3", new IncorrectOptionScorer()),
+                new Option("2 * 2",new CorrectOptionScorer()),
+                new Option("1 + 3",new CorrectOptionScorer()),
+                new Option("2^2", new CorrectOptionScorer()));
+
+        doNothing().when(gameMock).setNextRound();
+        Round round = new Round(players, question);
+        Turn turnOne = round.getTurn(gameMock);
+        Turn turnTwo = round.getTurn(gameMock);
+
+        question.selectOptions(playerOneOptions, turnOne.getPoints());
+        question.selectOptions(playerTwoOptions, turnTwo.getPoints());
+
+        round.finish();
+
+        Assert.assertEquals(players[0].getPoints(), uno);
+        Assert.assertEquals(players[1].getPoints(), cero);
     }
 }
