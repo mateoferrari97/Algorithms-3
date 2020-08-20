@@ -6,6 +6,8 @@ import interfazGrafica.Draggable.*;
 import interfazGrafica.Eventos.BooleanOptionsEventHandler;
 import interfazGrafica.Draggable.GroupChoiceDragDroppedEventHandler;
 import interfazGrafica.Eventos.MultiplicatorEventHandler;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -25,6 +27,7 @@ import javafx.scene.shape.Ellipse;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import modelo.game.Game;
 import modelo.game.Player;
 import modelo.game.Round;
@@ -41,6 +44,7 @@ import java.util.Random;
 public class Play extends VBox {
     Stage stage;
     List<String> backgrounds;
+    private int time = 10;
 
     public Play(Stage stage){
         super();
@@ -54,11 +58,22 @@ public class Play extends VBox {
         Turn turn = round.getTurn(game);
         this.setPadding(new Insets(10));
 
+        Label tiempo = new Label(String.valueOf(time));
+        tiempo.setTextFill(Color.web("#FF0000"));
+        tiempo.setStyle("-fx-font: 20 arial;");
+
         Scene scene = new Scene(this, 900, 600);
         Random random = new Random();
         this.setStyle(this.backgrounds.get(random.nextInt(backgrounds.size())));
 
-        createPlayerLabels(turn);
+
+        Timeline timeline = new Timeline();
+
+        Timeline timeline2 = new Timeline();
+
+        Timeline timeline3 = new Timeline();
+
+        createPlayerLabels(turn, tiempo);
 
         createQuestionLabel(round);
 
@@ -67,14 +82,40 @@ public class Play extends VBox {
         switch (round.getQuestion().getType()) {
             case "GroupChoiceQuestion":
                 createAnswerDraggableOptions(round, turn, game);
-                createTargeteableGroups(round, turn, game);
+                createTargeteableGroups(round, turn, game, timeline, timeline2, timeline3);
                 break;
             default:
-                createAnswerOptionsButtons(round, turn, game);
+                createAnswerOptionsButtons(round, turn, game, timeline, timeline2, timeline3);
         }
+
+        Play nextScene = new Play(this.stage);
+
+        timeline3.getKeyFrames().add(new KeyFrame(Duration.millis(1000),
+                ae -> time--));
+        timeline3.setCycleCount(10);
+        timeline3.play();
+
+        timeline2.getKeyFrames().add(new KeyFrame(Duration.millis(1000),
+                ae -> tiempo.setText(String.valueOf(time))));
+        timeline2.setCycleCount(10);
+        timeline2.play();
+
+
+        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(10000),
+                ae -> actualizarEscena(nextScene, game, turn)));
+        timeline.play();
 
         this.setSpacing(30);
         this.stage.setScene(scene);
+    }
+
+    public void actualizarEscena(Play nextScene, Game game, Turn turn) {
+        turn.finish();
+        if(game.getNextRound() == null){
+            EndGame end = new EndGame(stage, game);
+        }else{
+            nextScene.start(game);
+        }
     }
 
     //----------------------------------------------------------------------
@@ -107,8 +148,8 @@ public class Play extends VBox {
     //----------------------------------------------------------------------
     //--------------------------Buttons creation----------------------------
     //----------------------------------------------------------------------
-    private void createAnswerOptionsButtons(Round round, Turn turn, Game game) {
-        Button[] buttons = getQuestionOptions(round, turn, game);
+    private void createAnswerOptionsButtons(Round round, Turn turn, Game game, Timeline timeline, Timeline timeline2, Timeline timeline3) {
+        Button[] buttons = getQuestionOptions(round, turn, game, timeline, timeline2, timeline3);
         HBox buttonsContainer = new HBox();
         for(Button aButton : buttons){
             aButton.setPrefSize(100,100);
@@ -121,7 +162,7 @@ public class Play extends VBox {
         this.getChildren().add(buttonsContainer);
     }
 
-    private Button[] getQuestionOptions(Round round, Turn turn, Game game) {
+    private Button[] getQuestionOptions(Round round, Turn turn, Game game, Timeline timeline, Timeline timeline2, Timeline timeline3) {
         String[] answerOptions = round.getQuestion().getAnswerOptions();
         Button[] buttons = new Button[answerOptions.length];
         int i = 0;
@@ -129,17 +170,17 @@ public class Play extends VBox {
             buttons[i] = new Button(aString);
             i++;
         }
-        fillWithEvents(buttons, round, turn, game);
+        fillWithEvents(buttons, round, turn, game, timeline, timeline2, timeline3);
         return buttons;
     }
 
-    public void fillWithEvents(Button[] buttons, Round round, Turn turn, Game game) {
+    public void fillWithEvents(Button[] buttons, Round round, Turn turn, Game game, Timeline timeline, Timeline timeline2, Timeline timeline3) {
         int i = 0;
         Play nextScene = new Play(this.stage);
         for(Button aButton : buttons) {
             Option option = round.getQuestion().getOptions().get(i);
             EventHandler<ActionEvent> handler;
-            handler = new BooleanOptionsEventHandler(option, round, turn, game, nextScene, this.stage, aButton);
+            handler = new BooleanOptionsEventHandler(option, round, turn, game, nextScene, this.stage, aButton, timeline, timeline2, timeline3);
             aButton.setOnAction(handler);
             i++;
         }
@@ -165,7 +206,7 @@ public class Play extends VBox {
     //----------------------------------------------------------------------
     //--------------------------Player and points labels--------------------
     //----------------------------------------------------------------------
-    private void createPlayerLabels(Turn turn) {
+    private void createPlayerLabels(Turn turn, Label tiempo) {
         Label playerText = new Label();
         playerText.setTextFill(Color.BLACK);
         playerText.setFont(new Font("Arial", 30));
@@ -179,7 +220,7 @@ public class Play extends VBox {
         playerText.setText(player.getName() + ":");
         playerPoints.setText(player.getPoints().toString());
 
-        HBox playerContenedorHorizontal = new HBox(playerText, playerPoints);
+        HBox playerContenedorHorizontal = new HBox(playerText, playerPoints, tiempo);
         playerContenedorHorizontal.setSpacing(10);
 
         this.getChildren().add(playerContenedorHorizontal);
@@ -237,7 +278,7 @@ public class Play extends VBox {
     //--------------------------Targeteable Groups--------------------------
     //----------------------------------------------------------------------
 
-    private void createTargeteableGroups(Round round, Turn turn, Game game){
+    private void createTargeteableGroups(Round round, Turn turn, Game game, Timeline timeline, Timeline timeline2, Timeline timeline3){
         Text groupAText = new Text("Grupo A");
         groupAText.setScaleX(2.0);
         groupAText.setScaleY(2.0);
@@ -249,8 +290,8 @@ public class Play extends VBox {
         VBox groupA = new VBox();
         VBox groupB = new VBox();
 
-        setAsTarget(groupAText, groupA, game, round, turn, new SelectableGroup());
-        setAsTarget(groupBText, groupB, game, round, turn, new UnselectableGroup());
+        setAsTarget(groupAText, groupA, game, round, turn, new SelectableGroup(), timeline, timeline2, timeline3);
+        setAsTarget(groupBText, groupB, game, round, turn, new UnselectableGroup(), timeline, timeline2, timeline3);
 
 
 
@@ -286,12 +327,12 @@ public class Play extends VBox {
         this.getChildren().add(groupsContainer);
     }
 
-    void setAsTarget(Text target, VBox vBox, Game game, Round round, Turn turn, OptionGroup typeOfGroup) {
+    void setAsTarget(Text target, VBox vBox, Game game, Round round, Turn turn, OptionGroup typeOfGroup, Timeline timeline, Timeline timeline2, Timeline timeline3) {
         Play nextScene = new Play(this.stage);
         target.setOnDragOver(new DragOverEventHandler());
         target.setOnDragEntered(new DragEnteredEventHandler(target));
         target.setOnDragExited(new DragExitedEventHandler(target));
-        target.setOnDragDropped(new GroupChoiceDragDroppedEventHandler(vBox, game, round, turn, nextScene, this.stage, typeOfGroup));
+        target.setOnDragDropped(new GroupChoiceDragDroppedEventHandler(vBox, game, round, turn, nextScene, this.stage, typeOfGroup, timeline, timeline2, timeline3));
     }
 }
 

@@ -3,6 +3,7 @@ package interfazGrafica.Draggable;
 import Group.OptionGroup;
 import interfazGrafica.EndGame;
 import interfazGrafica.Play;
+import javafx.animation.Timeline;
 import javafx.event.EventHandler;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
@@ -25,9 +26,12 @@ public class GroupChoiceDragDroppedEventHandler implements EventHandler<DragEven
     private Play nextPlay;
     private Stage stage;
     private OptionGroup typeOfGroup;
+    private Timeline timeline;
+    private Timeline timeline2;
+    private Timeline timeline3;
 
 
-    public GroupChoiceDragDroppedEventHandler(VBox vBox, Game game, Round round, Turn turn, Play nextPlay, Stage stage, OptionGroup typeOfGroup){
+    public GroupChoiceDragDroppedEventHandler(VBox vBox, Game game, Round round, Turn turn, Play nextPlay, Stage stage, OptionGroup typeOfGroup, Timeline timeline, Timeline timeline2, Timeline timeline3){
         this.vBox = vBox;
         this.turn = turn;
         this.game = game;
@@ -35,6 +39,9 @@ public class GroupChoiceDragDroppedEventHandler implements EventHandler<DragEven
         this.stage = stage;
         this.round = round;
         this.typeOfGroup = typeOfGroup;
+        this.timeline = timeline;
+        this.timeline2 = timeline2;
+        this.timeline3 = timeline3;
     }
 
     @Override
@@ -63,6 +70,9 @@ public class GroupChoiceDragDroppedEventHandler implements EventHandler<DragEven
             return;
         }
 
+        this.timeline.stop();
+        this.timeline2.stop();
+        this.timeline3.stop();
         this.turn.finish();
 
         this.turn.finish();
