@@ -1,8 +1,6 @@
 package modelo.game;
 
 
-import modelo.multiplicators.Multiplicate;
-import modelo.multiplicators.Multiplicator;
 import modelo.options.Option;
 import modelo.questions.Question;
 
@@ -25,6 +23,7 @@ public class Turn {
 
     public void finish() {
         question.selectOptions(answers, this.points);
+        //System.out.print(this.points.getPoints());
     }
 
     public Player getPlayer() {
@@ -59,6 +58,9 @@ public class Turn {
     }
 
     public void givePointsToPlayers() {
+        /*System.out.print("XDDDDDD");
+        System.out.print(this.points.getPoints());*/
+
         this.points.givePointsToPlayer(this.player);
     }
 }

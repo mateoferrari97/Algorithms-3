@@ -28,7 +28,7 @@ public class QuestionFactoryTest {
 
         Points points = new Points();
         List<Option> playerOptions = Arrays.asList(new Option("no", new IncorrectOptionScorer()));
-        Integer expectedPoints = -1;
+        Integer expectedPoints = 0;
 
         // When
         question.selectOptions(playerOptions, points);
@@ -165,9 +165,10 @@ public class QuestionFactoryTest {
         Question question1 = questions.get(0);
 
         List<Option> playerOptions1 = Arrays.asList(new Option("no", new IncorrectOptionScorer()));
-        Integer expectedPoints1 = -1;
+        Integer expectedPoints1 = 0;
 
         Points points1 = new Points();
+        points1.increasePoints();
 
         // When
         question1.selectOptions(playerOptions1, points1);

@@ -1,7 +1,6 @@
 package modelo.game;
 
 //import modelo.consumables.ScoreExclusivity;
-import exceptions.NoMoreConsumablesException;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;

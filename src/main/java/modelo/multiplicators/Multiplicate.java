@@ -23,11 +23,11 @@ public class Multiplicate implements Multiplicator {
 
     @Override
     public void activate(Turn turn) {
-        this.turn = turn;
+        turn.getPoints().multiplicate(this.multiplicate);
     }
 
     @Override
     public void multiplicate(List<Turn> turns) {
-        this.turn.getPoints().multiplicate(this.multiplicate);
+
     }
 }
