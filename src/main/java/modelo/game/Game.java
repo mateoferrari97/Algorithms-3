@@ -105,6 +105,7 @@ public class Game {
     }
 
     public boolean getDraw() {
+
         return players[0].isTied();
     }
 

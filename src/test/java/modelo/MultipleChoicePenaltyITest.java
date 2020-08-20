@@ -91,10 +91,11 @@ public class MultipleChoicePenaltyITest {
         Question question = new MultipleChoiceQuestion("elegir las opciones que dan como resultado igual a 4", options, scorer);
 
         Points points = new Points();
+        points.increasePoints();
         List<Option> playerOptions = Arrays.asList(
                 new Option("5 / 1", new IncorrectOptionScorer()),
                 new Option("1 / 1", new IncorrectOptionScorer()));
-        Integer expectedPoints = -2;
+        Integer expectedPoints = 0;
 
         // When
         question.selectOptions(playerOptions, points);

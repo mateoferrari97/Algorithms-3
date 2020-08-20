@@ -24,6 +24,7 @@ public class Points {
 
     public void decreasePoints() {
         this.points--;
+        if (this.points < 0) this.points = 0;
     }
 
     public void changeScoreToZero() {
