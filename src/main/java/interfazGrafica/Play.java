@@ -5,6 +5,7 @@ import Group.UnselectableGroup;
 import interfazGrafica.Draggable.*;
 import interfazGrafica.Eventos.BooleanOptionsEventHandler;
 import interfazGrafica.Draggable.GroupChoiceDragDroppedEventHandler;
+import interfazGrafica.Eventos.MultiplicatorEventHandler;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -24,8 +25,10 @@ import modelo.game.Round;
 import modelo.game.Turn;
 import modelo.options.Option;
 import Group.OptionGroup;
+import modelo.multiplicators.Multiplicator;
 
-import static constantes.Constantes.GROUP_CHOCIE_QUESTION_TYPE;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Play extends VBox {
     Stage stage;
@@ -46,7 +49,10 @@ public class Play extends VBox {
         Scene scene = new Scene(this);
 
         createPlayerLabels(turn);
+
         createQuestionLabel(round);
+
+        createMultiplicatorButton(round, turn);
 
         switch (round.getQuestion().getType()) {
             case "GroupChoiceQuestion":
@@ -59,6 +65,26 @@ public class Play extends VBox {
 
         this.setSpacing(30);
         this.stage.setScene(scene);
+    }
+
+    //----------------------------------------------------------------------
+    //-------------------Multiplicator Buttons creation---------------------
+    //----------------------------------------------------------------------
+    private void createMultiplicatorButton(Round round, Turn turn) {
+        List<Button> buttons = new ArrayList<>();
+
+        for(Multiplicator aMultiplicator : round.getMultiplicator()){
+            Button button = new Button(aMultiplicator.getText());
+            MultiplicatorEventHandler multiplicatorEventHandler = new MultiplicatorEventHandler(aMultiplicator, turn, round);
+            button.setOnAction(multiplicatorEventHandler);
+            buttons.add(button);
+        }
+        HBox multiplicatorsContainer = new HBox();
+        for(Button aButton : buttons){
+            multiplicatorsContainer.getChildren().add(aButton);
+        }
+
+        this.getChildren().add(multiplicatorsContainer);
     }
 
     //----------------------------------------------------------------------

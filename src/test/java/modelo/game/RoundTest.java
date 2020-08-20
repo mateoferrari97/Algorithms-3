@@ -1,7 +1,6 @@
 package modelo.game;
 
-import modelo.consumables.Consumable;
-import modelo.consumables.ScoreExclusivity;
+
 import modelo.options.*;
 import modelo.questions.*;
 import modelo.scorers.*;
@@ -24,13 +23,12 @@ import static org.mockito.Mockito.*;
 @PrepareForTest({Player.class, BooleanScorer.class,BooleanQuestion.class,ArrayList.class})
 
 
-public class RoundTest {
+ public class RoundTest {
     private Game gameMock = spy(new Game());
     private Player playerMock = spy(new Player());
     private List<Option> optionsMock = spy(new ArrayList<>());
     private BooleanScorer scorerMock= spy(new BooleanScorer());
-    private Consumable consumable = spy(new ScoreExclusivity());
-    private Question questionMock = spy(new BooleanQuestion( "",optionsMock,scorerMock, consumable));
+    private Question questionMock = spy(new BooleanQuestion( "",optionsMock,scorerMock));
 
     public Round setUpRound(){
         Player[] players = new Player[]{playerMock,playerMock};

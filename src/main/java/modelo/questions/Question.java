@@ -1,8 +1,9 @@
 package modelo.questions;
 
-import modelo.consumables.*;
-import modelo.game.Player;
+
 import modelo.game.Points;
+import modelo.game.Round;
+import modelo.multiplicators.Multiplicator;
 import modelo.options.Option;
 import modelo.scorers.QuestionScorer;
 
@@ -13,17 +14,10 @@ public abstract class Question {
     protected String text;
     protected QuestionScorer scorer;
     protected List<Option> options;
-    protected Points points;
-    protected Consumable consumable;
     protected String type;
+    protected List<Multiplicator> multiplicator;
 
-    public abstract void selectOptions(List<Option> playerAnswers);
-
-    public abstract void score(Player player);
-
-    public boolean isCorrect() {
-        return (this.points.getPoints() > 0);
-    }
+    public abstract void selectOptions(List<Option> playerAnswers, Points points);
 
     public String getText() {
         return this.text;
@@ -57,6 +51,11 @@ public abstract class Question {
     public String getType() {
         return this.type;
     }
+
+    public List<Multiplicator> getMultiplicators() {
+        return this.multiplicator;
+    }
+
 }
 
 

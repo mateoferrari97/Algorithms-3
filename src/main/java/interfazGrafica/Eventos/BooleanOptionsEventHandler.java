@@ -46,8 +46,10 @@ public class BooleanOptionsEventHandler implements EventHandler<ActionEvent> {
         this.turn.finish();
 
         if(game.getNextRound() == null){
-            EndGame end = new EndGame(stage, game);
+            this.round.finish();
+            new EndGame(stage, game);
         }else{
+            this.round.finish();
             nextPlay.start(game);
         }
     }

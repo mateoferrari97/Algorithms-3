@@ -1,7 +1,7 @@
 package modelo.game;
 
-import modelo.consumables.Consumable;
-import modelo.consumables.ScoreExclusivity;
+
+
 import modelo.options.CorrectOptionScorer;
 import modelo.options.IOptionScorer;
 import modelo.options.Option;
@@ -32,8 +32,7 @@ public class TurnTest {
     private Option optionMock = spy(new Option("",optionScorer));
     private List<Option> optionsMock = new ArrayList<>();
     private BooleanScorer scorerMock= spy(new BooleanScorer());
-    private Consumable consumable = spy(new ScoreExclusivity());
-    private Question questionMock = spy(new BooleanQuestion( "",optionsMock,scorerMock, consumable));
+    private Question questionMock = spy(new BooleanQuestion( "",optionsMock,scorerMock));
 
     public Turn setUpTurn(){
         return new Turn(playerMock,questionMock);
@@ -45,7 +44,7 @@ public class TurnTest {
         Turn turn = setUpTurn();
         Integer expectedSize = 0;
 
-        Assert.assertEquals(expectedSize, turn.getAmountCurrentOptions());
+        Assert.assertEquals(expectedSize, turn.getAmountOfOptions());
     }
 
     @Test
@@ -83,12 +82,10 @@ public class TurnTest {
     @Test
     public void finish() {
         Turn turn = setUpTurn();
-        doCallRealMethod().when(questionMock).selectOptions(any(ArrayList.class));
-        doCallRealMethod().when(questionMock).score(any(Player.class));
+        doCallRealMethod().when(questionMock).selectOptions(any(ArrayList.class), any(Points.class));
 
         turn.finish();
 
-        verify(questionMock, times(1)).selectOptions(optionsMock);
-        verify(questionMock, times(1)).score(playerMock);
+        verify(questionMock, times(1)).selectOptions(optionsMock, turn.getPoints());
     }
 }

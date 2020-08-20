@@ -1,9 +1,5 @@
 package modelo.game;
 
-import exceptions.NoMoreConsumablesException;
-import modelo.consumables.*;
-import static constantes.ErrorMessage.PLAYER_HAS_NO_MORE_CONSUMABLES_ERROR;
-
 public class Player {
     private String  name;
     private Integer points = 0;
@@ -37,13 +33,6 @@ public class Player {
 
     public String getName() {
         return this.name;
-    }
-
-    public void activateConsumable(Consumable consumable) throws NoMoreConsumablesException {
-        consumablesAmount--;
-        if (consumablesAmount < 0)
-            throw new NoMoreConsumablesException(PLAYER_HAS_NO_MORE_CONSUMABLES_ERROR);
-        consumable.activate();
     }
 
     public void changeStateToDraw() {

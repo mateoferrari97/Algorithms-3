@@ -1,12 +1,14 @@
 package modelo.game;
 
 public class Points {
+    private Integer multiplication;
     private Integer points;
     private Integer factor;
 
     public Points(){
         this.points = 0;
         this.factor = 1;
+        this.multiplication = 1;
     }
 
     public void increasePoints() {
@@ -14,8 +16,14 @@ public class Points {
     }
 
     public void givePointsToPlayer(Player player) {
-        player.gainAmountOfPoints(this.points * this.factor);
+        player.gainAmountOfPoints(this.points * this.factor * this.multiplication);
         this.points = 0;
+        this.factor = 1;
+        this.multiplication = 1;
+    }
+
+    public void dontMultiplicate() {
+        this.factor = 1;
     }
 
     public void decreasePoints() {
@@ -28,11 +36,15 @@ public class Points {
 
     public void gainAPoint() { this.points = 1; }
 
-    public Integer getPoints() {return (this.points * this.factor);}
+    public Integer getPoints() {return (this.points * this.factor * this.multiplication);}
   
     public void multiplicate(Integer multiplicator){
-        this.points = this.points * multiplicator;
+        this.multiplication = multiplicator;
     }
 
     public boolean equals(Points otherPoints) {return (this.points == otherPoints.getPoints());}
+
+    public Integer getPointsWithoutMultiplicate() {
+        return this.points * this.factor;
+    }
 }

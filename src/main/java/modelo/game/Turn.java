@@ -1,5 +1,8 @@
 package modelo.game;
 
+
+import modelo.multiplicators.Multiplicate;
+import modelo.multiplicators.Multiplicator;
 import modelo.options.Option;
 import modelo.questions.Question;
 
@@ -7,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Turn {
+    private Points points;
     private Player player;
     private Question question;
     private List<Option> answers = new ArrayList<>();
@@ -16,17 +20,16 @@ public class Turn {
         this.question = question;
         this.player = aPlayer;
         this.amountOfCurrentOptions = 0;
+        this.points = new Points();
     }
 
     public void finish() {
-        question.selectOptions(answers);
-        question.score(player);
+        question.selectOptions(answers, this.points);
     }
 
     public Player getPlayer() {
         return this.player;
     }
-
 
     public void addPlayerAnswer(Option option) {
         this.amountOfCurrentOptions++;
@@ -47,7 +50,15 @@ public class Turn {
         return this.question.getOptions().size();
     }
 
-    public Integer getAmountCurrentOptions() {
+    public Integer getAmountCurrentOptions() { // ESTA HACIENDO LO MISMO QUE getAmountOfOptions
         return this.amountOfCurrentOptions;
+    }
+
+    public Points getPoints() {
+        return this.points;
+    }
+
+    public void givePointsToPlayers() {
+        this.points.givePointsToPlayer(this.player);
     }
 }

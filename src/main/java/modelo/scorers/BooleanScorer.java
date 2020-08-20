@@ -1,14 +1,12 @@
 package modelo.scorers;
 
-
-import modelo.game.Player;
 import modelo.game.Points;
+import modelo.multiplicators.Multiplicator;
+import modelo.multiplicators.ScoreExclusivity;
+
+import java.util.List;
 
 public class BooleanScorer implements QuestionScorer {
-
-    public void score(Player player, Points points) {
-        points.givePointsToPlayer(player);
-    }
 
     public void reward(Points points) {
         points.increasePoints();
@@ -16,6 +14,10 @@ public class BooleanScorer implements QuestionScorer {
 
     public void punish(Points points) {
 
+    }
+
+    public void getMultiplicator(List<Multiplicator> multiplicator) {
+        multiplicator.add(new ScoreExclusivity());
     }
 
 }
