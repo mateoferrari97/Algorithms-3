@@ -1,6 +1,5 @@
-package Group;
+package modelo.game;
 
-import modelo.game.Turn;
 import modelo.options.Option;
 
 public class UnselectableGroup implements OptionGroup {

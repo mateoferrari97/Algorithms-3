@@ -1,7 +1,7 @@
 package interfazGrafica;
 
-import Group.SelectableGroup;
-import Group.UnselectableGroup;
+import modelo.game.SelectableGroup;
+import modelo.game.UnselectableGroup;
 import interfazGrafica.Draggable.*;
 import interfazGrafica.Eventos.BooleanOptionsEventHandler;
 import interfazGrafica.Draggable.GroupChoiceDragDroppedEventHandler;
@@ -15,15 +15,9 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.CubicCurve;
-import javafx.scene.shape.Ellipse;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -33,7 +27,7 @@ import modelo.game.Player;
 import modelo.game.Round;
 import modelo.game.Turn;
 import modelo.options.Option;
-import Group.OptionGroup;
+import modelo.game.OptionGroup;
 import modelo.multiplicators.Multiplicator;
 
 import java.util.ArrayList;
