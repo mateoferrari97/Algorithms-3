@@ -1,4 +1,4 @@
-package interfazGrafica.Eventos;
+package interfazGrafica.Events;
 
 import interfazGrafica.EndGame;
 import interfazGrafica.Play;

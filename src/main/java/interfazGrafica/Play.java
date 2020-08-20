@@ -1,11 +1,11 @@
 package interfazGrafica;
 
-import Group.SelectableGroup;
-import Group.UnselectableGroup;
+import group.SelectableGroup;
+import group.UnselectableGroup;
 import interfazGrafica.Draggable.*;
-import interfazGrafica.Eventos.BooleanOptionsEventHandler;
+import interfazGrafica.Events.BooleanOptionsEventHandler;
 import interfazGrafica.Draggable.GroupChoiceDragDroppedEventHandler;
-import interfazGrafica.Eventos.MultiplicatorEventHandler;
+import interfazGrafica.Events.MultiplicatorEventHandler;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -24,7 +24,7 @@ import modelo.game.Player;
 import modelo.game.Round;
 import modelo.game.Turn;
 import modelo.options.Option;
-import Group.OptionGroup;
+import group.OptionGroup;
 import modelo.multiplicators.Multiplicator;
 
 import java.util.ArrayList;

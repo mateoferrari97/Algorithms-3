@@ -1,4 +1,4 @@
-package Group;
+package group;
 
 import modelo.game.Turn;
 import modelo.options.Option;

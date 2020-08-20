@@ -1,6 +1,6 @@
 package interfazGrafica.Draggable;
 
-import Group.OptionGroup;
+import group.OptionGroup;
 import interfazGrafica.EndGame;
 import interfazGrafica.Play;
 import javafx.event.EventHandler;

@@ -1,8 +1,8 @@
 package interfazGrafica;
 
-import interfazGrafica.Eventos.BotonEnviarEventHandler;
-import interfazGrafica.Eventos.BotonLimpiarEventHandler;
-import interfazGrafica.Eventos.TextoEventHandler;
+import interfazGrafica.Events.BotonEnviarEventHandler;
+import interfazGrafica.Events.BotonLimpiarEventHandler;
+import interfazGrafica.Events.TextoEventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
