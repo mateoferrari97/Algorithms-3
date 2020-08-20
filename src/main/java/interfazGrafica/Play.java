@@ -1,7 +1,8 @@
 package interfazGrafica;
 
-import group.SelectableGroup;
-import group.UnselectableGroup;
+
+import modelo.game.SelectableGroup;
+import modelo.game.UnselectableGroup;
 import interfazGrafica.Draggable.*;
 import interfazGrafica.Events.BooleanOptionsEventHandler;
 import interfazGrafica.Draggable.GroupChoiceDragDroppedEventHandler;
@@ -30,7 +31,9 @@ import modelo.game.Player;
 import modelo.game.Round;
 import modelo.game.Turn;
 import modelo.options.Option;
-import group.OptionGroup;
+
+import modelo.game.OptionGroup;
+
 import modelo.multiplicators.Multiplicator;
 
 import java.util.ArrayList;

@@ -1,6 +1,5 @@
 package interfazGrafica.Draggable;
-
-import group.OptionGroup;
+import modelo.game.OptionGroup;
 import interfazGrafica.EndGame;
 import interfazGrafica.Play;
 import javafx.animation.Timeline;
