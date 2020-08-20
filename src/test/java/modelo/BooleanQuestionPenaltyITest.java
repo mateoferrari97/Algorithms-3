@@ -29,8 +29,9 @@ public class BooleanQuestionPenaltyITest {
         Question question = new BooleanQuestion("vamos a aprobar algoritmos 3?", options, scorer);
 
         Points points = new Points();
+        points.increasePoints();
         List<Option> playerOptions = Arrays.asList(new Option("no", new IncorrectOptionScorer()));
-        Integer expectedPoints = -1;
+        Integer expectedPoints = 0;
 
         // When
         question.selectOptions(playerOptions, points);
