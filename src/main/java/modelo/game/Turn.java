@@ -1,8 +1,6 @@
 package modelo.game;
 
 
-import modelo.multiplicators.Multiplicate;
-import modelo.multiplicators.Multiplicator;
 import modelo.options.Option;
 import modelo.questions.Question;
 

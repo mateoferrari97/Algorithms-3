@@ -22,10 +22,6 @@ public class Points {
         this.multiplication = 1;
     }
 
-    public void dontMultiplicate() {
-        this.factor = 1;
-    }
-
     public void decreasePoints() {
         this.points--;
     }

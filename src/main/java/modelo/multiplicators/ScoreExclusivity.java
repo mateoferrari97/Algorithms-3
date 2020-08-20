@@ -1,10 +1,11 @@
 package modelo.multiplicators;
 
 import modelo.game.Points;
-import modelo.game.Round;
 import modelo.game.Turn;
 
 import java.util.List;
+
+import static constantes.Constantes.SCORE_EXCLUSIVITY_TEXT;
 
 public class ScoreExclusivity implements Multiplicator {
     private Integer multiplicate = 1;
@@ -12,14 +13,14 @@ public class ScoreExclusivity implements Multiplicator {
 
     @Override
     public String getText() {
-        return "ScoreExclusivity";
+        return SCORE_EXCLUSIVITY_TEXT;
     }
 
     @Override
     public void multiplicate(List<Turn> turns) {
         for(Turn aTurn : turns) {
             if (this.lastPoints != null) {
-                if (this.lastPoints.getPointsWithoutMultiplicate() == aTurn.getPoints().getPointsWithoutMultiplicate()) {
+                if (this.lastPoints.getPointsWithoutMultiplicate().equals(aTurn.getPoints().getPointsWithoutMultiplicate())) {
                     multiplicate = 1;
                     lastPoints.multiplicate(multiplicate);
                 } else if (this.lastPoints.getPointsWithoutMultiplicate() < aTurn.getPoints().getPointsWithoutMultiplicate()) {

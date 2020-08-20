@@ -1,8 +1,6 @@
 package modelo.game;
 
-import modelo.multiplicators.Multiplicate;
 import modelo.multiplicators.Multiplicator;
-import modelo.multiplicators.ScoreExclusivity;
 import modelo.questions.Question;
 
 import java.util.ArrayList;
@@ -56,10 +54,6 @@ public class Round {
 
     public Question getQuestion() {
         return this.question;
-    }
-
-    public List<Turn> getTurns() {
-        return turns;
     }
 
     public void multiplicate(Multiplicator multiplicator, Turn turn) {
