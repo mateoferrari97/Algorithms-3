@@ -14,8 +14,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -28,14 +30,18 @@ import Group.OptionGroup;
 import modelo.multiplicators.Multiplicator;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 public class Play extends VBox {
     Stage stage;
+    List<String> backgrounds;
 
     public Play(Stage stage){
         super();
         this.stage = stage;
+        this.backgrounds = Arrays.asList("-fx-background-color: lightblue;", "-fx-background-color: yellow;", "-fx-background-color: lightorange;", "-fx-background-color: lightgreen;" );
     }
 
     public void start(Game game) {
@@ -47,6 +53,9 @@ public class Play extends VBox {
         this.setPadding(new Insets(300));
 
         Scene scene = new Scene(this);
+        Random random = new Random();
+        this.setStyle(this.backgrounds.get(random.nextInt(backgrounds.size())));
+        //this.setStyle("-fx-background-color: lightorange;");
 
         createPlayerLabels(turn);
 
@@ -152,7 +161,7 @@ public class Play extends VBox {
 
 
         Player player = turn.getPlayer();
-        playerText.setText(player.getName());
+        playerText.setText(player.getName() + ":");
         playerPoints.setText(player.getPoints().toString());
 
         HBox playerContenedorHorizontal = new HBox(playerText, playerPoints);
