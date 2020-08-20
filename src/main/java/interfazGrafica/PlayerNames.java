@@ -56,7 +56,7 @@ public class PlayerNames {
         TextoEventHandler textoEventHandler = new TextoEventHandler(botonEnviar);
         texto.setOnKeyPressed(textoEventHandler);
 
-        Scene scene = new Scene(contenedorPrincipal, 900, 900);
+        Scene scene = new Scene(contenedorPrincipal, 900, 600);
         contenedorPrincipal.setStyle("-fx-background-color: lightblue;");
 
         stage.setScene(scene);

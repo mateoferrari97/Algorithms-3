@@ -65,9 +65,13 @@ public class GroupChoiceDragDroppedEventHandler implements EventHandler<DragEven
 
         this.turn.finish();
 
+        this.turn.finish();
+
         if(game.getNextRound() == null){
-            EndGame end = new EndGame(stage, game);
+            this.round.finish();
+            new EndGame(stage, game);
         }else{
+            this.round.finish();
             nextPlay.start(game);
         }
     }

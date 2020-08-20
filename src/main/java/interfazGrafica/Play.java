@@ -19,6 +19,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.CubicCurve;
+import javafx.scene.shape.Ellipse;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -51,10 +54,9 @@ public class Play extends VBox {
         Turn turn = round.getTurn(game);
         this.setPadding(new Insets(10));
 
-        Scene scene = new Scene(this, 900, 900);
+        Scene scene = new Scene(this, 900, 600);
         Random random = new Random();
         this.setStyle(this.backgrounds.get(random.nextInt(backgrounds.size())));
-        //this.setStyle("-fx-background-color: lightorange;");
 
         createPlayerLabels(turn);
 
@@ -81,16 +83,23 @@ public class Play extends VBox {
     private void createMultiplicatorButton(Round round, Turn turn) {
         List<Button> buttons = new ArrayList<>();
 
+        HBox multiplicatorsContainer = new HBox();
         for(Multiplicator aMultiplicator : round.getMultiplicator()){
             Button button = new Button(aMultiplicator.getText());
-            MultiplicatorEventHandler multiplicatorEventHandler = new MultiplicatorEventHandler(aMultiplicator, turn, round);
+            multiplicatorsContainer.getChildren().add(button);
+            MultiplicatorEventHandler multiplicatorEventHandler = new MultiplicatorEventHandler(aMultiplicator, turn, round, button, multiplicatorsContainer);
             button.setOnAction(multiplicatorEventHandler);
             buttons.add(button);
         }
-        HBox multiplicatorsContainer = new HBox();
+
+
         for(Button aButton : buttons){
-            multiplicatorsContainer.getChildren().add(aButton);
+            aButton.setStyle("-fx-background-radius: 30; -fx-background-color: #896bab; -fx-border-color: white; -fx-border-width: 2px; -fx-border-radius: 30; -fx-text-fill: white;");
+            aButton.setScaleX(1.5);
+            aButton.setScaleY(1.5);
         }
+        multiplicatorsContainer.setAlignment(Pos.CENTER);
+        multiplicatorsContainer.setSpacing(20);
 
         this.getChildren().add(multiplicatorsContainer);
     }
@@ -185,10 +194,13 @@ public class Play extends VBox {
 
     private void createAnswerDraggableOptions(Round round, Turn turn, Game game) {
         HBox textContainer = new HBox();
+
         Text[] text = getQuestionTextOptions(round, turn, game, textContainer);
         for(Text aText : text){
             textContainer.getChildren().add(aText);
         }
+        textContainer.setStyle("-fx-background-color: white");
+        textContainer.setMinHeight(50);
         textContainer.setAlignment(Pos.CENTER);
         textContainer.setSpacing(100);
         this.getChildren().add(textContainer);
@@ -240,9 +252,20 @@ public class Play extends VBox {
         setAsTarget(groupAText, groupA, game, round, turn, new SelectableGroup());
         setAsTarget(groupBText, groupB, game, round, turn, new UnselectableGroup());
 
+
+
         HBox groupsContainer = new HBox();
         VBox groupAContainer = new VBox();
         VBox groupBContainer = new VBox();
+
+        groupAContainer.setStyle("-fx-background-color: white; -fx-border-color: black; -fx-border-width: 2px");
+        groupAContainer.setMinWidth(150);
+        groupAContainer.setMinHeight(40);
+
+        groupBContainer.setStyle("-fx-background-color: white; -fx-border-color: black; -fx-border-width: 2px");
+        groupBContainer.setMinWidth(150);
+        groupBContainer.setMinHeight(40);
+
         groupsContainer.getChildren().add(groupAContainer);
         groupsContainer.getChildren().add(groupBContainer);
         groupAContainer.getChildren().add(groupAText);
@@ -251,6 +274,10 @@ public class Play extends VBox {
         groupBContainer.getChildren().add(groupB);
         groupsContainer.setAlignment(Pos.CENTER);
         groupsContainer.setSpacing(200);
+        groupAContainer.setAlignment(Pos.CENTER);
+        groupA.setAlignment(Pos.CENTER);
+        groupBContainer.setAlignment(Pos.CENTER);
+        groupB.setAlignment(Pos.CENTER);
         groupAContainer.setSpacing(15);
         groupBContainer.setSpacing(15);
         groupA.setSpacing(10);

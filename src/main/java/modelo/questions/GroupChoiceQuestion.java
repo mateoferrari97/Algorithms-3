@@ -53,11 +53,7 @@ public class GroupChoiceQuestion extends Question {
         if (pointsDone.equals(minPoints) || pointsDone.equals(maxPoints)) {
             points.gainAPoint();
         }
-
-        for (Option aOption : playerAnswers) {
-            aOption.changeState();
-        }
-
+        
     }
 }
 
