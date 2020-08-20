@@ -1,3 +1,6 @@
+
+[![Build Status](https://travis-ci.org/mateoferrari97/Algoritmos3.svg?branch=develop)](https://travis-ci.org/mateoferrari97/Algoritmos3)[![codecov](https://codecov.io/gh/mateoferrari97/Algoritmos3/branch/develop/graph/badge.svg)](https://codecov.io/gh/mateoferrari97/Algoritmos3)
+
 # TP2 Algoritmos 3: Kahoot
 
 Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUBA.
@@ -10,7 +13,10 @@ Se puede visualizar el [informe](https://www.overleaf.com/read/bycdxrcvvgvh) en 
 * **Bautista** - [BautistaXifro](https://github.com/BautistaXifro)
 * **Tadeo Rial** - [Tadeo Rial](https://github.com/TadeoRial)
 * **AgustÍn Rodriguez** - [AgustÍn Rodriguez](https://github.com/chicho-98)
-* **Kevin Untrojb** - [Kevin Untrojb](https://github.com/kuntrojb)
+* **Kevin Untrojb** - [Kevin Untrojb](https://github.com/kevin-untrojb)
+
+Corrector: **Pablo Suarez**
+### Links del proyecto
 
 Corrector: **Pablo S**
 
@@ -19,18 +25,12 @@ Corrector: **Pablo S**
 Listado de software/herramientas necesarias para el proyecto
 
 ```
-java 1.8
+java 11.x
 maven 3.6.0
+
 ```
 
 ## Ejecutando las pruebas
 
-Explicación de como ejecutar las pruebas
+utilizando el comando mvn test
 
-## Ejecutando la aplicación
-
-Explicación de como ejecutar la aplicación
-
-## Licencia
-
-Este repositorio está bajo la Licencia MIT
