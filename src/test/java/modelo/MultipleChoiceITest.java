@@ -20,7 +20,7 @@ import org.junit.rules.ExpectedException;
 import java.util.Arrays;
 import java.util.List;
 
-public class MultipleChoiceIT {
+public class MultipleChoiceITest {
 
     @Test
     public void testMultipleChoiceQuestionIncreasePointsWhenAllOptionsAreCorrect() throws InvalidSizeException {

@@ -18,7 +18,7 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 
-public class OrderedChoiceIT {
+public class OrderedChoiceITest {
     @Test
     public void testOrderedChoiceQuestionIncreasePointsWhenOptionsAreInTheCorrectOrder() throws InvalidSizeException {
         // Given

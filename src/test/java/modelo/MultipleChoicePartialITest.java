@@ -18,7 +18,7 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 
-public class MultipleChoicePartialIT {
+public class MultipleChoicePartialITest {
     @Test
     public void testMultipleChoiceQuestionWithPartialScoreIncreasePointsForeachOptionThatIsCorrect() throws InvalidSizeException {
         // Given

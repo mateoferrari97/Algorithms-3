@@ -18,7 +18,7 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 
-public class GroupChoiceIT {
+public class GroupChoiceITest {
     @Test
     public void testGroupChoiceQuestionIncreasePointsWhenCorrectGroupSeparation() throws InvalidSizeException {
         // Given

@@ -38,7 +38,7 @@ import static org.mockito.Mockito.spy;
 @PowerMockIgnore({"javax.management.*"})
 @PrepareForTest({Player.class, BooleanScorer.class, BooleanQuestion.class, ArrayList.class})
 
-public class RoundIT {
+public class RoundITest {
     private  Game gameMock = spy(new Game());
     @Test
     public void testRoundDontDecreasePlayerPointsWhenQuestionHavePenaltyScorerAndPlayerAnswerIncorrecltyWhenPlayerHasntPoints() {
