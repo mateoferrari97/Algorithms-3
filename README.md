@@ -3,7 +3,9 @@
 
 # TP2 Algoritmos 3: Kahoot
 
-Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUBA
+Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUBA.
+
+Se puede visualizar el [informe](https://www.overleaf.com/read/bycdxrcvvgvh) en overleaf utilizando Latex
 
 ## Grupo N14
 
@@ -16,9 +18,7 @@ Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUB
 Corrector: **Pablo Suarez**
 ### Links del proyecto
 
- * [Tareas realizadas en trello](https://trello.com/tp2algo3)
- * [Visualización del informe](https://www.overleaf.com/read/bycdxrcvvgvh)
-
+Corrector: **Pablo S**
 
 ### Pre-requisitos
 
@@ -32,12 +32,5 @@ maven 3.6.0
 
 ## Ejecutando las pruebas
 
-Explicación de como ejecutar las pruebas
+utilizando el comando mvn test
 
-## Ejecutando la aplicación
-
-Explicación de como ejecutar la aplicación
-
-## Licencia
-
-Este repositorio está bajo la Licencia MIT
